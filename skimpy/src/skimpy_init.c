@@ -16,10 +16,10 @@ extern SEXP _skimpy_mvp_deriv(SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"_skimpy_simplify",   (DL_FUNC) &_skimpy_simplify, 3},
-    {"_skimpy_mvp_prod",   (DL_FUNC) &_skimpy_mvp_prod, 6},
-    {"_skimpy_mvp_add",   (DL_FUNC) &_skimpy_mvp_add, 6},
-    {"_skimpy_mvp_power",   (DL_FUNC) &_skimpy_mvp_power, 4},
-    {"_skimpy_mvp_deriv",   (DL_FUNC) &_skimpy_mvp_deriv, 4},
+    {"_skimpy_mvp_prod",   (DL_FUNC) &_skimpy_simplify, 6},
+    {"_skimpy_mvp_add",   (DL_FUNC) &_skimpy_simplify, 6},
+    {"_skimpy_mvp_power",   (DL_FUNC) &_skimpy_simplify, 4},
+    {"_skimpy_mvp_deriv",   (DL_FUNC) &_skimpy_simplify, 4},
     {NULL, NULL, 0}
 };
 

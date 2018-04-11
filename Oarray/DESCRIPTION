@@ -1,0 +1,10 @@
+Package: Oarray
+Version: 1.4-9
+Date: 2018-03-19
+Depends: methods, R (>= 3.0.0)
+Title: Arrays with Arbitrary Offsets
+Author: Jonathan Rougier <j.c.rougier@bristol.ac.uk>
+Description: Generalise the starting point of the array index.
+License: GPL
+Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
+

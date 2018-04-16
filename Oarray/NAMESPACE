@@ -1,8 +1,0 @@
-export(Oarray, as.Oarray, as.array, as.array.Oarray, is.Oarray)
-
-S3method("[",Oarray)
-S3method("[<-",Oarray)
-S3method("print",Oarray)
-S3method("as.array",Oarray)
-
-import(methods)

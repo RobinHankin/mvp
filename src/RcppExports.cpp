@@ -79,23 +79,12 @@ BEGIN_RCPP
 END_RCPP
 }
 
-RcppExport SEXP skimpy_mvp_add(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP skimpy_mvp_deriv(SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP skimpy_mvp_power(SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP skimpy_mvp_prod(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP skimpy_simplify(SEXP, SEXP, SEXP);
-
 static const R_CallMethodDef CallEntries[] = {
     {"_skimpy_simplify", (DL_FUNC) &_skimpy_simplify, 3},
     {"_skimpy_mvp_prod", (DL_FUNC) &_skimpy_mvp_prod, 6},
     {"_skimpy_mvp_add", (DL_FUNC) &_skimpy_mvp_add, 6},
     {"_skimpy_mvp_power", (DL_FUNC) &_skimpy_mvp_power, 4},
     {"_skimpy_mvp_deriv", (DL_FUNC) &_skimpy_mvp_deriv, 4},
-    {"skimpy_mvp_add",   (DL_FUNC) &skimpy_mvp_add,   6},
-    {"skimpy_mvp_deriv", (DL_FUNC) &skimpy_mvp_deriv, 4},
-    {"skimpy_mvp_power", (DL_FUNC) &skimpy_mvp_power, 4},
-    {"skimpy_mvp_prod",  (DL_FUNC) &skimpy_mvp_prod,  6},
-    {"skimpy_simplify",  (DL_FUNC) &skimpy_simplify,  3},
     {NULL, NULL, 0}
 };
 

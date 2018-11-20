@@ -68,12 +68,13 @@ out7 <- mvp_prod(
            list("x"),list(0),c(10)
            )
            
-kahle  <-
-simplify(
-    split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
-    rep(list(1:2),26),
-    1:26
-    )
-   
+kahle  <- simplify(
+    allnames     = split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
+    allpowers    = rep(list(1:2),26),
+    coefficients = 1:26
+)
+
+# kahle * kahle:
+mvp_prod(kahle$names,kahle$power,kahle$coeffs,kahle$names,kahle$power,kahle$coeffs)
 
 uu <- mvp_deriv(out1$names,out1$power,out1$coeffs,c("x","a","t"))

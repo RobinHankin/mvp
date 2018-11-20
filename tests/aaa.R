@@ -30,6 +30,7 @@ allpowers <- list(
 coeffs = 1:9
 
 
+
 out1 <- simplify(allnames=allnames,allpowers=allpowers,coefficients=coeffs)
 
 allnames2      <- list(c("x","y"),"x", "y", c("y","x"), c("x","z"),c("z","x"), "t", "u",c("t","f"), letters[1:4])
@@ -39,16 +40,19 @@ coefficients2  <- c(        19,   2,   5,       5,        4,       -4,         1
 out2 <- simplify(allnames=allnames2,allpowers=allpowers2,coefficients=coefficients2)
 
 
+## (x+y)(x-y) == x^2-y^2:
 out3 <- mvp_prod(
     list("x","y"),list(1,1),c(+1,+1),
     list("x","y"),list(1,1),c(+1,-1)
 )
 
+## (x+y)+(x-y)==2x:
 out4 <- mvp_add(
     list("x","y"),list(1,1),c(+1,+1),
     list("x","y"),list(1,1),c(+1,-1)
 )
 
+## x*(x+y) == x^2+xy:
 out5 <- mvp_prod(
     list("x"),list(1),c(+1),   # x
     list("x","y"),list(1,1),c(1,1) # x+y

@@ -72,13 +72,18 @@ shift <- function(x,i=1){# from magic
   return(x[c((n - i + 1):n, 1:(n - i))])
 } 
  
-kahle  <- simplify(
+kahle  <- mvp(list(
     allnames     = split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
     allpowers    = rep(list(1:2),26),
     coefficients = 1:26
-)
+))
+
 
 # kahle * kahle:
 mvp_prod(kahle$names,kahle$power,kahle$coeffs,kahle$names,kahle$power,kahle$coeffs)
 
 uu <- mvp_deriv(out1$names,out1$power,out1$coeffs,c("x","a","t"))
+
+
+
+

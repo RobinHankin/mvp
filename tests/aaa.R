@@ -29,13 +29,13 @@ coeffs = 1:9
 
 
 
-out1 <- simplify(allnames=allnames,allpowers=allpowers,coefficients=coeffs)
+out1 <- mvp(list(allnames,allpowers,coeffs))
 
 allnames2      <- list(c("x","y"),"x", "y", c("y","x"), c("x","z"),c("z","x"), "t", "u",c("t","f"), letters[1:4])
 allpowers2     <- list(c(1  , 1),  3,   4,  c(1,   1),  c(1,3),    c(3,1),      0,   0, c(0,5),      1:4)
 coefficients2  <- c(        19,   2,   5,       5,        4,       -4,         100,  100, 3,         0)
 
-out2 <- simplify(allnames=allnames2,allpowers=allpowers2,coefficients=coefficients2)
+out2 <- mvp(list(allnames=allnames2,allpowers=allpowers2,coefficients=coefficients2))
 
 
 ## (x+y)(x-y) == x^2-y^2:

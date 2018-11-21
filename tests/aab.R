@@ -1,3 +1,6 @@
+
+
+
 library("skimpy")
 
 
@@ -5,13 +8,12 @@ library("skimpy")
 allnames <- list(
     c("a"),
     c("a"),
-    c("a","b"),
+    c("bung","b"),
     letters[1:3]
 )
 
-
 allpowers <- list(
-    0,
+    3,
     1,
     c(2,1),
     c(1,1,1)
@@ -19,6 +21,22 @@ allpowers <- list(
 
 coeffs = c(1,3,7,9)
 
-
-out1 <- simplify(allnames=allnames,allpowers=allpowers,coefficients=coeffs)
+a <- mvp(list(names=allnames,powers=allpowers,coeffs=coeffs))
  
+
+
+jj <- list(
+       c(x = 1, coef = 1, y = 0),
+       c(x = 0, y = 1, coef = 2),  
+       c(y = 1, coef = -6),  
+       c(z = 1, coef = -3, x = 2),  
+       c(x = 1, coef = 0, x = 3),
+       c(t = 1, coef = 4, t = 2, y = 4),
+       c(x = 1000,coef=777),  # 777 x^1000
+       c(x = 1),  # x
+       c(coef = 5),
+       c(coef = 5),
+       c(coef = -5)
+     )
+     
+mj <-     mpoly(jj)

@@ -3,3 +3,4 @@ exportPattern("^[[:alpha:]]+")
 
 
 importFrom(Rcpp, evalCpp)
+S3method(as.mpoly,mvp)

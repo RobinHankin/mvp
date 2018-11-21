@@ -1,6 +1,4 @@
-library(skimpy)
-library(magic)
-library(mpoly)
+library("skimpy")
 
 allnames <- list(
     c("bing","y","bong","bung","bang","x","a","xxxxxxxx"),
@@ -67,7 +65,13 @@ out7 <- mvp_prod(
            list("x","y"),list(1,1),c(1,3),
            list("x"),list(0),c(10)
            )
-           
+
+
+shift <- function(x,i=1){# from magic
+  n <- length(x)
+  return(x[c((n - i + 1):n, 1:(n - i))])
+} 
+ 
 kahle  <- simplify(
     allnames     = split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
     allpowers    = rep(list(1:2),26),

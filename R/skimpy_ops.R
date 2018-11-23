@@ -74,7 +74,7 @@
     if(is.zero(S)){
         return(S)
     } else {
-        return(mvp(names(mvp),powers(mvp),-coeffs(mvp)))
+        return(mvp(vars(S),powers(S),-coeffs(S)))
     }
 }
 
@@ -94,7 +94,7 @@
   mvp(S[[1]],S[[2]],x*S[[3]])
 }
 
-mvp_plus_mvp <- function(S1,S2){
+`mvp_plus_mvp` <- function(S1,S2){
   if(is.zero(S1)){
         return(S2)
     } else if(is.zero(S2)){
@@ -102,7 +102,7 @@ mvp_plus_mvp <- function(S1,S2){
     } else {
         jj <- mvp_add(
             allnames1=S1[[1]],allpowers1=S1[[2]],coefficients1=S1[[3]],
-            allnames1=S2[[1]],allpowers1=S2[[2]],coefficients2=S2[[3]]
+            allnames2=S2[[1]],allpowers2=S2[[2]],coefficients2=S2[[3]]
         )
         return(mvp(jj[[1]],jj[[2]],jj[[3]]))
     }

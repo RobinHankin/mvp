@@ -14,6 +14,9 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 `is.mvp` <- function(x){inherits(x,"mvp")}
 
 `is_ok_mvp` <- function(vars,powers,coeffs){
+    if( (length(vars)==0) & (length(powers)==0) && (length(coeffs)==0)){
+        return(TRUE)  # zero polynomial
+    }
   stopifnot(unlist(lapply(vars,is.character)))
   stopifnot(unlist(lapply(powers,is.numeric)))
   stopifnot(is.numeric(coeffs))
@@ -53,11 +56,11 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 }
 
 `mpoly_to_mvp` <- function(m){
-  mvp(list(
-  names  = lapply(m,function(x){names(x[names(x)!="coef"])}),
+  mvp(
+  vars   = lapply(m,function(x){names(x[names(x)!="coef"])}),
   powers = lapply(m, function(x){as.vector(x[names(x)!="coef"])}),
   coeffs =  unlist(lapply(m,function(x){x["coef"]}))
-  ))
+  )
 }
 
 ## as.mpoly() converts out1 into an mpoly object:

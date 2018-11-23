@@ -1,31 +1,42 @@
-`mvp` <- function(x){  # three-element list
-  stopifnot(is_ok_mvp(x))
-  out <- simplify(x[[1]],x[[2]],x[[3]])
+`mvp` <- function(vars,powers,coeffs){  # three-element list
+  stopifnot(is_ok_mvp(vars,powers,coeffs))
+  out <- simplify(vars,powers,coeffs)  # simplify() is defined in
+                                       # RcppExports.R; it returns a
+                                       # list
   class(out) <- "mvp"   # this is the only time class() is set to "mvp"
   return(out)
 }
 
+vars <- function(x){x[[1]]}
+powers <- function(x){x[[2]]}
+coeffs <- function(x){x[[3]]}  # accessor methods end here
+
 `is.mvp` <- function(x){inherits(x,"mvp")}
 
-`is_ok_mvp` <- function(l){
-  stopifnot(is.list(l))
-  stopifnot(length(l) == 3)
+`is_ok_mvp` <- function(vars,powers,coeffs){
+  stopifnot(unlist(lapply(vars,is.character)))
+  stopifnot(unlist(lapply(powers,is.numeric)))
+  stopifnot(is.numeric(coeffs))
 
-  stopifnot(unlist(lapply(l[[1]],is.character)))
-  stopifnot(unlist(lapply(l[[2]],is.numeric)))
-  stopifnot(is.numeric(l[[3]]))
+  stopifnot(length(vars)==length(powers))
+  stopifnot(length(powers)==length(coeffs))
 
-  stopifnot(length(l[[1]])==length(l[[2]]))
-  stopifnot(length(l[[2]])==length(l[[3]]))
-
-  stopifnot(unlist(lapply(l[[1]],length)) == unlist(lapply(l[[2]],length)))
+  stopifnot(unlist(lapply(vars,length)) == unlist(lapply(powers,length)))
 
   return(TRUE)
 }
-  
+
+`is.zero` <- function(x){
+    length(vars(x))==0
+}
+
 `print.mvp` <-  function(x){
     cat("mvp object algebraically equal to\n")
-    print(as.mpoly(x))
+    if(is.zero(x)){
+        print(mp("0"))
+    } else {
+        print(as.mpoly(x))
+    }
     cat("\n")
 }
 
@@ -49,7 +60,6 @@
   ))
 }
 
-
 ## as.mpoly() converts out1 into an mpoly object:
 `as.mpoly.mvp` <- function(x,...){
     out <- list()
@@ -58,6 +68,12 @@
     }
     class(out) <- "mpoly"
     return(out)
-}
+}    
 
-    
+`rmvp` <- function(n,size=6,pow=6,symbols=letters){
+    mvp(
+        vars   = replicate(n,sample(symbols,size,replace=TRUE),simplify=FALSE),
+        powers = replicate(n,sample(pow,size,replace=TRUE),simplify=FALSE),
+        coeffs = sample(seq_len(n))
+    )
+}

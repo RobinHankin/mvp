@@ -74,24 +74,28 @@
     if(is.zero(S)){
         return(S)
     } else {
-        return(mvp(vars(S),powers(S),-coeffs(S)))
+        return(mvp(-const(S),vars(S),powers(S),-coeffs(S)))
     }
 }
 
-`mvp_times_mvp` <- function(S1,S2){
+`mvp_times_mvp` <- function(S1,S2){  # constant handled here
   if(is.zero(S1) || is.zero(S2)){
     return(zeromvp)
   } else {
+      jj1 <- const(S1)*const(S2),
+      jj2 <- mvp(0, vars=vars(S1),powers=powers(S1),coeffs=const(S2)*coeffs(S1))
+      jj3 <- mvp(0, vars=vars(S2),powers=powers(S2),coeffs=const(S1)*coeffs(S2))
       jj <- mvp_prod(
           allnames1=S1[[1]],allpowers1=S1[[2]],coefficients1=S1[[3]],
           allnames2=S2[[1]],allpowers2=S2[[2]],coefficients2=S1[[3]]
       )
-      return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+      jj4 <- mvp(0,jj[[1]],jj[[2]],jj[[3]])
+      return(jj1+jj2+jj3+jj4)
   }
 }
 
 `mvp_times_scalar` <- function(S,x){
-  mvp(S[[1]],S[[2]],x*S[[3]])
+    mvp(const(S)*x, vars(S),powers(S),coeffs(S)*x)
 }
 
 `mvp_plus_mvp` <- function(S1,S2){
@@ -104,25 +108,34 @@
             allnames1=S1[[1]],allpowers1=S1[[2]],coefficients1=S1[[3]],
             allnames2=S2[[1]],allpowers2=S2[[2]],coefficients2=S2[[3]]
         )
-        return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+        return(mvp(const(S1)+const(S2),jj[[1]],jj[[2]],jj[[3]]))
     }
 }
 
 `mvp_plus_numeric` <- function(S,x){
-    mvp_plus_mvp(S,numeric_to_mvp(x))
+    mvp(x+const(S),vars(S),powers(S),coeffs(S))
 }
 
-mvp_power_scalar <- function(S,n){
+`mvp_power_scalar` <- function(S,n){
   stopifnot(n==round(n))
+  if(n==0){return(mvp(1,character(0)),list(integer(0)),integer(0))}
   if(n<0){
     stop("use ooom() for negative powers")
-  } else {
-      jj <- mvp_power(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]],n=n)
-      return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+  } else { # n>=1
+      if(const(S)==0){  # use C code
+          jj <- mvp_power(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]],n=n)
+          return(mvp(0,jj[[1]],jj[[2]],jj[[3]]))
+      } else {  # do it in R
+          out <- S
+          for(i in seq_len(n-1)){
+              out <- out*S
+          }
+          return(out)
+      }
   }
 }
 
 `mvp_eq_mvp` <- function(S1,S2){
   is.zero(S1-S2)  # nontrivial; S1 and S2 might have different orders
-    }
+}
 

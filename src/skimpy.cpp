@@ -1,6 +1,6 @@
 // -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 
-#define container vector         // Could be 'vector' or 'deque' (both work but there may be performance differences)
+#define container deque         // Could be 'vector' or 'deque' (both work but there may be performance differences)
 #define USE_UNORDERED_MAP true   // set to true for unordered_map; comment out to use plain stl map.
 
 #include <Rcpp.h>
@@ -64,9 +64,13 @@ List retval(const mvp &X){   // takes a mvp object and returns a mpoly-type list
     for(it = X.begin(), i=0 ; it != X.end() ; ++it, i++){
         oneterm = it->first; // oneterm is a 'term' object, a map from strings to integers
         const unsigned int r = oneterm.size(); // 'r' is the number of variables in oneterm; thus 5x^2*y*z^6 has r=3
-        
+
+        if(r<1){r==1}
         CharacterVector names(r); 
         IntegerVector powers(r);
+
+
+
 
     for(ic = oneterm.begin(), j=0 ; ic != oneterm.end() ; ++ic, ++j){
         names[j] = (string) ic->first;

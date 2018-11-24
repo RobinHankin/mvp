@@ -1,21 +1,25 @@
-`mvp` <- function(vars,powers,coeffs){  # three-element list
-  stopifnot(is_ok_mvp(vars,powers,coeffs))
-  out <- simplify(vars,powers,coeffs)  # simplify() is defined in
+`mvp` <- function(const,vars,powers,coeffs){  # three-element list
+  stopifnot(is_ok_mvp(const,vars,powers,coeffs))
+  out <- c(const,simplify(vars,powers,coeffs))  # simplify() is defined in
                                        # RcppExports.R; it returns a
-                                       # list
+                                       # three-element list
   class(out) <- "mvp"   # this is the only time class() is set to "mvp"
   return(out)
 }
 
-vars <- function(x){x[[1]]}
-powers <- function(x){x[[2]]}
-coeffs <- function(x){x[[3]]}  # accessor methods end here
+const  <- function(x){x[[1]]}
+vars   <- function(x){x[[2]]}
+powers <- function(x){x[[3]]}
+coeffs <- function(x){x[[4]]}  # accessor methods end here
 
 `is.mvp` <- function(x){inherits(x,"mvp")}
 
-`is_ok_mvp` <- function(vars,powers,coeffs){
+`is_ok_mvp` <- function(const,vars,powers,coeffs){
+    stopifnot(is.numeric(const))
+    stopifnot(length(const)==1)
+
     if( (length(vars)==0) & (length(powers)==0) && (length(coeffs)==0)){
-        return(TRUE)  # zero polynomial
+        return(TRUE)  # constant polynomial
     }
   stopifnot(unlist(lapply(vars,is.character)))
   stopifnot(unlist(lapply(powers,is.numeric)))
@@ -30,7 +34,7 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 }
 
 `is.zero` <- function(x){
-    length(vars(x))==0
+    (const(x)==0) & (length(vars(x))==0)
 }
 
 `print.mvp` <-  function(x){
@@ -59,24 +63,26 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 
 `mpoly_to_mvp` <- function(m){
   mvp(
+  const  = unlist(lapply(m, function(x){if(length(x)==1){return(x)}else{return(NULL)}})),
   vars   = lapply(m,function(x){names(x[names(x)!="coef"])}),
   powers = lapply(m, function(x){as.vector(x[names(x)!="coef"])}),
   coeffs =  unlist(lapply(m,function(x){x["coef"]}))
   )
 }
 
-## as.mpoly() converts out1 into an mpoly object:
+## as.mpoly() converts an mvp into an mpoly object:
 `as.mpoly.mvp` <- function(x,...){
     out <- list()
-    for(i in seq_along(x[[1]])){
-        out[[i]] <- c(`names<-`(x$power[[i]],x$names[[i]]),coef=x$coeffs[i],recursive=TRUE)
+    for(i in seq_along(vars(x))){
+        out[[i]] <- c(`names<-`(power(x)[[i]],vars(x)[[i]]),coeffs(x)[i],recursive=TRUE)
     }
     class(out) <- "mpoly"
-    return(out)
+    return(out+const(x))
 }    
 
 `rmvp` <- function(n,size=6,pow=6,symbols=letters){
     mvp(
+        const  = sample(seq_len(n),1),
         vars   = replicate(n,sample(symbols,size,replace=TRUE),simplify=FALSE),
         powers = replicate(n,sample(pow,size,replace=TRUE),simplify=FALSE),
         coeffs = sample(seq_len(n))

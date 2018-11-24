@@ -17,7 +17,7 @@
 
 
 `product` <- function(v,symbols=letters){
-    mvp(list(symbols[seq_along(v)]),list(v),1)
+    mvp(0,list(symbols[seq_along(v)]),list(v),1)
 }
 
 `homog` <- function(d,power=1){
@@ -25,7 +25,7 @@
 }
 
 `linear` <- function(x,power=1,symbols=letters){
-    mvp(as.list(symbols[seq_along(x)]),rep(power,length(x)),x)
+    mvp(0,as.list(symbols[seq_along(x)]),rep(power,length(x)),x)
 }
 
 `numeric_to_mvp` <- function(x){

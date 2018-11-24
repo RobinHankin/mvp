@@ -33,9 +33,9 @@
         if (lclass && rclass) {
             return(mvp_plus_mvp(e1, e2))  # S1+S2
         } else if (lclass) {
-            return(mvp_plus_scalar(e1, e2)) # S+x
+            return(mvp_plus_numeric(e1, e2)) # S+x
         } else if (rclass) {
-            return(mvp_plus_scalar(e2, e1)) # x+S
+            return(mvp_plus_numeric(e2, e1)) # x+S
         } else {
             oddfunc()
         }
@@ -43,9 +43,9 @@
         if (lclass && rclass) {
             return(mvp_plus_mvp(e1, mvp_negative(e2)))  # S1-S2
         } else if (lclass) {
-            return(mvp_plus_scalar(e1, -e2))                # S-x
+            return(mvp_plus_numeric(e1, -e2))                # S-x
         } else if (rclass) {
-            return(mvp_plus_scalar(mvp_negative(e2), e1)) # x-S
+            return(mvp_plus_numeric(mvp_negative(e2), e1)) # x-S
         } else {
             oddfunc()
         }
@@ -108,6 +108,10 @@
     }
 }
 
+`mvp_plus_numeric` <- function(S,x){
+    mvp_plus_mvp(S,numeric_to_mvp(x))
+}
+
 mvp_power_scalar <- function(S,n){
   stopifnot(n==round(n))
   if(n<0){
@@ -121,3 +125,4 @@ mvp_power_scalar <- function(S,n){
 `mvp_eq_mvp` <- function(S1,S2){
   is.zero(S1-S2)  # nontrivial; S1 and S2 might have different orders
     }
+

@@ -50,6 +50,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     return(mpoly_to_mvp(x))
   } else if(is.list(x)){
     return(mvp(x))
+  } else if(is.numeric(x)){
+    return(numeric_to_mvp(x))
   } else {
     stop("not recognised")
   }
@@ -80,3 +82,4 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
         coeffs = sample(seq_len(n))
     )
 }
+

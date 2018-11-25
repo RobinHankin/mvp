@@ -129,12 +129,12 @@ mvp product(const mvp X1, const mvp X2){
         for(mvp::const_iterator it2=X2.begin() ; it2 != X2.end() ; ++it2){
             t1new = t1;// we will modify t1new by adding stuff to it
             t2=it2->first;
-            const double c2=it2->second; // coefficient of t2
             for(term::const_iterator is=t2.begin() ; is != t2.end() ; ++is){
                 t1new[is->first] += is->second;  // add the powers of the variables in the two terms
             }  // is loop closes
             
             t1new = zero_power_remover(t1new);
+            const double c2=it2->second; // coefficient of t2
             out[t1new] += c1*c2;  // NB inside the it2 loop
 
         }  //it2 loop closes

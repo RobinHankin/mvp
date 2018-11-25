@@ -1,11 +1,7 @@
 \name{mvp}
 \alias{mvp}
-\title{
-Multivariate polynomials, mvp objects}
-}
-\description{
-Create, test for, an coerce to, mvp objects}
-}
+\title{Multivariate polynomials, mvp objects}
+\description{Create, test for, an coerce to, mvp objects}
 \usage{
 mvp(vars, powers, coeffs)
 is.mvp(x)

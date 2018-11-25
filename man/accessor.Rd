@@ -4,7 +4,6 @@
 \alias{powers}
 \alias{coefficients}
 \title{Accessor methods for mvp objects}
-}
 \description{Accessor methods for mvp objects}
 \usage{
 vars(x)

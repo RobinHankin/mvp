@@ -57,8 +57,8 @@ The high-level functions return an object of \code{mvp}, the low-level
   The \dQuote{\code{A}} at the beginning of a function name means
   \strong{A}ny mvp.  Thus \code{Ainv()} takes quaternionic or
   octmvpic arguments, but \code{OprodO()} takes only octmvps.
-  
-} 
+}
+\author{Robin K. S. Hankin}
 \examples{
 6+7
 }

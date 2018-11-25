@@ -122,7 +122,6 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
 mvp product(const mvp X1, const mvp X2){
     mvp out;
     term t1new,t2;
-    double c2;
     
     for(mvp::const_iterator it1=X1.begin() ; it1 != X1.end() ; ++it1){
         const term t1=it1->first;
@@ -130,7 +129,7 @@ mvp product(const mvp X1, const mvp X2){
         for(mvp::const_iterator it2=X2.begin() ; it2 != X2.end() ; ++it2){
             t1new = t1;// we will modify t1new by adding stuff to it
             t2=it2->first;
-            c2=it2->second; // coefficient of t2
+            const double c2=it2->second; // coefficient of t2
             for(term::const_iterator is=t2.begin() ; is != t2.end() ; ++is){
                 t1new[is->first] += is->second;  // add the powers of the variables in the two terms
             }  // is loop closes

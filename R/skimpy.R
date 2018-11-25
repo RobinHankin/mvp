@@ -83,3 +83,31 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     )
 }
 
+
+"constant" <- function(x){UseMethod("constant")}
+"constant<-" <- function(x, value){UseMethod("constant<-")}
+
+`constant.mvp` <- function(x){
+  wanted <- sapply(x$names,function(x){length(x)==0})
+  if(any(wanted)){
+    out <- x$coeffs[wanted]
+  } else {
+    out <- 0
+  }
+  return(out)
+}
+
+`constant<-.mvp` <- function(x,value){
+  wanted <- sapply(a$names,function(x){length(x)==0})
+  if(any(wanted)){
+    x$coeffs[wanted] <- value
+  } else {  # no constant term
+    x <- mvp(
+        vars = c(x$names,list(character(0))),
+        powers = c(x$power,list(integer(0))),
+        coeffs=c(x$coeffs,value)
+    )
+  }
+  return(x)
+}
+

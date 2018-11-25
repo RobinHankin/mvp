@@ -28,43 +28,14 @@ allpowers <- list(
 coeffs = 1:9
 
 
-
-out1 <- mvp(list(allnames,allpowers,coeffs))
+out1 <- mvp(allnames,allpowers,coeffs)
 
 allnames2      <- list(c("x","y"),"x", "y", c("y","x"), c("x","z"),c("z","x"), "t", "u",c("t","f"), letters[1:4])
 allpowers2     <- list(c(1  , 1),  3,   4,  c(1,   1),  c(1,3),    c(3,1),      0,   0, c(0,5),      1:4)
 coefficients2  <- c(        19,   2,   5,       5,        4,       -4,         100,  100, 3,         0)
 
-out2 <- mvp(list(allnames=allnames2,allpowers=allpowers2,coefficients=coefficients2))
+out2 <- mvp(allnames2,allpowers2,coefficients2)
 
-
-## (x+y)(x-y) == x^2-y^2:
-out3 <- mvp_prod(
-    list("x","y"),list(1,1),c(+1,+1),
-    list("x","y"),list(1,1),c(+1,-1)
-)
-
-## (x+y)+(x-y)==2x:
-out4 <- mvp_add(
-    list("x","y"),list(1,1),c(+1,+1),
-    list("x","y"),list(1,1),c(+1,-1)
-)
-
-## x*(x+y) == x^2+xy:
-out5 <- mvp_prod(
-    list("x"),list(1),c(+1),   # x
-    list("x","y"),list(1,1),c(1,1) # x+y
-)
-
-out6 <- mvp_prod(
-    list("x"),list(1),c(+1),  # x
-    list("x","y"),list(1,1),c(1,1) # x+y
-)
-
-out7 <- mvp_prod(
-           list("x","y"),list(1,1),c(1,3),
-           list("x"),list(0),c(10)
-           )
 
 
 shift <- function(x,i=1){# from magic
@@ -72,11 +43,11 @@ shift <- function(x,i=1){# from magic
   return(x[c((n - i + 1):n, 1:(n - i))])
 } 
  
-kahle  <- mvp(list(
-    allnames     = split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
-    allpowers    = rep(list(1:2),26),
-    coefficients = 1:26
-))
+kahle  <- mvp(
+    vars     = split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
+    powers    = rep(list(1:2),26),
+    coeffs = 1:26
+)
 
 
 # kahle * kahle:

@@ -17,11 +17,11 @@ allpowers <- list(
     1,
     c(2,1),
     c(1,1,1)
-    )
+    ) 
 
 coeffs = c(1,3,7,9)
 
-a <- mvp(list(names=allnames,powers=allpowers,coeffs=coeffs))
+a <- mvp(vars=allnames,powers=allpowers,coeffs=coeffs)
  
 
 

@@ -84,7 +84,7 @@
   } else {
       jj <- mvp_prod(
           allnames1=S1[[1]],allpowers1=S1[[2]],coefficients1=S1[[3]],
-          allnames2=S2[[1]],allpowers2=S2[[2]],coefficients2=S1[[3]]
+          allnames2=S2[[1]],allpowers2=S2[[2]],coefficients2=S2[[3]]
       )
       return(mvp(jj[[1]],jj[[2]],jj[[3]]))
   }

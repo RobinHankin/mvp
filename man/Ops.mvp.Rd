@@ -30,7 +30,6 @@ mvp_times_mvp(S1,S2)
 mvp_times_scalar(S,x)
 mvp_plus_mvp(S1,S2)
 mvp_plus_numeric(S,x)
-mvp_plus_scalar(S,n)
 mvp_eq_mvp(S1,S2)
 }
 \arguments{

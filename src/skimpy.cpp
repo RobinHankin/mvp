@@ -262,8 +262,8 @@ List mvp_substitute(
 	      X.erase(t);                         // (1), remove the term that included a match from X.  NB, we could have used X[t]=0;
 	      t.erase(it);                        // (2), set the matched power to zero (in t)
 	      X[t] += c*(i->second);              // (3) add a new term to X with term t and coefficient c*x^n; note increment operator in case there is another term the same
-	    }                                     // No match in the term means do nothing
-	}                                         // go on to look at the next element of X
-    }                                             // go on to consider the next element of substitution object s 
+	    }                                     // if() closes: No match in the term means do nothing
+	}                                         // j loop closes: go on to look at the next element of X
+    }                                             // i loop closes: go on to consider the next element of substitution object s 
 }
 

@@ -23,7 +23,7 @@ typedef container <string> mynames;  // a mynames object is a container [vector 
 typedef map <string, signed int> term; //... and a 'term' object is a map from a string object to an integer; thus a^2 b^3 is 'a' -> 2, 'b' -> 3
 typedef map <term, double> mvp;  // ... An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double.
 
-typedef map <string, signed int> subs; // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
+typedef map <string, double> subs; // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
 
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
@@ -239,39 +239,43 @@ List mvp_substitute(
               const List &allnames, const List &allpowers, const NumericVector &coefficients,
               const CharacterVector &v, const NumericVector &values
     ){
-    const mvp X = prepare(allnames, allpowers, coefficients);
-    subs s;
-    for(CharacterVector::const_iterator i = v.begin() ; i != v.end() ;  ++i, ++j){
-        s[i->first] = values[j];
+    mvp X = prepare(allnames, allpowers, coefficients);
+    subs s;  // "subs" is a substitution object, e.g. {x -> 3, y -> 4, zzd -> 10.1}
+    NumericVector::const_iterator u=0;
+    const unsigned int n=v.size();
+
+    for(unsigned int i=0 ; i<n ; i++){
+      s[(string) v[i]] = values[i];
     }
-    // now 's' is a subs object, maps a character vector to a real
+    // now 's' is a subs object
 
     // Go through all the LHS elements of s, and substitute into X:
 
-    for(subs::const_iterator i = s.begin() ; i != s.end() ; ++i){    // iterate through the substitution object: x=1, then b=5.5, etc.  EG i->first = "x" and  i->second = 1.1
-        for(mvp::const_iterator j = X.begin() ; j != X.end() ; ++j){ // iterate through the terms of the mvp object  EG j->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and j->second =2.2 [that is, 2.2 x^3*ab^5] 
-            term t = j->first;                                       // 't' is a single term of X (see preceding line)
-            term c = j->second;                                      // 'c' is the coefficient corresponding to the term (two lines previous)
-            it = t.find(i->first);                                   // Now, find a symbol in the term that matches the substitution symbol.
-            if(!(it == t.end())){                                    // if there is a match,  
-                (it->.erase(it);                                             // first, set its power to zero, and 
-            j->second *= (i->second);                                // second, multiply its coefficient by the appropriate number
-            
-                    
-                }
-            }
-        }
+    subs::const_iterator i;
+    mvp::const_iterator j;
+    term::iterator it;
+    
+    for(i = s.begin() ; i != s.end() ; ++i){      // iterate through the substitution object: x=1, then b=5.5, etc.  EG i->first = "x" and  i->second = 1.1
+        for(j = X.begin() ; j != X.end() ; ++j){  // iterate through the terms of the mvp object EG j->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and j->second =2.2 [that is, 2.2 x^3*ab^5] 
+            term t = j->first;                    // 't' is a single term of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
+            const double c = j->second;           // 'c' is the coefficient corresponding to the term (a real number)
+	    it = t.find(i->first); // Now, search the symbols in the term for one that matches the substitution symbol.  EG it->first = {"x"}
+            if(!(it == t.end())){                 // If there is a match, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3  [mathematica notation]
+	                                          // That is, we need to delete the old term 3x^2 y^5 and insert a new term 12 y^3.
+	                                          // We need to do three things:
+	      X.erase(t);                         // (1), remove the term that included a match from X   . . . could have used X[t]=0;
+	      t.erase(it);                        // (2), set the matched power to zero (in t)
+	      X[t] += c*(i->second);              // (3) add a new term to X with term t and coefficient c*x^n; note increment operator
+	    }
+	}
     }
 }
-    
-    
 
     
-        
+    
 
-
-}
-
+    
+ 
 /*
     
     

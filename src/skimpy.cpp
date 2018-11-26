@@ -254,17 +254,17 @@ List mvp_substitute(
     for(i = s.begin() ; i != s.end() ; ++i){      // iterate through the substitution object: x=1, then b=5.5, etc.  EG i->first = "x" and  i->second = 1.1
         for(j = X.begin() ; j != X.end() ; ++j){  // iterate through the terms of the mvp object EG j->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and j->second =2.2 [that is, 2.2 x^3*ab^5] 
             term t = j->first;                    // 't' is a single term of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
-            const double c = j->second;           // 'c' is the coefficient corresponding to the term (a real number)
+            const double c = j->second;           // 'c' is the coefficient corresponding to that term (a real number)
 	    it = t.find(i->first);                // Now, search the symbols in the term for one that matches the substitution symbol.  EG it->first = {"x"}
-            if(!(it == t.end())){                 // If there is a match, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3  [mathematica notation]
+            if(it != t.end()){                    // If there is a match, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3  [mathematica notation]
 	                                          // That is, we need to delete the old term 3x^2 y^5 and insert a new term 12 y^3.
 	                                          // We need to do three things:
-	      X.erase(t);                         // (1), remove the term that included a match from X   . . . could have used X[t]=0;
+	      X.erase(t);                         // (1), remove the term that included a match from X.  NB, we could have used X[t]=0;
 	      t.erase(it);                        // (2), set the matched power to zero (in t)
-	      X[t] += c*(i->second);              // (3) add a new term to X with term t and coefficient c*x^n; note increment operator
-	    }
-	}
-    }
+	      X[t] += c*(i->second);              // (3) add a new term to X with term t and coefficient c*x^n; note increment operator in case there is another term the same
+	    }                                     // No match in the term means do nothing
+	}                                         // go on to look at the next element of X
+    }                                             // go on to consider the next element of substitution object s 
 }
 
     

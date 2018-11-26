@@ -241,15 +241,11 @@ List mvp_substitute(
     ){
     mvp X = prepare(allnames, allpowers, coefficients);
     subs s;  // "subs" is a substitution object, e.g. {x -> 3, y -> 4, zzd -> 10.1}
-    NumericVector::const_iterator u=0;
     const unsigned int n=v.size();
 
     for(unsigned int i=0 ; i<n ; i++){
       s[(string) v[i]] = values[i];
     }
-    // now 's' is a subs object
-
-    // Go through all the LHS elements of s, and substitute into X:
 
     subs::const_iterator i;
     mvp::const_iterator j;
@@ -259,7 +255,7 @@ List mvp_substitute(
         for(j = X.begin() ; j != X.end() ; ++j){  // iterate through the terms of the mvp object EG j->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and j->second =2.2 [that is, 2.2 x^3*ab^5] 
             term t = j->first;                    // 't' is a single term of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
             const double c = j->second;           // 'c' is the coefficient corresponding to the term (a real number)
-	    it = t.find(i->first); // Now, search the symbols in the term for one that matches the substitution symbol.  EG it->first = {"x"}
+	    it = t.find(i->first);                // Now, search the symbols in the term for one that matches the substitution symbol.  EG it->first = {"x"}
             if(!(it == t.end())){                 // If there is a match, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3  [mathematica notation]
 	                                          // That is, we need to delete the old term 3x^2 y^5 and insert a new term 12 y^3.
 	                                          // We need to do three things:

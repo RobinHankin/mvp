@@ -265,5 +265,6 @@ List mvp_substitute(
 	    }                                     // if() closes: No match in the term means do nothing
 	}                                         // j loop closes: go on to look at the next element of X
     }                                             // i loop closes: go on to consider the next element of substitution object s 
+    return(retval(X));
 }
 

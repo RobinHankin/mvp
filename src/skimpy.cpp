@@ -250,21 +250,24 @@ List mvp_substitute(
     subs::const_iterator i;
     mvp::const_iterator j;
     term::iterator it;
-    
-    for(i = s.begin() ; i != s.end() ; ++i){      // iterate through the substitution object: x=1, then b=5.5, etc.  EG i->first = "x" and  i->second = 1.1
-        for(j = X.begin() ; j != X.end() ; ++j){  // iterate through the terms of the mvp object EG j->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and j->second =2.2 [that is, 2.2 x^3*ab^5] 
-            term t = j->first;                    // 't' is a single term of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
-            const double c = j->second;           // 'c' is the coefficient corresponding to that term (a real number)
-	    it = t.find(i->first);                // Now, search the symbols in the term for one that matches the substitution symbol.  EG it->first = {"x"}
-            if(it != t.end()){                    // If there is a match, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3  [mathematica notation]
-	                                          // That is, we need to delete the old term 3x^2 y^5 and insert a new term 12 y^3.
-	                                          // We need to do three things:
-	      X.erase(t);                         // (1), remove the term that included a match from X.  NB, we could have used X[t]=0;
-	      t.erase(it);                        // (2), set the matched power to zero (in t)
-	      X[t] += c*pow(i->second,it->second);// (3) add a new term to X with term t and coefficient c*x^n; note increment operator in case there is another term the same
-	    }                                     // if() closes: No match in the term means do nothing
-	}                                         // j loop closes: go on to look at the next element of X
-    }                                             // i loop closes: go on to consider the next element of substitution object s 
-    return(retval(X));
-}
+
+    mvp Xnew;    
+    for(i = s.begin() ; i != s.end() ; ++i){     // Iterate through the substitution object s; e.g. {x=1.1, b=5.5};  i->first = "x" and  i->second = 1.1
+        Xnew.clear();                            // Empty mvp object to take substituted terms
+        for(j = X.begin() ; j != X.end() ; ++j){ // Iterate through  X; e.g. j->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and j->second=2.2 [that is, 2.2 x^3*ab^5]
+            term t = j->first;                   // "t" is a single term of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
+            const double coeff = j->second;      // "coeff" is the coefficient corresponding to that term (a real number)
+	    it = t.find(i->first);               // Now, search the symbols in the term for one that matches the substitution symbol, e.g. it->first = {"x"}
+            if(it == t.end()){                   // if(no match)...
+                Xnew[t] = coeff;                 // ...then include term t and coeff unchanged in Xnew
+	    } else {                             // else a match found.  If so, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3 [mathematica notation].  Do two things:
+	      t.erase(it);                       // (1) Set the power of the matched symbol to zero (in t); and
+	      Xnew[t] +=                         // (2) Add a new element to Xnew with term t...
+              coeff*pow(i->second,it->second);   // ... and coefficient coeff*<var>^n; note use of "+=" in case there is another term the same
+            }                                    // if(match found) closes
+	}                                        // j loop closes: go on to look at the next element of X
+        X = Xnew;                                // update X to reflect changes
+    }                                            // i loop closes: go on to consider the next element of substitution object s 
+    return(retval(X));                           // return a pre-prepared list to R
+}                                                // function mvp_substitute() closes
 

@@ -24,7 +24,10 @@ typedef map <string, signed int> term; //... and a 'term' object is a map from a
 typedef map <term, double> mvp;  // ... An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double.
 
 typedef map <string, double> subs; // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
-typedef map <string, mvp> subs_mvp; // A 'subs_mvp' object is a map from a string object to a mvp object, used in variable substitutions; thus a=1+3xy^2, b=7tt^3 is the map {'a' -> {emptymap -> 1, {x -> 1, y -> 2} -> 3}, 'b' -> {{tt -> 3} -> 7}}
+
+typedef map <string, mvp> subs_mvp; // A 'subs_mvp' object is a map from a string object to a mvp  object, used in variable  substitutions; thus a=1+3xy^2,
+                                    // b=7tt^3 is the map {'a' ->  {emptymap -> 1, {x -> 1, y -> 2} -> 3}, 'b' -> {{tt -> 3} ->  7}}
+                                    // (not currently used but might be useful for things like xy^2 /. {x -> 1+a, y -> 1+b}
 
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
@@ -279,8 +282,8 @@ List mvp_substitute_mvp(
               const CharacterVector &v                                                           // symbol to substitute for
     ){
 
-    mvp X = prepare(allnames1, allpowers1, coefficients1);  // original mvp object
-    mvp Y = prepare(allnames2, allpowers2, coefficients2);  // mvp object to substitute v for
+    const mvp X = prepare(allnames1, allpowers1, coefficients1);  // original mvp object
+    const mvp Y = prepare(allnames2, allpowers2, coefficients2);  // mvp object to substitute v for
 
 
     mvp::const_iterator i;
@@ -291,51 +294,18 @@ List mvp_substitute_mvp(
     for(i = X.begin() ; i != X.end() ; ++i){ // Iterate through  X; e.g. i->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and i->second=2.2 [that is, 2.2 x^3*ab^5]
         term t = i->first;                   // "t" is a single _term_ of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
         const double coeff = i->second;      // "coeff" is the coefficient corresponding to that term (a real number)
-        it = t.find((string) v[0]);          // Now, search the symbols in the term for one that matches the substitution symbol, e.g. it->first = {"x"}
-        cout << "string to be matched: " << v[0] << "\n";
-        cout << "it->first:"  << it->first   << "\n";
-        cout << "A: it->second:" << it->second << "\n";
-        cout << " ==\n";
+        it = t.find((string) v[0]);          // Now, search the symbols in term "t" for one that matches the substitution symbol
+        const unsigned int psubs=it->second; // "psubs" is "the power of the variable being substituted for"
         if(it == t.end()){                   // if(no match)...
-            cout << "no match\n";
-            Xnew[t] += coeff;                 // ...then include term t and coeff unchanged in Xnew
+            Xnew[t] += coeff;                // ...then include term t and coeff unchanged in Xnew
         } else {                             // else a match found.  If so, we want to effect things like 3x^2*y^5z /. {t -> 1+a} giving 3x^2*(1+a)^5*z
-            cout << "yes match\n";
-            for(term::const_iterator p=t.begin() ; p != t.end() ; ++p){
-                cout << "here p->first " << p->first << "\n";
-                cout << "here p->second " << p->second << "\n";
-                cout << " ========\n";
-
-            }
-            cout << "erasing...\n";
-        cout << "B: it->second:" << it->second << "\n";
-            t.erase(it);                     // Set the power of the matched symbol to zero (in t); and
-        cout << "C: it->second:" << it->second << "\n";
-            
-            for(term::const_iterator p=t.begin() ; p != t.end() ; ++p){
-                cout << "here p->first " << p->first << "\n";
-                cout << "here p->second " << p->second << "\n";
-                cout << " ========\n";
-
-            }
-            cout << "D: it->second = " << it->second << "\n";
-            Xtemp.clear();                   // clear Xtemp
-            cout << "Xtemp.size() is " << Xtemp.size() << "\n";
-            cout << "E: it->second = " << it->second << "\n";
-            Xtemp[t] = coeff;                // algebraically, Xnew = coeff*term-without-match
-            cout << "Xtemp.size() is " << Xtemp.size() << "\n";
-            cout << "F: it->second = " << it->second << "\n";
-            Xtemp = product(Xtemp, power(Y, it->second));
-            cout << "Xtemp.size() is " << Xtemp.size() << "\n";
-            Xnew = sum(Xnew,Xtemp);
-            cout << "Xnew.size() is " << Xnew.size() << "\n";
-            cout << "nnnnnn\n";
-
+            t.erase(it);                     // Remove the matched symbol from t
+            Xtemp.clear();                   // Clear Xtemp, now the zero polynomial
+            Xtemp[t] = coeff;                // Algebraically, Xnew = coeff*term-without-match
+            Xtemp = product(Xtemp, power(Y, psubs));  // this is the "meat" of the function
+            Xnew = sum(Xnew,Xtemp);          // Take cumulative sum
         }                                    // if(match found) closes
-
-            cout << "at the end of the X loop with i as iterator\n";
-    }     
-                                   // i loop closes: go on to consider the next element of X
+    }                                        // i loop closes: go on to consider the next element of X
     return(retval(Xnew));                    // return a pre-prepared list to R
 }                                            // function mvp_substitute() closes
 

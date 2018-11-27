@@ -93,6 +93,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mvp_substitute_mvp
+List mvp_substitute_mvp(const List& allnames1, const List& allpowers1, const NumericVector& coefficients1, const List& allnames2, const List& allpowers2, const NumericVector& coefficients2, const CharacterVector& v);
+RcppExport SEXP _skimpy_mvp_substitute_mvp(SEXP allnames1SEXP, SEXP allpowers1SEXP, SEXP coefficients1SEXP, SEXP allnames2SEXP, SEXP allpowers2SEXP, SEXP coefficients2SEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type allnames1(allnames1SEXP);
+    Rcpp::traits::input_parameter< const List& >::type allpowers1(allpowers1SEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type coefficients1(coefficients1SEXP);
+    Rcpp::traits::input_parameter< const List& >::type allnames2(allnames2SEXP);
+    Rcpp::traits::input_parameter< const List& >::type allpowers2(allpowers2SEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type coefficients2(coefficients2SEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_substitute_mvp(allnames1, allpowers1, coefficients1, allnames2, allpowers2, coefficients2, v));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_skimpy_simplify", (DL_FUNC) &_skimpy_simplify, 3},
@@ -101,6 +118,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_skimpy_mvp_power", (DL_FUNC) &_skimpy_mvp_power, 4},
     {"_skimpy_mvp_deriv", (DL_FUNC) &_skimpy_mvp_deriv, 4},
     {"_skimpy_mvp_substitute", (DL_FUNC) &_skimpy_mvp_substitute, 5},
+    {"_skimpy_mvp_substitute_mvp", (DL_FUNC) &_skimpy_mvp_substitute_mvp, 7},
     {NULL, NULL, 0}
 };
 

@@ -25,3 +25,7 @@ mvp_substitute <- function(allnames, allpowers, coefficients, v, values) {
     .Call(`_skimpy_mvp_substitute`, allnames, allpowers, coefficients, v, values)
 }
 
+mvp_substitute_mvp <- function(allnames1, allpowers1, coefficients1, allnames2, allpowers2, coefficients2, v) {
+    .Call(`_skimpy_mvp_substitute_mvp`, allnames1, allpowers1, coefficients1, allnames2, allpowers2, coefficients2, v)
+}
+

@@ -130,3 +130,12 @@ mvp_power_scalar <- function(S,n){
     jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(vv),as.vector(vv))
     return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
+
+
+`subsmvp` <- function(S, v, X){
+  jj <- mvp_substitute_mvp(
+      S[[1]],S[[2]],S[[3]],
+      X[[1]],X[[2]],X[[3]],
+      v)
+    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+}

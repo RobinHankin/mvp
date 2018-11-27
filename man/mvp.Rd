@@ -21,7 +21,7 @@ as.mvp(x)
 \author{Robin K. S. Hankin}
 \examples{
 
-mvp(list("x" , c("x","y"), "a",c("y","x")),list(1,1:2,3,c(1,4)),1:4)
+mvp(list("x" , c("x","y"), "a",c("y","x")),list(1,1:2,3,c(-1,4)),1:4)
 
 ## Note how the terms appear in an arbitrary order, as do
 ## the symbols within a term.

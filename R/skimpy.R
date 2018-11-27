@@ -48,6 +48,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     return(x)
   } else if(is.mpoly(x)){
     return(mpoly_to_mvp(x))
+  } else if(is.character(x)){
+    return(mpoly_to_mvp(mp(x)))
   } else if(is.list(x)){
     return(mvp(x))
   } else if(is.numeric(x)){

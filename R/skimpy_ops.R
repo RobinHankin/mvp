@@ -126,8 +126,9 @@ mvp_power_scalar <- function(S,n){
   is.zero(S1-S2)  # nontrivial; S1 and S2 might have different orders
     }
 
-`subs` <- function(S, vv, drop=TRUE){
-    jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(vv),as.vector(vv))
+`subs` <- function(S, ..., drop=TRUE){
+    sb <- unlist(list(...))
+    jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(sb),as.vector(sb))
     return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 

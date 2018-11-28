@@ -4,7 +4,7 @@ exportPattern("^[[:alpha:]]+")
 
 importFrom(Rcpp, evalCpp)
 importFrom("spray","is.spray")
-importFrom("mpoly","as.mpoly","is.mpoly")
+importFrom("mpoly","as.mpoly","is.mpoly","mp")
 
 S3method(as.mpoly,mvp)
 

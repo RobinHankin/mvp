@@ -7,7 +7,6 @@
 \alias{mvp_add}
 \alias{mvp_power}
 \alias{simplify}
-\alias{
 \title{Low level functions}
 \description{Various low-level functions that call the C routines}
 \usage{

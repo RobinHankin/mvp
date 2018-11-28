@@ -17,6 +17,7 @@ subsmvp(S,v,X)
   \item{\dots}{named arguments corresponding to variables to substitute}
   \item{drop}{Boolean with default \code{TRUE} meaning to return a
     scalar (the constant) in place of a constant mvp object}
+  \item{v}{A string corresponding to the variable to substitute}
 }
 \value{
   Return a multivariate polynomial, object of class mvp
@@ -31,9 +32,6 @@ subs(p,a=1,b=2)
 subs(p,a=1,b=2,c=3)
 subs(p,a=1,b=2,c=3,drop=FALSE)
 
-
 subsmvp(p,'a',as.mvp("1+x+x^4"))
-
-
 }
 \keyword{symbolmath}

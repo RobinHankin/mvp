@@ -18,7 +18,7 @@ Print methods for mvp objects: to print, an mvp object is coerced to
 \author{Robin K. S. Hankin}
 \examples{
 
-a <- mvp(diag(3))
+a <- rmvp(4)
 a
 print(a)
 print(a,stars=TRUE)

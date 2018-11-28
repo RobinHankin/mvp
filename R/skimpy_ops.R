@@ -126,12 +126,25 @@ mvp_power_scalar <- function(S,n){
   is.zero(S1-S2)  # nontrivial; S1 and S2 might have different orders
     }
 
+
+`drop` <- function(S){
+    if((length(vars(S))==1) & (length(vars(S)[[1]])==0)){
+        return(coeffs(S))
+    } else {
+        return(S)
+    }
+}
+
 `subs` <- function(S, ..., drop=TRUE){
     sb <- unlist(list(...))
     jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(sb),as.vector(sb))
-    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+    out <- mvp(jj[[1]],jj[[2]],jj[[3]])
+    if(drop){
+        return(drop(out))
+    } else {
+        return(out)
+    }
 }
-
 
 `subsmvp` <- function(S, v, X){
   jj <- mvp_substitute_mvp(

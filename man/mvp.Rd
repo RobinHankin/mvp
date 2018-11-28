@@ -15,9 +15,6 @@ as.mvp(x)
     element of the \code{var} and \code{powers} lists}
   \item{x}{Object possibly of class \code{mvp}}
 }
-\details{
-
-}
 \author{Robin K. S. Hankin}
 \examples{
 

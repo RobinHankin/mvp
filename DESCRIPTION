@@ -4,7 +4,7 @@ Title: Fast multiplication of sparse multivariate polynomials
 Version: 1.0-0
 Date: 2017-05-18
 Author: Robin K. S. Hankin
-Depends: mpoly
+Depends: mpoly,spray
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description: Fast multiplication of sparse multivariate polynomials.  Hopefully a pleasing hybrid of spray and mpoly.
 License: GPL (>= 2)

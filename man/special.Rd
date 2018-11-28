@@ -19,6 +19,7 @@ numeric_to_mvp(x)
   \item{d}{An integer; generally, the dimension or arity of the resulting mvp}
   \item{v,power}{Integer vector of powers}
   \item{x}{Numeric vector of coefficients}
+  \item{symbols}{Character vector for the symbols}
 }
 \value{All functions documented here return a mvp object}
 \author{Robin K. S. Hankin}

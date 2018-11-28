@@ -127,6 +127,9 @@ mvp_power_scalar <- function(S,n){
     }
 
 
+
+setGeneric("drop",function(x){standardGeneric("drop")})
+`drop` <- function(x){UseMethod("drop")}
 `drop` <- function(S){
     if((length(vars(S))==1) & (length(vars(S)[[1]])==0)){
         return(coeffs(S))

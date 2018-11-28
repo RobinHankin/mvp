@@ -43,11 +43,13 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     cat("\n")
 }
 
-`as.mvp` <- function(x){
+`as.mvp` <- function(x,...){
   if(is.mvp(x)){
     return(x)
   } else if(is.mpoly(x)){
     return(mpoly_to_mvp(x))
+  } else if(is.spray(x)){
+    return(spray_to_mvp(x,...))
   } else if(is.character(x)){
     return(mpoly_to_mvp(mp(x)))
   } else if(is.list(x)){
@@ -77,6 +79,15 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     return(out)
 }    
 
+`spray_to_mvp` <- function(L,symbols=letters){
+  I <- L$index
+  mvp(
+      vars   = sapply(seq_len(nrow(I)),function(i){symbols[which(I[i,] != 0)]},simplify=FALSE),
+      powers = sapply(seq_len(nrow(I)),function(i){          I[i,I[i,] != 0 ]},simplify=FALSE),
+      coeffs = L$value
+      )
+}
+
 `rmvp` <- function(n,size=6,pow=6,symbols=letters){
     mvp(
         vars   = replicate(n,sample(symbols,size,replace=TRUE),simplify=FALSE),
@@ -98,6 +109,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
   }
   return(out)
 }
+
+`constant.numeric` <- function(x){numeric_to_mvp(x)}
 
 `constant<-.mvp` <- function(x,value){
   wanted <- sapply(a$names,function(x){length(x)==0})

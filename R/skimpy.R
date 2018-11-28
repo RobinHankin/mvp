@@ -155,6 +155,6 @@ setGeneric("drop",function(x){standardGeneric("drop")})
     return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 
-`as.function.mvp` <- function(p,...){
-  function(...){subs(p, ...)}
+`as.function.mvp` <- function(x, ...){
+  function(...){subs(x, ...)}
 }

@@ -3,10 +3,10 @@
 \title{Functional form for multivariate polynomials}
 \description{Coerces a multivariate polynomial into a function}
 \usage{
-\method{as.function}{mvp}(p, ...)
+\method{as.function}{mvp}(x, ...)
 }
 \arguments{
-  \item{p}{Multivariate polynomial}
+  \item{x}{Multivariate polynomial}
   \item{...}{Further arguments (currently ignored)}
 }
 \author{Robin K. S. Hankin}

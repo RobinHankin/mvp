@@ -4,7 +4,6 @@
 \alias{subsmvp}
 \alias{subs_mvp}
 \alias{mvp_subs_mvp}
-\alias{mvp_substitute_mvp}
 \title{Substitution}
 \description{
 }
@@ -21,6 +20,17 @@ subsmvp(S,v,X)
 }
 \value{
   Return a multivariate polynomial, object of class mvp
+}
+\details{
+Function \code{subs()} uses a natural R idiom to substitute scalar
+values for symbols.  Observe that this type of substitution is
+insensitive to order: \code{subs(P,a=1,b=3) == subs(P,b=3,a=1)}.  This
+would appear in mathematica as \code{P /. \{a -> 1, b->3\}} which
+is a much preferable idiom, IMO.
+
+Function \code{subsmpv()} takes a mvp object and substitutes another mvp
+object for a specific symbol.  This operation is sensitive to order
+which is why a different R idiom is needed.
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{drop}}}

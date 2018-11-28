@@ -5,7 +5,7 @@
 \usage{
 mvp(vars, powers, coeffs)
 is.mvp(x)
-as.mvp(x)
+as.mvp(x,...)
 }
 \arguments{
   \item{vars}{List of variables comprising each term of a mvp object}
@@ -14,6 +14,7 @@ as.mvp(x)
   \item{coeffs}{Numeric vector corresponding to the coefficients to each
     element of the \code{var} and \code{powers} lists}
   \item{x}{Object possibly of class \code{mvp}}
+  \item{...}{Further arguments, passed to the methods}
 }
 \author{Robin K. S. Hankin}
 \examples{

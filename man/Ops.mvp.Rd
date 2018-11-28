@@ -21,10 +21,6 @@
 }
 \usage{
 \method{Ops}{mvp}(e1, e2)
-simplify(allnames,allpowers,coefficients)
-mvp_prod(allnames1,allpowers1,coefficients1,allnames2,allpowers2,coefficients2)
-mvp_add(allnames1, allpowers1, coefficients1, allnames2, allpowers2, coefficients2)
-mvp_power(allnames, allpowers, coefficients, n) 
 mvp_negative(S)
 mvp_times_mvp(S1,S2)
 mvp_times_scalar(S,x)

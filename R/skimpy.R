@@ -113,6 +113,35 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
   return(x)
 }
 
+setGeneric("drop",function(x){standardGeneric("drop")})
+`drop` <- function(x){UseMethod("drop")}
+`drop` <- function(S){
+    if((length(vars(S))==1) & (length(vars(S)[[1]])==0)){
+        return(coeffs(S))
+    } else {
+        return(S)
+    }
+}
+
+`subs` <- function(S, ..., drop=TRUE){
+    sb <- unlist(list(...))
+    jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(sb),as.vector(sb))
+    out <- mvp(jj[[1]],jj[[2]],jj[[3]])
+    if(drop){
+        return(drop(out))
+    } else {
+        return(out)
+    }
+}
+
+`subsmvp` <- function(S, v, X){
+  jj <- mvp_substitute_mvp(
+      S[[1]],S[[2]],S[[3]],
+      X[[1]],X[[2]],X[[3]],
+      v)
+    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+}
+
 `as.function.mvp` <- function(p,...){
   function(...){subs(p, ...)}
 }

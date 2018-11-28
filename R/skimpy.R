@@ -33,12 +33,12 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     length(vars(x))==0
 }
 
-`print.mvp` <-  function(x){
+`print.mvp` <-  function(x, ...){
     cat("mvp object algebraically equal to\n")
     if(is.zero(x)){
-        print(mp("0"))
+        print(mp("0"),...)
     } else {
-        print(as.mpoly(x))
+        print(as.mpoly(x), ...)
     }
     cat("\n")
 }

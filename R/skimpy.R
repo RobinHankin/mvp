@@ -113,3 +113,6 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
   return(x)
 }
 
+`as.function.mvp` <- function(p){
+  function(...){subs(p,...)}
+}

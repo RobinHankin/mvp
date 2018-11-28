@@ -1,5 +1,7 @@
 \name{mvp}
 \alias{mvp}
+\alias{is.mvp}
+\alias{as.mvp}
 \title{Multivariate polynomials, mvp objects}
 \description{Create, test for, an coerce to, mvp objects}
 \usage{

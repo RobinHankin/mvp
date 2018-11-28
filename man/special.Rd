@@ -17,7 +17,7 @@ numeric_to_mvp(x)
 }
 \arguments{
   \item{d}{An integer; generally, the dimension or arity of the resulting mvp}
-  \item{power}{Integer vector of powers}
+  \item{v,power}{Integer vector of powers}
   \item{x}{Numeric vector of coefficients}
 }
 \value{All functions documented here return a mvp object}

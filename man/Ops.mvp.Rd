@@ -1,10 +1,6 @@
 \name{Ops.mvp}
 \alias{Ops.mvp}
 \alias{Ops}
-\alias{simplify}
-\alias{mvp_prod}
-\alias{mvp_add}
-\alias{mvp_power}
 \alias{mvp_negative}
 \alias{mvp_times_mvp}
 \alias{mvp_times_scalar}
@@ -31,10 +27,6 @@ mvp_eq_mvp(S1,S2)
 \arguments{
   \item{e1,e2,S,S1,S2}{Objects of class \dQuote{\code{mvp}}}
   \item{x}{Scalar, length one numeric vector}
-  \item{n}{Integer}
-  \item{allnames,allpowers,coefficients,allnames1, allpowers1,
-    coefficients1, allnames2, allpowers2, coefficients2}{Arguments for
-    low-level functions}
 }
 \details{
   The function \code{Ops.mvp()} passes unary and binary arithmetic

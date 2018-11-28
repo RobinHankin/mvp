@@ -1,6 +1,5 @@
 \name{lowlevel}
 \alias{lowlevel}
-\alias{subsmvp}
 \alias{mvp_substitute_mvp}
 \alias{mvp_substitute}
 \alias{mvp_prod}

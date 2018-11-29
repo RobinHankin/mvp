@@ -1,5 +1,6 @@
 # following check uses Euler's four-square identity:
 
+library("skimpy")
 
 LHS <- as.mvp(
   "
@@ -15,4 +16,4 @@ RHS <- as.mvp("
   +(a1*b4+a2*b3-a3*b2+a4*b1)^2
 ")
 
-stopifnot(lhs==rhs)
+stopifnot(LHS==RHS)

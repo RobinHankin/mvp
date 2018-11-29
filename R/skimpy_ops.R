@@ -80,7 +80,7 @@
 
 `mvp_times_mvp` <- function(S1,S2){
   if(is.zero(S1) || is.zero(S2)){
-    return(zeromvp)
+    return(constant(0))
   } else {
       jj <- mvp_prod(
           allnames1=S1[[1]],allpowers1=S1[[2]],coefficients1=S1[[3]],

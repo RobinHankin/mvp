@@ -2,13 +2,14 @@
 \alias{accessors}
 \alias{vars}
 \alias{powers}
+\alias{coeffs}
 \alias{coefficients}
 \title{Accessor methods for mvp objects}
 \description{Accessor methods for mvp objects}
 \usage{
 vars(x)
 powers(x)
-coefficients(x)
+coeffs(x)
 }
 \arguments{
   \item{x}{Object of class mvp}

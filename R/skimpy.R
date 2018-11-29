@@ -88,6 +88,21 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
       )
 }
 
+`mvp_to_spray` <- function(S){
+    vS <- vars(S)
+    pS <- powers(S)
+    allvars <- sort(unique(c(vS,recursive=TRUE)))
+
+    M <- matrix(0,length(powers(S)),length(allvars))
+    for(i in seq_len(nrow(M))){
+        v <- vS[[i]]
+        p <- pS[[i]]
+
+        M[i,sapply(v,function(x){which(x==allvars)})] <- p
+    }
+    spray::spray(M,coeffs(S))
+}
+
 `rmvp` <- function(n,size=6,pow=6,symbols=letters){
     mvp(
         vars   = replicate(n,sample(symbols,size,replace=TRUE),simplify=FALSE),

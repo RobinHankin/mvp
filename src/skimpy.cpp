@@ -168,7 +168,7 @@ mvp power(const mvp X, unsigned int n){
     return out;
 }
 
-mvp deriv(const mvp X, const string v){// differentiation: dX/dv
+mvp deriv(const mvp X, const string v){// differentiation: dX/dv, 'v' a single variable
     mvp out;
 
     for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){
@@ -225,17 +225,17 @@ List mvp_power(
 // [[Rcpp::export]]
 List mvp_deriv(
               const List &allnames, const List &allpowers, const NumericVector &coefficients,
-              const CharacterVector &v
+              const CharacterVector &v    // v a vector of symbols to be differentiated WR to.
                ){
 
     const mvp X = prepare(allnames, allpowers, coefficients);
+    mvp out = X;
     const unsigned int n=v.size();
-    Rcpp::List out(n);
-        
+     
     for(unsigned int i=0 ; i<n ; i++){
-        out[i] = retval(deriv(X, (string) v[i]));
+        out = deriv(out, (string) v[i]);
     }
-    return out;
+    return retval(out);
 }
 
 // [[Rcpp::export]]

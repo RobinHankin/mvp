@@ -5,6 +5,7 @@
 \alias{mvp_prod}
 \alias{mvp_add}
 \alias{mvp_power}
+\alias{mvp_deriv}
 \alias{simplify}
 \title{Low level functions}
 \description{Various low-level functions that call the C routines}
@@ -15,6 +16,7 @@ mvp_substitute_mvp(allnames1, allpowers1, coefficients1, allnames2, allpowers2,
 mvp_prod(allnames1,allpowers1,coefficients1,allnames2,allpowers2,coefficients2)
 mvp_add(allnames1, allpowers1, coefficients1, allnames2, allpowers2,coefficients2)
 simplify(allnames,allpowers,coefficients)
+mvp_deriv(allnames, allpowers, coefficients, v)
 mvp_power(allnames, allpowers, coefficients, n) 
 }
 \arguments{

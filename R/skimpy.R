@@ -173,3 +173,16 @@ setGeneric("drop",function(x){standardGeneric("drop")})
 `as.function.mvp` <- function(x, ...){
   function(...){subs(x, ...)}
 }
+
+`deriv.mvp` <- function(expr, v, ...){
+  jj <- mvp_deriv(expr[[1]], expr[[2]], expr[[3]], v)
+  return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+}
+
+setGeneric("deriv")
+setGeneric("aderiv",function(x){standardGeneric("aderiv")})
+`aderiv` <- function(expr, n, ...){UseMethod("aderiv")}
+
+`aderiv.mvp` <- function(expr, n, ...){
+  deriv(expr, rep(names(n),n))
+}

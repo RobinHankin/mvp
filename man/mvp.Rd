@@ -6,7 +6,8 @@
 \description{Create, test for, an coerce to, mvp objects}
 \usage{
 mvp(vars, powers, coeffs)
-is_ok_mvp(vars,powers,coeffs){is.mvp(x)
+is_ok_mvp(vars,powers,coeffs)
+is.mvp(x)
 as.mvp(x,...)
 }
 \arguments{

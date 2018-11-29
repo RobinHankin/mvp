@@ -6,7 +6,7 @@
 \description{Create, test for, an coerce to, mvp objects}
 \usage{
 mvp(vars, powers, coeffs)
-is.mvp(x)
+is_ok_mvp(vars,powers,coeffs){is.mvp(x)
 as.mvp(x,...)
 }
 \arguments{
@@ -17,6 +17,14 @@ as.mvp(x,...)
     element of the \code{var} and \code{powers} lists}
   \item{x}{Object possibly of class \code{mvp}}
   \item{...}{Further arguments, passed to the methods}
+}
+\details{
+Function \code{mvp()} is the formal creation mechanism for \code{mvp}
+objects.  However, it is not very user-friendly; it is better to use
+\code{as.mvp()} in day-to-day use.
+
+Function \code{is_ok_mvp()} checks for consistency of its arguments.
+
 }
 \author{Robin K. S. Hankin}
 \examples{

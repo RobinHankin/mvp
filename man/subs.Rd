@@ -5,7 +5,8 @@
 \alias{subs_mvp}
 \alias{mvp_subs_mvp}
 \title{Substitution}
-\description{
+\description{Substitute symbols in an mvp object for numbers or other
+  multivariate polynomials
 }
 \usage{
 subs(S, ..., drop = TRUE)

@@ -2,6 +2,7 @@
 \alias{mvp}
 \alias{is.mvp}
 \alias{as.mvp}
+\alias{is_ok_mvp}
 \title{Multivariate polynomials, mvp objects}
 \description{Create, test for, an coerce to, mvp objects}
 \usage{

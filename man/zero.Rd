@@ -51,6 +51,6 @@ t2 <- as.mvp("x-y")
 
 stopifnot(is.zero(t1*t2-as.mvp("x^2-y^2")))
 
-
+}
 
 \keyword{symbolmath}

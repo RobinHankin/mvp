@@ -1,5 +1,7 @@
 ## special polynomials: zero, constant, homog, etc.  Names consistent
-## with the spray package.
+## with the spray package as far as possible, but not all of spray's
+## special polynomials make sense here, and some of them need a
+## different approach.
 
 
 
@@ -11,7 +13,6 @@
 #     lone(3)         #      z
 #     lone(2,3)       #      y
 #     one(3)          #      1
-#     zero(3)         #      0
 #     xyz(3)          #      xyz
      
 
@@ -33,3 +34,5 @@
     stopifnot(is.numeric(x))
     return(mvp(list(character(0)),list(integer(0)),x))
 }
+
+# constant() defined in skimpy.R

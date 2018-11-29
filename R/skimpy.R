@@ -113,7 +113,7 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 `constant.numeric` <- function(x){numeric_to_mvp(x)}
 
 `constant<-.mvp` <- function(x,value){
-  wanted <- sapply(a$names,function(x){length(x)==0})
+  wanted <- sapply(x$names,function(x){length(x)==0})
   if(any(wanted)){
     x$coeffs[wanted] <- value
   } else {  # no constant term

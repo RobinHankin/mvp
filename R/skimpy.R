@@ -195,7 +195,7 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   pp <- powers(p)
   for(i in seq_along(powers(p))){
     ## pp[[i]][vp[[i]] %in% v]  %<>% `*`(-1)
-    pp[[i]][vp[[i]] %in% v] <- pp[[i]][vp[[i]] %in% v]
+    pp[[i]][vp[[i]] %in% v] <- -pp[[i]][vp[[i]] %in% v]
   }
   mvp(vp,pp,coeffs(p))
 }

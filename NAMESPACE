@@ -1,4 +1,4 @@
-useDynLib(skimpy, .registration=TRUE)
+useDynLib(mvp, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
 
 import("methods")

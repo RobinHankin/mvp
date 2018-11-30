@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // simplify
 List simplify(const List& allnames, const List& allpowers, const NumericVector& coefficients);
-RcppExport SEXP _skimpy_simplify(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP) {
+RcppExport SEXP _mvp_simplify(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // mvp_prod
 List mvp_prod(const List& allnames1, const List& allpowers1, const NumericVector& coefficients1, const List& allnames2, const List& allpowers2, const NumericVector& coefficients2);
-RcppExport SEXP _skimpy_mvp_prod(SEXP allnames1SEXP, SEXP allpowers1SEXP, SEXP coefficients1SEXP, SEXP allnames2SEXP, SEXP allpowers2SEXP, SEXP coefficients2SEXP) {
+RcppExport SEXP _mvp_mvp_prod(SEXP allnames1SEXP, SEXP allpowers1SEXP, SEXP coefficients1SEXP, SEXP allnames2SEXP, SEXP allpowers2SEXP, SEXP coefficients2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -36,7 +36,7 @@ END_RCPP
 }
 // mvp_add
 List mvp_add(const List& allnames1, const List& allpowers1, const NumericVector& coefficients1, const List& allnames2, const List& allpowers2, const NumericVector& coefficients2);
-RcppExport SEXP _skimpy_mvp_add(SEXP allnames1SEXP, SEXP allpowers1SEXP, SEXP coefficients1SEXP, SEXP allnames2SEXP, SEXP allpowers2SEXP, SEXP coefficients2SEXP) {
+RcppExport SEXP _mvp_mvp_add(SEXP allnames1SEXP, SEXP allpowers1SEXP, SEXP coefficients1SEXP, SEXP allnames2SEXP, SEXP allpowers2SEXP, SEXP coefficients2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -52,7 +52,7 @@ END_RCPP
 }
 // mvp_power
 List mvp_power(const List& allnames, const List& allpowers, const NumericVector& coefficients, const NumericVector& n);
-RcppExport SEXP _skimpy_mvp_power(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP nSEXP) {
+RcppExport SEXP _mvp_mvp_power(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -66,7 +66,7 @@ END_RCPP
 }
 // mvp_deriv
 List mvp_deriv(const List& allnames, const List& allpowers, const NumericVector& coefficients, const CharacterVector& v);
-RcppExport SEXP _skimpy_mvp_deriv(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP) {
+RcppExport SEXP _mvp_mvp_deriv(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -80,7 +80,7 @@ END_RCPP
 }
 // mvp_substitute
 List mvp_substitute(const List& allnames, const List& allpowers, const NumericVector& coefficients, const CharacterVector& v, const NumericVector& values);
-RcppExport SEXP _skimpy_mvp_substitute(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP, SEXP valuesSEXP) {
+RcppExport SEXP _mvp_mvp_substitute(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP, SEXP valuesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -95,7 +95,7 @@ END_RCPP
 }
 // mvp_substitute_mvp
 List mvp_substitute_mvp(const List& allnames1, const List& allpowers1, const NumericVector& coefficients1, const List& allnames2, const List& allpowers2, const NumericVector& coefficients2, const CharacterVector& v);
-RcppExport SEXP _skimpy_mvp_substitute_mvp(SEXP allnames1SEXP, SEXP allpowers1SEXP, SEXP coefficients1SEXP, SEXP allnames2SEXP, SEXP allpowers2SEXP, SEXP coefficients2SEXP, SEXP vSEXP) {
+RcppExport SEXP _mvp_mvp_substitute_mvp(SEXP allnames1SEXP, SEXP allpowers1SEXP, SEXP coefficients1SEXP, SEXP allnames2SEXP, SEXP allpowers2SEXP, SEXP coefficients2SEXP, SEXP vSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -112,17 +112,17 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_skimpy_simplify", (DL_FUNC) &_skimpy_simplify, 3},
-    {"_skimpy_mvp_prod", (DL_FUNC) &_skimpy_mvp_prod, 6},
-    {"_skimpy_mvp_add", (DL_FUNC) &_skimpy_mvp_add, 6},
-    {"_skimpy_mvp_power", (DL_FUNC) &_skimpy_mvp_power, 4},
-    {"_skimpy_mvp_deriv", (DL_FUNC) &_skimpy_mvp_deriv, 4},
-    {"_skimpy_mvp_substitute", (DL_FUNC) &_skimpy_mvp_substitute, 5},
-    {"_skimpy_mvp_substitute_mvp", (DL_FUNC) &_skimpy_mvp_substitute_mvp, 7},
+    {"_mvp_simplify", (DL_FUNC) &_mvp_simplify, 3},
+    {"_mvp_mvp_prod", (DL_FUNC) &_mvp_mvp_prod, 6},
+    {"_mvp_mvp_add", (DL_FUNC) &_mvp_mvp_add, 6},
+    {"_mvp_mvp_power", (DL_FUNC) &_mvp_mvp_power, 4},
+    {"_mvp_mvp_deriv", (DL_FUNC) &_mvp_mvp_deriv, 4},
+    {"_mvp_mvp_substitute", (DL_FUNC) &_mvp_mvp_substitute, 5},
+    {"_mvp_mvp_substitute_mvp", (DL_FUNC) &_mvp_mvp_substitute_mvp, 7},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_skimpy(DllInfo *dll) {
+RcppExport void R_init_mvp(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

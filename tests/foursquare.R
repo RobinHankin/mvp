@@ -1,6 +1,6 @@
 # following check uses Euler's four-square identity:
 
-library("skimpy")
+library("mvp")
 
 LHS <- as.mvp(
   "

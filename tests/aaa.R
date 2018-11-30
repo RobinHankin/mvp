@@ -1,4 +1,4 @@
-library("skimpy")
+library("mvp")
 
 allnames <- list(
     c("bing","y","bong","bung","bang","x","a","xxxxxxxx"),

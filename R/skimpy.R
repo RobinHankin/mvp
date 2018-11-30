@@ -186,3 +186,16 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
 `aderiv.mvp` <- function(expr, n, ...){
   deriv(expr, rep(names(n),n))
 }
+
+`invert` <- function(p,v){
+  p <- as.mvp(p)
+  vp <- vars(p)
+  if(missing(v)){v <- unique(unlist(vp))}
+  pp <- powers(p)
+  for(i in seq_along(powers(p))){
+    ## pp[[i]][vp[[i]] %in% v]  %<>% `*`(-1)
+    pp[[i]][vp[[i]] %in% v] <- pp[[i]][vp[[i]] %in% v]
+  }
+  mvp(vp,pp,coeffs(p))
+}
+

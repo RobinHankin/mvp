@@ -29,9 +29,8 @@ A ```map``` is a sorted associative container that contains key-value
 pairs with unique keys.  It is interesting here because search and
 insertion operations have logarithmic complexity.  Multivariate
 polynomials are considered to be the sum of a finite number of
-*terms*, each multiplied by a coefficient.
-
-A *term* is something like $x^2y^3z$.  We may consider this term to be the map
+*terms*, each multiplied by a coefficient.  A *term* is something like
+$x^2y^3z$.  We may consider this term to be the map
 
 ```
 {"x" -> 2, "y" -> 3, "z" -> 7}
@@ -69,7 +68,6 @@ Note also that constant terms are handled with no difficulty
 (constants are simply maps from the empty map to its value), as is the
 zero polynomial (which is simply an empty map).
 
-
 ## The package in use
 
 Consider a simple multivariate polynomial:
@@ -98,4 +96,68 @@ propitious ordering.  In any event, the ```mpoly``` package can
 specify a print order:
 
 
+```{r}
+print(M,order="lex", varorder=c("stoat","goat","boat","bloat","gloat","float"))
 ```
+
+
+## Arithmetic operations
+
+The arithmetic operations ```*```, ```+```, ```-``` and ```^``` work
+as expected:
+
+```{r}
+S1 <- rmvp(5,2,2,4)
+S2 <- rmvp(5,2,2,4)
+S1
+S2
+S1+S2
+S1*S2
+S1^2
+```
+
+## Substitution
+
+The package has two substitution functionalities.  Firstly, we can
+substitute one or more variables for a numeric value.  Define a mvp
+object:
+
+```{r}
+S3 <- as.mvp("x + 5x^4*y + 8y^2*x*z^3")
+S3
+```
+
+And then we may substitute $x=1$:
+
+```{r}
+subs(S3,x=1)
+```
+
+Note the natural R idiom, and that the return value is another mvp
+object.  We may subsitute for the other variables:
+
+```{r}
+subs(S3,x=1,y=2,z=3)
+```
+
+(in this case, the default behaviour is to return a "dropped" version
+of the resulting polynomial, that is, coerced to a scalar).  The other
+mode of substitution is to replace a variable by another polynomial:
+
+```{r}
+subsmvp(S3,"z",as.mvp("a^2+2b^3"))
+```
+
+## Some timings
+
+```{r}
+library("spray")
+library("mpoly")
+a1 <- rmvp(30,9,9,26)
+a2 <- as.mpoly(a1)
+a3 <- mvp_to_spray(a1)
+system.time(ignore <- a1^3)  # mvp
+system.time(ignore <- a2^3)  # mpoly
+system.time(ignore <- a3^3)  # spray
+```
+

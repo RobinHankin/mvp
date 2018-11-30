@@ -1,0 +1,101 @@
+---
+title: "Fast multivariate polynomials R"
+author: "Robin K. S. Hankin"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{mvp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r set-options, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", dev = "png", fig.width = 7, fig.height = 3.5, message = FALSE, warning = FALSE)
+options(width = 80, tibble.width = Inf)
+```
+
+# Introduction
+
+The ```mvp``` package provides some functionality for fast
+manipulation of multivariate polynomials, using the Standard Template
+library of ```C++```, commonly known as the ```STL```.  The package is
+comparable in speed to the ```spray``` package for sparse arrays,
+while retaining the symbolic capabilities of the ```mpoly``` package.
+It uses the print and coercion methods of ```mpoly```; the only
+improvement of this package on ```mpoly``` is its speed.
+
+# The ```STL map``` class
+
+A ```map``` is a sorted associative container that contains key-value
+pairs with unique keys.  It is interesting here because search and
+insertion operations have logarithmic complexity.  Multivariate
+polynomials are considered to be the sum of a finite number of
+*terms*, each multiplied by a coefficient.
+
+A *term* is something like $x^2y^3z$.  We may consider this term to be the map
+
+```
+{"x" -> 2, "y" -> 3, "z" -> 7}
+```
+
+the map takes symbols to their (integer) power, and it is understood
+that powers are nonzero.  A ```mvp``` object is a map from terms to
+their coeffients; thus $7xy^2 -3x^2z^5$ would be
+
+```
+{{"x" -> 2, "y" -> 3, "z" -> 1} -> 7, {"x" -> 2, "z" ->5} -> -7
+```  
+
+and we understand that coefficients are nonzero.  In ```C++``` the
+declarations would be
+
+```
+typedef vector <signed int> mypowers;  
+typedef vector <string> mynames;  
+
+typedef map <string, signed int> term; 
+typedef map <term, double> mvp; 
+```
+
+Thus a ```term``` maps a string to a (signed) integer, and a ```mvp```
+maps terms to doubles. 
+
+One reason why the ```map``` class is fast is that the order in which
+the keys are stored is undefined: the compiler may store them in the
+order which it regards as most propitious.  This is not an issue for
+the maps considered here as addition and multiplication are
+commutative and associative.
+
+Note also that constant terms are handled with no difficulty
+(constants are simply maps from the empty map to its value), as is the
+zero polynomial (which is simply an empty map).
+
+
+## The package in use
+
+Consider a simple multivariate polynomial:
+
+
+```{r}
+library("mvp",quietly=TRUE)
+p <- as.mvp("3x y + z^3 + x y^6 z")
+p
+```
+
+Coercion and printing are accomplished by the ```mpoly``` package.
+Note, however, that the order of the terms is not preserved, and
+neither is the order of the symbols within a single term.  Although
+this might sound odd, if we consider a marginally more involved
+situation, such as
+
+```{r}
+M <- as.mvp("3 stoat*goat^6 -4 + 7 boat^3 * bloat -9 float*boat*goat*gloat^6")
+M
+```
+
+it is not clear that any human-discernable ordering is preferable to
+any other, and we would be better off letting the compiler decide a
+propitious ordering.  In any event, the ```mpoly``` package can
+specify a print order:
+
+
+```

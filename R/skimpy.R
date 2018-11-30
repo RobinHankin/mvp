@@ -103,7 +103,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     spray::spray(M,coeffs(S))
 }
 
-`rmvp` <- function(n,size=6,pow=6,symbols=letters){
+`rmvp` <- function(n,size=6,pow=6,symbols=6){
+  if(is.numeric(symbols)){symbols <- letters[seq_len(symbols)]}
     mvp(
         vars   = replicate(n,sample(symbols,size,replace=TRUE),simplify=FALSE),
         powers = replicate(n,sample(pow,size,replace=TRUE),simplify=FALSE),

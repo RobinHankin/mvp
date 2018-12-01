@@ -39,7 +39,11 @@ p <- rmvp(10,9,9,letters[1:4])
 deriv(p,letters[1:3])
 deriv(p,rev(letters[1:3]))  # should be the same
 
-deriv(p,c(a=3,b=4,c=2))
+aderiv(p,c(a=3,b=4,c=2))
+
+jj <- c(a=1,b=2,c=3)
+
+aderiv(p,jj) - aderiv(rev(jj)) # should be zero
 
 }
 \keyword{symbolmath}

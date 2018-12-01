@@ -6,7 +6,9 @@ Print methods for mvp objects
 }
 \description{
 Print methods for mvp objects: to print, an mvp object is coerced to
-\code{mpoly} form}
+\code{mpoly} form and the \code{mpoly} print method used.
+
+}
 \usage{
 \method{print}{mvp}(x, ...)
 }

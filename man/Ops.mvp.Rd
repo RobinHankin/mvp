@@ -29,24 +29,37 @@ mvp_eq_mvp(S1,S2)
   \item{x}{Scalar, length one numeric vector}
 }
 \details{
+
   The function \code{Ops.mvp()} passes unary and binary arithmetic
-  operators (\dQuote{\code{+}}, \dQuote{\code{-}}, \dQuote{\code{*}}, and
-  \dQuote{\code{/}}) to the appropriate specialist function.
+  operators \dQuote{\code{+}}, \dQuote{\code{-}}, \dQuote{\code{*}} and
+  \dQuote{\code{^}} to the appropriate specialist function.
 
   The most interesting operator is \dQuote{\code{*}}, which is passed to
-  \code{mvp_times_mvp()}.  
+  \code{mvp_times_mvp()}.  I guess \dQuote{\code{+}} is quite
+  interesting too.
+
 }
 \value{
-The high-level functions return an object of \code{mvp}, the low-level
-  functions return lists.
-}
-\note{
-  The \dQuote{\code{A}} at the beginning of a function name means
-  \strong{A}ny mvp.  Thus \code{Ainv()} takes quaternionic or
-  octmvpic arguments, but \code{OprodO()} takes only octmvps.
+
+  The high-level functions documented here return an object of
+  \code{mvp}, the low-level functions documented at \code{lowlevel.Rd}
+  return lists.   But don't use the low-level functions.
+
 }
 \author{Robin K. S. Hankin}
+\seealso{\code{\link{lowlevel}}}
 \examples{
-6+7
+p1 <- rmvp(3)
+p2 <- rmvp(3)
+
+p1*p2
+
+p1+p2
+
+p1^3
+
+
+p1*(p1+p2) == p1^2+p1*p2  # should be TRUE
+
 }
 \keyword{symbolmath}

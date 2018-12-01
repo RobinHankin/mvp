@@ -15,9 +15,11 @@ coeffs(x)
   \item{x}{Object of class mvp}
 }
 \details{
-Access the different parts of an mvp object.  
+Access the different parts of an mvp object.    The constant term is
+technically a coefficient but is documented under \code{constant.Rd}. 
 }
 \author{Robin K. S. Hankin}
+\seealso{\code{\link{constant}}}
 \examples{
 a <- rmvp(5)
 vars(a)

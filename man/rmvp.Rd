@@ -21,4 +21,5 @@ Returns a multivariate polynomial, an object of class \code{mvp}}
 \author{Robin K. S. Hankin}
 \examples{
 rmvp(5)
+rmvp(5,symbols=state.abb)
 }

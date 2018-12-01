@@ -33,10 +33,10 @@ below for convenience.
 }
 \seealso{\code{\link{constant}}, \code{\link{zero}}}
 \examples{
-product(1:3)        #      x * y^2 * z^3
-homog(3)            #      x + y + z
-homog(3,2)          #      x^2  + xy + xz + y^2 + yz + z^2
-linear(1:3)         #      1*x + 2*y + 3*z
-constant(5)         #  5
+product(1:3)        #      a * b^2 * c^3
+homog(3)            #      a + b + c
+homog(3,2)          #      a^2  + a b + a c + b^2 + b c + c^2
+linear(1:3)         #      1*a + 2*b + 3*c
+constant(5)         #      5
 }
 \keyword{symbolmath}

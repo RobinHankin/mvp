@@ -25,7 +25,6 @@
   If \code{x} is an mvp object, \code{constant(x)} returns the value of
   the constant in the multivariate polynomial; if \code{x} is numeric,
   it returns a constant multivariate polynomial with value \code{x}.
-
   
 }
 \author{Robin K. S. Hankin}
@@ -34,7 +33,6 @@ a <- rmvp(5)+4
 constant(a)
 constant(a) <- 33
 a
-
 
 constant(0)  # the zero mvp
 }

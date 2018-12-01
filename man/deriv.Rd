@@ -43,7 +43,7 @@ aderiv(p,c(a=3,b=4,c=2))
 
 jj <- c(a=1,b=2,c=3)
 
-aderiv(p,jj) - aderiv(rev(jj)) # should be zero
+aderiv(p,jj) - aderiv(p,rev(jj)) # should be zero
 
 }
 \keyword{symbolmath}

@@ -26,7 +26,7 @@ subsmvp(S,v,X)
 Function \code{subs()} uses a natural R idiom to substitute scalar
 values for symbols.  Observe that this type of substitution is
 insensitive to order: \code{subs(P,a=1,b=3) == subs(P,b=3,a=1)}.  This
-would appear in mathematica as \code{P /. \{a -> 1, b->3\}} which
+would appear in mathematica as \code{P /. \{a -> 1, b -> 3\}}, which
 is a much preferable idiom, IMO.
 
 Function \code{subsmpv()} takes a mvp object and substitutes another mvp

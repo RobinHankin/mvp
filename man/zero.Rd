@@ -37,7 +37,7 @@ A general mvp object is something like
 
 which would be \eqn{6x^3y^5-7xz^8}{6x^3*y^5-7x*z^8}.
 
-The zero polynomial is just \code{\{\}}.  Neet, eh?
+The zero polynomial is just \code{\{\}}.  Neat, eh?
   
 }
 

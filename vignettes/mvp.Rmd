@@ -1,5 +1,5 @@
 ---
-title: "Fast multivariate polynomials R"
+title: "The ```mvp``` package: fast multivariate polynomials R"
 author: "Robin K. S. Hankin"
 date: "`r Sys.Date()`"
 vignette: >
@@ -20,8 +20,9 @@ manipulation of multivariate polynomials, using the Standard Template
 library of ```C++```, commonly known as the ```STL```.  The package is
 comparable in speed to the ```spray``` package for sparse arrays,
 while retaining the symbolic capabilities of the ```mpoly``` package.
-It uses the print and coercion methods of ```mpoly```; the only
-improvement of this package on ```mpoly``` is its speed.
+It uses the excellent print and coercion methods of ```mpoly```; the
+only improvement of this package on ```mpoly``` is its speed, and the
+ability to handle negative powers.
 
 # The ```STL map``` class
 
@@ -146,6 +147,25 @@ mode of substitution is to replace a variable by another polynomial:
 
 ```{r}
 subsmvp(S3,"z",as.mvp("a^2+2b^3"))
+```
+
+## Differentiation
+
+Differentiation is implemented.  First we have the ```deriv()```
+method:
+
+```{r}
+S <- rmvp(5,4,3,4)
+S
+deriv(S,letters[1:3])
+deriv(S,rev(letters[1:3]))  # should be the same.
+```
+
+Also a slightly different form:```aderiv()```, here used to evaluate
+$\frac{\partial^6S}{\partial a^3\partial b\partial c^2}$:
+
+```{r}
+aderiv(S,c(a=3,b=1,c=2))
 ```
 
 ## Some timings

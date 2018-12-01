@@ -18,12 +18,13 @@ options(width = 80, tibble.width = Inf)
 
 The ```mvp``` package provides some functionality for fast
 manipulation of multivariate polynomials, using the Standard Template
-library of ```C++```, commonly known as the ```STL```.  The package is
+library of ```C++```, commonly known as the ```STL```.  It is
 comparable in speed to the ```spray``` package for sparse arrays,
-while retaining the symbolic capabilities of the ```mpoly``` package.
-It uses the excellent print and coercion methods of ```mpoly```; the
-only improvement of this package on ```mpoly``` is its speed, and the
-ability to handle negative powers.
+while retaining the symbolic capabilities of the ```mpoly``` package
+[@kahle2013].  The ```mvp package``` uses the excellent print and
+coercion methods of ```mpoly```.  The ```mvp``` package provides
+improved speed over ```mpoly```, the ability to handle negative
+powers, and a more sophisticated substitution mechanism.
 
 # The ```STL map``` class
 
@@ -182,3 +183,4 @@ system.time(ignore <- a2^3)  # mpoly
 system.time(ignore <- a3^3)  # spray
 ```
 
+# References

@@ -2,6 +2,7 @@
 title: "The ```mvp``` package: fast multivariate polynomials R"
 author: "Robin K. S. Hankin"
 date: "`r Sys.Date()`"
+bibliography: poly.bib
 vignette: >
   %\VignetteIndexEntry{mvp}
   %\VignetteEngine{knitr::rmarkdown}

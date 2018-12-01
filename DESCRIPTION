@@ -1,6 +1,6 @@
 Package: mvp
 Type: Package
-Title: Fast multiplication of sparse multivariate polynomials
+Title: Fast manipulation of multivariate polynomials
 Version: 1.0-0
 Date: 2017-05-18
 Author: Robin K. S. Hankin
@@ -8,7 +8,10 @@ Depends: mpoly,spray,methods
 Suggests: knitr,rmarkdown
 VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
-Description: Fast multiplication of sparse multivariate polynomials.  Hopefully a pleasing hybrid of spray and mpoly.
+Description: Fast manipulation of sparse multivariate polynomials
+  using the "Map" class of the Standard Template Library.  The package
+  uses the "mpoly" print and coercion methods.  It is comparable in
+  speed to the "spray" package, but retains the symbolic aproach of "mpoly".
 License: GPL (>= 2)
 Imports: Rcpp (>= 0.12.3)
 LinkingTo: Rcpp

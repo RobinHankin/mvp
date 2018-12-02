@@ -161,20 +161,6 @@ checker3 <- function(x,y,z){
 } # checker3() closes
 
 
-# Euler's four-square identity:
-checker4 <- function(a1,a2,a3,a4,b1,b2,b3,b4){
-  LHS <- 
-    (a1^2 + a2^2 + a3^2 + a4^2)*
-    (b1^2 + b2^2 + b3^2 + b4^2)
-  
-  RHS <- (
-     (a1*b1-a2*b2-a3*b3-a4*b4)^2
-    +(a1*b2+a2*b1+a3*b4-a4*b3)^2
-    +(a1*b3-a2*b4+a3*b1+a4*b2)^2
-    +(a1*b4+a2*b3-a3*b2+a4*b1)^2
-  )
-  return(RHS==RHS)
-}
 
 
 
@@ -183,14 +169,40 @@ for(i in 1:10){
     x <- rmvp(5)
     y <- rmvp(5)
     z <- rmvp(5)
-    a <- rmvp(5)
     
     checker1(x)
     checker2(x,y)
     checker3(x,y,z)
 }
 
-checker4(
+
+## Brahmagupta-Fibonacci:
+
+bf <- function(a1,a2,a3,a4,n){
+  LHS <- (a1^2 + n*a2^2)*(a3^2 + n*a4^2)
+  RHS <- (a1*a3-n*a2*a4)^2 + n*(a1*a4 +a2*a3)^2
+  return(LHS == RHS)
+}
+
+
+# Euler's four-square identity:
+checker8 <- function(a1,a2,a3,a4,b1,b2,b3,b4){
+  LHS <- 
+    (a1^2 + a2^2 + a3^2 + a4^2)*
+    (b1^2 + b2^2 + b3^2 + b4^2)
+  
+  RHS <- (
+    +(a1*b1 - a2*b2 - a3*b3 - a4*b4)^2
+    +(a1*b2 + a2*b1 + a3*b4 - a4*b3)^2
+    +(a1*b3 - a2*b4 + a3*b1 + a4*b2)^2
+    +(a1*b4 + a2*b3 - a3*b2 + a4*b1)^2
+  )
+  return(RHS==RHS)
+}
+
+bf(rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4),7)
+
+checker8(
     rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4),
     rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4)
 )

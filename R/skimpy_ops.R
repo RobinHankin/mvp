@@ -115,7 +115,9 @@
 mvp_power_scalar <- function(S,n){
   stopifnot(n==round(n))
   if(n<0){
-    stop("use ooom() for negative powers")
+    stop("negative powers not implemented")
+  } else if(n==0){
+    return(constant(1))
   } else {
       jj <- mvp_power(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]],n=n)
       return(mvp(jj[[1]],jj[[2]],jj[[3]]))

@@ -29,6 +29,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
   return(TRUE)
 }
 
+`allvars` <- function(x){sort(unique(c(vars(x),recursive=TRUE)))}
+
 `is.zero` <- function(x){
     length(vars(x))==0
 }
@@ -91,14 +93,14 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 `mvp_to_spray` <- function(S){
     vS <- vars(S)
     pS <- powers(S)
-    allvars <- sort(unique(c(vS,recursive=TRUE)))
+    av <- allvars(S)
 
-    M <- matrix(0,length(powers(S)),length(allvars))
+    M <- matrix(0,length(powers(S)),length(av))
     for(i in seq_len(nrow(M))){
         v <- vS[[i]]
         p <- pS[[i]]
 
-        M[i,sapply(v,function(x){which(x==allvars)})] <- p
+        M[i,sapply(v,function(x){which(x==av)})] <- p
     }
     spray::spray(M,coeffs(S))
 }

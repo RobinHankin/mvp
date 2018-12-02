@@ -45,5 +45,15 @@ jj <- c(a=1,b=2,c=3)
 
 aderiv(p,jj) - aderiv(p,rev(jj)) # should be zero
 
+
+## verify the chain rule:
+x <- rmvp(7,symbols=6)
+v <- allvars(x)[1]
+s <- as.mvp("1  +  y  -  y^2 zz  +  y^3 z^2")
+LHS <- subsmvp(deriv(x,v)*deriv(s,"y"),v,s)   # dx/ds*ds/dy
+RHS <- deriv(subsmvp(x,v,s),"y")              # dx/dy
+
+LHS - RHS # should be zero
+
 }
 \keyword{symbolmath}

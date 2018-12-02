@@ -15,6 +15,6 @@ S3method(constant, mvp)
 S3method(deriv, mvp)
 S3method(aderiv,mvp)
 S3method(print,mvp)
-
 S3method(Ops,mvp)
 
+S3method(constant, numeric)

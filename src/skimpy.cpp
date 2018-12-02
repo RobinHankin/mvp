@@ -156,9 +156,10 @@ mvp sum(const mvp X1, const mvp X2){
 }
 
 mvp power(const mvp X, unsigned int n){
-    mvp out; // empty
-    if(n==0){
-        return out;
+    mvp out; // empty mvp object is the zero polynomial; X^0 is managed in R
+    if(n<1){throw std::range_error("power cannot be <1");} 
+    if(n==1){
+        return X;
     } else {
         out = X; 
         for( ; n>1; n--){

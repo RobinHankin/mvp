@@ -1,60 +1,71 @@
+## This file follows the structure of aaa.R in the free group package.
+
+## Define some checker functions, and call them at the end.  They
+## should all return TRUE if the package works, and stop with error if
+## a test is failed.  Function checker1() has one argument, checker2()
+## two, and checker3() has three.  
+
 library("mvp")
 
-allnames <- list(
-    c("bing","y","bong","bung","bang","x","a","xxxxxxxx"),
-    c("bing","bong","bang","x"),
-    c("bing","bong","bung","bang","x"),
-    c("bong","bung","bang","x"),
-    letters[2:9],
-    c('a','b','a'),
-    letters[1:3],
-    c('a','c','b'),
-    c('t','a')
+checker1 <- function(x){
+  stopifnot(x==x)
+
+  stopifnot(x == x + constant(0))
+  stopifnot(x == -(-x))
+  stopifnot(x == +(+x))
+
+  stopifnot(x+x-x == x)
+
+  stopifnot(is.zero(x-x))
+
+  stopifnot(0*x == constant(0))
+  stopifnot(1*x == x)
+  stopifnot(2*x == x+x)
+  stopifnot(3*x == x+x+x)
+  stopifnot(4*x == x+x+x+x)
+  stopifnot(5*x == x+x+x+x+x)
+  stopifnot(6*x == x+x+x+x+x+x)
+
+  stopifnot(x^0 == constant(1))
+  stopifnot(x^1 == x)
+  stopifnot(x^2 == x*x)
+  stopifnot(x^3 == x*x*x)
+  stopifnot(x^4 == x*x*x*x)
+  
+  return(TRUE)
+}
+
+
+checker2 <- function(x,y){
+  stopifnot(x == -y+x+y)
+  stopifnot(x+y == x-(-y))
+
+  stopifnot(x+y == y+x)
+
+  stopifnot((-x)*y == -(x*y))
+  stopifnot(x*(-y) == -(x*y))
+
+              
+  return(TRUE)
+}
+
+checker3 <- function(x,y,z){
+  stopifnot(x+(y+z) == (x+y)+z) # associativity
+  stopifnot(x*(y*z) == (x*y)*z) # associativity
+
+  stopifnot(x*(y+z) == x*y + x*z)
+  return(TRUE)
+}
+
+
+for(i in 1:10){
+    x <- rmvp(5)
+    y <- rmvp(5)
+    z <- rmvp(5)
     
-)
-
-allpowers <- list(
-    1:8,
-    sample(4),
-    sample(5),
-    sample(4),
-    sample(8),
-    c(3,2,3),
-    1:3,
-    c(1,3,2),
-    1:2
-    )
-
-coeffs = 1:9
-
-
-out1 <- mvp(allnames,allpowers,coeffs)
-
-allnames2      <- list(c("x","y"),"x", "y", c("y","x"), c("x","z"),c("z","x"), "t", "u",c("t","f"), letters[1:4])
-allpowers2     <- list(c(1  , 1),  3,   4,  c(1,   1),  c(1,3),    c(3,1),      0,   0, c(0,5),      1:4)
-coefficients2  <- c(        19,   2,   5,       5,        4,       -4,         100,  100, 3,         0)
-
-out2 <- mvp(allnames2,allpowers2,coefficients2)
-
-
-
-shift <- function(x,i=1){# from magic
-  n <- length(x)
-  return(x[c((n - i + 1):n, 1:(n - i))])
-} 
- 
-kahle  <- mvp(
-    vars     = split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
-    powers    = rep(list(1:2),26),
-    coeffs = 1:26
-)
-
-
-# kahle * kahle:
-mvp_prod(kahle$names,kahle$power,kahle$coeffs,kahle$names,kahle$power,kahle$coeffs)
-
-uu <- mvp_deriv(out1$names,out1$power,out1$coeffs,c("x","a","t"))
-
-
+    checker1(x)
+    checker2(x,y)
+    checker3(x,y,z)
+}
 
 

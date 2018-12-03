@@ -1,8 +1,8 @@
 ## Generating function for d-dimensional knight
 
-library("skimpy")
+library("mvp")
 
-`knight_skimpy` <- function(d,can_stay_still=FALSE){
+`knight_mvp` <- function(d,can_stay_still=FALSE){
   f <- function(d){
     n <- d * (d - 1)
     out <- matrix(0, n, d)
@@ -27,4 +27,4 @@ library("skimpy")
   return(out)
 }
 
-knight_skimpy(4)  # four-dimensional knight
+knight_mvp(4)  # four-dimensional knight

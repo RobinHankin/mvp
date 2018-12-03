@@ -18,6 +18,7 @@
 
 
 `product` <- function(v,symbols=letters){
+    if(length(v)>length(letters)){stop("not enough symbols")}
     mvp(list(symbols[seq_along(v)]),list(v),1)
 }
 
@@ -32,6 +33,7 @@
 }
 
 `linear` <- function(x,power=1,symbols=letters){
+    if(length(x)>length(letters)){stop("not enough symbols")}
     mvp(as.list(symbols[seq_along(x)]),rep(power,length(x)),x)
 }
 

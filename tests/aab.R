@@ -1,39 +1,46 @@
+## Some specific algebraic identities (here Euler's four-square
+## identity and the Brahmagupta-Fibonacci identity), which are usually
+## applied to real numbers but work for any commutative ring (such as
+## multivariate polynomials).  The script defines some checker 
+
+
+
 library("mvp")
 
+## Brahmagupta-Fibonacci:
 
-# 1+3a+7a^2*b + 9abc:
-allnames <- list(
-    c("a"),
-    c("a"),
-    c("bung","b"),
-    letters[1:3]
+bf <- function(a1,a2,a3,a4,n){
+  LHS <- (a1^2 + n*a2^2)*(a3^2 + n*a4^2)
+  RHS <- (a1*a3-n*a2*a4)^2 + n*(a1*a4 +a2*a3)^2
+  stopifnot(LHS == RHS)
+  return(TRUE)
+}
+
+
+# Euler's four-square identity:
+euler_four_square <- function(a1,a2,a3,a4,b1,b2,b3,b4){
+  LHS <- 
+    (a1^2 + a2^2 + a3^2 + a4^2)*
+    (b1^2 + b2^2 + b3^2 + b4^2)
+  
+  RHS <- (
+    +(a1*b1 - a2*b2 - a3*b3 - a4*b4)^2
+    +(a1*b2 + a2*b1 + a3*b4 - a4*b3)^2
+    +(a1*b3 - a2*b4 + a3*b1 + a4*b2)^2
+    +(a1*b4 + a2*b3 - a3*b2 + a4*b1)^2
+  )
+  stopifnot(RHS==RHS)
+  return(TRUE)
+}
+
+bf(rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4),7)
+
+euler_four_square(
+    rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4),
+    rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4)
 )
 
-allpowers <- list(
-    3,
-    1,
-    c(2,1),
-    c(1,1,1)
-    ) 
 
-coeffs = c(1,3,7,9)
+## misc checks:
+stopifnot(constant(0) == as.mvp(0))
 
-a <- mvp(vars=allnames,powers=allpowers,coeffs=coeffs)
- 
-
-
-jj <- list(
-       c(x = 1, coef = 1, y = 0),
-       c(x = 0, y = 1, coef = 2),  
-       c(y = 1, coef = -6),  
-       c(z = 1, coef = -3, x = 2),  
-       c(x = 1, coef = 0, x = 3),
-       c(t = 1, coef = 4, t = 2, y = 4),
-       c(x = 1000,coef=777),  # 777 x^1000
-       c(x = 1),  # x
-       c(coef = 5),
-       c(coef = 5),
-       c(coef = -5)
-     )
-     
-mj <-     mpoly(jj)

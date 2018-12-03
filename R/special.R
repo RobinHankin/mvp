@@ -43,4 +43,11 @@
     return(mvp(list(character(0)),list(integer(0)),x))
 }
 
-# constant() defined in skimpy.R
+
+`xyz` <- function(n,symbols=letters){
+    if(n>length(letters)){stop("not enough symbols")}
+    mvp(list(symbols[seq_len(n)]), list(rep(1,n)), 1)
+}
+
+
+## constant() defined in skimpy.R

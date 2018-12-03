@@ -4,8 +4,8 @@ Title: Fast Manipulation of Multivariate Polynomials
 Version: 1.0-0
 Date: 2018-12-01
 Author: Robin K. S. Hankin
-Depends: mpoly,spray,methods
-Suggests: knitr,rmarkdown
+Depends: mpoly,methods
+Suggests: knitr,rmarkdown,spray
 VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description: Fast manipulation of multivariate polynomials
@@ -14,7 +14,7 @@ Description: Fast manipulation of multivariate polynomials
   comparable in speed to the 'spray' package for sparse arrays, but
   retains the symbolic benefits of 'mpoly'.
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.3)
+Imports: Rcpp (>= 0.12.3),partitions
 LinkingTo: Rcpp
 SystemRequirements: C++11
 URL: https://github.com/RobinHankin/mvp.git

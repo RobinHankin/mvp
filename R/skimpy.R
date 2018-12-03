@@ -50,7 +50,7 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     return(x)
   } else if(is.mpoly(x)){
     return(mpoly_to_mvp(x))
-  } else if(is.spray(x)){
+  } else if(inherits(x,"spray")){
     return(spray_to_mvp(x,...))
   } else if(is.character(x)){
     return(mpoly_to_mvp(mp(x)))
@@ -102,7 +102,9 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 
         M[i,sapply(v,function(x){which(x==av)})] <- p
     }
-    spray::spray(M,coeffs(S))
+    out <- list(M,coeffs(S))
+    class(out) <- "spray"
+    return(out)
 }
 
 `rmvp` <- function(n,size=6,pow=6,symbols=6){

@@ -11,7 +11,7 @@ homogenous, and constant multivariate polynomials.
 }
 \usage{
 product(v,symbols=letters)
-homog(d,power=1)
+homog(d,power=1,symbols=letters)
 linear(x,power=1,symbols=letters)
 numeric_to_mvp(x)
 }

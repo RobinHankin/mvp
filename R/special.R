@@ -21,8 +21,14 @@
     mvp(list(symbols[seq_along(v)]),list(v),1)
 }
 
-`homog` <- function(d,power=1){
-    as.mvp(spray::homog(d,power))
+`homog` <- function(d,power=1,symbols=letters){
+    if(d>length(letters)){stop("not enough symbols")}
+    jj <- partitions::compositions(power,d)
+    mvp(
+        apply(jj,2,function(x){symbols[which(x!=0)]}),
+        apply(jj,2,function(x){x[x!=0]}),
+        rep(1,ncol(jj))
+    )
 }
 
 `linear` <- function(x,power=1,symbols=letters){

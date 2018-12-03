@@ -55,7 +55,7 @@
 
 ## Generating function for d-dimensional knight
 
-`knight_mvp` <- function(d,can_stay_still=FALSE){
+`knight` <- function(d,can_stay_still=FALSE){
   f <- function(d){
     n <- d * (d - 1)
     out <- matrix(0, n, d)

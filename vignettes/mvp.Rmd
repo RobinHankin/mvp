@@ -204,14 +204,14 @@ p + as.mvp("z^6")
 We can see the generating function for a chess knight:
 
 ```{r}
-knight_mvp(2)
+knight(2)
 ```
 
 How many ways are there for a 4D knight to return to its starting
 square after four moves?  Answer:
 
 ```{r}
-constant(knight_mvp(4)^4)
+constant(knight(4)^4)
 ```
 
 ## Some timings

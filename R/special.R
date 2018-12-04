@@ -18,12 +18,12 @@
 
 
 `product` <- function(v,symbols=letters){
-    if(length(v)>length(letters)){stop("not enough symbols")}
+    if(length(v)>length(symbols)){stop("not enough symbols")}
     mvp(list(symbols[seq_along(v)]),list(v),1)
 }
 
 `homog` <- function(d,power=1,symbols=letters){
-    if(d>length(letters)){stop("not enough symbols")}
+    if(d>length(symbols)){stop("not enough symbols")}
     jj <- partitions::compositions(power,d)
     mvp(
         apply(jj,2,function(x){symbols[which(x!=0)]}),
@@ -33,7 +33,7 @@
 }
 
 `linear` <- function(x,power=1,symbols=letters){
-    if(length(x)>length(letters)){stop("not enough symbols")}
+    if(length(x)>length(symbols)){stop("not enough symbols")}
     mvp(as.list(symbols[seq_along(x)]),rep(power,length(x)),x)
 }
 
@@ -45,7 +45,7 @@
 
 
 `xyz` <- function(n,symbols=letters){
-    if(n>length(letters)){stop("not enough symbols")}
+    if(n>length(symbols)){stop("not enough symbols")}
     mvp(list(symbols[seq_len(n)]), list(rep(1,n)), 1)
 }
 

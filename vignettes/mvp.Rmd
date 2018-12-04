@@ -178,7 +178,7 @@ Also a slightly different form:```aderiv()```, here used to evaluate
 $\frac{\partial^6S}{\partial a^3\partial b\partial c^2}$:
 
 ```{r}
-aderiv(S,c(a=3,b=1,c=2))
+aderiv(S,a=3,b=1,c=2)
 ```
 
 ## Negative powers

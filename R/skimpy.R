@@ -186,9 +186,10 @@ setGeneric("drop",function(x){standardGeneric("drop")})
 
 setGeneric("deriv")
 setGeneric("aderiv",function(x){standardGeneric("aderiv")})
-`aderiv` <- function(expr, n, ...){UseMethod("aderiv")}
+`aderiv` <- function(expr, ...){UseMethod("aderiv")}
 
-`aderiv.mvp` <- function(expr, n, ...){
+`aderiv.mvp` <- function(expr, ...){
+  n <- unlist(list(...))
   deriv(expr, rep(names(n),n))
 }
 

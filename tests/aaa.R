@@ -89,12 +89,6 @@ checker1 <- function(x){
     stopifnot(deriv(x,v) == deriv(x,rev(v)))
   }
 
-  ## check aderiv():
-  if(length(allvars(x))>1){
-    jj <- sample(unclass(table(allvars(x))),replace=TRUE)
-    stopifnot(aderiv(x,jj) == aderiv(x,sample(jj,replace=FALSE)))
-  }
-
   ## check the chain rule, here dx/dv = (dx/dy)*(dy/dv):
   if((length(allvars(x))>1)   & (! "y" %in% allvars(x)) ){
 

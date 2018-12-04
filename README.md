@@ -1,4 +1,4 @@
-# mvp: fast symbolic multivariate polynomials
+# mvp: fast symbolic multivariate polynomials in R
 
 Multivariate polynomials are intereresting and useful objects.  Here I
 present the `mvp` package which hopefully improves upon previous R

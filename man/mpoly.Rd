@@ -25,7 +25,8 @@ mpoly_to_mvp(m)
 
 x <- rmvp(5)
 
-x == mpoly_to_mvp(as.mpoly(x))  # should be TRUE
+\dontrun{x == mpoly_to_mvp(as.mpoly(x))}  # should be TRUE (needs mpoly)
+x == mpoly_to_mvp(mpoly::as.mpoly(x))  # should be TRUE
 
 
 }

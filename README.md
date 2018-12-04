@@ -3,17 +3,22 @@
 Multivariate polynomials are intereresting and useful objects.  Here I
 present the `mvp` package which hopefully improves upon previous R
 functionality provided by the packages `multipol`, `mpoly`, and
-`spray`.  The `mvp` package uses the excellent print and coercion
-methods of the `mpoly` package.  `mvp` is theoretically comparable in
-speed to the `spray` package.
+`spray`.  The `mvp` package follows `mpoly` in usingsymbolic, rather than
+numeric, representation of a multivariate polynomial; but it offers speed
+advantages over `mpoly`.  `mvp` uses the excellent print and
+coercion methods of the `mpoly` package.  `mvp` includes some pleasing
+substitution idiom not found elsewhere; it is theoretically comparable
+in speed to the `spray` package and I present some timings in the package
+vignetee.
 
-The `mvp` package uses the STL `map` class of `C++` for efficiency,
+The `mvp` package uses `C++`'s  STL `map` class for efficiency,
 which has the downside that the order of the terms, and the order of
 the symbols within each term, is undefined.  This does not matter as
 the mathematical value of a multivariate polynomial is unaffected by
 reordering; and the print method (taken from `mpoly`) does a good job
 in producing human-readable output.
 
+Sample `R` session:
 
 ```
 library("mvp")

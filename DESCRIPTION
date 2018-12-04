@@ -1,6 +1,6 @@
 Package: mvp
 Type: Package
-Title: Fast Manipulation of Multivariate Polynomials
+Title: Fast Symbolic Multivariate Polynomials
 Version: 1.0-0
 Date: 2018-12-01
 Author: Robin K. S. Hankin
@@ -8,11 +8,11 @@ Depends: methods
 Suggests: knitr,rmarkdown,spray
 VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
-Description: Fast manipulation of multivariate polynomials
+Description: Fast manipulation of symbolic multivariate polynomials
   using the 'Map' class of the Standard Template Library.  The package
-  uses print and coercion methods from the 'mpoly' package.  It is
-  comparable in speed to the 'spray' package for sparse arrays, but
-  retains the symbolic benefits of 'mpoly'.
+  uses print and coercion methods from the 'mpoly' package but offers
+  speed improvements.  It is comparable in speed to the 'spray' package
+  for sparse arrays, but retains the symbolic benefits of 'mpoly'.
 License: GPL (>= 2)
 Imports: Rcpp (>= 0.12.3),partitions,mpoly
 LinkingTo: Rcpp

@@ -39,7 +39,9 @@ mvp object algebraically equal to
 
 P^3
 mvp object algebraically equal to
-1  +  6 a x^2 y  +  3 a x^3  +  3 a x^4 y  +  6 a x^5  +  3 a x^7  +  3 a y  +  3 a^2 x^2 y^2  +  6 a^2 x^3 y  +  6 a^2 x^5 y  +  3 a^2 x^6  +  3 a^2 x^8  +  3 a^2 y^2  +  3 a^3 x^3 y^2  +  3 a^3 x^6 y  +  a^3 x^9  +  a^3 y^3  +  3 x^2  +  3 x^4  +  x^6
+1  +  6 a x^2 y  +  3 a x^3  +  3 a x^4 y  +  6 a x^5  +  3 a x^7  +  3 a y  +  3 a^2 x^2 y^2  + 
+   6 a^2 x^3 y  +  6 a^2 x^5 y  +  3 a^2 x^6  +  3 a^2 x^8  +  3 a^2 y^2  +  3 a^3 x^3 y^2  +
+   3 a^3 x^6 y  +  a^3 x^9  +  a^3 y^3  +  3 x^2  +  3 x^4  +  x^6
 
 # Substitution
 

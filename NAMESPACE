@@ -6,7 +6,7 @@ import("methods")
 importFrom(Rcpp, evalCpp)
 importFrom("mpoly","as.mpoly","is.mpoly","mp")
 importFrom(partitions,compositions)
-
+importFrom(magic, circulant)
 
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)

@@ -1,7 +1,7 @@
 library("mvp")
 library("magic")
 
-kahle  <- function(n,r=2,p=1,coeffs=1,symbols=letters){
+`kahle`  <- function(n=26,r=1,p=1,coeffs=1,symbols=letters){
   if(n > length(symbols)){stop("not enough symbols")}
   symbols <- symbols[seq_len(n)]
   p <- rep(p,length=r)
@@ -17,12 +17,5 @@ kahle  <- function(n,r=2,p=1,coeffs=1,symbols=letters){
   )
 }
 
-kahleold  <- mvp(
-    vars     = split(cbind(letters,shift(letters)),rep(seq_len(26),each=2)),
-    powers    = rep(list(1:2),26),
-    coeffs = 1:26
-)
 
-
-
-
+# 

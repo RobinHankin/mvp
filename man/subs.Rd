@@ -1,5 +1,6 @@
 \name{subs}
 \alias{subs}
+\alias{subsy}
 \alias{substitute}
 \alias{subsmvp}
 \alias{subs_mvp}
@@ -10,6 +11,7 @@
 }
 \usage{
 subs(S, ..., drop = TRUE)
+subsy(S, ..., drop = TRUE)
 subsmvp(S,v,X)
 }
 \arguments{
@@ -24,14 +26,25 @@ subsmvp(S,v,X)
 }
 \details{
 Function \code{subs()} uses a natural R idiom to substitute scalar
-values for symbols.  Observe that this type of substitution is
-insensitive to order: \code{subs(P,a=1,b=3) == subs(P,b=3,a=1)}.  This
-would appear in mathematica as \code{P /. \{a -> 1, b -> 3\}}, which
-is a much preferable idiom, IMO.
+values for symbols.
 
-Function \code{subsmpv()} takes a mvp object and substitutes another mvp
-object for a specific symbol.  This operation is sensitive to order
-which is why a different R idiom is needed.
+Observe that this type of substitution is sensitive to order:
+
+\preformatted{
+> p <- as.mvp("a b^2")
+> subs(p,a="b",b="x")
+mvp object algebraically equal to
+x^3
+> subs(p,b="x",a="b")
+mvp object algebraically equal to
+b x^2
+}
+
+Functions \code{subsy()} and \code{subsmpv()} are lower-level functions,
+not really intended for the end-user.  Function \code{subsy()}
+substitutes variables for numeric values (order matters if a variable is
+substitued more than once).  Function \code{subsmpv()} takes a mvp
+object and substitutes another mvp object for a specific symbol.  
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{drop}}}
@@ -40,9 +53,10 @@ p <- rmvp(6,2,2,letters[1:3])
 p
 subs(p,a=1)
 subs(p,a=1,b=2)
-subs(p,a=1,b=2,c=3)
+
+subs(p,a="1+b x^3",b="1-y")
 subs(p,a=1,b=2,c=3,drop=FALSE)
 
-subsmvp(p,'a',as.mvp("1+x+x^4"))
+
 }
 \keyword{symbolmath}

@@ -156,7 +156,22 @@ setGeneric("drop",function(x){standardGeneric("drop")})
     }
 }
 
-`subs` <- function(S, ..., drop=TRUE){
+`subs` <- function(S,...,drop=TRUE){
+  sb <- list(...)
+  v <- names(sb)
+
+  out <- S
+  for(i in seq_along(sb)){
+    out <- subsmvp(out,v[i],as.mvp(sb[[i]]))
+  }
+  if(drop){
+    return(drop(out))
+  } else {
+    return(out)
+  }
+}
+
+`subsy` <- function(S, ..., drop=TRUE){
     sb <- unlist(list(...))
     jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(sb),as.vector(sb))
     out <- mvp(jj[[1]],jj[[2]],jj[[3]])

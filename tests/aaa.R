@@ -64,8 +64,8 @@ checker1 <- function(x){
     jj2 <- list(1/2)
     names(jj2) <- v
 
-    LHS <- do.call("subs",list(x,jj1))
-    RHS <- invert(do.call("subs",list(invert(x),jj2)))
+    LHS <- do.call("subsy",list(x,jj1))
+    RHS <- invert(do.call("subsy",list(invert(x),jj2)))
     stopifnot(LHS == RHS)
   }  
 
@@ -169,6 +169,7 @@ for(i in 1:10){
     checker3(x,y,z)
 }
 
+print("finished")
 
 ## Brahmagupta-Fibonacci:
 

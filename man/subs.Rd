@@ -57,6 +57,7 @@ subs(p,a=1,b=2)
 subs(p,a="1+b x^3",b="1-y")
 subs(p,a=1,b=2,c=3,drop=FALSE)
 
+do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 
 }
 \keyword{symbolmath}

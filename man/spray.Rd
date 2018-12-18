@@ -16,12 +16,9 @@ mvp_to_spray(S)
 }
 \author{Robin K. S. Hankin}
 \examples{
-\dontrun{  # needs spray package
+
 mvp_to_spray(rmvp(5))
-
-
-spray_to_mvp(spray(diag(6),1:6))
+spray_to_mvp(spray::spray(diag(6),1:6))
 }
 
-}
 \keyword{symbolmath}

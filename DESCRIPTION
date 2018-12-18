@@ -10,7 +10,8 @@ VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description: Fast manipulation of symbolic multivariate polynomials
   using the 'Map' class of the Standard Template Library.  The package
-  uses print and coercion methods from the 'mpoly' package but offers
+  uses print and coercion methods from the 'mpoly' package (Kahle 2013,
+  "Multivariate polynomials in R".  The R Journal, 5(1):162), but offers
   speed improvements.  It is comparable in speed to the 'spray' package
   for sparse arrays, but retains the symbolic benefits of 'mpoly'.
 License: GPL (>= 2)

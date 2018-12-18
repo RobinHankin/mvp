@@ -25,9 +25,6 @@ mpoly_to_mvp(m)
 
 x <- rmvp(5)
 
-\dontrun{x == mpoly_to_mvp(as.mpoly(x))}  # should be TRUE (needs mpoly)
-x == mpoly_to_mvp(mpoly::as.mpoly(x))  # should be TRUE
-
-
+x == mpoly_to_mvp(mpoly::as.mpoly(x))        # should be TRUE
 }
 \keyword{symbolmath}

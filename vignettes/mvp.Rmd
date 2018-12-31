@@ -92,7 +92,7 @@ the symbols within a term ($3xy=3yx$, for example) to display the
 polynomial in a human-friendly form.
 
 However, note carefully that such rearranging does not affect the
-mathematical properties of the polynomial itself.  In the ```mvp``
+mathematical properties of the polynomial itself.  In the ```mvp```
 package, the order of the terms is not preserved (or even defined) in
 the internal representation of the object; and neither is the order of
 the symbols within a single term.  Although this might sound odd, if

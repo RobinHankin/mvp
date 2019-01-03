@@ -1,8 +1,8 @@
 Package: mvp
 Type: Package
 Title: Fast Symbolic Multivariate Polynomials
-Version: 1.0-0
-Date: 2018-12-01
+Version: 1.0-1
+Date: 2019-01-04
 Author: Robin K. S. Hankin
 Depends: methods
 Suggests: knitr,rmarkdown,spray

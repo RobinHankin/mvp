@@ -265,10 +265,11 @@ List mvp_substitute(
 	    it = t.find(i->first);               // Now, search the symbols in the term for one that matches the substitution symbol, e.g. it->first = {"x"}
             if(it == t.end()){                   // if(no match)...
                 Xnew[t] = coeff;                 // ...then include term t and coeff unchanged in Xnew
-	    } else {                             // else a match found.  If so, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3 [mathematica notation].  Do two things:
-	      t.erase(it);                       // (1) Set the power of the matched symbol to zero (in t); and
-	      Xnew[t] +=                         // (2) Add a new element to Xnew with term t...
-              coeff*pow(i->second,it->second);   // ... and coefficient coeff*<var>^n; note use of "+=" in case there is another term the same
+	    } else {                             // else a match found.  If so, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3 [mathematica notation];  do three things:
+              const signed int n=it->second;     // (1) extract the power, n, *before* erasing the iterator;
+	      t.erase(it);                       // (2) Set the power of the matched symbol to zero (in t); and
+	      Xnew[t] +=                         // (3) Add a new element to Xnew with term (updated) t...
+              coeff*pow(i->second,n);            // ... and coefficient coeff*<var>^n using the saved value of n; note use of "+=" in case there is another term the same
             }                                    // if(match found) closes
 	}                                        // j loop closes: go on to look at the next element of X
         X = Xnew;                                // update X to reflect changes

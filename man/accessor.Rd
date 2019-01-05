@@ -3,6 +3,8 @@
 \alias{vars}
 \alias{powers}
 \alias{coeffs}
+\alias{coeffs<-}
+\alias{coeffs<-.mvp}
 \alias{coefficients}
 \title{Accessor methods for mvp objects}
 \description{Accessor methods for mvp objects}
@@ -10,9 +12,11 @@
 vars(x)
 powers(x)
 coeffs(x)
+coeffs(x) <- value
 }
 \arguments{
   \item{x}{Object of class mvp}
+  \item{value}{Numeric vector of length 1}
 }
 \details{
 Access the different parts of an mvp object.  The constant term is
@@ -49,4 +53,8 @@ a <- rmvp(5)
 vars(a)
 powers(a)
 coeffs(a)
+
+coeffs(a) <- 1  # A simpler object
+coeffs(a) <- 0  # The zero polynomial
+
 }

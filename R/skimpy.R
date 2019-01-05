@@ -116,6 +116,15 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     )
 }
 
+`coeffs<-` <- function(x,value){UseMethod("coeffs<-")}
+`coeffs<-.mvp` <- function(x,value){
+    if(length(value) != 1){
+        stop('order of coefficients not defined.  Idiom "coeffs(x) <- value" is meaningful only if value is unchanged on reordering, here we require "value" to have length 1') 
+    }
+    x[[3]][] <- value
+    return(mvp(x[[1]],x[[2]],x[[3]]))
+}
+    
 
 "constant" <- function(x){UseMethod("constant")}
 "constant<-" <- function(x, value){UseMethod("constant<-")}

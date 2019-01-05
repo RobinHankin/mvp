@@ -196,7 +196,7 @@ In the above, ```p``` is a regular multivariate polynomial which
 includes negative powers.  It obeys the same arithmetic rules as other
 mvp objects:
 
-```
+```{r}
 p + as.mvp("z^6")
 ```
 
@@ -216,15 +216,29 @@ constant(knight(4)^4)
 
 ## Some timings
 
+I will show some timings using a particularly favourable example that
+exploits the symbolic nature of the ```mvp``` package.  
+
 ```{r}
 library("spray")
 library("mpoly")
-a1 <- rmvp(30,9,9,26)
-a2 <- as.mpoly(a1)
-a3 <- mvp_to_spray(a1)
-system.time(ignore <- a1^3)  # mvp
-system.time(ignore <- a2^3)  # mpoly
-system.time(ignore <- a3^3)  # spray
+n <- 500
+k <- kahle(n,r=3,p=1:3,symbols=paste("x",sprintf("%03d",seq_len(n)),sep=""))
 ```
+
+In the above, polynomial ```k``` has 500 terms of the form $xy^2z^3$.
+Coercing ```k``` to ```spray``` form would need a $500\times 500$
+matrix for the indices, almost every element of which would be zero.
+This makes the spray package slower:
+
+```{r}
+system.time(ignore <- k^2)
+system.time(ignore <- mvp_to_spray(k)^2) 
+```
+
+In the above, the first line uses ```mvp``` functionality, and the
+second line uses ```spray``` functionality.  The speedup increases for
+larger polynomials.
+
 
 # References

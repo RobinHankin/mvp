@@ -297,10 +297,10 @@ List mvp_substitute_mvp(
         term t = i->first;                   // "t" is a single _term_ of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
         const double coeff = i->second;      // "coeff" is the coefficient corresponding to that term (a real number)
         it = t.find((string) v[0]);          // Now, search the symbols in term "t" for one that matches the substitution symbol
-        const signed int psubs=it->second; // "psubs" is "the power of the variable being substituted for"
         if(it == t.end()){                   // if(no match)...
             Xnew[t] += coeff;                // ...then include term t and coeff unchanged in Xnew
         } else {                             // else a match found.  If so, we want to effect things like 3x^2*y^5z /. {t -> 1+a} giving 3x^2*(1+a)^5*z
+            const signed int psubs=it->second; // "psubs" is "the power of the variable being substituted for"
             if(psubs<0){throw std::range_error("negative powers cannot be substituted for");}
             t.erase(it);                     // Remove the matched symbol from t
             Xtemp.clear();                   // Clear Xtemp, now the zero polynomial

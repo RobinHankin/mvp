@@ -159,7 +159,7 @@ checker3 <- function(x,y,z){
 
 
 
-for(i in 1:10){
+for(i in 1:2){
     x <- rmvp(5)
     y <- rmvp(5)
     z <- rmvp(5)

@@ -2,6 +2,7 @@ useDynLib(mvp, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
 
 import("methods")
+importFrom("magrittr","%>%")
 
 importFrom(Rcpp, evalCpp)
 importFrom("mpoly","as.mpoly","is.mpoly","mp")

@@ -59,5 +59,8 @@ subs(p,a=1,b=2,c=3,drop=FALSE)
 
 do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 
+
+kahle(5,3,1:3) \%>\% subs(a="a + delta")
+
 }
 \keyword{symbolmath}

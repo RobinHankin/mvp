@@ -254,3 +254,20 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
       coeffs = coeffs
   )
 }
+
+
+`horner` <- function(P, v) {  # inspired by Rosettacode
+  P <- as.mvp(P)
+  Reduce(v, right=TRUE, f=function(a,b){b*P + a})
+}
+
+`ooom` <- function(P,n){
+  P <- as.mvp(P)
+  stopifnot(constant(P)==0)
+  stopifnot(n>=0)
+  if(n==0){
+    return(as.mvp("1"))
+  } else {
+    return(horner(P,rep(1,n+1)))
+  }
+}

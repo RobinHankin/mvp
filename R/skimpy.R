@@ -91,6 +91,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 }
 
 `mvp_to_spray` <- function(S){
+    cons <- constant(S)
+    constant(S) <- 0
     vS <- vars(S)
     pS <- powers(S)
     av <- allvars(S)
@@ -102,7 +104,14 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 
         M[i,sapply(v,function(x){which(x==av)})] <- p
     }
-    out <- list(M,coeffs(S))
+
+    if(cons==0){
+      jj <- coeffs(S)
+    } else {
+      M <- rbind(M,0)
+      jj <- c(coeffs(S),cons)
+    }
+    out <- list(M,jj)
     class(out) <- "spray"
     return(out)
 }
@@ -143,16 +152,16 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 
 `constant<-.mvp` <- function(x,value){
   wanted <- sapply(x$names,function(x){length(x)==0})
-  if(any(wanted)){
-    x$coeffs[wanted] <- value
-  } else {  # no constant term
-    x <- mvp(
-        vars = c(x$names,list(character(0))),
-        powers = c(x$power,list(integer(0))),
-        coeffs=c(x$coeffs,value)
+  if(any(wanted)){  # if there is constant term present in x...
+    x$coeffs[wanted] <- value  # ... change its value
+    return(mvp(vars(x),powers(x),coeffs(x)))
+  } else {  # no constant term in x... 
+    return(mvp(     # ...so an extra (constant) term must be added:
+    c(vars(x),list(character(0))), # to the variables
+    c(powers(x),list(integer(0))), # and the powers
+    c(coeffs(x),value))            # and coeffs (with the correct value)
     )
   }
-  return(x)
 }
 
 setGeneric("drop",function(x){standardGeneric("drop")})

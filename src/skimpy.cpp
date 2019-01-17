@@ -182,6 +182,33 @@ mvp deriv(const mvp X, const string v){// differentiation: dX/dv, 'v' a single v
     return zero_coefficient_remover(out); // eliminates terms with no v
 }
 
+mvp maxterm(const mvp X, const mvp Xmax){  // linear approximations
+    mvp out=X;
+    mvp::const_iterator it,im;
+    term::const_iterator mit;
+    
+    for(it=X.begin() ; it != X.end() ; ++it){      // iterate through X, remove terms if needed.
+        term xt=it->first;                         // coefficient is "it->second"
+        for(im=Xmax.begin() ; im != Xmax.end() ; ++im){
+            const term maxterm = im->first;
+            for(mit=maxterm.begin() ; mit != maxterm.end() ; ++mit){ // iterate through maxterm
+                const string var = mit->first;
+                const signed int power = mit->second;
+                if(
+                   (maxterm.find(var) != maxterm.end()) & // if symbol present and...
+                   (power > xt[var])                  ){  // ...its power is too large, then:
+                    out.erase(xt);                        // erase that term from 'out'; 
+                    break;                                // no point looking further.
+                } // if() closes [else: do nothing]
+            } // maxterm iteration closes
+        } // Xmax iteration closes
+    } // X iteration closes
+    return out;
+}
+
+
+
+
 // [[Rcpp::export]]
 List simplify(const List &allnames, const List &allpowers, const NumericVector &coefficients){
     return retval(prepare(allnames,allpowers,coefficients));

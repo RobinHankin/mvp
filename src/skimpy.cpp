@@ -198,9 +198,10 @@ mvp maxterm(const mvp X, const mvp Xmax){  // linear approximations
                    (maxterm.find(var) != maxterm.end()) & // if symbol present and...
                    (power > xt[var])                  ){  // ...its power is too large, then:
                     out.erase(xt);                        // erase that term from 'out'; 
-                    break;                                // no point looking further.
-                } // if() closes [else: do nothing]
+                    goto nextx;                           // break two levels; no point looking further
+                } // if() closes [else: do nothing and test the next symbol of maxterm
             } // maxterm iteration closes
+        nextx: ;
         } // Xmax iteration closes
     } // X iteration closes
     return out;

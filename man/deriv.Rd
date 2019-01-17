@@ -20,7 +20,7 @@ Differentiation of mvp objects}
 }
 \value{Returns its argument invisibly}
 \author{Robin K. S. Hankin}
-
+\seealso{\code{\link{taylor}}}
 \details{
 
   Function \code{deriv(S,v)} returns \eqn{\frac{\partial^r S}{\partial

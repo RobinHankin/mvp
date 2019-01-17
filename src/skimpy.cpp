@@ -182,33 +182,54 @@ mvp deriv(const mvp X, const string v){// differentiation: dX/dv, 'v' a single v
     return zero_coefficient_remover(out); // eliminates terms with no v
 }
 
-mvp maxterm(const mvp X, const mvp Xmax){  // linear approximations
+mvp taylor_onevar(const mvp X, const unsigned int n, const string v){
+    if(n < 0){throw std::range_error("power cannot be <0");} 
     mvp out=X;
-    mvp::const_iterator it,im;
-    term::const_iterator mit;
-    
+    mvp::const_iterator it;  // sit == symbol iterator
     for(it=X.begin() ; it != X.end() ; ++it){      // iterate through X, remove terms if needed.
-        term xt=it->first;                         // coefficient is "it->second"
-        for(im=Xmax.begin() ; im != Xmax.end() ; ++im){
-            const term maxterm = im->first;
-            for(mit=maxterm.begin() ; mit != maxterm.end() ; ++mit){ // iterate through maxterm
-                const string var = mit->first;
-                const signed int power = mit->second;
-                if(
-                   (maxterm.find(var) != maxterm.end()) & // if symbol present and...
-                   (power > xt[var])                  ){  // ...its power is too large, then:
-                    out.erase(xt);                        // erase that term from 'out'; 
-                    goto nextx;                           // break two levels; no point looking further
-                } // if() closes [else: do nothing and test the next symbol of maxterm
-            } // maxterm iteration closes
-        nextx: ;
-        } // Xmax iteration closes
-    } // X iteration closes
+        term xt=it->first;                         // coefficient, "it->second", is ignored
+        if(xt.find(v) != xt.end()){ 
+            if(xt[v]>n){
+                out.erase(xt) ;
+            }
+        }
+    }
     return out;
 }
 
+mvp taylor_allvars(const mvp X, const unsigned int n){  // truncated Taylor series
+    if(n < 0){throw std::range_error("power cannot be <0");} 
+    term::const_iterator sit;  // sit == symbol iterator
+    mvp::const_iterator it;  
+    mvp out=X;
 
+    for(it=X.begin() ; it != X.end() ; ++it){      // iterate through X, remove terms if needed.
+      const term xt=it->first;                         // coefficient, "it->second", is ignored
+      signed int totalpower = 0;
+      for(sit = xt.begin() ; sit != xt.end() ; ++sit){ // iterate through one term of X
+          totalpower += sit->second;
+      }      
+      if(totalpower > n){ out.erase(xt); }
+    }
+    return out;
+}
+    
+// [[Rcpp::export]]
+List mvp_taylor_onevar(
+              const List &allnames, const List &allpowers, const NumericVector &coefficients,
+              const NumericVector   &n,
+              const CharacterVector &v
+              ){
+    return retval(taylor_onevar(prepare(allnames,allpowers,coefficients), n[0], (string) v[0]));
+}
 
+// [[Rcpp::export]]
+List mvp_taylor_allvars(
+              const List &allnames, const List &allpowers, const NumericVector &coefficients,
+              const NumericVector &n
+              ){
+    return retval(taylor_allvars(prepare(allnames,allpowers,coefficients), n[0]));
+}
 
 // [[Rcpp::export]]
 List simplify(const List &allnames, const List &allpowers, const NumericVector &coefficients){
@@ -339,4 +360,9 @@ List mvp_substitute_mvp(
     }                                        // i loop closes: go on to consider the next element of X
     return(retval(Xnew));                    // return a pre-prepared list to R
 }                                            // function mvp_substitute() closes
+
+
+
+
+                
 

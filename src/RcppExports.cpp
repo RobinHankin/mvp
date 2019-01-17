@@ -5,6 +5,35 @@
 
 using namespace Rcpp;
 
+// mvp_taylor_onevar
+List mvp_taylor_onevar(const List& allnames, const List& allpowers, const NumericVector& coefficients, const NumericVector& n, const CharacterVector& v);
+RcppExport SEXP _mvp_mvp_taylor_onevar(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP nSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type allnames(allnamesSEXP);
+    Rcpp::traits::input_parameter< const List& >::type allpowers(allpowersSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type coefficients(coefficientsSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_taylor_onevar(allnames, allpowers, coefficients, n, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mvp_taylor_allvars
+List mvp_taylor_allvars(const List& allnames, const List& allpowers, const NumericVector& coefficients, const NumericVector& n);
+RcppExport SEXP _mvp_mvp_taylor_allvars(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type allnames(allnamesSEXP);
+    Rcpp::traits::input_parameter< const List& >::type allpowers(allpowersSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type coefficients(coefficientsSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_taylor_allvars(allnames, allpowers, coefficients, n));
+    return rcpp_result_gen;
+END_RCPP
+}
 // simplify
 List simplify(const List& allnames, const List& allpowers, const NumericVector& coefficients);
 RcppExport SEXP _mvp_simplify(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP) {
@@ -112,6 +141,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_mvp_mvp_taylor_onevar", (DL_FUNC) &_mvp_mvp_taylor_onevar, 5},
+    {"_mvp_mvp_taylor_allvars", (DL_FUNC) &_mvp_mvp_taylor_allvars, 4},
     {"_mvp_simplify", (DL_FUNC) &_mvp_simplify, 3},
     {"_mvp_mvp_prod", (DL_FUNC) &_mvp_mvp_prod, 6},
     {"_mvp_mvp_add", (DL_FUNC) &_mvp_mvp_add, 6},

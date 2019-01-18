@@ -25,10 +25,6 @@ typedef map <term, double> mvp;  // ... An 'mvp' object (MultiVariatePolynomial)
 
 typedef map <string, double> subs; // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
 
-typedef map <string, mvp> subs_mvp; // A 'subs_mvp' object is a map from a string object to a mvp  object, used in variable  substitutions; thus a=1+3xy^2,
-                                    // b=7tt^3 is the map {'a' ->  {emptymap -> 1, {x -> 1, y -> 2} -> 3}, 'b' -> {{tt -> 3} ->  7}}
-                                    // (not currently used but might be useful for things like xy^2 /. {x -> 1+a, y -> 1+b}
-
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
     for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){

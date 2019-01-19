@@ -236,15 +236,20 @@ polypoly mvptopolypoly(const mvp X, const string v){ // convert mvp to polypoly 
     mvp::const_iterator it;
     mvp jj;
     for(it=X.begin() ; it != X.end() ; ++it){  // iterate through X
-        term xt=it->first;             // xt is something like x^2 y^8
-        if(xt.find(v) != xt.end()){     // if symbol v is present in xt, then:
-            term xn = xt;                 // (1) make a new term xn;
-            xn.erase(v);                  // (2) erase symbol v from xn;
-            jj.clear();                   // (3) clear nonce object jj
-            jj[xn] = it->second; // (4) jj is a one-term mvp 
-            out[it->second] = sum(out[it->second],jj); // update out.
+        term xt=it->first;                    // xt is something like x^2 y^8
+        jj.clear();                          //  clear nonce object jj
+        if(xt.find(v) != xt.end()){         // if symbol v is present in xt, then:
+            term xn = xt;                  // (1) make a new term xn;
+            const unsigned int n = xt[v]; // (2) record the power of v (before erasing v!)
+            xn.erase(v);                 // (3) erase symbol v from xn;
+            jj[xn] = it->second;        // (4) jj is a one-term mvp 
+            out[n] = sum(out[n],jj);   // (4) update out with jj
             /* PROBLEM! SHOULD BE out[it->second] +=jj */
-        }  // [else do nothing]
+        } else {  // xt is zero-power in v:
+            jj[xt] = it->second; // (1) jj is a one-term mvp 
+            out[0] = sum(out[0],jj); // (2) update out.
+            /* PROBLEM! SHOULD BE out[it->second] +=jj */
+        } // endif
     }      // X loop closes
     return out;
 }
@@ -281,13 +286,13 @@ polypoly polypoly_product(const polypoly X, const polypoly Y){
     return out;
 }
 
-polypoly polypoly_add(const polypoly X1, polypoly X2){   // return X2
-    polypoly::const_iterator ix;
-    for(ix=X1.begin() ; ix != X1.end ; ++ix){
-        X2[ix->first] = X2[ix->first] + X1[ix->first];   // the meat
-        /* PROBLEM!  SHOULD BE X2[ix->first] += X1[ix->first]; */
+polypoly polypoly_add(const polypoly P1, polypoly P2){   // return X2
+    polypoly::const_iterator ip;
+    for(ip=P1.begin() ; ip != P1.end() ; ++ip){
+        P2[ip->first] = sum(P2[ip->first], ip->second);   // the meat
+        /* PROBLEM!  SHOULD BE P2[ip->first] += P1[ip->first]; */
     }
-    return X2;
+    return P2;
 }
 
 // [[Rcpp::export]]

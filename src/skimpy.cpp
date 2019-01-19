@@ -25,6 +25,11 @@ typedef map <term, double> mvp;  // ... An 'mvp' object (MultiVariatePolynomial)
 
 typedef map <string, double> subs; // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
 
+typedef map <signed int, mvp> polypoly;
+
+
+
+
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
     for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){
@@ -209,7 +214,82 @@ mvp taylor_allvars(const mvp X, const unsigned int n){  // truncated Taylor seri
     }
     return out;
 }
-    
+
+
+mvp getsymbolpowerpoly(const mvp X, const signed int n, const string v){ // finds mvp coefficient of v^n
+    mvp out;  // initially empty
+    mvp::const_iterator it;
+    for(it=X.begin() ; it != X.end() ; ++it){  // iterate through X
+        term xt=it->first;        // xt is something like x^2 y^8
+        if(xt.find(v) != xt.end() // if symbol v is present...
+           & xt[v] == n){         // ... and the power matches, then:
+                term xn = xt;          // (1) make a new term xn,
+                xn.erase(v);           // (2) erase the focal symbol v, and
+                out[xn] += it->second; // (3) update the term-coefficient pair of out
+        }                     // [else do nothing]
+    }                         // X loop closes
+    return out;
+}
+
+polypoly mvptopolypoly(const mvp X, const string v){ // convert mvp to polypoly in variable v
+    polypoly out;
+    mvp::const_iterator it;
+    mvp jj;
+    for(it=X.begin() ; it != X.end() ; ++it){  // iterate through X
+        term xt=it->first;             // xt is something like x^2 y^8
+        if(xt.find(v) != xt.end()){     // if symbol v is present in xt, then:
+            term xn = xt;                 // (1) make a new term xn;
+            xn.erase(v);                  // (2) erase symbol v from xn;
+            jj.clear();                   // (3) clear nonce object jj
+            jj[xn] = it->second; // (4) jj is a one-term mvp 
+            out[it->second] = sum(out[it->second],jj); // update out.
+            /* PROBLEM! SHOULD BE out[it->second] +=jj */
+        }  // [else do nothing]
+    }      // X loop closes
+    return out;
+}
+
+mvp polypoly_to_mvp(const polypoly P, const string v){
+    mvp out;
+    polypoly::const_iterator it;
+    mvp::const_iterator ix;
+    for(it=P.begin() ; it != P.end() ; ++it){
+        const signed int n=it->first; // the power of v
+        const mvp X=it->second;       // the mvp coefficient of v^n
+        for(ix=X.begin() ; ix != X.end() ; ++ix){ // iterate through mvp object X
+            term t=ix->first;  // e.g. t = x^6 y^4
+            t[v] = t[v] + n;
+            out[t] += ix->second; // add the coefficient
+        }  // X loop closes
+    } // P loop closes
+    return out;
+}
+                                             
+polypoly polypoly_product(const polypoly X, const polypoly Y){
+    polypoly out;
+    polypoly::const_iterator ix,iy;
+    for(ix=X.begin() ; ix != X.end() ; ++ix){
+        const signed int power1 = ix->first;
+        const mvp poly1  = ix->second;
+        for(iy=Y.begin() ; iy != Y.end() ; ++iy){
+            const signed int power2 = iy->first;
+            const mvp poly2  = iy->second;
+            out[power1+power2] = sum(out[power1+power2], product(poly1,poly2));  // the meat
+            /* PROBLEM!  SHOULD BE             out[power1+power2] += product(poly1,poly2); */
+        }
+    }
+    return out;
+}
+
+polypoly polypoly_add(const polypoly X1, polypoly X2){   // return X2
+    polypoly::const_iterator ix;
+    for(ix=X1.begin() ; ix != X1.end ; ++ix){
+        X2[ix->first] = X2[ix->first] + X1[ix->first];   // the meat
+        /* PROBLEM!  SHOULD BE X2[ix->first] += X1[ix->first]; */
+    }
+    return X2;
+}
+
 // [[Rcpp::export]]
 List mvp_taylor_onevar(
               const List &allnames, const List &allpowers, const NumericVector &coefficients,
@@ -350,7 +430,7 @@ List mvp_substitute_mvp(
             t.erase(it);                     // Remove the matched symbol from t
             Xtemp.clear();                   // Clear Xtemp, now the zero polynomial
             Xtemp[t] = coeff;                // Algebraically, Xnew = coeff*term-without-match
-            Xtemp = product(Xtemp, power(Y, psubs));  // this is the "meat" of the function
+            Xtemp = product(Xtemp, power(Y, psubs));  // this is the "meat" of the function: should be Xtemp *= power(Y,psubs)
             Xnew = sum(Xnew,Xtemp);          // Take cumulative sum
         }                                    // if(match found) closes
     }                                        // i loop closes: go on to consider the next element of X

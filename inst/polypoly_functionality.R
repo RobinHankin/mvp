@@ -26,7 +26,7 @@ library("mvp")
 }
 
 print.polypoly <- function(x){
-    print("hi tehrer")
+    print("PRINT METHOD NOT IMPLEMENTED")
     print(unclass(x))
     x
 }

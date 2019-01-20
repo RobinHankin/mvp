@@ -27,9 +27,6 @@ typedef map <string, double> subs; // A 'subs' object is a map from a string obj
 
 typedef map <signed int, mvp> polypoly;
 
-
-
-
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
     for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){
@@ -231,22 +228,51 @@ mvp getsymbolpowerpoly(const mvp X, const signed int n, const string v){ // find
     return out;
 }
 
-polypoly mvptopolypoly(const mvp X, const string v){ // convert mvp to polypoly in variable v
+List retval_polypoly(const polypoly &P){ // takes a polypoly and returns a
+                                   // list suitable for R
+
+    polypoly::const_iterator ip;
+    const unsigned int n=P.size();
+    unsigned int i=0;
+    List mvp_list(n);
+    IntegerVector powers(n);
+
+    for(ip = P.begin() ; ip != P.end() ; ++ip){
+        powers[i] = ip->first;
+        mvp_list[i++] = (mvp) retval(ip->second);
+    }
+    return List::create(
+                        Named("powers")     = powers,
+                        Named("polycoeffs") = mvp_list
+                        );
+}
+
+polypoly prepare_polypoly(const IntegerVector powers, const List polys){
+    polypoly out;
+    for(unsigned int i=0 ; i<polys.size() ; i++){
+        const SEXP jj = polys[i];
+        const Rcpp::List p(jj);
+        out[powers[i]] = prepare(p[1],p[2],p[3]); // allnames,allpowers,coefficients
+    }
+    return out;
+}
+
+polypoly mvp_to_polypoly_C(const mvp X, const string v){ // convert mvp to polypoly in variable v
     polypoly out;
     mvp::const_iterator it;
     mvp jj;
     for(it=X.begin() ; it != X.end() ; ++it){  // iterate through X
-        term xt=it->first;                    // xt is something like x^2 y^8
-        jj.clear();                          //  clear nonce object jj
-        if(xt.find(v) != xt.end()){         // if symbol v is present in xt, then:
-            term xn = xt;                  // (1) make a new term xn;
-            const unsigned int n = xt[v]; // (2) record the power of v (before erasing v!)
+        const term xt=it->first;              // xt is something like x^2 y^8
+        jj.clear();                          // clear nonce mvp object jj
+        term xn = xt;                       // make a new term xn, a copy of xt
+        if(xt.find(v) != xt.end()){        // if symbol v is present in xt, then:
+            const unsigned int n = xn[v]; // (2) record the power of v (before erasing v!)
             xn.erase(v);                 // (3) erase symbol v from xn;
-            jj[xn] = it->second;        // (4) jj is a one-term mvp 
-            out[n] = sum(out[n],jj);   // (4) update out with jj
+            jj[xn] = it->second;        // (4) jj is a one-term mvp; it-> second is the coefficent
+            out[n] = sum(out[n],jj);   // (5) update out with jj
             /* PROBLEM! SHOULD BE out[it->second] +=jj */
         } else {  // xt is zero-power in v:
-            jj[xt] = it->second; // (1) jj is a one-term mvp 
+            jj[xn] = it->second; // (1) jj is a one-term mvp  [here xn==xt]
             out[0] = sum(out[0],jj); // (2) update out.
             /* PROBLEM! SHOULD BE out[it->second] +=jj */
         } // endif
@@ -254,7 +280,7 @@ polypoly mvptopolypoly(const mvp X, const string v){ // convert mvp to polypoly 
     return out;
 }
 
-mvp polypoly_to_mvp(const polypoly P, const string v){
+mvp polypoly_to_mvp_C(const polypoly P, const string v){
     mvp out;
     polypoly::const_iterator it;
     mvp::const_iterator ix;
@@ -270,7 +296,7 @@ mvp polypoly_to_mvp(const polypoly P, const string v){
     return out;
 }
                                              
-polypoly polypoly_product(const polypoly X, const polypoly Y){
+polypoly prod_polypoly(const polypoly X, const polypoly Y){
     polypoly out;
     polypoly::const_iterator ix,iy;
     for(ix=X.begin() ; ix != X.end() ; ++ix){
@@ -286,7 +312,7 @@ polypoly polypoly_product(const polypoly X, const polypoly Y){
     return out;
 }
 
-polypoly polypoly_add(const polypoly P1, polypoly P2){   // return X2
+polypoly sum_polypoly(const polypoly P1, polypoly P2){   // return X2
     polypoly::const_iterator ip;
     for(ip=P1.begin() ; ip != P1.end() ; ++ip){
         P2[ip->first] = sum(P2[ip->first], ip->second);   // the meat
@@ -442,8 +468,52 @@ List mvp_substitute_mvp(
     return(retval(Xnew));                    // return a pre-prepared list to R
 }                                            // function mvp_substitute() closes
 
+//[[Rcpp::export]]
+List simplify_polypoly(const IntegerVector &powers, const List &polycoeffs){
+    return retval_polypoly(prepare_polypoly(powers,polycoeffs));
+}
 
+//[[Rcpp::export]]
+List polypoly_to_mvp(
+                     const IntegerVector &powers, const List &polys, const CharacterVector &v
+                     ){
+    return retval(polypoly_to_mvp_C(prepare_polypoly(powers, polys), (string) v[0]));
+}
 
+//[[Rcpp::export]]
+List mvp_to_polypoly_lowlevel(const List &allnames, const List &allpowers, const NumericVector &coefficients, const CharacterVector &v){
+    return    retval_polypoly(mvp_to_polypoly_C(
+                                      prepare(allnames, allpowers, coefficients), (string) v[0]
+                                      )
+                    );
+}
+    
+//[[Rcpp::export]]
+List polypoly_add(
+                  const IntegerVector &powers1, const List &polys1, 
+                  const IntegerVector &powers2, const List &polys2
+                  ){
 
-                
+    return retval_polypoly(
+                           sum_polypoly(
+                                        prepare_polypoly(powers1, polys1),
+                                        prepare_polypoly(powers2, polys2)
+                                        )
+                           );
+}
+
+//[[Rcpp::export]]
+List polypoly_prod(
+                  const IntegerVector &powers1, const List &polys1, 
+                  const IntegerVector &powers2, const List &polys2
+                   ){
+    
+    return retval_polypoly(
+                           prod_polypoly(
+                                         prepare_polypoly(powers1, polys1),
+                                         prepare_polypoly(powers2, polys2)
+                                         )
+                           );
+}
+
 

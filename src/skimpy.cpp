@@ -219,7 +219,7 @@ mvp getsymbolpowerpoly(const mvp X, const signed int n, const string v){ // find
     for(it=X.begin() ; it != X.end() ; ++it){  // iterate through X
         term xt=it->first;        // xt is something like x^2 y^8
         if(xt.find(v) != xt.end() // if symbol v is present...
-           & xt[v] == n){         // ... and the power matches, then:
+           & (xt[v] == n)){         // ... and the power matches, then:
                 term xn = xt;          // (1) make a new term xn,
                 xn.erase(v);           // (2) erase the focal symbol v, and
                 out[xn] += it->second; // (3) update the term-coefficient pair of out
@@ -239,7 +239,7 @@ List retval_polypoly(const polypoly &P){ // takes a polypoly and returns a
 
     for(ip = P.begin() ; ip != P.end() ; ++ip){
         powers[i] = ip->first;
-        mvp_list[i++] = (mvp) retval(ip->second);
+        mvp_list[i++] = retval(ip->second);
     }
     return List::create(
                         Named("powers")     = powers,

@@ -37,3 +37,23 @@ mvp_substitute_mvp <- function(allnames1, allpowers1, coefficients1, allnames2, 
     .Call(`_mvp_mvp_substitute_mvp`, allnames1, allpowers1, coefficients1, allnames2, allpowers2, coefficients2, v)
 }
 
+simplify_polypoly <- function(powers, polycoeffs) {
+    .Call(`_mvp_simplify_polypoly`, powers, polycoeffs)
+}
+
+polypoly_to_mvp <- function(powers, polys, v) {
+    .Call(`_mvp_polypoly_to_mvp`, powers, polys, v)
+}
+
+mvp_to_polypoly_lowlevel <- function(allnames, allpowers, coefficients, v) {
+    .Call(`_mvp_mvp_to_polypoly_lowlevel`, allnames, allpowers, coefficients, v)
+}
+
+polypoly_add <- function(powers1, polys1, powers2, polys2) {
+    .Call(`_mvp_polypoly_add`, powers1, polys1, powers2, polys2)
+}
+
+polypoly_prod <- function(powers1, polys1, powers2, polys2) {
+    .Call(`_mvp_polypoly_prod`, powers1, polys1, powers2, polys2)
+}
+

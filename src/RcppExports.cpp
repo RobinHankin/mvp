@@ -139,6 +139,73 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// simplify_polypoly
+List simplify_polypoly(const IntegerVector& powers, const List& polycoeffs);
+RcppExport SEXP _mvp_simplify_polypoly(SEXP powersSEXP, SEXP polycoeffsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const IntegerVector& >::type powers(powersSEXP);
+    Rcpp::traits::input_parameter< const List& >::type polycoeffs(polycoeffsSEXP);
+    rcpp_result_gen = Rcpp::wrap(simplify_polypoly(powers, polycoeffs));
+    return rcpp_result_gen;
+END_RCPP
+}
+// polypoly_to_mvp
+List polypoly_to_mvp(const IntegerVector& powers, const List& polys, const CharacterVector& v);
+RcppExport SEXP _mvp_polypoly_to_mvp(SEXP powersSEXP, SEXP polysSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const IntegerVector& >::type powers(powersSEXP);
+    Rcpp::traits::input_parameter< const List& >::type polys(polysSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(polypoly_to_mvp(powers, polys, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mvp_to_polypoly_lowlevel
+List mvp_to_polypoly_lowlevel(const List& allnames, const List& allpowers, const NumericVector& coefficients, const CharacterVector& v);
+RcppExport SEXP _mvp_mvp_to_polypoly_lowlevel(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type allnames(allnamesSEXP);
+    Rcpp::traits::input_parameter< const List& >::type allpowers(allpowersSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type coefficients(coefficientsSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_to_polypoly_lowlevel(allnames, allpowers, coefficients, v));
+    return rcpp_result_gen;
+END_RCPP
+}
+// polypoly_add
+List polypoly_add(const IntegerVector& powers1, const List& polys1, const IntegerVector& powers2, const List& polys2);
+RcppExport SEXP _mvp_polypoly_add(SEXP powers1SEXP, SEXP polys1SEXP, SEXP powers2SEXP, SEXP polys2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const IntegerVector& >::type powers1(powers1SEXP);
+    Rcpp::traits::input_parameter< const List& >::type polys1(polys1SEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type powers2(powers2SEXP);
+    Rcpp::traits::input_parameter< const List& >::type polys2(polys2SEXP);
+    rcpp_result_gen = Rcpp::wrap(polypoly_add(powers1, polys1, powers2, polys2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// polypoly_prod
+List polypoly_prod(const IntegerVector& powers1, const List& polys1, const IntegerVector& powers2, const List& polys2);
+RcppExport SEXP _mvp_polypoly_prod(SEXP powers1SEXP, SEXP polys1SEXP, SEXP powers2SEXP, SEXP polys2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const IntegerVector& >::type powers1(powers1SEXP);
+    Rcpp::traits::input_parameter< const List& >::type polys1(polys1SEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type powers2(powers2SEXP);
+    Rcpp::traits::input_parameter< const List& >::type polys2(polys2SEXP);
+    rcpp_result_gen = Rcpp::wrap(polypoly_prod(powers1, polys1, powers2, polys2));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mvp_mvp_taylor_onevar", (DL_FUNC) &_mvp_mvp_taylor_onevar, 5},
@@ -150,6 +217,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mvp_mvp_deriv", (DL_FUNC) &_mvp_mvp_deriv, 4},
     {"_mvp_mvp_substitute", (DL_FUNC) &_mvp_mvp_substitute, 5},
     {"_mvp_mvp_substitute_mvp", (DL_FUNC) &_mvp_mvp_substitute_mvp, 7},
+    {"_mvp_simplify_polypoly", (DL_FUNC) &_mvp_simplify_polypoly, 2},
+    {"_mvp_polypoly_to_mvp", (DL_FUNC) &_mvp_polypoly_to_mvp, 3},
+    {"_mvp_mvp_to_polypoly_lowlevel", (DL_FUNC) &_mvp_mvp_to_polypoly_lowlevel, 4},
+    {"_mvp_polypoly_add", (DL_FUNC) &_mvp_polypoly_add, 4},
+    {"_mvp_polypoly_prod", (DL_FUNC) &_mvp_polypoly_prod, 4},
     {NULL, NULL, 0}
 };
 

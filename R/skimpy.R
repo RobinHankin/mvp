@@ -280,3 +280,8 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   }
   return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
+
+`onevarpow` <- function(S,n,v){
+   jj <- mvp_taylor_onepower_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], n, v)
+   return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+}

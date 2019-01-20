@@ -5,6 +5,10 @@ mvp_taylor_onevar <- function(allnames, allpowers, coefficients, n, v) {
     .Call(`_mvp_mvp_taylor_onevar`, allnames, allpowers, coefficients, n, v)
 }
 
+mvp_taylor_onepower_onevar <- function(allnames, allpowers, coefficients, n, v) {
+    .Call(`_mvp_mvp_taylor_onepower_onevar`, allnames, allpowers, coefficients, n, v)
+}
+
 mvp_taylor_allvars <- function(allnames, allpowers, coefficients, n) {
     .Call(`_mvp_mvp_taylor_allvars`, allnames, allpowers, coefficients, n)
 }

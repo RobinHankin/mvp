@@ -193,6 +193,36 @@ mvp taylor_onevar(const mvp X, const unsigned int n, const string v){
     return out;
 }
 
+mvp taylor_onepower_onevar(const mvp X, const unsigned int n, const string v){
+    mvp jj,out;
+    term xn;
+    mvp::const_iterator it;  // sit == symbol iterator
+    if(n==0){  // n=0 means we seek terms with no symbol v in them
+        for(it=X.begin() ; it != X.end() ; ++it){      // iterate through X
+            term xt=it->first;                         // it->second is the coefficient
+            jj.clear();
+            if(xt.find(v) == xt.end()){ // if symbol v *not* present in xt, then:
+                jj[xt] = it->second;    // (1) populate mvp jj with a single pair
+                out = sum(out, jj);     // (2) add this to out
+            } // else do nothing
+        } // X iteration closes
+    } else { //  now n != 0, we seek terms with v^n
+        for(it=X.begin() ; it != X.end() ; ++it){ // iterate through X, 
+            term xt=it->first;
+            jj.clear();
+            if(xt.find(v) != xt.end()){  // if there *is* symbol v in term...
+                if(xt[v]==n){            // ...and if its power equals n, then:
+                    xn=xt;               // (1) create a new term,
+                    xn.erase(v);         // (2) remove v from the new term, 
+                    jj[xn] = it->second; // (3) populate jj with a single key-value pair
+                    out = sum(out, jj);  // (4) add jj to out.
+                } // else do nothing
+            } // else do nothing
+        }
+    } //if(n==0) closes
+    return out;
+}
+
 mvp taylor_allvars(const mvp X, const unsigned int n){  // truncated Taylor series
     if(n < 0){throw std::range_error("power cannot be <0");} 
     term::const_iterator sit;  // sit == symbol iterator
@@ -217,6 +247,15 @@ List mvp_taylor_onevar(
               const CharacterVector &v
               ){
     return retval(taylor_onevar(prepare(allnames,allpowers,coefficients), n[0], (string) v[0]));
+}
+
+// [[Rcpp::export]]
+List mvp_taylor_onepower_onevar(
+              const List &allnames, const List &allpowers, const NumericVector &coefficients,
+              const NumericVector   &n,
+              const CharacterVector &v
+              ){
+    return retval(taylor_onepower_onevar(prepare(allnames,allpowers,coefficients), n[0], (string) v[0]));
 }
 
 // [[Rcpp::export]]

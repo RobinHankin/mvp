@@ -23,7 +23,7 @@ mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
 \details{
 
   Function \code{taylor()} returns the Taylor series of \code{S} in
-  powers of \code{v} up to an including terms \code{v^n}.
+  powers of \code{v} up to and including terms \code{v^n}.
 
   Function \code{onevarpow()} returns just the terms in which symbol
   \code{v} appears with power \code{n}.
@@ -49,6 +49,12 @@ onevarpow(p,3,"x")
 p \%>\% taylor(2)
 p \%>\% taylor(2,"x")
 (p \%>\% subs(x="x+dx") -p) \%>\% taylor(2,"dx")
+
+
+# Second order taylor expansion of f(x)=sin(x+y) for x=1.1, about a=1:
+sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120,0,-1/5040))
+d <- as.mvp("x-a")
+(sinxpy + aderiv(sinxpy,x=1)*d + aderiv(sinxpy,x=2)*d^2/2) \%>\% subs(a=1,x=1.1)
 
 
 }

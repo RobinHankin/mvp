@@ -1,11 +1,11 @@
 Package: mvp
 Type: Package
 Title: Fast Symbolic Multivariate Polynomials
-Version: 1.0-4
-Date: 2019-01-11
+Version: 1.0-5
+Date: 2019-01-29
 Author: Robin K. S. Hankin
 Depends: methods,magrittr
-Suggests: knitr,rmarkdown,spray
+Suggests: knitr,rmarkdown,spray,microbenchmark
 VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description: Fast manipulation of symbolic multivariate polynomials
@@ -15,7 +15,10 @@ Description: Fast manipulation of symbolic multivariate polynomials
   speed improvements.  It is comparable in speed to the 'spray' package
   for sparse arrays, but retains the symbolic benefits of 'mpoly'.
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.3),partitions,mpoly,magic
+Imports: Rcpp (>= 0.12.3),
+  partitions,
+  mpoly (>= 1.1.0),
+  magic
 LinkingTo: Rcpp
 SystemRequirements: C++11
 URL: https://github.com/RobinHankin/mvp.git

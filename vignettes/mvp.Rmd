@@ -36,15 +36,15 @@ polynomials are considered to be the sum of a finite number of
 $x^2y^3z$.  We may consider this term to be the map
 
 ```
-{"x" -> 2, "y" -> 3, "z" -> 7}
+{"x" -> 2, "y" -> 3, "z" -> 1}
 ```
 
-the map takes symbols to their (integer) power, and it is understood
+where the map takes symbols to their (integer) power; it is understood
 that powers are nonzero.  A ```mvp``` object is a map from terms to
-their coeffients; thus $7xy^2 -3x^2z^5$ would be
+their coeffients; thus $7xy^2 -3x^2yz^5$ would be
 
 ```
-{{"x" -> 2, "y" -> 3, "z" -> 1} -> 7, {"x" -> 2, "z" ->5} -> -7}
+{{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, 'y" -> 1, "z" ->5} -> -3}
 ```  
 
 and we understand that coefficients are nonzero.  In ```C++``` the
@@ -59,13 +59,11 @@ typedef map <term, double> mvp;
 ```
 
 Thus a ```term``` maps a string to a (signed) integer, and a ```mvp```
-maps terms to doubles. 
-
-One reason why the ```map``` class is fast is that the order in which
-the keys are stored is undefined: the compiler may store them in the
-order which it regards as most propitious.  This is not an issue for
-the maps considered here as addition and multiplication are
-commutative and associative.
+maps terms to doubles.  One reason why the ```map``` class is fast is
+that the order in which the keys are stored is undefined: the compiler
+may store them in the order which it regards as most propitious.  This
+is not an issue for the maps considered here as addition and
+multiplication are commutative and associative.
 
 Note also that constant terms are handled with no difficulty
 (constants are simply maps from the empty map to its value), as is the

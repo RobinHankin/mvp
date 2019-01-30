@@ -1,12 +1,11 @@
 ---
-title: "The ```mvp``` package: fast multivariate polynomials R"
+title: 'The ```mvp``` package: fast multivariate polynomials R'
 author: "Robin K. S. Hankin"
 date: "`r Sys.Date()`"
+output: pdf_document
 bibliography: poly.bib
-vignette: >
-  %\VignetteIndexEntry{mvp}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+vignette: |
+  %\VignetteIndexEntry{mvp} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
 ```{r set-options, echo = FALSE}
@@ -148,12 +147,28 @@ subs(S3, x = 1, y = 2, z = 3)
 ```
 
 (in this case, the default behaviour is to return a "dropped" version
-of the resulting polynomial, that is, coerced to a scalar).  The other
-mode of substitution is to replace a variable by another polynomial:
+of the resulting polynomial, that is, coerced to a scalar).  The idiom
+also allows one to substitute a variable for an ```mvp``` object:
 
 ```{r}
-subsmvp(S3,"z", as.mvp("a^2 + 2 b^3"))
+subs(as.mvp("a+b+c"), a="x^6")
 ```
+
+Note carefully that ```subs()``` depends on the order of substitution:
+
+```{r}
+subs(as.mvp("a+b+c"), a="x^6",x="1+a")
+subs(as.mvp("a+b+c"), x="1+a",a="x^6")
+```
+  
+### Pipes
+
+Substitution works well with pipes:
+
+```{r}
+as.mvp("a+b") %>% subs(a="a^2+b^2") %>% subs(b="x^6")
+```
+
 
 ## Differentiation
 
@@ -161,18 +176,49 @@ Differentiation is implemented.  First we have the ```deriv()```
 method:
 
 ```{r}
-(S <- rmvp(5,4,6,4))
+(S <- as.mvp("a + 5 a^5*b^2*c^8 -3 x^2 a^3 b c^3"))
 deriv(S, letters[1:3])
 deriv(S, rev(letters[1:3]))  # should be the same.
 ```
 
-Also a slightly different form:```aderiv()```, here used to evaluate
+Also a slightly different form: ```aderiv()```, here used to evaluate
 $\frac{\partial^6S}{\partial a^3\partial b\partial c^2}$:
 
 ```{r}
 aderiv(S, a = 3, b = 1, c = 2)
 ```
 
+
+Again, pipes work quite nicely:
+
+
+```{r}
+S %<>% aderiv(a=1,b=2) %>% subs(c="x^4") %>% `+`(as.mvp("o^99"))
+S
+```
+
+## Taylor series
+
+The package includes functionality to deal with Taylor and Laurent series:
+
+
+```{r}
+(X <- as.mvp("1+x+x^2 y")^3)
+taylor(X,3)        # terms with total power <= 3
+taylor(X,3,"x")    # terms with power of x <= 3
+onevarpow(X,3,"x") # terms with power of x == 3
+```
+
+```{r}
+## second order taylor expansion of f(x)=sin(x+y) for x=1.1, about x=1:
+sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120,0,-1/5040))  # sin(x+y)
+dx <- as.mvp("dx")
+t2 <- sinxpy  + aderiv(sinxpy,x=1)*dx + aderiv(sinxpy,x=2)*dx^2/2
+(t2 %<>% subs(x=1,dx=0.1))  # (Taylor expansion of sin(y+1.1), left in symbolic form)
+(t2 %>% subs(y=0.3))  - sin(1.4)  # numeric; should be small
+```
+
+       	     
 ## Negative powers
 
 The ```mvp``` package handles negative powers, although the idiom is not perfect and I'm still working on it.

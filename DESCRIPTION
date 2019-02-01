@@ -3,7 +3,7 @@ Type: Package
 Title: Fast Symbolic Multivariate Polynomials
 Version: 1.0-5
 Date: 2019-01-29
-Author: Robin K. S. Hankin
+Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
 Depends: methods,magrittr
 Suggests: knitr,rmarkdown,spray,microbenchmark
 VignetteBuilder: knitr

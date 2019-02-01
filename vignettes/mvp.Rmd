@@ -7,8 +7,10 @@ output:
   html_document:
     df_print: paged
 bibliography: poly.bib
-vignette: |
-  %\VignetteIndexEntry{mvp} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+vignette: >
+  %\VignetteIndexEntry{mvp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r set-options, echo = FALSE}

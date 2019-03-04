@@ -45,7 +45,7 @@ $x^2y^3z$.  We may consider this term to be the map
 
 where the map takes symbols to their (integer) power; it is understood
 that powers are nonzero.  A ```mvp``` object is a map from terms to
-their coeffients; thus $7xy^2 -3x^2yz^5$ would be
+their coefficients; thus $7xy^2 -3x^2yz^5$ would be
 
 ```
 {{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, 'y" -> 1, "z" ->5} -> -3}

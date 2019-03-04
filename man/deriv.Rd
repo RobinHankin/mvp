@@ -18,7 +18,6 @@ Differentiation of mvp objects}
   \item{...}{Further arguments, ignored in \code{deriv()} but specifies
     the differentials in \code{aderiv()}}
 }
-\value{Returns its argument invisibly}
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{taylor}}}
 \details{

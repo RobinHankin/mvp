@@ -1,6 +1,7 @@
 # Degen's eight square identity
 
 library("mvp")
+library("testthat")
 
 LHS <-
     (
@@ -20,4 +21,4 @@ RHS <- (
 )
 
 
-stopifnot(LHS==RHS)
+expect_true(LHS==RHS,label="Degen")

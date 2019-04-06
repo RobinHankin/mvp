@@ -6,88 +6,89 @@
 ## two, and checker3() has three.  
 
 library("mvp")
+library("testthat")
 
 checker1 <- function(x){
-  stopifnot(x==x)
+    expect_true(x==x, info=dput(x))
 
-  stopifnot(x == x + constant(0))
-  stopifnot(x == x + 0)
-  stopifnot(x == (x + 4) -4)
-  stopifnot(x == -(-x))
-  stopifnot(x == +(+x))
+    expect_true(x == x + constant(0), info=dput(x))
+    expect_true(x == x + 0, info=dput(x))
+    expect_true(x == (x + 4) -4, info=dput(x))
+    expect_true(x == -(-x), info=dput(x))
+    expect_true(x == +(+x), info=dput(x))
 
-  stopifnot(x+x-x == x)
+    expect_true(x+x-x == x, info=dput(x))
 
-  stopifnot(is.zero(x-x))
+    expect_true(is.zero(x-x), info=dput(x))
 
-  stopifnot(0*x == constant(0))
-  stopifnot(1*x == x)
-  stopifnot(2*x == x+x)
-  stopifnot(3*x == x+x+x)
-  stopifnot(4*x == x+x+x+x)
-  stopifnot(5*x == x+x+x+x+x)
-  stopifnot(6*x == x+x+x+x+x+x)
+    expect_true(0*x == constant(0), info=dput(x))
+    expect_true(1*x == x, info=dput(x))
+    expect_true(2*x == x+x, info=dput(x))
+    expect_true(3*x == x+x+x, info=dput(x))
+    expect_true(4*x == x+x+x+x, info=dput(x))
+    expect_true(5*x == x+x+x+x+x, info=dput(x))
+    expect_true(6*x == x+x+x+x+x+x, info=dput(x))
 
-  stopifnot(x^0 == constant(1))
-  stopifnot(x^1 == x)
-  stopifnot(x^2 == x*x)
-  stopifnot(x^3 == x*x*x)
-  stopifnot(x^4 == x*x*x*x)
-
-  ## check constant() and constant<-():
-  ## checks below include 
-  y <- x
-  stopifnot(constant(x) == constant(y))
-  constant(y) <- 4
-  stopifnot(constant(y) == 4)
-  constant(y) <- 0
-  stopifnot(constant(y) == 0)
-  
-  
-  ## check invert():
-  stopifnot(invert(invert(x))==x)
-  if(length(allvars(x))>0){
-    v <- allvars(x)[1]
-    stopifnot(invert(invert(x,v[1]),v[1])==x)
-  }
-
-  if(length(allvars(x))>0){
-    v <- allvars(x)[1]
-    stopifnot(invert(invert(x,v[1]),v[1])==x)
-  }
+    expect_true(x^0 == constant(1), info=dput(x))
+    expect_true(x^1 == x, info=dput(x))
+    expect_true(x^2 == x*x, info=dput(x))
+    expect_true(x^3 == x*x*x, info=dput(x))
+    expect_true(x^4 == x*x*x*x, info=dput(x))
     
-  ## check subs():
-  if(length(allvars(x))>0){
-    v <- allvars(x)[1]
-    jj1 <- list(2)
-    names(jj1) <- v
-    jj2 <- list(1/2)
-    names(jj2) <- v
-
-    LHS <- do.call("subsy",list(x,jj1))
-    RHS <- invert(do.call("subsy",list(invert(x),jj2)))
-    stopifnot(LHS == RHS)
-  }  
-
-## check subsmvp():
-  if(length(allvars(x))>0){
-    v <- allvars(x)[1]
-    stopifnot(x == subsmvp(x,v,as.mvp(v)))
-  }
+    ## check constant() and constant<-():
+    ## checks below include 
+    y <- x
+    expect_true(constant(x) == constant(y), info=dput(x))
+    constant(y) <- 4
+    expect_true(constant(y) == 4, info=dput(x))
+    constant(y) <- 0
+    expect_true(constant(y) == 0, info=dput(x))
   
-  ## check d(X^n)/dt = nX^(n-1)dX/dt:
-  if(length(allvars(x))>0){
-    v <- allvars(x)[1]
-    for(i in seq_len(5)){
-      stopifnot(deriv(x^i,v) == i*x^(i-1)*deriv(x,v))
+  
+    ## check invert():
+    expect_true(invert(invert(x))==x, info=dput(x))
+    if(length(allvars(x))>0){
+        v <- allvars(x)[1]
+        expect_true(invert(invert(x,v[1]),v[1])==x, info=dput(x))
     }
-  }
+    
+    if(length(allvars(x))>0){
+        v <- allvars(x)[1]
+        expect_true(invert(invert(x,v[1]),v[1])==x, info=dput(x))
+    }
+    
+    ## check subs():
+    if(length(allvars(x))>0){
+        v <- allvars(x)[1]
+        jj1 <- list(2)
+        names(jj1) <- v
+        jj2 <- list(1/2)
+        names(jj2) <- v
+        
+        LHS <- do.call("subsy",list(x,jj1))
+        RHS <- invert(do.call("subsy",list(invert(x),jj2)))
+        expect_true(LHS == RHS, info=dput(x))
+    }  
 
-  ## check d^2X/dudv = d^2X/dvdu: 
-  if(length(allvars(x))>1){
-    v <- allvars(x)[1:2]
-    stopifnot(deriv(x,v) == deriv(x,rev(v)))
-  }
+    ## check subsmvp():
+    if(length(allvars(x))>0){
+        v <- allvars(x)[1]
+        expect_true(x == subsmvp(x,v,as.mvp(v)), info=list(dput(x),v))
+    }
+    
+    ## check d(X^n)/dt = nX^(n-1)dX/dt:
+    if(length(allvars(x))>0){
+        v <- allvars(x)[1]
+        for(i in seq_len(5)){
+            expect_true(deriv(x^i,v) == i*x^(i-1)*deriv(x,v), info=list(dput(x),v))
+        }
+    }
+    
+    ## check d^2X/dudv = d^2X/dvdu: 
+    if(length(allvars(x))>1){
+        v <- allvars(x)[1:2]
+        expect_true(deriv(x,v) == deriv(x,rev(v)), info=list(dput(x),v))
+    }
 
   ## check the chain rule, here dx/dv = (dx/dy)*(dy/dv):
   if((length(allvars(x))>1)   & (! "y" %in% allvars(x)) ){
@@ -97,7 +98,7 @@ checker1 <- function(x){
     
     LHS <- subsmvp(deriv(x,v)*deriv(s,"y"),v,s)
     RHS <- deriv(subsmvp(x,v,s),"y")
-    stopifnot(LHS == RHS)
+    expect_true(LHS == RHS,info=list(LHS,RHS))
 }
   return(TRUE)
 }  # checker1() closes
@@ -155,10 +156,6 @@ checker3 <- function(x,y,z){
 } # checker3() closes
 
 
-
-
-
-
 for(i in 1:2){
     x <- rmvp(5)
     y <- rmvp(5)
@@ -169,8 +166,6 @@ for(i in 1:2){
     checker3(x,y,z)
 }
 
-print("finished")
-
 ## Brahmagupta-Fibonacci:
 
 bf <- function(a1,a2,a3,a4,n){
@@ -179,6 +174,14 @@ bf <- function(a1,a2,a3,a4,n){
   return(LHS == RHS)
 }
 
+for(i in 1:10){
+    a1 <- rmvp(2,3,2,4)
+    a2 <- rmvp(2,3,2,4)
+    a3 <- rmvp(2,3,2,4)
+    a4 <- rmvp(2,3,2,4)
+    n <- rpois(1,lambda=5)
+    expect_true(bf(a1,a2,a3,a4,n),info=list(dput(a1),dput(a2),dput(a3),dput(a4),n))
+}
 
 # Euler's four-square identity:
 checker8 <- function(a1,a2,a3,a4,b1,b2,b3,b4){
@@ -195,14 +198,20 @@ checker8 <- function(a1,a2,a3,a4,b1,b2,b3,b4){
   return(RHS==RHS)
 }
 
-bf(rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4),7)
 
-checker8(
-    rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4),
-    rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4), rmvp(2,3,2,4)
-)
-
+a1 <- rmvp(2,3,2,4)
+a2 <- rmvp(2,3,2,4)
+a3 <- rmvp(2,3,2,4)
+a4 <- rmvp(2,3,2,4)
+b1 <- rmvp(2,3,2,4)
+b2 <- rmvp(2,3,2,4)
+b3 <- rmvp(2,3,2,4)
+b4 <- rmvp(2,3,2,4)
+expect_true(checker8(a1,a2,a3,a4,b1,b2,b3,b4),
+            info=list(dput(a1),dput(a2),dput(a3),dput(a4),
+                      dput(b1),dput(b2),dput(b3),dput(b4))
+            )
 
 ## misc checks:
-stopifnot(constant(0) == as.mvp(0))
+expect_true(constant(0) == as.mvp(0))
 

@@ -5,7 +5,7 @@ Version: 1.0-5
 Date: 2019-01-29
 Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
 Depends: methods,magrittr
-Suggests: knitr,rmarkdown,spray,microbenchmark
+Suggests: knitr,rmarkdown,spray,microbenchmark,testthat
 VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description: Fast manipulation of symbolic multivariate polynomials

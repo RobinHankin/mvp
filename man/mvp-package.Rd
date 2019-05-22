@@ -30,11 +30,4 @@ p^3
 subs(p^4,x="a+b^2")
 aderiv(p^2,x=4)
 horner(p,1:3)
-
-
-
-
-
-
-
 }

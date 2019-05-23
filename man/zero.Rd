@@ -3,13 +3,13 @@
 \alias{is.zero}
 \title{The zero polynomial}
 \description{
-Test for a polynomial being zero
+Test for a multivariate polynomial being zero
 }
 \usage{
 is.zero(x)
 }
 \arguments{
-  \item{x}{Object of class mvp}
+  \item{x}{Object of class \code{mvp}}
 }
 \details{
 
@@ -29,15 +29,12 @@ I would have expected the zero polynomial to be problematic (cf the
 require extensive special case treatment).  But it seems to work fine,
 which is a testament to the robust coding in the STL.
 
-A general mvp object is something like
+A general \code{mvp} object is something like
 
-\code{\{"x" -> 3, "y" -> 5\} -> 6, \{"x" -> 1, "z" -> 8\} -> -7\}}
+\code{\{\{"x" -> 3, "y" -> 5\} -> 6, \{"x" -> 1, "z" -> 8\} -> -7\}\}}
 
-
-
-which would be \eqn{6x^3y^5-7xz^8}{6x^3*y^5-7x*z^8}.
-
-The zero polynomial is just \code{\{\}}.  Neat, eh?
+which would be \eqn{6x^3y^5-7xz^8}{6x^3*y^5-7x*z^8}.  The zero
+polynomial is just \code{\{\}}.  Neat, eh?
   
 }
 

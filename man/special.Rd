@@ -7,7 +7,7 @@
 \alias{numeric_to_mvp}
 \title{Various functions to create simple multivariate polynomials}
 \description{
-Various functions to create simple mvp objects such as single-term,
+Various functions to create simple \code{mvp} objects such as single-term,
 homogenous, and constant multivariate polynomials.
 }
 \usage{
@@ -18,12 +18,13 @@ xyz(n,symbols=letters)
 numeric_to_mvp(x)
 }
 \arguments{
-  \item{d,n}{An integer; generally, the dimension or arity of the resulting mvp}
+  \item{d,n}{An integer; generally, the dimension or arity of the
+    resulting \code{mvp} object}
   \item{v,power}{Integer vector of powers}
   \item{x}{Numeric vector of coefficients}
   \item{symbols}{Character vector for the symbols}
 }
-\value{All functions documented here return a mvp object}
+\value{All functions documented here return a \code{mvp} object}
 \author{Robin K. S. Hankin}
 \note{
 

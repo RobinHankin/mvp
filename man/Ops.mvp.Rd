@@ -9,7 +9,7 @@
 \alias{mvp_plus_scalar}
 \alias{mvp_power_scalar}
 \alias{mvp_eq_mvp}
-\title{Arithmetic Ops Group Methods for mvp objects}
+\title{Arithmetic Ops Group Methods for \code{mvp} objects}
 \description{
   Allows arithmetic operators to be used for
   multivariate polynomials  such as addition, multiplication,
@@ -25,7 +25,7 @@ mvp_plus_numeric(S,x)
 mvp_eq_mvp(S1,S2)
 }
 \arguments{
-  \item{e1,e2,S,S1,S2}{Objects of class \dQuote{\code{mvp}}}
+  \item{e1,e2,S,S1,S2}{Objects of class \code{mvp}}
   \item{x}{Scalar, length one numeric vector}
 }
 \details{

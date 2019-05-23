@@ -22,7 +22,7 @@ subsmvp(S,v,X)
   \item{v}{A string corresponding to the variable to substitute}
 }
 \value{
-  Return a multivariate polynomial, object of class mvp
+  Returns a multivariate polynomial, object of class \code{mvp}
 }
 \details{
 Function \code{subs()} uses a natural R idiom to substitute scalar
@@ -35,7 +35,7 @@ Observe that this type of substitution is sensitive to order:
 > subs(p,a="b",b="x")
 mvp object algebraically equal to
 x^3
-> subs(p,b="x",a="b")
+> subs(p,b="x",a="b")  # same arguments, different order
 mvp object algebraically equal to
 b x^2
 }
@@ -43,8 +43,8 @@ b x^2
 Functions \code{subsy()} and \code{subsmpv()} are lower-level functions,
 not really intended for the end-user.  Function \code{subsy()}
 substitutes variables for numeric values (order matters if a variable is
-substitued more than once).  Function \code{subsmpv()} takes a mvp
-object and substitutes another mvp object for a specific symbol.  
+substitued more than once).  Function \code{subsmpv()} takes a \code{mvp}
+object and substitutes another \code{mvp} object for a specific symbol.  
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{drop}}}

@@ -4,7 +4,7 @@
 \alias{as.mvp}
 \alias{is_ok_mvp}
 \title{Multivariate polynomials, mvp objects}
-\description{Create, test for, an coerce to, mvp objects}
+\description{Create, test for, an coerce to, \code{mvp} objects}
 \usage{
 mvp(vars, powers, coeffs)
 is_ok_mvp(vars,powers,coeffs)
@@ -12,7 +12,7 @@ is.mvp(x)
 as.mvp(x,...)
 }
 \arguments{
-  \item{vars}{List of variables comprising each term of a mvp object}
+  \item{vars}{List of variables comprising each term of a \code{mvp} object}
   \item{powers}{List of powers corresponding to the variables of the
     \code{vars} argument}
   \item{coeffs}{Numeric vector corresponding to the coefficients to each

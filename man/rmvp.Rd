@@ -2,7 +2,7 @@
 \alias{rmvp}
 \title{Random multivariate polynomials}
 \description{Random multivariate polynomials, intended as quick
-  \dQuote{get you going} examples of mvp objects}
+  \dQuote{get you going} examples of \code{mvp} objects}
 \usage{
 rmvp(n, size = 6, pow = 6, symbols = 6)
 }

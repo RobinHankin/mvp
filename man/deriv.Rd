@@ -5,15 +5,15 @@
 \alias{deriv_mvp}
 \alias{aderiv.mvp}
 \alias{aderiv_mvp}
-\title{Differentiation of mvp objects}
+\title{Differentiation of \code{mvp} objects}
 \description{
-Differentiation of mvp objects}
+Differentiation of \code{mvp} objects}
 \usage{
 \method{deriv}{mvp}(expr, v, ...)
 \method{aderiv}{mvp}(expr, ...)
 }
 \arguments{
-  \item{expr}{mvp object}
+  \item{expr}{Object of class \code{mvp}}
   \item{v}{Character vector.  Elements denote variables to differentiate with respect to}
   \item{...}{Further arguments, ignored in \code{deriv()} but specifies
     the differentials in \code{aderiv()}}

@@ -12,7 +12,7 @@ is.mvp(x)
 as.mvp(x,...)
 }
 \arguments{
-  \item{vars}{List of variables comprising each term of a \code{mvp} object}
+  \item{vars}{List of variables comprising each term of an \code{mvp} object}
   \item{powers}{List of powers corresponding to the variables of the
     \code{vars} argument}
   \item{coeffs}{Numeric vector corresponding to the coefficients to each

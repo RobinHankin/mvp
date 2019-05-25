@@ -7,8 +7,8 @@
 \description{
   The \pkg{mpoly} package by David Kahle provides similar functionality
   to this package, and the functions documented here convert between
-  mpoly and mvp objects.  The mvp package uses \code{mpoly::mp()} to
-  convert character strings to mvp objects.
+  mpoly and \code{mvp} objects.  The mvp package uses \code{mpoly::mp()} to
+  convert character strings to \code{mvp} objects.
 }
 \usage{
 mpoly_to_mvp(m)

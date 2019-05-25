@@ -2,13 +2,13 @@
 \alias{invert}
 \title{Replace symbols with their reciprocals}
 \description{
-Given an mvp object, replace one or more symbols with their reciprocals
+Given an \code{mvp} object, replace one or more symbols with their reciprocals
 }
 \usage{
 invert(p, v)
 }
 \arguments{
-  \item{p}{Object (coerced to) mvp form}
+  \item{p}{Object (coerced to) \code{mvp} form}
   \item{v}{Character vector of symbols to be replaced with their
     reciprocal; missing interpreted as replace all symbols}
 }

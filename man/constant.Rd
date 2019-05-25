@@ -6,23 +6,23 @@
 \alias{constant<-.mvp}
 \alias{constant.numeric}
 \title{The constant term}
-\description{Get and set the constant term of a mvp object}
+\description{Get and set the constant term of an \code{mvp} object}
 \usage{
 \method{constant}{mvp}(x)
 \method{constant}{mvp}(x) <- value
 \method{constant}{numeric}(x)
 }
 \arguments{
-  \item{x}{Object of class mvp}
+  \item{x}{Object of class \code{mvp}}
   \item{value}{Scalar value for the constant}
 }
 \details{
 
   The constant term in a polynomial is the coefficient of the empty term.
-  In an mvp object, the map \code{\{\} -> c}, implies that \code{c} is
+  In an \code{mvp} object, the map \code{\{\} -> c}, implies that \code{c} is
   the constant.
 
-  If \code{x} is an mvp object, \code{constant(x)} returns the value of
+  If \code{x} is an \code{mvp} object, \code{constant(x)} returns the value of
   the constant in the multivariate polynomial; if \code{x} is numeric,
   it returns a constant multivariate polynomial with value \code{x}.
   

@@ -2,14 +2,14 @@
 \alias{drop}
 \title{Drop empty variables}
 \description{
-Convert a mvp object which is a pure constant into a scalar whose value is
+Convert an \code{mvp} object which is a pure constant into a scalar whose value is
 the coefficient of the empty term
 }
 \usage{
 drop(S)
 }
 \arguments{
-  \item{S}{An mvp object}
+  \item{S}{Object of class \code{mvp}}
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{subs}}}

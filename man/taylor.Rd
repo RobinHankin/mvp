@@ -14,11 +14,11 @@ mvp_taylor_allvars(allnames,allpowers,coefficients, n)
 mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
 }
 \arguments{
-  \item{S}{mvp object}
+  \item{S}{Object of class \code{mvp}}
   \item{n}{Non-negative integer specifying highest order to be retained}
   \item{v}{Variable to take Taylor series with respect to.  If missing,
     total power of each term is used}
-  \item{allnames,allpowers,coefficients}{Components of mvp objects}
+  \item{allnames,allpowers,coefficients}{Components of \code{mvp} objects}
 }
 \details{
 

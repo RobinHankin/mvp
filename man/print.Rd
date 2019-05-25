@@ -2,10 +2,10 @@
 \alias{print.mvp}
 \alias{print_mvp}
 \title{
-Print methods for mvp objects
+Print methods for \code{mvp} objects
 }
 \description{
-Print methods for mvp objects: to print, an mvp object is coerced to
+Print methods for \code{mvp} objects: to print, an \code{mvp} object is coerced to
 \code{mpoly} form and the \code{mpoly} print method used.
 
 }
@@ -13,7 +13,7 @@ Print methods for mvp objects: to print, an mvp object is coerced to
 \method{print}{mvp}(x, ...)
 }
 \arguments{
-  \item{x}{mvp object, coerced to \code{mpoly} form}
+  \item{x}{Object of class \code{mvp}, coerced to \code{mpoly} form}
   \item{...}{Further arguments}
 }
 \value{Returns its argument invisibly}

@@ -15,11 +15,11 @@ coeffs(x)
 coeffs(x) <- value
 }
 \arguments{
-  \item{x}{Object of class mvp}
+  \item{x}{Object of class \code{mvp}}
   \item{value}{Numeric vector of length 1}
 }
 \details{
-Access the different parts of an mvp object.  The constant term is
+Access the different parts of an \code{mvp} object.  The constant term is
 technically a coefficient but is documented under \code{constant.Rd}. 
 }
 \author{Robin K. S. Hankin}

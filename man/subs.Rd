@@ -6,7 +6,7 @@
 \alias{subs_mvp}
 \alias{mvp_subs_mvp}
 \title{Substitution}
-\description{Substitute symbols in an mvp object for numbers or other
+\description{Substitute symbols in an \code{mvp} object for numbers or other
   multivariate polynomials
 }
 \usage{
@@ -18,7 +18,7 @@ subsmvp(S,v,X)
   \item{S,X}{Multivariate polynomials}
   \item{\dots}{named arguments corresponding to variables to substitute}
   \item{drop}{Boolean with default \code{TRUE} meaning to return a
-    scalar (the constant) in place of a constant mvp object}
+    scalar (the constant) in place of a constant \code{mvp} object}
   \item{v}{A string corresponding to the variable to substitute}
 }
 \value{

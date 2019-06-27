@@ -5,8 +5,7 @@
 ## a test is failed.  Function checker1() has one argument, checker2()
 ## two, and checker3() has three.  
 
-library("mvp")
-library("testthat")
+test_that("Test suite aaa.R",{
 
 checker1 <- function(x){
     expect_true(x==x, info=dput(x))
@@ -165,3 +164,4 @@ for(i in 1:2){
     checker2(x,y)
     checker3(x,y,z)
 }
+})

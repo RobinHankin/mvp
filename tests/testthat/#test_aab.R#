@@ -4,9 +4,7 @@
 ## multivariate polynomials).
 
 
-library("mvp")
-library("testthat")
-
+test_that("Test suite aab.R",{
 
 ## Brahmagupta-Fibonacci:
 
@@ -56,3 +54,4 @@ expect_true(checker8(a1,a2,a3,a4,b1,b2,b3,b4),
 
 ## misc checks:
 expect_true(constant(0) == as.mvp(0))
+})

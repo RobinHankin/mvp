@@ -1,8 +1,6 @@
 # Degen's eight square identity
 
-library("mvp")
-library("testthat")
-
+test_that("Test suite aad.R, Degen's eight-square identity",{
 LHS <-
     (
         as.mvp("a_1^2 + a_2^2 + a_3^2 + a_4^2 + a_5^2 + a_6^2 + a_7^2 + a_8^2") *
@@ -22,3 +20,5 @@ RHS <- (
 
 
 expect_true(LHS==RHS,label="Degen")
+
+})

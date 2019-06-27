@@ -41,7 +41,10 @@ taylor(as.mvp("1+x+y")^3,2,"x")  # terms like y^3 are treated as constants
 
 p <- horner("x+y",1:4)
 
-onevarpow(p,3,"x")
+onevarpow(p,2,"x")   # coefficient of x^2
+onevarpow(p,3,"x")   # coefficient of x^3
+
+
 
 # Works well with pipes:
 

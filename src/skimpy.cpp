@@ -1,6 +1,5 @@
 // -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 
-#define container vector         // Could be 'vector' or 'deque' (both work but there may be performance differences)
 #define USE_UNORDERED_MAP true   // set to true for unordered_map; comment out to use plain stl map.
 
 #include <Rcpp.h>
@@ -16,9 +15,6 @@
 
 using namespace std;
 using namespace Rcpp; 
-
-typedef container <signed int> mypowers;  // a mypowers object is a container [vector or deque] of signed integers (the powers of the variables)
-typedef container <string> mynames;  // a mynames object is a container [vector or deque] of strings...
 
 typedef map <string, signed int> term; //... and a 'term' object is a map from string objects to a integers; thus a^2 b^3 is 'a' -> 2, 'b' -> 3
 typedef map <term, double> mvp;  // ... An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double.

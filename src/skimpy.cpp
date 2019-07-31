@@ -16,9 +16,12 @@
 using namespace std;
 using namespace Rcpp; 
 
-typedef map <string, signed int> term; // A 'term' object is a map from string objects to a integers; thus a^2 b^3 is 'a' -> 2, 'b' -> 3
-typedef map <term, double> mvp;       // An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double.
-typedef map <string, double> subs;   // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
+typedef map <string, signed int> term; // A 'term' object is a map from string objects to a integers; thus a^2 b^3 is {'a' -> 2, 'b' -> 3}
+typedef map <term, double> mvp;       // An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double (its coefficient)
+typedef map <string, double> subs;   // A 'subs' object is a map from a string object to a real value, used in variable substitutions;
+                                    // thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
+
+typedef map <string, NumericVector> subvec; 
 
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
@@ -396,3 +399,21 @@ List mvp_substitute_mvp(
 
                 
 
+NumericVector mvp_vector_subs_dowork(const mvp X, const subvec S, const int n)
+{
+        mvp::const_iterator i;
+        term::iterator it;
+        NumericVector out;
+        
+        for(int i = 0 ; i != n ; ++i){  // iterate through the substitution vector
+            for(mvp::const_iterator ix = X.begin() ; ix != X.end() ; ++ix){ // Iterate through  X; e.g. i->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and i->second=2.2 [that is, 2.2 x^3*ab^5]
+                const term t = ix->first;                   // "t" is a single _term_ of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
+                const double coeff = ix->second;      // "coeff" is the coefficient corresponding to that term (a real number)
+                for(term::const_iterator it=t.begin() ; it != t.end() ; ++it){  // iterate through the term and substitute each symbol in turn
+                    for(subvec::const_iterator j = S.begin() ; j != S.end() ; ++j){ // iterate through the subvec object
+                        ix->first  = j->second
+                    }
+                }  
+            }
+        } 
+}

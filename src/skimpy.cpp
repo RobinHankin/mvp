@@ -394,26 +394,33 @@ List mvp_substitute_mvp(
     return(retval(Xnew));                    // return a pre-prepared list to R
 }                                            // function mvp_substitute() closes
 
-
-
-
-                
-
-NumericVector mvp_vector_subs_dowork(const mvp X, const subvec S, const int n)
+NumericVector mvp_vector_subs_dowork(const mvp X, subvec S, const int n) 
 {
-        mvp::const_iterator i;
-        term::iterator it;
         NumericVector out;
-        
-        for(int i = 0 ; i != n ; ++i){  // iterate through the substitution vector
-            for(mvp::const_iterator ix = X.begin() ; ix != X.end() ; ++ix){ // Iterate through  X; e.g. i->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and i->second=2.2 [that is, 2.2 x^3*ab^5]
-                const term t = ix->first;                   // "t" is a single _term_ of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
-                const double coeff = ix->second;      // "coeff" is the coefficient corresponding to that term (a real number)
-                for(term::const_iterator it=t.begin() ; it != t.end() ; ++it){  // iterate through the term and substitute each symbol in turn
-                    for(subvec::const_iterator j = S.begin() ; j != S.end() ; ++j){ // iterate through the subvec object
-                        ix->first  = j->second
-                    }
-                }  
-            }
-        } 
-}
+        double temp,x;
+        mvp::const_iterator ix;
+        term::const_iterator it;
+
+        for(int i = 0 ; i != n ; ++i){                     // iterate through the substitution vector
+            for(ix = X.begin() ; ix != X.end() ; ++ix){     // iterate through mvp object X
+                term t = ix->first;                          // "t" is a single _term_ of X, 
+                temp = ix->second;                             // temp is the coefficient of this term
+                for(it=t.begin() ; it != t.end() ; ++it){       // iterate through the term and substitute using S:
+                    temp *= pow((S[it->first])[i], it->second); // meat part 1
+                }                                              // it loop closes
+                out[i] += temp;                               // increment out[i]; meat 2.
+            }                                                // X iteration closes
+        }                                                   // for(i) loop closes
+        return(out);
+}  // function closes
+
+
+
+
+
+
+
+
+
+
+

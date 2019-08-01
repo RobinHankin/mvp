@@ -21,7 +21,10 @@ typedef map <term, double> mvp;       // An 'mvp' object (MultiVariatePolynomial
 typedef map <string, double> subs;   // A 'subs' object is a map from a string object to a real value, used in variable substitutions;
                                     // thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
 
-typedef map <string, NumericVector> subvec; 
+typedef map <string, NumericVector> subvec;
+// A subvec object is a map from a string to a numeric vector, for
+// example {'a -> c(1,5,2), 'b' -> c(-5.5,3,3)}.  All the vectors must
+// be the same length although this is managed on the R side.
 
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
@@ -83,6 +86,7 @@ List retval(const mvp &X){   // takes a mvp object and returns a mpoly-type list
                         );
 }
     
+
 mvp prepare(const List allnames, const List allpowers, const NumericVector coefficients){  // the entry of each element is the coefficient.
     mvp out;
     term oneterm;
@@ -116,6 +120,21 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
     // now clear out any term with zero coefficient:
     return zero_coefficient_remover(out);
 }
+
+subvec prepare_subvec(const List allnames, const NumericVector M, const int nrows, const int ncols){
+    subvec out;
+    NumericVector subval(nrows);  
+        for(int i=0 ; i<ncols ; i++){  
+            SEXP jj = allnames[i]; 
+            Rcpp::CharacterVector name(jj);
+            for(int j=0 ; j<nrows ; j++){
+                subval[j] = M[i*nrows + j];
+            }
+            std::string fname = Rcpp::as<std::string>(name);
+            out[fname] = subval; 
+        } // i loop closes
+        return out;
+} // function prepare_subvec() closes
 
 mvp product(const mvp X1, const mvp X2){
     mvp out;
@@ -394,33 +413,34 @@ List mvp_substitute_mvp(
     return(retval(Xnew));                    // return a pre-prepared list to R
 }                                            // function mvp_substitute() closes
 
-NumericVector mvp_vector_subs_dowork(const mvp X, subvec S, const int n) 
-{
+
+NumericVector mvp_vector_subs_dowork(const mvp X, subvec S, const int ncols){
         NumericVector out;
-        double temp,x;
+        double temp;
         mvp::const_iterator ix;
         term::const_iterator it;
 
-        for(int i = 0 ; i != n ; ++i){                     // iterate through the substitution vector
-            for(ix = X.begin() ; ix != X.end() ; ++ix){     // iterate through mvp object X
-                term t = ix->first;                          // "t" is a single _term_ of X, 
-                temp = ix->second;                             // temp is the coefficient of this term
-                for(it=t.begin() ; it != t.end() ; ++it){       // iterate through the term and substitute using S:
-                    temp *= pow((S[it->first])[i], it->second); // meat part 1
+        for(int i = 0 ; i != ncols ; ++i){                // iterate through the substitution vector
+            for(ix = X.begin() ; ix != X.end() ; ++ix){    // iterate through mvp object X
+                const term t = ix->first;                         // "t" is a single _term_ of X, 
+                temp = ix->second;                            // temp is the coefficient of this term
+                for(it=t.begin() ; it != t.end() ; ++it){      // iterate through the term and substitute using S:
+                    temp *= pow((S[it->first])[i], it->second); // the meat, part 1
                 }                                              // it loop closes
-                out[i] += temp;                               // increment out[i]; meat 2.
+                out[i] += temp;                               // increment out[i]; the meat, part 2.
             }                                                // X iteration closes
         }                                                   // for(i) loop closes
-        return(out);
-}  // function closes
+        return out;
+}
 
+// [[Rcpp::export]]
+NumericVector mvp_vector_subs(
+              const List &allnames, const List &allpowers, const NumericVector &coefficients, // X
+              const List &subnames, const NumericVector &M, const int &nrows, const int &ncols // S
+              ){
 
-
-
-
-
-
-
-
-
-
+    return mvp_vector_subs_dowork(
+               prepare(allnames,allpowers,coefficients),   // X
+               prepare_subvec(subnames, M, nrows, ncols), // S
+               ncols);
+}

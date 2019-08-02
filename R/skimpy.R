@@ -285,3 +285,12 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
    jj <- mvp_taylor_onepower_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], n, v)
    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
+
+`subvec` <- function(S,...){
+    M <- do.call("cbind",list(...))
+    print(M)
+    mvp_vector_subs(allnames=S[[1]], allpowers=S[[2]], coefficients=S[[3]],
+                    subnames=colnames(M), M=c(as.double(M)),
+                    nrows=nrow(M), ncols=ncol(M))
+}
+

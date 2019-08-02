@@ -124,16 +124,35 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
 subvec prepare_subvec(const List allnames, const NumericVector M, const int nrows, const int ncols){
     subvec out;
     NumericVector subval(nrows);  
+    cout << "prepare_subvec() starts" << "\n";
+
         for(int i=0 ; i<ncols ; i++){  
             SEXP jj = allnames[i]; 
             Rcpp::CharacterVector name(jj);
+            cout << "j loop starts\n";
             for(int j=0 ; j<nrows ; j++){
                 subval[j] = M[i*nrows + j];
+                cout << "in the j loop\n";
+                cout << "subval[j]: " << subval[j] << "\n";
             }
+            cout << "j loop ends\n";
             std::string fname = Rcpp::as<std::string>(name);
+            cout << "fname: " << fname << "\n";
             out[fname] = subval; 
         } // i loop closes
-        return out;
+
+    // now iterate through out, which is a subvec object:
+    for(subvec::const_iterator ib=out.begin() ; ib != out.end() ; ++ib){
+        cout << "ib loop; ib->first: " << ib->first << "\n";
+        int n=(ib->second).size();
+        cout << "ib loop. ib->second:\n";
+        for(int nn=0 ; nn<n; nn++){
+            cout << (ib->second)[nn] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "prepare_subvec() ends" << "\n";
+    return out;
 } // function prepare_subvec() closes
 
 mvp product(const mvp X1, const mvp X2){
@@ -414,19 +433,29 @@ List mvp_substitute_mvp(
 }                                            // function mvp_substitute() closes
 
 
-NumericVector mvp_vector_subs_dowork(const mvp X, subvec S, const int ncols){
-        NumericVector out;
+NumericVector mvp_vector_subs_dowork(const mvp X, subvec S, const int nrows){
+        NumericVector out(nrows);
         double temp;
         mvp::const_iterator ix;
         term::const_iterator it;
 
-        for(int i = 0 ; i != ncols ; ++i){                // iterate through the substitution vector
+        for(int i = 0 ; i < nrows ; ++i){                // iterate through the substitution vector
+            out[i] = 0;
             for(ix = X.begin() ; ix != X.end() ; ++ix){    // iterate through mvp object X
-                const term t = ix->first;                         // "t" is a single _term_ of X, 
-                temp = ix->second;                            // temp is the coefficient of this term
+                const term t = ix->first;                   // "t" is a single _term_ of X, something like a^6*b^2
+                temp = ix->second;                            // temp is the coefficient of this term in X
                 for(it=t.begin() ; it != t.end() ; ++it){      // iterate through the term and substitute using S:
+                    cout << "it->first: " << it->first << "\n";
+                    cout << "it->second: " << it-> second << "\n";
+                    cout << "temp before: " << temp << "\n";
                     temp *= pow((S[it->first])[i], it->second); // the meat, part 1
+                    cout << "temp after: " << temp << "\n";
+                    cout << "(S[it->first])[i]: " << (S[it->first])[i] << "\n";
+                    cout << "-----------------\n";
                 }                                              // it loop closes
+                cout << "\n";
+                cout << "\n";
+
                 out[i] += temp;                               // increment out[i]; the meat, part 2.
             }                                                // X iteration closes
         }                                                   // for(i) loop closes
@@ -442,5 +471,6 @@ NumericVector mvp_vector_subs(
     return mvp_vector_subs_dowork(
                prepare(allnames,allpowers,coefficients),   // X
                prepare_subvec(subnames, M, nrows, ncols), // S
-               ncols);
+               nrows);
 }
+

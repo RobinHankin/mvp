@@ -154,6 +154,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mvp_vector_subs
+NumericVector mvp_vector_subs(const List& allnames, const List& allpowers, const NumericVector& coefficients, const List& subnames, const NumericVector& M, const int& nrows, const int& ncols);
+RcppExport SEXP _mvp_mvp_vector_subs(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP subnamesSEXP, SEXP MSEXP, SEXP nrowsSEXP, SEXP ncolsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type allnames(allnamesSEXP);
+    Rcpp::traits::input_parameter< const List& >::type allpowers(allpowersSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type coefficients(coefficientsSEXP);
+    Rcpp::traits::input_parameter< const List& >::type subnames(subnamesSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type M(MSEXP);
+    Rcpp::traits::input_parameter< const int& >::type nrows(nrowsSEXP);
+    Rcpp::traits::input_parameter< const int& >::type ncols(ncolsSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_vector_subs(allnames, allpowers, coefficients, subnames, M, nrows, ncols));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mvp_mvp_taylor_onevar", (DL_FUNC) &_mvp_mvp_taylor_onevar, 5},
@@ -166,6 +183,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mvp_mvp_deriv", (DL_FUNC) &_mvp_mvp_deriv, 4},
     {"_mvp_mvp_substitute", (DL_FUNC) &_mvp_mvp_substitute, 5},
     {"_mvp_mvp_substitute_mvp", (DL_FUNC) &_mvp_mvp_substitute_mvp, 7},
+    {"_mvp_mvp_vector_subs", (DL_FUNC) &_mvp_mvp_vector_subs, 7},
     {NULL, NULL, 0}
 };
 

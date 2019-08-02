@@ -41,3 +41,7 @@ mvp_substitute_mvp <- function(allnames1, allpowers1, coefficients1, allnames2, 
     .Call(`_mvp_mvp_substitute_mvp`, allnames1, allpowers1, coefficients1, allnames2, allpowers2, coefficients2, v)
 }
 
+mvp_vector_subs <- function(allnames, allpowers, coefficients, subnames, M, nrows, ncols) {
+    .Call(`_mvp_mvp_vector_subs`, allnames, allpowers, coefficients, subnames, M, nrows, ncols)
+}
+

@@ -141,7 +141,8 @@ subvec prepare_subvec(const List allnames, const NumericVector M, const int nrow
             out[fname] = subval; 
         } // i loop closes
 
-    // now iterate through out, which is a subvec object:
+    // now iterate through 'out', which is a subvec object:
+        cout << "ib loop starts:\n";
     for(subvec::const_iterator ib=out.begin() ; ib != out.end() ; ++ib){
         cout << "ib loop; ib->first: " << ib->first << "\n";
         int n=(ib->second).size();
@@ -149,7 +150,7 @@ subvec prepare_subvec(const List allnames, const NumericVector M, const int nrow
         for(int nn=0 ; nn<n; nn++){
             cout << (ib->second)[nn] << " ";
         }
-        cout << "\n";
+        cout << "ib loop ends\n";
     }
     cout << "prepare_subvec() ends" << "\n";
     return out;

@@ -21,7 +21,7 @@ typedef map <term, double> mvp;       // An 'mvp' object (MultiVariatePolynomial
 typedef map <string, double> subs;   // A 'subs' object is a map from a string object to a real value, used in variable substitutions;
                                     // thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
 
-typedef map <string, NumericVector> subvec;
+typedef map <string, Rcpp::NumericVector> subvec;
 // A subvec object is a map from a string to a numeric vector, for
 // example {'a -> c(1,5,2), 'b' -> c(-5.5,3,3)}.  All the vectors must
 // be the same length although this is managed on the R side.
@@ -129,29 +129,38 @@ subvec prepare_subvec(const List allnames, const NumericVector M, const int nrow
         for(int i=0 ; i<ncols ; i++){  
             SEXP jj = allnames[i]; 
             Rcpp::CharacterVector name(jj);
-            cout << "j loop starts\n";
+            cout << "rcpp name: " << name << "\n";
+            cout << "j loop; subval: ";
             for(int j=0 ; j<nrows ; j++){
                 subval[j] = M[i*nrows + j];
-                cout << "in the j loop\n";
-                cout << "subval[j]: " << subval[j] << "\n";
+                cout << subval[j] << " ";
             }
-            cout << "j loop ends\n";
+            cout << "\n j loop ends\n";
             std::string fname = Rcpp::as<std::string>(name);
             cout << "fname: " << fname << "\n";
-            out[fname] = subval; 
+            cout << "here is subval, in the o loop: ";
+            int n = subval.size();
+            for(int o=0 ; o<n ; o++){
+                cout  << subval[o] << " ";
+            }
+            cout << "\n";
+            cout << "o loop ends\n";
+            out[fname] = subval;
+            // now iterate through 'out', which is a subvec object:
+            cout << "ib loop starts:\n";
+            for(subvec::const_iterator ib=out.begin() ; ib != out.end() ; ++ib){
+                cout << "ib loop; ib->first: " << ib->first << "\n";
+                int n=(ib->second).size();
+                cout << "ib loop. ib->second: ";
+                for(int nn=0 ; nn<n; nn++){
+                    cout << (ib->second)[nn] << " ";
+                }
+                cout << "\n ib loop ends\n";
+            }
+            cout << " ------------------\n";
         } // i loop closes
 
-    // now iterate through 'out', which is a subvec object:
-        cout << "ib loop starts:\n";
-    for(subvec::const_iterator ib=out.begin() ; ib != out.end() ; ++ib){
-        cout << "ib loop; ib->first: " << ib->first << "\n";
-        int n=(ib->second).size();
-        cout << "ib loop. ib->second:\n";
-        for(int nn=0 ; nn<n; nn++){
-            cout << (ib->second)[nn] << " ";
-        }
-        cout << "ib loop ends\n";
-    }
+
     cout << "prepare_subvec() ends" << "\n";
     return out;
 } // function prepare_subvec() closes
@@ -446,16 +455,16 @@ NumericVector mvp_vector_subs_dowork(const mvp X, subvec S, const int nrows){
                 const term t = ix->first;                   // "t" is a single _term_ of X, something like a^6*b^2
                 temp = ix->second;                            // temp is the coefficient of this term in X
                 for(it=t.begin() ; it != t.end() ; ++it){      // iterate through the term and substitute using S:
-                    cout << "it->first: " << it->first << "\n";
-                    cout << "it->second: " << it-> second << "\n";
-                    cout << "temp before: " << temp << "\n";
+                    //                    cout << "it->first: " << it->first << "\n";
+                    //cout << "it->second: " << it-> second << "\n";
+                    //cout << "temp before: " << temp << "\n";
                     temp *= pow((S[it->first])[i], it->second); // the meat, part 1
-                    cout << "temp after: " << temp << "\n";
-                    cout << "(S[it->first])[i]: " << (S[it->first])[i] << "\n";
-                    cout << "-----------------\n";
+                    //cout << "temp after: " << temp << "\n";
+                    //cout << "(S[it->first])[i]: " << (S[it->first])[i] << "\n";
+                    //cout << "-----------------\n";
                 }                                              // it loop closes
-                cout << "\n";
-                cout << "\n";
+                //cout << "\n";
+                //cout << "\n";
 
                 out[i] += temp;                               // increment out[i]; the meat, part 2.
             }                                                // X iteration closes

@@ -208,6 +208,12 @@ setGeneric("drop",function(x){standardGeneric("drop")})
     return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 
+`subvec` <- function(S, ...){
+    M <- do.call("cbind",list(...))
+    mvp_vectorised_substitute(S[[1]], S[[2]], S[[3]],
+                              as.double(c(M)), nrow(M), ncol(M), colnames(M))
+}
+
 `as.function.mvp` <- function(x, ...){
   function(...){subs(x, ...)}
 }
@@ -285,3 +291,4 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
    jj <- mvp_taylor_onepower_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], n, v)
    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
+

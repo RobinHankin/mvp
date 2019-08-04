@@ -1,6 +1,7 @@
 \name{subs}
 \alias{subs}
 \alias{subsy}
+\alias{subvec}
 \alias{substitute}
 \alias{subsmvp}
 \alias{subs_mvp}
@@ -12,6 +13,7 @@
 \usage{
 subs(S, ..., drop = TRUE)
 subsy(S, ..., drop = TRUE)
+subvec(S, ...)
 subsmvp(S,v,X)
 }
 \arguments{
@@ -22,7 +24,8 @@ subsmvp(S,v,X)
   \item{v}{A string corresponding to the variable to substitute}
 }
 \value{
-  Returns a multivariate polynomial, object of class \code{mvp}
+  Returns a multivariate polynomial, object of class \code{mvp}, or a
+  numeric vector (\code{subvec()}
 }
 \details{
 Function \code{subs()} uses a natural R idiom to substitute scalar
@@ -44,7 +47,13 @@ Functions \code{subsy()} and \code{subsmpv()} are lower-level functions,
 not really intended for the end-user.  Function \code{subsy()}
 substitutes variables for numeric values (order matters if a variable is
 substitued more than once).  Function \code{subsmpv()} takes a \code{mvp}
-object and substitutes another \code{mvp} object for a specific symbol.  
+object and substitutes another \code{mvp} object for a specific symbol.
+
+Function \code{subvec()} substitutes the symbols of \code{S} with
+numerical values.  It is vectorised in its ellipsis arguments with
+recycling rules inherited from \code{cbind()}.  Unlike \code{subs()},
+this function is useful only if all symbols are given a value;
+unassigned symbols take a value of zero.
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{drop}}}
@@ -59,6 +68,7 @@ subs(p,a=1,b=2,c=3,drop=FALSE)
 
 do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 
+subvec(p,a=1,b=2,c=1:5)
 
 kahle(5,3,1:3) \%>\% subs(a="a + delta")
 

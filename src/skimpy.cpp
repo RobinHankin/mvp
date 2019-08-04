@@ -392,7 +392,34 @@ List mvp_substitute_mvp(
 }                                            // function mvp_substitute() closes
 
 
+// [[Rcpp::export]]
+NumericVector mvp_vectorised_substitute(
+              const List &allnames, const List &allpowers, const NumericVector &coefficients,    // original mvp
+              const NumericVector &M, const int &nrows, const int &ncols, const CharacterVector &v // things to substitute in
 
+    ){
 
-                
-
+    const mvp X = prepare(allnames, allpowers, coefficients);  // original mvp object
+    subs s; 
+    term::const_iterator it;
+    mvp::const_iterator ix;
+    double w;
+    Rcpp::NumericVector out(nrows);
+    
+    for(int i=0 ; i<nrows ; i++){             // main loop, one iteration per row of M
+        out[i] = 0;                            // initialize at zero
+        s.clear();                              // clear s before we populate it 
+        for(int j=0 ; j<ncols ; j++){            // sic; we are going through row i of M
+            s[(string) v[j]] = M[j*nrows + i];    // populate s with row i of M
+        }                                          // j loop closes 
+        for(ix = X.begin() ; ix != X.end() ; ++ix){ // iterate through (mvp) X
+            const term t = ix->first;                // "t" is a single _term_ of (mvp) X
+            w = ix->second;                           // w =  (double) coefficient of this term
+            for(it=t.begin() ; it != t.end() ; ++it){// iterate through the symbols in term "t" for one that matches the substitution symbol
+                w *= pow(s[it->first], it->second); // the meat
+            }                                      // it loop closes
+        out[i] += w;                             // also meat, I guess
+        }                                       // i loop closes
+    }
+    return out;
+}

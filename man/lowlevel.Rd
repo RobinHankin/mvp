@@ -2,6 +2,8 @@
 \alias{lowlevel}
 \alias{mvp_substitute_mvp}
 \alias{mvp_substitute}
+\alias{mvp_vectorised_substitute}
+\alias{mvp_vectorized_substitute}
 \alias{mvp_prod}
 \alias{mvp_add}
 \alias{mvp_power}
@@ -13,6 +15,7 @@
 mvp_substitute(allnames,allpowers,coefficients,v,values)
 mvp_substitute_mvp(allnames1, allpowers1, coefficients1, allnames2, allpowers2, 
     coefficients2, v)
+mvp_vectorised_substitute(allnames, allpowers, coefficients, M, nrows, ncols, v)
 mvp_prod(allnames1,allpowers1,coefficients1,allnames2,allpowers2,coefficients2)
 mvp_add(allnames1, allpowers1, coefficients1, allnames2, allpowers2,coefficients2)
 simplify(allnames,allpowers,coefficients)
@@ -20,7 +23,7 @@ mvp_deriv(allnames, allpowers, coefficients, v)
 mvp_power(allnames, allpowers, coefficients, n) 
 }
 \arguments{
-  \item{allnames,allpowers,coefficients,allnames1,allpowers1,coefficients1,allnames2,allpowers2,coefficients2,v,values,n}{Variables sent to the C routines}
+  \item{allnames,allpowers,coefficients,allnames1,allpowers1,coefficients1,allnames2,allpowers2,coefficients2,v,values,n,M,nrows,ncols}{Variables sent to the C routines}
 }
 \details{These functions call the functions defined in \code{RcppExports.R}}
 \author{Robin K. S.  Hankin}

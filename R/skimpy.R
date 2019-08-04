@@ -210,6 +210,7 @@ setGeneric("drop",function(x){standardGeneric("drop")})
 
 `subvec` <- function(S, ...){
     if(!is.matrix(list(...)[[1]])){ M <- do.call("cbind",list(...))}
+    if(is.null(colnames(M))){stop("Null symbols given: you need to name the ellipsis arguments or pass a matrix with column names")}
     out <- mvp_vectorised_substitute(S[[1]], S[[2]], S[[3]], as.double(c(M)), nrow(M), ncol(M), colnames(M))
     names(out) <- rownames(M)
     return(out)

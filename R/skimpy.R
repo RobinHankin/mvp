@@ -209,9 +209,10 @@ setGeneric("drop",function(x){standardGeneric("drop")})
 }
 
 `subvec` <- function(S, ...){
-    M <- do.call("cbind",list(...))
-    mvp_vectorised_substitute(S[[1]], S[[2]], S[[3]],
-                              as.double(c(M)), nrow(M), ncol(M), colnames(M))
+    if(!is.matrix(list(...)[[1]])){ M <- do.call("cbind",list(...))}
+    out <- mvp_vectorised_substitute(S[[1]], S[[2]], S[[3]], as.double(c(M)), nrow(M), ncol(M), colnames(M))
+    names(out) <- rownames(M)
+    return(out)
 }
 
 `as.function.mvp` <- function(x, ...){

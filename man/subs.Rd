@@ -54,9 +54,9 @@ numerical values.  It is vectorised in its ellipsis arguments with
 recycling rules and names behaviour inherited from \code{cbind()}.
 However, if the first element of \code{...} is a matrix, then this is
 interpreted by rows, with symbol names given by the matrix column names;
-further arguments are ignored).  Unlike \code{subs()}, this function is
-useful only if all symbols are given a value; unassigned symbols take a
-value of zero.
+further arguments are ignored.  Unlike \code{subs()}, this function is
+generally only useful if all symbols are given a value; unassigned
+symbols take a value of zero.
 
 }
 \author{Robin K. S. Hankin}
@@ -72,7 +72,12 @@ subs(p,a=1,b=2,c=3,drop=FALSE)
 
 do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 
-subvec(p,a=1,b=2,c=1:5)
+subvec(p,a=1,b=2,c=1:5)   # supply a named list of vectors
+
+M <- matrix(sample(1:3,26*3,replace=TRUE),ncol=26)
+colnames(M) <- letters
+rownames(M) <- c("Huey", "Dewie", "Louie")
+subvec(kahle(r=3,p=1:3),M)  # supply a matrix
 
 
 kahle(5,3,1:3) \%>\% subs(a="a + delta")

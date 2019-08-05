@@ -22,6 +22,6 @@ m2 <- as.mvp("bish +bash^2 + bosh^3")
 m1-m2         # an mvp object
 drop(m1-m2)   # numeric
 
-drop(as.mvp("0")) + drop(as.mvp("1")) + drop(as.mvp("2")   # old bug
+
 
 }

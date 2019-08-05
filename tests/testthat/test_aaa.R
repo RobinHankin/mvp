@@ -74,6 +74,17 @@ checker1 <- function(x){
         v <- allvars(x)[1]
         expect_true(x == subsmvp(x,v,as.mvp(v)), info=list(dput(x),v))
     }
+
+    ## check subvec():
+    if(length(allvars(x))>0){
+      LHS <- subvec(x,a=1,b=1,c=2,d=1,e=1:3,f=1)
+      RHS <- c(
+          subs(x,a=1,b=1,c=2,d=1,e=1,f=1),
+          subs(x,a=1,b=1,c=2,d=1,e=2,f=1),
+          subs(x,a=1,b=1,c=2,d=1,e=3,f=1)
+      )
+      expect_true(all(LHS==RHS))
+    }
     
     ## check d(X^n)/dt = nX^(n-1)dX/dt:
     if(length(allvars(x))>0){

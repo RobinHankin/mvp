@@ -20,6 +20,8 @@ typedef map <string, signed int> term; // A 'term' object is a map from string o
 typedef map <term, double> mvp;       // An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double.
 typedef map <string, double> subs;   // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
 
+typedef map <signed int, mvp> series;  // used for Taylor series
+
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
     for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){
@@ -423,3 +425,22 @@ NumericVector mvp_vectorised_substitute(
     }
     return out;
 }
+
+series mvp_to_series(const mvp X, const string var){
+    series out;
+    mvp jj;
+    term::iterator it;
+    mvp::const_iterator ix;
+    
+    for(ix=X.begin() ; ix!=X.end() ; ++ix){ // iterate through (mvp) X
+        const term t = ix->first;          // ix->first is a term and ix->second its coefficient
+        term tt = t;                      // create a copy of t that we can modify
+        const signed int p = tt[var];    // p is the power of var (zero if var is absent from t)
+        tt.erase(var);                  // remove var from tt (null operation if p=0);
+        jj.clear();                    // erase single-term mvp object jj
+        jj[tt] = ix->second;          // map the reduced term tt to the original coefficient of t
+        out[p] = sum(out[p],jj);     // should be "out[p] += jj;"
+    }                               // main loop closes
+    return out;
+}
+

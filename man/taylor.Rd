@@ -64,9 +64,11 @@ onevarpow(p,3,"x")   # coefficient of x^3
 
 series(rmvp(10),"a")
 
-
-
 # Works well with pipes:
+
+f <- function(n){as.mvp(sub('n',n,'1+x^n*y'))}
+Reduce(`*`,lapply(1:6,f)) \%>\% series('y')
+Reduce(`*`,lapply(1:6,f)) \%>\% series('x')
 
 
 p \%>\% taylor(2)

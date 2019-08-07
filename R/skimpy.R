@@ -311,14 +311,18 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
 }
 
 `print.series` <- function(x, ...){
-  out <- ''
-  if(isTRUE(getOption("print_star"))){star <- "*"} else {star <- ""}
+  out <- ""
   for(i in seq_along(x[[1]])){
     if(i>1){out <- paste(out, " + ")}
-    out <- paste(x$variablename,
-                 "^",
-                 x$varpower[i], star, "(",  print(mpoly::as.mpoly(x[[1]][[i]])),")",sep="")
+    out <- paste(
+        out, x$variablename, "^", x$varpower[i],
+        getOption("mvp_mult_symbol"),
+        "(",
+        capture.output(print(mpoly::as.mpoly(x[[1]][[i]]))),
+        ")",
+        sep="")
   }
   cat(out)
-  return(out)
+  cat("\n")
+  return(invisible(out))
 }

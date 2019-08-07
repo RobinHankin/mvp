@@ -444,3 +444,28 @@ series mvp_to_series(const mvp X, const string var){
     return out;
 }
 
+
+// [[Rcpp::export]]
+List mvp_to_series(
+const List &allnames, const List &allpowers, const NumericVector &coefficients,
+    const CharacterVector &v    // v[0] is a symbol
+    ){
+        
+        signed int i;
+        series::const_iterator io;
+        
+        series out = mvp_to_series(prepare(allnames,allpowers,coefficients), (string) v[0]);
+        
+        List mvpList(out.size());
+        NumericVector power(out.size());
+        
+        for(io=out.begin(), i=0;  io != out.end() ; ++io, i++){
+            mvpList[i] = retval(io->second);
+            power[i] = io->first;
+        }
+        
+        return List::create(
+            Named("mvp") = mvpList,
+            Named("varpower") = power
+            );
+}

@@ -45,3 +45,7 @@ mvp_vectorised_substitute <- function(allnames, allpowers, coefficients, M, nrow
     .Call(`_mvp_mvp_vectorised_substitute`, allnames, allpowers, coefficients, M, nrows, ncols, v)
 }
 
+mvp_to_series <- function(allnames, allpowers, coefficients, v) {
+    .Call(`_mvp_mvp_to_series`, allnames, allpowers, coefficients, v)
+}
+

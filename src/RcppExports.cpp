@@ -171,6 +171,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mvp_to_series
+List mvp_to_series(const List& allnames, const List& allpowers, const NumericVector& coefficients, const CharacterVector& v);
+RcppExport SEXP _mvp_mvp_to_series(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const List& >::type allnames(allnamesSEXP);
+    Rcpp::traits::input_parameter< const List& >::type allpowers(allpowersSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type coefficients(coefficientsSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_to_series(allnames, allpowers, coefficients, v));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_mvp_mvp_taylor_onevar", (DL_FUNC) &_mvp_mvp_taylor_onevar, 5},
@@ -184,6 +198,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_mvp_mvp_substitute", (DL_FUNC) &_mvp_mvp_substitute, 5},
     {"_mvp_mvp_substitute_mvp", (DL_FUNC) &_mvp_mvp_substitute_mvp, 7},
     {"_mvp_mvp_vectorised_substitute", (DL_FUNC) &_mvp_mvp_vectorised_substitute, 7},
+    {"_mvp_mvp_to_series", (DL_FUNC) &_mvp_mvp_to_series, 4},
     {NULL, NULL, 0}
 };
 

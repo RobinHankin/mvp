@@ -55,7 +55,7 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
   } else if(is.character(x)){
     return(mpoly_to_mvp(mp(x)))
   } else if(is.list(x)){
-    return(mvp(x))
+    return(mvp(vars=x$names,powers=x$power,coeffs=x$coeffs))
   } else if(is.numeric(x)){
     return(numeric_to_mvp(x))
   } else {
@@ -302,3 +302,23 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 
+`series` <- function(S,v){
+  o <-   mvp_to_series(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], as.character(v))
+  o[[1]] <- lapply(o[[1]],as.mvp)  # o[[1]] %<>% lapply(as.mvp)
+  o <- c(o,variablename=v)  # add the variable
+  class(o) <- "series"
+  return(o)
+}
+
+`print.series` <- function(x, ...){
+  out <- ''
+  if(isTRUE(getOption("print_star"))){star <- "*"} else {star <- ""}
+  for(i in seq_along(x[[1]])){
+    if(i>1){out <- paste(out, " + ")}
+    out <- paste(x$variablename,
+                 "^",
+                 x$varpower[i], star, "(",  print(mpoly::as.mpoly(x[[1]][[i]])),")",sep="")
+  }
+  cat(out)
+  return(out)
+}

@@ -1,19 +1,23 @@
 \name{taylor}
 \alias{taylor}
 \alias{series}
+\alias{print.series}
 \alias{mvp_taylor_allvars}
 \alias{mvp_taylor_onevar}
 \alias{mvp_taylor_onepower_onevar}
+\alias{mvp_to_series}
 \alias{onevarpow}
 \title{Taylor series}
 \description{Truncated Taylor series of multivariate polynomials}
 \usage{
 taylor(S,n,v)
 series(S,v)
+\method{print}{series}(x,...)
 onevarpow(S,n,v)
 mvp_taylor_onevar(allnames,allpowers,coefficients, n, v)
 mvp_taylor_allvars(allnames,allpowers,coefficients, n)
 mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
+mvp_to_series(allnames, allpowers, coefficients, v)
 }
 \arguments{
   \item{S}{Object of class \code{mvp}}
@@ -21,7 +25,11 @@ mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
   \item{v}{Variable to take Taylor series with respect to.   If missing,
     total power of each term is used (except for \code{series()} where
     it is mandatory)}
-  \item{allnames,allpowers,coefficients}{Components of \code{mvp} objects}
+  \item{x,...}{Object of class \code{series} and further arguments,
+    passed to the print method}
+  \item{allnames,allpowers,coefficients}{Components of \code{mvp}
+    objects}
+
 }
 \details{
 
@@ -36,8 +44,10 @@ mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
   sensitive to the value of  \code{getOption("mvp_mult_symbol")}; set
   this to \code{"*"} to get \code{mpoly}-compatible output.
 
-  Functions \code{mvp_taylor_onevar()} and \code{mvp_taylor_allvars()}
-  are low-level helper functions that are not intended for the user.
+  Functions \code{mvp_taylor_onevar()}, \code{mvp_taylor_allvars()} and
+  \code{mvp_to_series()} are low-level helper functions that are not
+  intended for the user.
+
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{deriv}}}

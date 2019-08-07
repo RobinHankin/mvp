@@ -9,6 +9,8 @@ importFrom("mpoly","as.mpoly","is.mpoly","mp")
 importFrom(partitions,compositions)
 importFrom(magic, circulant)
 
+importFrom("utils" , "capture.output")
+
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)
 S3method("constant<-", mvp)

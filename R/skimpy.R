@@ -322,7 +322,7 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
         ")",
         sep="")
   }
-  cat(out)
+  cat(strsplit(out,split=" ")[[1]],fill=TRUE)
   cat("\n")
   return(invisible(out))
 }

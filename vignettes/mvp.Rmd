@@ -223,7 +223,29 @@ t2 <- sinxpy  + aderiv(sinxpy,x=1)*dx + aderiv(sinxpy,x=2)*dx^2/2
 (t2 %>% subs(y=0.3))  - sin(1.4)  # numeric; should be small
 ```
 
-       	     
+Function `series()` will decompose an `mvp` object into a power series in a single variable:
+
+```{r}
+p <- as.mvp("a^2 x b + x^2 a b + b c x^2 + a b c + c^6 x")
+p
+series(p,'x')
+```
+
+This works nicely with `subs()` if we wish to take a power series
+about `x-v`, where `v` is any `mvp` object.  For example:
+
+
+```{r}
+p %>% subs(x="xmv+a+b") %>% series("xmv") 
+```
+
+is a series in powers of `x-a-b`.  We may perform a consistency check
+by a second substitution, returning us to the original expression:
+
+```{r}
+p == p %>% subs(x="xmv+a+b") %>% subs(xmv="x-a-b")
+```
+    	     
 ## Negative powers
 
 The ```mvp``` package handles negative powers, although the idiom is not perfect and I'm still working on it.

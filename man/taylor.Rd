@@ -1,5 +1,6 @@
 \name{taylor}
 \alias{taylor}
+\alias{series}
 \alias{mvp_taylor_allvars}
 \alias{mvp_taylor_onevar}
 \alias{mvp_taylor_onepower_onevar}
@@ -8,6 +9,7 @@
 \description{Truncated Taylor series of multivariate polynomials}
 \usage{
 taylor(S,n,v)
+series(S,v)
 onevarpow(S,n,v)
 mvp_taylor_onevar(allnames,allpowers,coefficients, n, v)
 mvp_taylor_allvars(allnames,allpowers,coefficients, n)
@@ -16,8 +18,9 @@ mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
 \arguments{
   \item{S}{Object of class \code{mvp}}
   \item{n}{Non-negative integer specifying highest order to be retained}
-  \item{v}{Variable to take Taylor series with respect to.  If missing,
-    total power of each term is used}
+  \item{v}{Variable to take Taylor series with respect to.   If missing,
+    total power of each term is used (except for \code{series()} where
+    it is mandatory)}
   \item{allnames,allpowers,coefficients}{Components of \code{mvp} objects}
 }
 \details{
@@ -28,6 +31,11 @@ mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
   Function \code{onevarpow()} returns just the terms in which symbol
   \code{v} appears with power \code{n}.
   
+  Function \code{series} returns a power series expansion of powers of
+  variable \code{v}.  The print method for \code{series} objects is
+  sensitive to the value of  \code{getOption("mvp_mult_symbol")}; set
+  this to \code{"*"} to get \code{mpoly}-compatible output.
+
   Functions \code{mvp_taylor_onevar()} and \code{mvp_taylor_allvars()}
   are low-level helper functions that are not intended for the user.
 }
@@ -43,6 +51,8 @@ p <- horner("x+y",1:4)
 
 onevarpow(p,2,"x")   # coefficient of x^2
 onevarpow(p,3,"x")   # coefficient of x^3
+
+series(rmvp(10),"a")
 
 
 
@@ -60,7 +70,5 @@ dx <- as.mvp("dx")
 t3 <- sinxpy  + aderiv(sinxpy,x=1)*dx + aderiv(sinxpy,x=2)*dx^2/2 + aderiv(sinxpy,x=3)*dx^3/6
 t3 \%<>\% subs(x=1,dx=0.1)  # t3 = Taylor expansion of sin(y+1.1)
 t3 \%>\% subs(y=0.3)  - sin(1.4)  # numeric; should be small
-
-
 }
 \keyword{symbolmath}

@@ -164,19 +164,19 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
   }
 }
 
-setGeneric("drop",function(x){standardGeneric("drop")})
-`drop` <- function(x){UseMethod("drop")}
-`drop` <- function(S){
-    if(is.zero(S)){
+setGeneric("lose",function(x){standardGeneric("lose")})
+`lose` <- function(x){UseMethod("lose",x)}
+`lose.mvp` <- function(x){
+    if(is.zero(x)){
       return(0)
-    } else if((length(vars(S))==1) & (length(vars(S)[[1]])==0)){
-      return(coeffs(S))
+    } else if((length(vars(x))==1) & (length(vars(x)[[1]])==0)){
+      return(coeffs(x))
     } else {
-      return(S)
+      return(x)
     }
 }
 
-`subs` <- function(S,...,drop=TRUE){
+`subs` <- function(S,...,lose=TRUE){
   sb <- list(...)
   v <- names(sb)
 
@@ -184,19 +184,19 @@ setGeneric("drop",function(x){standardGeneric("drop")})
   for(i in seq_along(sb)){
     out <- subsmvp(out,v[i],as.mvp(sb[[i]]))
   }
-  if(drop){
-    return(drop(out))
+  if(lose){
+    return(lose(out))
   } else {
     return(out)
   }
 }
 
-`subsy` <- function(S, ..., drop=TRUE){
+`subsy` <- function(S, ..., lose=TRUE){
     sb <- unlist(list(...))
     jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(sb),as.vector(sb))
     out <- mvp(jj[[1]],jj[[2]],jj[[3]])
-    if(drop){
-        return(drop(out))
+    if(lose){
+        return(lose(out))
     } else {
         return(out)
     }

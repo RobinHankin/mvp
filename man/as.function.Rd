@@ -18,7 +18,7 @@ f <- as.function(p)
 
 f(a=1)
 f(a=1,b=2)
-f(a=1,b=2,c=3)
-f(a=1,b=2,c=3,drop=FALSE)
+f(a=1,b=2,c=3)             # coerces to a scalar
+f(a=1,b=2,c=3,lose=FALSE)  # formal mvp object
 }
 

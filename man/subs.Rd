@@ -11,15 +11,15 @@
   multivariate polynomials
 }
 \usage{
-subs(S, ..., drop = TRUE)
-subsy(S, ..., drop = TRUE)
+subs(S, ..., lose = TRUE)
+subsy(S, ..., lose = TRUE)
 subvec(S, ...)
 subsmvp(S,v,X)
 }
 \arguments{
   \item{S,X}{Multivariate polynomials}
   \item{\dots}{named arguments corresponding to variables to substitute}
-  \item{drop}{Boolean with default \code{TRUE} meaning to return a
+  \item{lose}{Boolean with default \code{TRUE} meaning to return a
     scalar (the constant) in place of a constant \code{mvp} object}
   \item{v}{A string corresponding to the variable to substitute}
 }
@@ -60,7 +60,7 @@ symbols take a value of zero.
 
 }
 \author{Robin K. S. Hankin}
-\seealso{\code{\link{drop}}}
+\seealso{\code{\link{lose}}}
 \examples{
 p <- rmvp(6,2,2,letters[1:3])
 p
@@ -68,7 +68,7 @@ subs(p,a=1)
 subs(p,a=1,b=2)
 
 subs(p,a="1+b x^3",b="1-y")
-subs(p,a=1,b=2,c=3,drop=FALSE)
+subs(p,a=1,b=2,c=3,lose=FALSE)
 
 do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 

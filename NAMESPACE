@@ -19,6 +19,7 @@ S3method(as.function, mvp)
 S3method(constant, mvp)
 S3method(deriv, mvp)
 S3method(aderiv,mvp)
+S3method(lose,mvp)
 S3method(print,mvp)
 S3method(Ops,mvp)
 

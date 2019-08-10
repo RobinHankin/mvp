@@ -151,8 +151,16 @@ object.  We may subsitute for the other variables:
 subs(S3, x = 1, y = 2, z = 3)
 ```
 
-(in this case, the default behaviour is to return a "dropped" version
-of the resulting polynomial, that is, coerced to a scalar).  The idiom
+(in this case, the default behaviour is to return the the resulting
+polynomial coerced to a scalar).  We can suppress the coercion using
+the `lose` argument:
+
+```{r}
+subs(S3, x = 1, y = 2, z = 3,lose=FALSE)
+```
+
+
+The idiom
 also allows one to substitute a variable for an ```mvp``` object:
 
 ```{r}

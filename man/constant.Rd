@@ -1,6 +1,7 @@
 \name{constant}
 \alias{constant}
 \alias{constant}
+\alias{is.constant}
 \alias{constant<-}
 \alias{constant.mvp}
 \alias{constant<-.mvp}
@@ -11,6 +12,7 @@
 \method{constant}{mvp}(x)
 \method{constant}{mvp}(x) <- value
 \method{constant}{numeric}(x)
+is.constant(x)
 }
 \arguments{
   \item{x}{Object of class \code{mvp}}
@@ -25,6 +27,9 @@
   If \code{x} is an \code{mvp} object, \code{constant(x)} returns the value of
   the constant in the multivariate polynomial; if \code{x} is numeric,
   it returns a constant multivariate polynomial with value \code{x}.
+
+  Function \code{is.constant()} returns \code{TRUE} if its argument has
+  no variables and \code{FALSE} otherwise.
   
 }
 \author{Robin K. S. Hankin}

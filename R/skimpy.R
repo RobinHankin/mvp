@@ -164,6 +164,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
   }
 }
 
+`is.constant` <- function(x){length(allvars(x)==0)}
+
 setGeneric("lose",function(x){standardGeneric("lose")})
 `lose` <- function(x){UseMethod("lose",x)}
 `lose.mvp` <- function(x){

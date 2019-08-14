@@ -304,9 +304,10 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 
-`series` <- function(S,v){
+`series` <- function(S,v,showsymb=TRUE){
   o <-   mvp_to_series(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], as.character(v))
   o[[1]] <- lapply(o[[1]],as.mvp)  # o[[1]] %<>% lapply(as.mvp)
+  if(showsymb){v <- sub("^(.*)_m(.*)", "(\\1-\\2)", v, perl=TRUE)}
   o <- c(o,variablename=v)  # add the variable
   class(o) <- "series"
   return(o)

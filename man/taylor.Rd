@@ -11,7 +11,7 @@
 \description{Truncated Taylor series of multivariate polynomials}
 \usage{
 taylor(S,n,v)
-series(S,v)
+series(S,v,showsymb=TRUE)
 \method{print}{series}(x,...)
 onevarpow(S,n,v)
 mvp_taylor_onevar(allnames,allpowers,coefficients, n, v)
@@ -27,6 +27,9 @@ mvp_to_series(allnames, allpowers, coefficients, v)
     it is mandatory)}
   \item{x,...}{Object of class \code{series} and further arguments,
     passed to the print method}
+  \item{showsymb}{In function \code{series()}, Boolean, with default
+    \code{TRUE} meaning to substitute variables like \code{x_mfoo} with
+    \code{(x-foo)} for readability reasons}
   \item{allnames,allpowers,coefficients}{Components of \code{mvp}
     objects}
 

@@ -175,7 +175,7 @@ mvp deriv(const mvp X, const string v){// differentiation: dX/dv, 'v' a single v
     return zero_coefficient_remover(out); // eliminates terms with no v
 }
 
-mvp taylor_onevar(const mvp X, const unsigned int n, const string v){
+mvp taylor_onevar(const mvp X, const string v, const unsigned int n){
     if(n < 0){throw std::range_error("power cannot be <0");} 
     mvp out=X;
     mvp::const_iterator it;  // sit == symbol iterator
@@ -190,7 +190,7 @@ mvp taylor_onevar(const mvp X, const unsigned int n, const string v){
     return out;
 }
 
-mvp taylor_onepower_onevar(const mvp X, const unsigned int n, const string v){
+mvp taylor_onepower_onevar(const mvp X, const string v, const unsigned int n){
     mvp jj,out;
     term xn;
     mvp::const_iterator it;  // sit == symbol iterator
@@ -240,19 +240,19 @@ mvp taylor_allvars(const mvp X, const unsigned int n){  // truncated Taylor seri
 // [[Rcpp::export]]
 List mvp_taylor_onevar(
               const List &allnames, const List &allpowers, const NumericVector &coefficients,
-              const NumericVector   &n,
-              const CharacterVector &v
+              const CharacterVector &v,
+              const NumericVector   &n
               ){
-    return retval(taylor_onevar(prepare(allnames,allpowers,coefficients), n[0], (string) v[0]));
+    return retval(taylor_onevar(prepare(allnames,allpowers,coefficients),  (string) v[0], n[0]));
 }
 
 // [[Rcpp::export]]
 List mvp_taylor_onepower_onevar(
               const List &allnames, const List &allpowers, const NumericVector &coefficients,
-              const NumericVector   &n,
-              const CharacterVector &v
+              const CharacterVector &v,
+              const NumericVector   &n
               ){
-    return retval(taylor_onepower_onevar(prepare(allnames,allpowers,coefficients), n[0], (string) v[0]));
+    return retval(taylor_onepower_onevar(prepare(allnames,allpowers,coefficients), (string) v[0], n[0]));
 }
 
 // [[Rcpp::export]]

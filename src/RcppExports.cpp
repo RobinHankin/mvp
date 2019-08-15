@@ -6,32 +6,32 @@
 using namespace Rcpp;
 
 // mvp_taylor_onevar
-List mvp_taylor_onevar(const List& allnames, const List& allpowers, const NumericVector& coefficients, const NumericVector& n, const CharacterVector& v);
-RcppExport SEXP _mvp_mvp_taylor_onevar(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP nSEXP, SEXP vSEXP) {
+List mvp_taylor_onevar(const List& allnames, const List& allpowers, const NumericVector& coefficients, const CharacterVector& v, const NumericVector& n);
+RcppExport SEXP _mvp_mvp_taylor_onevar(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const List& >::type allnames(allnamesSEXP);
     Rcpp::traits::input_parameter< const List& >::type allpowers(allpowersSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type coefficients(coefficientsSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type n(nSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type v(vSEXP);
-    rcpp_result_gen = Rcpp::wrap(mvp_taylor_onevar(allnames, allpowers, coefficients, n, v));
+    Rcpp::traits::input_parameter< const NumericVector& >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_taylor_onevar(allnames, allpowers, coefficients, v, n));
     return rcpp_result_gen;
 END_RCPP
 }
 // mvp_taylor_onepower_onevar
-List mvp_taylor_onepower_onevar(const List& allnames, const List& allpowers, const NumericVector& coefficients, const NumericVector& n, const CharacterVector& v);
-RcppExport SEXP _mvp_mvp_taylor_onepower_onevar(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP nSEXP, SEXP vSEXP) {
+List mvp_taylor_onepower_onevar(const List& allnames, const List& allpowers, const NumericVector& coefficients, const CharacterVector& v, const NumericVector& n);
+RcppExport SEXP _mvp_mvp_taylor_onepower_onevar(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const List& >::type allnames(allnamesSEXP);
     Rcpp::traits::input_parameter< const List& >::type allpowers(allpowersSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type coefficients(coefficientsSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type n(nSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type v(vSEXP);
-    rcpp_result_gen = Rcpp::wrap(mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v));
+    Rcpp::traits::input_parameter< const NumericVector& >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, v, n));
     return rcpp_result_gen;
 END_RCPP
 }

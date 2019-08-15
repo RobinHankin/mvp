@@ -290,17 +290,18 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   }
 }
 
-`taylor` <- function(S,n,v){
-  if(missing(v)){
-    jj <- mvp_taylor_allvars(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], n)
-  } else {
-    jj <- mvp_taylor_onevar (allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], n, v)
-  }
-  return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+`trunc` <- function(S,n){
+    jj <- mvp_taylor_allvars(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]],n)
+    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 
-`onevarpow` <- function(S,n,v){
-   jj <- mvp_taylor_onepower_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], n, v)
+`trunc1` <- function(S,v,n){
+    jj <- mvp_taylor_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], v, n)
+    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+}
+
+`onevarpow` <- function(S,v,n){
+   jj <- mvp_taylor_onepower_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], v, n)
    return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 

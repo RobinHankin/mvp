@@ -1,22 +1,26 @@
-\name{taylor}
-\alias{taylor}
+\name{series}
 \alias{series}
+\alias{taylor}
+\alias{trunc}
+\alias{trunc1}
 \alias{print.series}
 \alias{mvp_taylor_allvars}
 \alias{mvp_taylor_onevar}
 \alias{mvp_taylor_onepower_onevar}
 \alias{mvp_to_series}
 \alias{onevarpow}
-\title{Taylor series}
-\description{Truncated Taylor series of multivariate polynomials}
+\title{Decomposition of multivariate polynomials by powers}
+\description{Power series of multivariate polynomials, in
+  various forms}
 \usage{
-taylor(S,n,v)
+trunc(S,n)
+trunc1(S,v,n)
 series(S,v,showsymb=TRUE)
 \method{print}{series}(x,...)
-onevarpow(S,n,v)
-mvp_taylor_onevar(allnames,allpowers,coefficients, n, v)
+onevarpow(S,v,n)
+mvp_taylor_onevar(allnames,allpowers,coefficients, v, n)
 mvp_taylor_allvars(allnames,allpowers,coefficients, n)
-mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, n, v)
+mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, v, n)
 mvp_to_series(allnames, allpowers, coefficients, v)
 }
 \arguments{
@@ -55,10 +59,10 @@ mvp_to_series(allnames, allpowers, coefficients, v)
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{deriv}}}
 \examples{
-taylor(as.mvp("1+x")^6,2)
+trunc(as.mvp("1+x")^6,2)
 
-taylor(as.mvp("1+x+y")^3,2)      # neglects all terms with total power>2
-taylor(as.mvp("1+x+y")^3,2,"x")  # terms like y^3 are treated as constants
+trunc(as.mvp("1+x+y")^3,2)      # neglects all terms with total power>2
+trunc1(as.mvp("1+x+y")^3,"x",2) # terms like y^3 are treated as constants
 
 p <- horner("x+y",1:4)
 
@@ -74,9 +78,9 @@ Reduce(`*`,lapply(1:6,f)) \%>\% series('y')
 Reduce(`*`,lapply(1:6,f)) \%>\% series('x')
 
 
-p \%>\% taylor(2)
-p \%>\% taylor(2,"x")
-(p \%>\% subs(x="x+dx") -p) \%>\% taylor(2,"dx")
+p \%>\% trunc(2)
+p \%>\% trunc1("x",2)
+(p \%>\% subs(x="x+dx") -p) \%>\% trunc1("dx",2)
 
 
 ## Third order taylor expansion of f(x)=sin(x+y) for x=1.1, about x=1:

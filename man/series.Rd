@@ -66,8 +66,8 @@ trunc1(as.mvp("1+x+y")^3,"x",2) # terms like y^3 are treated as constants
 
 p <- horner("x+y",1:4)
 
-onevarpow(p,2,"x")   # coefficient of x^2
-onevarpow(p,3,"x")   # coefficient of x^3
+onevarpow(p,"x",2)   # coefficient of x^2
+onevarpow(p,"x",3)   # coefficient of x^3
 
 series(rmvp(10),"a")
 

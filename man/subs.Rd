@@ -7,6 +7,8 @@
 \alias{subs_mvp}
 \alias{mvp_subs_mvp}
 \alias{varchange}
+\alias{varchange_formal}
+\alias{namechanger}
 \title{Substitution}
 \description{Substitute symbols in an \code{mvp} object for numbers or other
   multivariate polynomials
@@ -16,7 +18,9 @@ subs(S, ..., lose = TRUE)
 subsy(S, ..., lose = TRUE)
 subvec(S, ...)
 subsmvp(S,v,X)
-varchange(S,old,new)
+varchange(S,...)
+varchange_formal(S,old,new)
+namechanger(x,old,new)
 }
 \arguments{
   \item{S,X}{Multivariate polynomials}
@@ -24,18 +28,18 @@ varchange(S,old,new)
   \item{lose}{Boolean with default \code{TRUE} meaning to return a
     scalar (the constant) in place of a constant \code{mvp} object}
   \item{v}{A string corresponding to the variable to substitute}
-  \item{old,new}{In function \code{varchange()}, the old and new
-    variable names respectively}
+  \item{old,new,x}{The old and new variable names respectively; \code{x}
+  is a character vector} 
 }
 \value{
   Returns a multivariate polynomial, object of class \code{mvp}, or a
-  numeric vector (\code{subvec()}
+  numeric vector (\code{subvec()}).
 }
 \details{
-Function \code{subs()} uses a natural R idiom to substitute scalar
-values for symbols.
 
-Observe that this type of substitution is sensitive to order:
+Function \code{subs()} substitutes variables for \code{mvp} objects,
+using a natural R idiom.  Observe that this type of substitution is
+sensitive to order:
 
 \preformatted{
 > p <- as.mvp("a b^2")
@@ -64,7 +68,14 @@ symbols take a value of zero.
 
 Function \code{varchange()} makes a \emph{formal} variable substitution.
 It is useful because it can take non-standard variable names such as
-\dQuote{\code{(a-b)}}, and is used in \code{taylor()}.
+\dQuote{\code{(a-b)}} or \dQuote{\code{?}}, and is used in
+\code{taylor()}.  Function \code{varchange_formal()} does the same task,
+but takes two character vectors, \code{old} and \code{new}.  Use this if
+you want to substitute nonstandard variable names such as
+\dQuote{\code{?}} or \dQuote{\code{[}} (but remember that you might need
+to escape some characters, see the examples).  Function
+\code{namechanger()} is a low-level helper function that uses regular
+expression idiom to substitute variable names.
 
 }
 \author{Robin K. S. Hankin}
@@ -87,11 +98,12 @@ colnames(M) <- letters
 rownames(M) <- c("Huey", "Dewie", "Louie")
 subvec(kahle(r=3,p=1:3),M)  # supply a matrix
 
+varchange(as.mvp("1+x+xy + x*y"),x="newx") # variable xy unchanged
 
 kahle(5,3,1:3) \%>\% subs(a="a + delta")
 
-varchange(p,old="a",new="(p-q)")
-
+pnew <- varchange(p,a="]")  # nonstandard variable names OK
+p111 <- varchange_formal(p,"\\\]","a")
 
 }
 \keyword{symbolmath}

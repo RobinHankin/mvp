@@ -331,12 +331,25 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   return(invisible(out))
 }
 
-`varchange` <- function(S,old,new){
-    S[[1]] <- lapply(S[[1]],
-                     function(x){
-                         sub(
-                             pattern = paste("^",old,"$",sep=""),
-                             replacement = new,
-                             x)})
-    return(S)
+`namechanger` <- function(x,old,new){
+  sub(
+      pattern = paste("^", old, "$", sep=""),
+      replacement = new,
+      x)
+}
+
+`varchange` <- function(S, ...){
+  sb <- list(...)
+  for(i in seq_along(sb)){
+    S[[1]] <- lapply(S[[1]], function(x){namechanger(x,names(sb)[i],sb[[i]])})
+  }
+  return(mvp(S[[1]],S[[2]],S[[3]]))
+}
+
+`varchange_formal` <- function(S,old,new){
+  stopifnot(length(old) == length(new))
+  for(i in seq_along(old)){
+    S[[1]] <- lapply(S[[1]], function(x){namechanger(x,old[i],new[i])})
+  }
+  return(mvp(S[[1]],S[[2]],S[[3]]))
 }

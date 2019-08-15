@@ -6,6 +6,7 @@
 \alias{subsmvp}
 \alias{subs_mvp}
 \alias{mvp_subs_mvp}
+\alias{varchange}
 \title{Substitution}
 \description{Substitute symbols in an \code{mvp} object for numbers or other
   multivariate polynomials
@@ -15,6 +16,7 @@ subs(S, ..., lose = TRUE)
 subsy(S, ..., lose = TRUE)
 subvec(S, ...)
 subsmvp(S,v,X)
+varchange(S,old,new)
 }
 \arguments{
   \item{S,X}{Multivariate polynomials}
@@ -22,6 +24,8 @@ subsmvp(S,v,X)
   \item{lose}{Boolean with default \code{TRUE} meaning to return a
     scalar (the constant) in place of a constant \code{mvp} object}
   \item{v}{A string corresponding to the variable to substitute}
+  \item{old,new}{In function \code{varchange()}, the old and new
+    variable names respectively}
 }
 \value{
   Returns a multivariate polynomial, object of class \code{mvp}, or a
@@ -58,6 +62,10 @@ further arguments are ignored.  Unlike \code{subs()}, this function is
 generally only useful if all symbols are given a value; unassigned
 symbols take a value of zero.
 
+Function \code{varchange()} makes a \emph{formal} variable substitution.
+It is useful because it can take non-standard variable names such as
+\dQuote{\code{(a-b)}}, and is used in \code{taylor()}.
+
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{lose}}}
@@ -81,6 +89,9 @@ subvec(kahle(r=3,p=1:3),M)  # supply a matrix
 
 
 kahle(5,3,1:3) \%>\% subs(a="a + delta")
+
+varchange(p,old="a",new="(p-q)")
+
 
 }
 \keyword{symbolmath}

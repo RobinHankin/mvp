@@ -330,3 +330,13 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   cat("\n")
   return(invisible(out))
 }
+
+`varchange` <- function(S,old,new){
+    S[[1]] <- lapply(S[[1]],
+                     function(x){
+                         sub(
+                             pattern = paste("^",old,"$",sep=""),
+                             replacement = new,
+                             x)})
+    return(S)
+}

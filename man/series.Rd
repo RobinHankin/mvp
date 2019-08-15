@@ -17,7 +17,7 @@ trunc(S,n)
 trunc1(S,...)
 series(S,v,showsymb=TRUE)
 \method{print}{series}(x,...)
-onevarpow(S,v,n)
+onevarpow(S,...)
 mvp_taylor_onevar(allnames,allpowers,coefficients, v, n)
 mvp_taylor_allvars(allnames,allpowers,coefficients, n)
 mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, v, n)
@@ -67,8 +67,10 @@ trunc1(as.mvp("1+x+y")^3,x=2) # terms like y^3 are treated as constants
 
 p <- horner("x+y",1:4)
 
-onevarpow(p,"x",2)   # coefficient of x^2
-onevarpow(p,"x",3)   # coefficient of x^3
+onevarpow(p,x=2)   # coefficient of x^2
+onevarpow(p,x=3)   # coefficient of x^3
+
+onevarpow(as.mvp("1+x+x*y^2  + z*y^2*x"),x=1,y=2)
 
 series(rmvp(10),"a")
 

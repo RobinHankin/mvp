@@ -219,7 +219,7 @@ The package includes functionality to deal with Taylor and Laurent series:
 (X <- as.mvp("1+x+x^2 y")^3)
 trunc(X,3)         # truncate, retain only terms with total power <= 3
 trunc1(X,x=3)    # truncate, retain only terms with  power of x <= 3
-onevarpow(X,"x",3) # retain only terms with power of x == 3
+onevarpow(X,x=3) # retain only terms with power of x == 3
 ```
 
 ```{r}

@@ -305,9 +305,14 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   return(S)
 }
 
-`onevarpow` <- function(S,v,n){
-   jj <- mvp_taylor_onepower_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], v, n)
-   return(mvp(jj[[1]],jj[[2]],jj[[3]]))
+`onevarpow` <- function(S,...){
+  sb <- list(...)
+  v <- names(sb)
+  for(i in seq_along(sb)){
+    jj <- mvp_taylor_onepower_onevar(allnames=S[[1]],allpowers=S[[2]],coefficients=S[[3]], v[i],sb[[i]])
+    S <- mvp(jj[[1]],jj[[2]],jj[[3]])
+  }
+  return(S)
 }
 
 `series` <- function(S,v,showsymb=TRUE){

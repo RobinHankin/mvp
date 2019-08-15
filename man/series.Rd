@@ -14,7 +14,7 @@
   various forms}
 \usage{
 trunc(S,n)
-trunc1(S,v,n)
+trunc1(S,...)
 series(S,v,showsymb=TRUE)
 \method{print}{series}(x,...)
 onevarpow(S,v,n)
@@ -30,7 +30,8 @@ mvp_to_series(allnames, allpowers, coefficients, v)
     total power of each term is used (except for \code{series()} where
     it is mandatory)}
   \item{x,...}{Object of class \code{series} and further arguments,
-    passed to the print method}
+    passed to the print method; in \code{trunc1()} a list of variables
+    to truncate}
   \item{showsymb}{In function \code{series()}, Boolean, with default
     \code{TRUE} meaning to substitute variables like \code{x_mfoo} with
     \code{(x-foo)} for readability reasons}
@@ -62,7 +63,7 @@ mvp_to_series(allnames, allpowers, coefficients, v)
 trunc(as.mvp("1+x")^6,2)
 
 trunc(as.mvp("1+x+y")^3,2)      # neglects all terms with total power>2
-trunc1(as.mvp("1+x+y")^3,"x",2) # terms like y^3 are treated as constants
+trunc1(as.mvp("1+x+y")^3,x=2) # terms like y^3 are treated as constants
 
 p <- horner("x+y",1:4)
 
@@ -79,8 +80,8 @@ Reduce(`*`,lapply(1:6,f)) \%>\% series('x')
 
 
 p \%>\% trunc(2)
-p \%>\% trunc1("x",2)
-(p \%>\% subs(x="x+dx") -p) \%>\% trunc1("dx",2)
+p \%>\% trunc1(x=2)
+(p \%>\% subs(x="x+dx") -p) \%>\% trunc1(dx=2)
 
 
 ## Third order taylor expansion of f(x)=sin(x+y) for x=1.1, about x=1:

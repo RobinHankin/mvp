@@ -33,7 +33,7 @@ mvp_to_series(allnames, allpowers, coefficients, v)
     passed to the print method; in \code{trunc1()} a list of variables
     to truncate}
   \item{showsymb}{In function \code{series()}, Boolean, with default
-    \code{TRUE} meaning to substitute variables like \code{x_mfoo} with
+    \code{TRUE} meaning to substitute variables like \code{x_m_foo} with
     \code{(x-foo)} for readability reasons}
   \item{allnames,allpowers,coefficients}{Components of \code{mvp}
     objects}

@@ -253,12 +253,12 @@ by a second substitution, returning us to the original expression:
 p == p %>% subs(x="xmv+a+b") %>% subs(xmv="x-a-b")
 ```
 
-If function `series()` is given a variable name ending in `_mfoo`,
+If function `series()` is given a variable name ending in `_m_foo`,
 where `foo` is any variable name, then this is typeset as `(x-foo)`.
 For example:
 
 ```{r}
-as.mvp('x^3 + x*a') %>% subs(x="x_ma + a") %>% series("x_ma")
+as.mvp('x^3 + x*a') %>% subs(x="x_m_a + a") %>% series("x_m_a")
 ```
 
 So above we see the expansion of $x^2+ax$ in powers of $x-a$.  If we
@@ -266,7 +266,7 @@ want to see the expansion of a mvp in terms of a more complicated
 expression then it is better to use a nonce variable `v`:
 
 ```{r}
-as.mvp('x^2 + x*a+b^3') %>% subs(x="x_mv + a^2+b") %>% series("x_mv")
+as.mvp('x^2 + x*a+b^3') %>% subs(x="x_m_v + a^2+b") %>% series("x_m_v")
 ```
 
 where it is understood that $v=a+b^2$.

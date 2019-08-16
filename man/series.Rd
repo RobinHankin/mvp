@@ -18,6 +18,7 @@ trunc1(S,...)
 series(S,v,showsymb=TRUE)
 \method{print}{series}(x,...)
 onevarpow(S,...)
+taylor(S,vx,va,debug=FALSE)
 mvp_taylor_onevar(allnames,allpowers,coefficients, v, n)
 mvp_taylor_allvars(allnames,allpowers,coefficients, n)
 mvp_taylor_onepower_onevar(allnames, allpowers, coefficients, v, n)
@@ -35,14 +36,15 @@ mvp_to_series(allnames, allpowers, coefficients, v)
   \item{showsymb}{In function \code{series()}, Boolean, with default
     \code{TRUE} meaning to substitute variables like \code{x_m_foo} with
     \code{(x-foo)} for readability reasons}
+  \item{vx,va,debug}{In function \code{taylor()}, names of variables to
+    take series with respect to; and a Boolean with default \code{FALSE}
+    meaning to return the mvp and \code{TRUE} meaning to return
+    the string that is passed to \code{eval()}}
   \item{allnames,allpowers,coefficients}{Components of \code{mvp}
     objects}
 
 }
 \details{
-
-  Function \code{taylor()} returns the Taylor series of \code{S} in
-  powers of \code{v} up to and including terms \code{v^n}.
 
   Function \code{onevarpow()} returns just the terms in which symbol
   \code{v} appears with power \code{n}.
@@ -52,6 +54,8 @@ mvp_to_series(allnames, allpowers, coefficients, v)
   sensitive to the value of  \code{getOption("mvp_mult_symbol")}; set
   this to \code{"*"} to get \code{mpoly}-compatible output.
 
+  Function \code{taylor()} is a convenience wrapper for \code{series()}.
+  
   Functions \code{mvp_taylor_onevar()}, \code{mvp_taylor_allvars()} and
   \code{mvp_to_series()} are low-level helper functions that are not
   intended for the user.

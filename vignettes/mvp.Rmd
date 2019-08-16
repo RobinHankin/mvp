@@ -269,7 +269,16 @@ expression then it is better to use a nonce variable `v`:
 as.mvp('x^2 + x*a+b^3') %>% subs(x="x_m_v + a^2+b") %>% series("x_m_v")
 ```
 
-where it is understood that $v=a+b^2$.
+where it is understood that $v=a+b^2$.  Function `taylor()` is a
+convenience wrapper that does some of the above in one step:
+
+```{r}
+p <- as.mvp("1+x-x*y+a")^2
+taylor(p,'x','a')
+```
+
+But it's not as good as I expected it to be and frankly it's overkill.
+
 
 ## Negative powers
 

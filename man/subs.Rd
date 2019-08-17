@@ -70,10 +70,10 @@ Function \code{varchange()} makes a \emph{formal} variable substitution.
 It is useful because it can take non-standard variable names such as
 \dQuote{\code{(a-b)}} or \dQuote{\code{?}}, and is used in
 \code{taylor()}.  Function \code{varchange_formal()} does the same task,
-but takes two character vectors, \code{old} and \code{new}.  Use this if
-you want to substitute nonstandard variable names such as
-\dQuote{\code{?}} or \dQuote{\code{[}} (but remember that you might need
-to escape some characters, see the examples).  Function
+but takes two character vectors, \code{old} and \code{new}, which might
+be more convenient than passing named arguments.  Remember that
+non-standard names might need to be quoted; also you might need to
+escape some characters, see the examples).  Function
 \code{namechanger()} is a low-level helper function that uses regular
 expression idiom to substitute variable names.
 

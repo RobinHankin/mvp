@@ -73,9 +73,9 @@ It is useful because it can take non-standard variable names such as
 but takes two character vectors, \code{old} and \code{new}, which might
 be more convenient than passing named arguments.  Remember that
 non-standard names might need to be quoted; also you might need to
-escape some characters, see the examples).  Function
-\code{namechanger()} is a low-level helper function that uses regular
-expression idiom to substitute variable names.
+escape some characters, see the examples.  Function \code{namechanger()}
+is a low-level helper function that uses regular expression idiom to
+substitute variable names.
 
 }
 \author{Robin K. S. Hankin}

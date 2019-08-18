@@ -279,6 +279,20 @@ taylor(p,'x','a')
 
 But it's not as good as I expected it to be and frankly it's overkill.
 
+## Extraction
+
+Given a multivariate polynomial, one often needs to extract certain
+terms.  Because the terms of an `mvp` object have an
+implementation-dependent order, this can be difficult.  But we can use
+function `onevarpow()`:
+
+
+```{r}
+P <- as.mvp("1 + z + y^2 + x*z^2 +  x*y")^4
+onevarpow(P,x=1,y=2)
+```
+
+
 
 ## Negative powers
 

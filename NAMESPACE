@@ -22,6 +22,8 @@ S3method(aderiv,mvp)
 S3method(lose,mvp)
 S3method(print,mvp)
 S3method(Ops,mvp)
+S3method(summary,mvp)
+S3method(print, summary.mvp)
 
 S3method(constant, numeric)
 

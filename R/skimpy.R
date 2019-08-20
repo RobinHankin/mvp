@@ -375,3 +375,36 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
         return(eval(parse(text = string)))
     }
 }
+
+`nterms` <- function(object){length(object[[1]])}
+
+`summary.mvp` <- function(object, ...){
+  out <- list(
+      no.of.terms         = length(object[[1]]),
+      no.of.symbols       = length(unique(c(object[[1]],recursive=TRUE))),
+      highest.power       = max(c(object[[2]],recursive=TRUE)),
+      longest.term        = max(unlist(lapply(object[[1]],length))),
+      has.negative.powers = any(c(object[[2]],recursive=TRUE) < 0),
+      constant            = constant(object)
+      )
+    class(out) <- "summary.mvp"
+    return(out)
+}
+
+`print.summary.mvp` <- function(x, ...){
+  cat("mvp object.\n")
+  cat("Number of terms:"           , x[[1]],"\n") 
+  cat("Number of distinct symbols:", x[[2]],"\n") 
+  cat("Highest power:"             , x[[3]],"\n") 
+  cat("Longest term: "             , x[[4]],"\n")
+  cat("Has negative powers: "      , x[[5]],"\n")
+  cat("Constant: "                 , x[[6]],"\n")
+}
+
+`rtypical` <- function(object,n=3){
+  K <- constant(object)
+  constant(object) <- 0
+  wanted <- sample(nterms(object),n,replace=FALSE)
+  K + mvp(object[[1]][wanted],object[[2]][wanted],object[[3]][wanted])
+}
+

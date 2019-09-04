@@ -26,7 +26,7 @@ multiplications and \eqn{n} additions, and this is optimal.  But this is
 not implemented here because it's efficient.  It is implemented because
 it works if \eqn{x} is itself a (multivariate) polynomial, and that is
 the second coolest thing ever.  The coolest thing ever is the
-\proglang{R} idiom of \code{horner()}.
+\code{Reduce()} function.
 
 }
   

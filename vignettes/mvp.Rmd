@@ -1,5 +1,5 @@
 ---
-title: 'The ```mvp``` package: fast multivariate polynomials R'
+title: 'The ```mvp``` package: fast multivariate polynomials in R'
 author: "Robin K. S. Hankin"
 date: "`r Sys.Date()`"
 output:

@@ -11,6 +11,10 @@ importFrom(magic, circulant)
 
 importFrom("utils" , "capture.output")
 
+importFrom("freealg", "words")
+importFrom("freealg", "coeffs")
+
+
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)
 S3method("constant<-", mvp)

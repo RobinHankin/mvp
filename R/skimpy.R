@@ -52,6 +52,8 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
     return(mpoly_to_mvp(x))
   } else if(inherits(x,"spray")){
     return(spray_to_mvp(x,...))
+  } else if(inherits(x,"freealg")){ # free algebra
+    return(freealg_to_mvp(x))
   } else if(is.character(x)){
     return(mpoly_to_mvp(mp(x)))
   } else if(is.list(x)){
@@ -408,3 +410,10 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   K + mvp(object[[1]][wanted],object[[2]][wanted],object[[3]][wanted])
 }
 
+`freealg_to_mvp` <- function(x){ # takes x, a freealg object, returns mvp
+  mvp(
+      vars   = lapply(freealg::words(x),function(v){letters[abs(v)]}),
+      powers = lapply(freealg::words(x),function(v){2*(v>0)-1}),
+      coeffs = freealg::coeffs(x)
+  )
+}

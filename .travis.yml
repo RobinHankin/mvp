@@ -5,4 +5,10 @@ cache: packages
 branches:
   only:
   - master
-  
+r_build_args: '--resave-data --compact-vignettes="both" '
+
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'

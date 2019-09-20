@@ -9,6 +9,8 @@ Fast symbolic multivariate polynomials in R
 Status](https://travis-ci.org/RobinHankin/mvp.svg?branch=master)](https://travis-ci.org/RobinHankin/mvp)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/mvp)](https://cran.r-project.org/package=mvp)
 [![Rdoc](http://www.rdocumentation.org/badges/version/mvp)](http://www.rdocumentation.org/packages/mvp)
+[![Codecov test
+coverage](https://codecov.io/gh/RobinHankin/mvp/branch/master/graph/badge.svg)](https://codecov.io/gh/RobinHankin/mvp/branch/master)
 <!-- badges: end -->
 
 # Overview

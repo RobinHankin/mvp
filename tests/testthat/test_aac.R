@@ -11,13 +11,31 @@ expect_false(P!=P)
 expect_true(P!=P+1)
 expect_false(P==P+1)
 
-expect_true(P/2+ P/2==P)
+expect_true(P/2 + P/2==P)
+expect_true(P+P==P*2)
+expect_true(P+P==2*P)
 
+expect_true(is.zero(P-P))
+expect_true(is.zero(P*0))
+expect_true(is.zero(P*as.mvp(0)))
+
+expect_true(P+1 ==  1+P)
+expect_true(P-1 == -1+P)
+expect_true(1-P == -P+1)
+
+expect_error(P==1)
+expect_error(P!=1)
+expect_false(P!=P)
+expect_error(P^P)
+expect_error(P^-1)
+expect_error(P/P)
 
 expect_error(P<P)
 expect_error(P<=P)
 expect_error(P>P)
 expect_error(P>=P)
+
+
 
 expect_true(aderiv(P,x=1,y=2,z=3) == aderiv(P,z=3,x=1,y=2))
 

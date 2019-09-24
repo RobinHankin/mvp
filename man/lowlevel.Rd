@@ -23,11 +23,13 @@ mvp_deriv(allnames, allpowers, coefficients, v)
 mvp_power(allnames, allpowers, coefficients, n) 
 }
 \arguments{
-  \item{allnames,allpowers,coefficients,allnames1,allpowers1,coefficients1,allnames2,allpowers2,coefficients2,v,values,n,M,nrows,ncols}{Variables sent to the C routines}
+  \item{allnames,allpowers,coefficients,allnames1,allpowers1,coefficients1,
+    allnames2,allpowers2,coefficients2,v,values,n,M,nrows,ncols}{Variables
+    sent to the C routines}
 }
 \details{These functions call the functions defined in \code{RcppExports.R}}
 \author{Robin K. S.  Hankin}
 \note{These functions are not intended for the end-user.  Use the
   syntatic sugar (as in \code{a+b} or \code{a*b} or \code{a^n}), or
-  functions like \code{mvp_plus_mvp()}, which are more user-friendly}
+  functions like \code{mvp_plus_mvp()}, which are more user-friendly.}
 \keyword{symbolmath}

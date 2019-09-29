@@ -51,10 +51,11 @@ does not matter because the algebraic value of the term does not depend
 on the order in which the variables appear and this term would be
 equivalent to \code{4b*c^6*a^3}.
 
-The vignette provides an extensive discussion of this.
+The vignette provides an extensive discussion of this, and more
+discussion is included at \code{Ops.coeffs.Rd}.
 
 }
-\seealso{\code{\link{constant}}}
+\seealso{\code{\link{constant}},\code{\link{constant}}}
 \examples{
 a <- rmvp(5)
 vars(a)

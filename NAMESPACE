@@ -14,6 +14,8 @@ importFrom("utils" , "capture.output")
 importFrom("freealg", "words")
 importFrom("freealg", "coeffs")
 
+importFrom("digest", "digest")
+
 
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)
@@ -26,8 +28,11 @@ S3method(aderiv,mvp)
 S3method(lose,mvp)
 S3method(print,mvp)
 S3method(Ops,mvp)
-S3method(summary,mvp)
+S3method(summary,mvp) 
 S3method(print, summary.mvp)
+
+S3method(print,mvp_coeffs)
+S3method(Ops,mvp_coeffs)
 
 S3method(constant, numeric)
 

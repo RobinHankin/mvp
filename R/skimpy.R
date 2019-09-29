@@ -9,7 +9,13 @@
 
 vars <- function(x){x[[1]]}
 powers <- function(x){x[[2]]}
-coeffs <- function(x){x[[3]]}  # accessor methods end here
+hash <- function(x){digest::digest(x)}
+coeffs <- function(x){
+    out <- x[[3]]
+    attributes(out) <- list(sha1=hash(x))
+    class(out) <- "mvp_coeffs"
+    return(out)
+}
 
 `is.mvp` <- function(x){inherits(x,"mvp")}
 
@@ -129,12 +135,18 @@ coeffs <- function(x){x[[3]]}  # accessor methods end here
 
 `coeffs<-` <- function(x,value){UseMethod("coeffs<-")}
 `coeffs<-.mvp` <- function(x,value){
-    if(length(value) != 1){
-        stop('order of coefficients not defined.  Idiom "coeffs(x) <- value" is meaningful only if value is unchanged on reordering, here we require "value" to have length 1') 
+    if(length(value) == 1){
+        x[[3]][] <- value
+        return(mvp(x[[1]],x[[2]],x[[3]]))
+    } else { # length >1;  must be of class mvp_coeffs:
+        stopifnot(inherits(value, "mvp_coeffs"))
+        ## also hash must match:
+        stopifnot(identical(hash(x), attributes(value)$sha1))
+        x[[3]][] <- unclass(value)
+        return(mvp(x[[1]],x[[2]],x[[3]]))
     }
-    x[[3]][] <- value
-    return(mvp(x[[1]],x[[2]],x[[3]]))
 }
+        
     
 
 "constant" <- function(x){UseMethod("constant")}
@@ -174,8 +186,10 @@ setGeneric("lose",function(x){standardGeneric("lose")})
     if(is.zero(x)){
       return(0)
     } else if((length(vars(x))==1) & (length(vars(x)[[1]])==0)){
-      return(coeffs(x))
-    } else {
+        out <- coeffs(x)
+        attributes(out) <- NULL
+        return(unclass(out))
+    } else {  # er, nothing to lose
       return(x)
     }
 }

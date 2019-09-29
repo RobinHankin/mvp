@@ -50,7 +50,12 @@ test_that("Test suite test_aae.R",{
         expect_silent(2 == ca)
         expect_silent(2 != ca)
 
-        
+        expect_silent(coeffs(a) <- coeffs(a)+0)
+        expect_silent(coeffs(a) <- coeffs(a)*1)
+        expect_error (coeffs(a) <- coeffs(b))
+        expect_error (coeffs(a) <- coeffs(a+1))
+
+        expect_silent(coeffs(a) <- 3)
 
     } # function foo() closes
 

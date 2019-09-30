@@ -30,7 +30,7 @@
         }
     }
 
-    if (!is.element(.Generic, c("+", "-", "*", "/", "^","==","!=","%%"))){
+    if (!is.element(.Generic, c("+", "-", "*", "/", "^","%%"))){
         stop("operator '", .Generic, "' is not implemented for coeffs")
     }
 
@@ -59,10 +59,6 @@
         return(as_coeffs(unclass(e1) ^ unclass(e2),h))
     } else if (.Generic == "%%") {
         return(as_coeffs(unclass(e1) %% unclass(e2),h))
-    } else if (.Generic == "==") {
-        return(unclass(e1) == unclass(e2))
-    } else if (.Generic == "!=") {
-        return(unclass(e1) != unclass(e2))
     } else {
         stop("this cannot happen")
     }   

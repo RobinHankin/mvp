@@ -20,8 +20,8 @@ test_that("Test suite test_aaf.R",{
         expect_silent(ca /  ca)
         expect_silent(ca ^  ca)
         expect_silent(ca %% ca)
-        expect_silent(ca == ca)
-        expect_silent(ca != ca)
+        expect_error(ca == ca)
+        expect_error(ca != ca)
 
         expect_error(ca +  cb)
         expect_error(ca -  cb)
@@ -38,8 +38,8 @@ test_that("Test suite test_aaf.R",{
         expect_silent(ca /  1)
         expect_silent(ca ^  1)
         expect_silent(ca %% 1)
-        expect_silent(ca == 1)
-        expect_silent(ca != 1)
+        expect_error(ca == 1)
+        expect_error(ca != 1)
 
         expect_silent(2 +  ca)
         expect_silent(2 -  ca)
@@ -47,8 +47,8 @@ test_that("Test suite test_aaf.R",{
         expect_silent(2 /  ca)
         expect_silent(2 ^  ca)
         expect_silent(2 %% ca)
-        expect_silent(2 == ca)
-        expect_silent(2 != ca)
+        expect_error(2 == ca)
+        expect_error(2 != ca)
 
         expect_silent(coeffs(a) <- coeffs(a)+0)
         expect_silent(coeffs(a) <- coeffs(a)*1)

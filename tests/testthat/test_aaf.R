@@ -1,6 +1,6 @@
 # test coeffs stuff
 
-test_that("Test suite test_aae.R",{
+test_that("Test suite test_aaf.R",{
 
 
     foo <- function(a,b){

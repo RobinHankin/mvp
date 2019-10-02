@@ -5,6 +5,10 @@
     return(out)
 }
 
+`is.coeffs` <- function(x){inherits(x,"mvp_coeffs")}
+`consistent` <- function(x,y){identical(attributes(x)$sha1, attributes(y)$sha1)}
+`%~%` <- function(x,y){consistent(x,y)}
+
 `print.mvp_coeffs` <- function(x,...){
     out <- x
     cat("coeffs object with hash ", attributes(x)$sha1, " and elements \n")
@@ -30,7 +34,7 @@
         }
     }
 
-    if (!is.element(.Generic, c("+", "-", "*", "/", "^","%%"))){
+    if (!is.element(.Generic, c("+", "-", "*", "/", "^","%%", "==", "!=",">",">=","<","<="))){
         stop("operator '", .Generic, "' is not implemented for coeffs")
     }
 
@@ -47,19 +51,45 @@
         stop("this cannot happen")
     }
     
-    if (.Generic == "*") {
-        return(as_coeffs(unclass(e1) * unclass(e2),h))
-    } else if (.Generic == "+") {
-        return(as_coeffs(unclass(e1) + unclass(e2),h))
-    } else if (.Generic == "-") {
-        return(as_coeffs(unclass(e1) - unclass(e2),h))
-    } else if (.Generic == "/") {
-        return(as_coeffs(unclass(e1) / unclass(e2),h))
-    } else if (.Generic == "^") {
-        return(as_coeffs(unclass(e1) ^ unclass(e2),h))
-    } else if (.Generic == "%%") {
-        return(as_coeffs(unclass(e1) %% unclass(e2),h))
+    if        (.Generic == "*" ) { return(as_coeffs(unclass(e1) *  unclass(e2),h))
+    } else if (.Generic == "+" ) { return(as_coeffs(unclass(e1) +  unclass(e2),h))
+    } else if (.Generic == "-" ) { return(as_coeffs(unclass(e1) -  unclass(e2),h))
+    } else if (.Generic == "/" ) { return(as_coeffs(unclass(e1) /  unclass(e2),h))
+    } else if (.Generic == "^" ) { return(as_coeffs(unclass(e1) ^  unclass(e2),h))
+    } else if (.Generic == "%%") { return(as_coeffs(unclass(e1) %% unclass(e2),h))
+    } else if (.Generic == "==") { return(as_coeffs(unclass(e1) == unclass(e2),h))
+    } else if (.Generic == "!=") { return(as_coeffs(unclass(e1) != unclass(e2),h))
+    } else if (.Generic == ">" ) { return(as_coeffs(unclass(e1) >  unclass(e2),h))
+    } else if (.Generic == ">=") { return(as_coeffs(unclass(e1) >= unclass(e2),h))
+    } else if (.Generic == "<" ) { return(as_coeffs(unclass(e1) <  unclass(e2),h))
+    } else if (.Generic == "<=") { return(as_coeffs(unclass(e1) <= unclass(e2),h))
+    } else {stop("this cannot happen")}   
+}
+
+`[.mvp_coeffs` <- function(x,i,j,drop=TRUE,...){
+      stop("extractor methods do not make sense for coeffs objects")
+}
+
+`[<-.mvp_coeffs` <- function(x,i,j,value){ # x[i] <- value; coeffs(a)[coeffs(a)>4] <- 4
+    h <- attributes(x)$sha1
+    if(is.coeffs(value)){
+      if(!(x %~% value)){stop("inconsistent coeffs objects (different sha1 hash)")}
     } else {
-        stop("this cannot happen")
-    }   
+      if(length(value) != 1){stop("replacement not of length 1")}
+    }
+
+    if(!(x %~% i)){stop("inconsistent coeffs objects (different sha1 hash)")}
+    if(!missing(j)){stop("too many arguments to `[<-`()")}
+
+    x <- unclass(x)
+    value <- unclass(value)
+    i <- unclass(i)
+
+    if(missing(i)) {  # x[]
+       x[] <- value
+    } else {  # x[i,] == x[i]
+        x[i] <- value    
+    }
+
+    return(as_coeffs(x,h))
 }

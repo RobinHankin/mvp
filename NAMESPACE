@@ -31,8 +31,11 @@ S3method(Ops,mvp)
 S3method(summary,mvp) 
 S3method(print, summary.mvp)
 
-S3method(print,mvp_coeffs)
-S3method(Ops,mvp_coeffs)
+S3method(print,  mvp_coeffs)
+S3method(Ops  ,  mvp_coeffs)
+S3method("["  ,  mvp_coeffs)
+S3method("[<-",  mvp_coeffs)
+
 
 S3method(constant, numeric)
 

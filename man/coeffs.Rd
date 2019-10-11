@@ -73,8 +73,8 @@ consistent(x,y)
   
   So even though \code{a+b} is well-defined, idiom such as
   \code{coeffs(a) + coeffs(b)} is not defined: we might have
-  \code{c(1,3,4)+c(1,2,3)=c(1,5,7)} or
-  \code{c(1,3,4)+c(1,3,2)=c(1,6,6)}, with neither being more
+  \code{c(1,3,4)+c(1,2,3)=c(2,5,7)} or
+  \code{c(1,3,4)+c(1,3,2)=c(2,6,6)}, with neither being more
   \dQuote{correct} than the other.  In the package, \code{coeffs(a) +
   coeffs(b)} will return an error.  In the same way \code{coeffs(a) +
   1:3} is not defined and will return an error.  In the same way, idiom

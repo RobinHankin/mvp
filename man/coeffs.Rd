@@ -15,7 +15,7 @@
 \alias{coeffs<-.mvp}
 \alias{coefficients}
 \alias{consistent}
-\title{Funcationality for \code{coeffs} objects}
+\title{Functionality for \code{coeffs} objects}
 \description{
   Allows arithmetic operators to be used for the coefficients of
   multivariate polynomials, bearing in mind that the order of
@@ -88,13 +88,32 @@ consistent(x,y)
   square}; note that this operation is insensitive to the order of
   coefficients.  The whole shebang is intended to make idiom such as
   \code{coeffs(a) <- coeffs(a)\%\%2} possible (so we can manipulate
-  polynomials over finite rings, here \eqn{Z/2Z}).  The replacement
-  methods are defined so that \code{coeffs(a)[coeffs(a) > 5] <- 5}
-  works.
+  polynomials over finite rings, here \eqn{Z/2Z}).
 
-  Further note that \code{coeffs(a) <- rev(coeffs(a))} is disallowed (as
-  indeed is \code{coeffs(a) <- sample(coeffs(a))}, although arguably
-  that should be OK).
+  The replacement methods are defined so that expressions like
+  \code{coeffs(a)[coeffs(a) > 5] <- 5} works as expected; the English
+  idiom would be \dQuote{Replace any coefficient greater than 5 with 5}.
+
+  To fix ideas, consider \code{a <- rmvp(8)}.  Extraction presents
+  issues; consider \code{coeffs(a)<5}.  This object has Boolean elements
+  but has the same ordering ambiguity as \code{coeffs(a)}.  One might
+  expect that we could use this to extract elements of \code{coeffs(a)},
+  specifically elements less than 5.  However,
+  \code{coeffs(a)[coeffs(a)<5]} in isolation is meaningless: what can be
+  done with such an object?  However, it makes sense on the left hand
+  side of an assignment, as long as the right hand side is a length-one
+  vector.  Idiom such as
+
+  \preformatted{coeffs(a)[coeffs(a)<5] <- 4+coeffs(a)[coeffs(a)<5]}
+
+  is arguably meaningful (\dQuote{Add 4 to any element less than 5}) but
+  is not implemented because replacement methods in R require the RHS to
+  be evaluated; also there is no ready way to check for (meaningless)
+  idiom such as \code{coeffs(a)[coeffs(a)<5] <-
+  4+coeffs(a)[coeffs(a)>3]}.  Further note that \code{coeffs(a) <-
+  rev(coeffs(a))} is disallowed (as indeed is \code{coeffs(a) <-
+  sample(coeffs(a))}, although arguably that should be OK).
+
 
   The function \code{Ops.coeffs()} passes unary and binary arithmetic
   operators to the appropriate specialist function using a system of

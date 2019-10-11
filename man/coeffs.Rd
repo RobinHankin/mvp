@@ -71,24 +71,27 @@ consistent(x,y)
   Likewise a multinomial \code{x+2y+3z} might have coefficients
   \code{c(1,2,3)} or \code{c(3,1,2)}
   
-  So idiom such as \code{coeffs(a) + coeffs(b)} is not defined: we might
-  have \code{c(1,3,4)+c(1,2,3)=c(1,5,7)} or
-  \code{c(1,3,4)+c(1,3,2)=c(1,6,6)}, with neither one being more
+  So even though \code{a+b} is well-defined, idiom such as
+  \code{coeffs(a) + coeffs(b)} is not defined: we might have
+  \code{c(1,3,4)+c(1,2,3)=c(1,5,7)} or
+  \code{c(1,3,4)+c(1,3,2)=c(1,6,6)}, with neither being more
   \dQuote{correct} than the other.  In the package, \code{coeffs(a) +
   coeffs(b)} will return an error.  In the same way \code{coeffs(a) +
   1:3} is not defined and will return an error.  In the same way, idiom
   such as \code{coeffs(a) <- 1:3} and \code{coeffs(a) <- coeffs(b)} are
-  not defined and will return an error.
+  not defined and will return an error.  However, note that
+  \code{coeffs(a) + coeffs(a)} and \code{coeffs(a)+coeffs(a)^2} are
+  fine, these returning a \code{coeffs} object specific to \code{a}.
 
-  However, note that \code{coeffs(a) + coeffs(a)} is fine.  Idiom such
-  as \code{coeffs(a) <- coeffs(a)^2} is fine too, for one does not need
-  to know the order of the coefficients on either side, so long as the
-  order is the same on both sides.  That would translate into idiomatic
-  English: \dQuote{the coefficient of each term of \code{a} becomes its
-  square}; note that this operation is insensitive to the order of
-  coefficients.  The whole shebang is intended to make idiom such as
-  \code{coeffs(a) <- coeffs(a)\%\%2} possible (so we can manipulate
-  polynomials over finite rings, here \eqn{Z/2Z}).
+  Idiom such as \code{coeffs(a)
+  <- coeffs(a)^2} is fine too, for one does not need to know the order
+  of the coefficients on either side, so long as the order is the same
+  on both sides.  That would translate into idiomatic English:
+  \dQuote{the coefficient of each term of \code{a} becomes its square};
+  note that this operation is insensitive to the order of coefficients.
+  The whole shebang is intended to make idiom such as \code{coeffs(a) <-
+  coeffs(a)\%\%2} possible (so we can manipulate polynomials over finite
+  rings, here \eqn{Z/2Z}).
 
   The replacement methods are defined so that expressions like
   \code{coeffs(a)[coeffs(a) > 5] <- 5} works as expected; the English
@@ -122,17 +125,16 @@ consistent(x,y)
   \code{coeffs()}.
 
   So the output of \code{coeffs(x)} is defined only up to an unknown
-  rearrangement.  If all the coefficients are the same, this does not
-  matter.  The same considerations apply to the output of \code{vars()},
-  which returns a list of character vectors in an undefined order, and
-  the output of \code{powers()}, which returns a numeric list whose
-  elements are in an undefined order.  However, even though the order of
-  these three objects is undefined individually, their ordering is
-  jointly consistent in the sense that the first element of
-  \code{coeffs(x)} corresponds to the first element of \code{vars(x)}
-  and the first element of \code{powers(x)}.  The identity of this
-  element is not defined---but whatever it is, the first element of all
-  three accessor methods refers to it.
+  rearrangement.  The same considerations apply to the output of
+  \code{vars()}, which returns a list of character vectors in an
+  undefined order, and the output of \code{powers()}, which returns a
+  numeric list whose elements are in an undefined order.  However, even
+  though the order of these three objects is undefined individually,
+  their ordering is jointly consistent in the sense that the first
+  element of \code{coeffs(x)} corresponds to the first element of
+  \code{vars(x)} and the first element of \code{powers(x)}.  The
+  identity of this element is not defined---but whatever it is, the
+  first element of all three accessor methods refers to it.
 
   Note also that a single term (something like \code{4a^3*b*c^6}) has
   the same issue: the variables are not stored in a well-defined order.

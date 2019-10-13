@@ -5,10 +5,6 @@
     lclass <- nchar(.Method[1]) > 0
     rclass <- !unary && (nchar(.Method[2]) > 0)
     
-    if (!is.element(.Generic, c("+", "-", "*", "/", "^", "==", "!="))){
-        stop("operator '", .Generic, "' is not implemented for mvps")
-    }
-
     if(unary){
         if (.Generic == "+") {
             return(e1)
@@ -18,7 +14,11 @@
             stop("Unary operator '", .Generic, "' is not implemented for mvps")
         }
     }
-    
+
+    if (!is.element(.Generic, c("+", "-", "*", "/", "^", "==", "!="))){
+        stop("Operator '", .Generic, "' is not implemented for mvps")
+    }
+
     if (.Generic == "*") {
         if (lclass && rclass) {
             return(mvp_times_mvp(e1, e2))

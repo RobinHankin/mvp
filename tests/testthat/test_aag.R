@@ -28,6 +28,13 @@ test_that("Test suite test_aag.R",{
     expect_error(subsy(as.mvp("1+x"),x=1,lose=FALSE)==2)
     expect_true (subsy(as.mvp("1+x"),x=1,lose=FALSE)==as.mvp(2))
 
-    
+
+
+    M <- matrix(sample(1:3,26*3,replace=TRUE),ncol=26)
+    rownames(M) <- c("Huey", "Dewie", "Louie")
+    expect_error(subvec(kahle(r=3,p=1:3),M)) # no colnames
+    colnames(M) <- letters
+    expect_silent(subvec(kahle(r=3,p=1:3),M)) 
+
     
 })

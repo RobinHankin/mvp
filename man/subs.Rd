@@ -32,8 +32,11 @@ namechanger(x,old,new)
   is a character vector} 
 }
 \value{
-  Returns a multivariate polynomial, object of class \code{mvp}, or a
-  numeric vector (\code{subvec()}).
+  Functions \code{subs()}, \code{subsy()} and \code{subsmvp()} return a
+  multivariate polynomial unless \code{lose} is \code{TRUE} in which
+  case a length one numeric vector is returned.  Function
+  \code{subvec()} returns a numeric vector (sic! the output inherits its
+  order from the arguments).
 }
 \details{
 

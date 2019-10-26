@@ -182,6 +182,17 @@ Substitution works well with pipes:
 as.mvp("a+b") %>% subs(a="a^2+b^2") %>% subs(b="x^6")
 ```
 
+## Vectorised substitution
+
+Function `subvec()`allows one to substitute variables for numeric
+values using vectorised idiom:
+
+```{r subvec_example}
+p <- rmvp(6,2,2,letters[1:3])
+p
+subvec(p,a=1,b=2,c=1:5)   # supply a named list of vectors
+```	
+
 
 ## Differentiation
 

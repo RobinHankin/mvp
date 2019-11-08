@@ -65,6 +65,24 @@ test_that("Test suite test_aaf.R",{
 
         expect_silent(coeffs(a) <- 3)
 
+        expect_true(is.coeffs(coeffs(a)))
+        expect_false(is.coeffs(a))
+        expect_true(consistent(coeffs(a),coeffs(a)))
+        expect_true(consistent(coeffs(a),2*coeffs(a)))
+        expect_true(consistent(coeffs(a),coeffs(a)*2))
+        expect_true(consistent(coeffs(a),coeffs(a)+5))
+        expect_false(consistent(coeffs(a),coeffs(a+5)))
+
+        expect_true(coeffs(a) %~% coeffs(a))
+        expect_true(coeffs(a) %~% (4+coeffs(a)))
+
+        expect_error(coeffs(a)[1])
+        expect_error(coeffs(a)[1] <- 0)
+        expect_error(coeffs(a) <- coeffs(a^2))
+        expect_silent(coeffs(a) <- coeffs(a)%%100)
+        
+
+
     } # function foo() closes
 
     for(i in 1:5){

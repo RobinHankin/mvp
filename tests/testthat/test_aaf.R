@@ -58,13 +58,6 @@ test_that("Test suite test_aaf.R",{
         expect_silent(2 >  ca)
         expect_silent(2 <  ca)
 
-        expect_silent(coeffs(a) <- coeffs(a)+0)
-        expect_silent(coeffs(a) <- coeffs(a)*1)
-        expect_error (coeffs(a) <- coeffs(b))
-        expect_error (coeffs(a) <- coeffs(a+1))
-
-        expect_silent(coeffs(a) <- 3)
-
         expect_true(is.coeffs(coeffs(a)))
         expect_false(is.coeffs(a))
         expect_true(consistent(coeffs(a),coeffs(a)))
@@ -73,13 +66,24 @@ test_that("Test suite test_aaf.R",{
         expect_true(consistent(coeffs(a),coeffs(a)+5))
         expect_false(consistent(coeffs(a),coeffs(a+5)))
 
+
+        expect_silent(as.function(a)(a=3))
+
+        expect_silent({jj <- a ; coeffs(jj) <- coeffs(jj)+0})
+        expect_silent({jj <- a ; coeffs(jj) <- coeffs(jj)*1})
+        expect_error (coeffs(a) <- coeffs(b))
+        expect_error (coeffs(a) <- coeffs(a+1))
+
+        expect_silent({jj <- a ; coeffs(jj) <- 3})
+
+
         expect_true(coeffs(a) %~% coeffs(a))
         expect_true(coeffs(a) %~% (4+coeffs(a)))
 
         expect_error(coeffs(a)[1])
         expect_error(coeffs(a)[1] <- 0)
         expect_error(coeffs(a) <- coeffs(a^2))
-        expect_silent(coeffs(a) <- coeffs(a)%%100)
+        expect_silent({jj <- a ; coeffs(jj) <- coeffs(jj)%%7})
         
 
 

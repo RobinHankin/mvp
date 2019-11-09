@@ -71,6 +71,7 @@
 }
 
 `[<-.mvp_coeffs` <- function(x,i,j,value){ # x[i] <- value; coeffs(a)[coeffs(a)>4] <- 4
+
     h <- attributes(x)$sha1
     if(is.coeffs(value)){
       if(!(x %~% value)){stop("inconsistent coeffs objects (different sha1 hash)")}
@@ -84,12 +85,7 @@
     x <- unclass(x)
     value <- unclass(value)
     i <- unclass(i)
-
-    if(missing(i)) {  # x[]
-       x[] <- value
-    } else {  # x[i,] == x[i]
-        x[i] <- value    
-    }
+    x[i] <- value    
 
     return(as_coeffs(x,h))
 }

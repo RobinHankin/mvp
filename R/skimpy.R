@@ -381,9 +381,9 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
 }
 
 `taylor` <- function(S,vx,va,debug=FALSE){# basically: p %>% subs(x="x_m_a + a") %>% series("x_m_a")
-    ## trying to do: series(subs(p,x="x_m_a + a"), "x_m_a")
+    ## trying to do: series(subs(S,x="x_m_a + a"), "x_m_a")
 
-    string <- paste('series(subs(p,',vx,'="',vx,"_m_", va, " + ", va, '"), "',vx,"_m_",va,'")',sep="")
+    string <- paste('series(subs(S,',vx,'="',vx,"_m_", va, " + ", va, '"), "',vx,"_m_",va,'")',sep="")
 
     if(debug){
         return(noquote(string))

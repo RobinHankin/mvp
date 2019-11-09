@@ -85,8 +85,16 @@ test_that("Test suite test_aaf.R",{
         expect_error(coeffs(a) <- coeffs(a^2))
         expect_silent({jj <- a ; coeffs(jj) <- coeffs(jj)%%7})
         
+        expect_error(coeffs(a)[2] <- coeffs(a^2))
+        expect_error(coeffs(a)[1:2] <- 1:2)
+        expect_error(coeffs(a)[2] <- coeffs(a^2)[2])
 
+        expect_error(coeffs(a)[1,2])
+        expect_error(coeffs(a)[1,2] <- 4)
+        expect_silent({jj <- a ; coeffs(jj)[coeffs(jj) < 2] <- 2})
+        expect_error(coeffs(a)[coeffs(a) < 2,1] <- 2)
 
+        
     } # function foo() closes
 
     for(i in 1:5){

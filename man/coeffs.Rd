@@ -15,6 +15,7 @@
 \alias{coeffs<-.mvp}
 \alias{coefficients}
 \alias{consistent}
+\alias{\%~\%}
 \title{Functionality for \code{coeffs} objects}
 \description{
   Allows arithmetic operators to be used for the coefficients of
@@ -32,7 +33,8 @@ powers(x)
 coeffs(x)
 coeffs(x) <- value
 consistent(x,y)
- }
+x \%~\% y
+}
 \arguments{
   \item{x,y,e1,e2}{Objects of class \code{coeffs}}
 \item{...}{Further arguments}

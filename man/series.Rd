@@ -35,7 +35,8 @@ mvp_to_series(allnames, allpowers, coefficients, v)
     to truncate}
   \item{showsymb}{In function \code{series()}, Boolean, with default
     \code{TRUE} meaning to substitute variables like \code{x_m_foo} with
-    \code{(x-foo)} for readability reasons}
+    \code{(x-foo)} for readability reasons; see the vignette for a
+    discussion}
   \item{vx,va,debug}{In function \code{taylor()}, names of variables to
     take series with respect to; and a Boolean with default \code{FALSE}
     meaning to return the mvp and \code{TRUE} meaning to return
@@ -49,10 +50,17 @@ mvp_to_series(allnames, allpowers, coefficients, v)
   Function \code{onevarpow()} returns just the terms in which symbol
   \code{v} appears with power \code{n}.
   
-  Function \code{series} returns a power series expansion of powers of
-  variable \code{v}.  The print method for \code{series} objects is
-  sensitive to the value of  \code{getOption("mvp_mult_symbol")}; set
-  this to \code{"*"} to get \code{mpoly}-compatible output.
+  Function \code{series()} returns a power series expansion of powers of
+  variable \code{v}.  The value returned is a list of three elements
+  named \code{mvp}, \code{varpower}, and \code{variablename}.  The first
+  element is a list of \code{mvp} objects and the second is an integer
+  vector of powers of variable \code{v} (element \code{variablename} is
+  a character string holding the variable name, argument \code{v}).
+
+  Function \code{series()} returns an object of class \code{series}; the
+  print method for \code{series} objects is sensitive to the value of
+  \code{getOption("mvp_mult_symbol")}; set this to \code{"*"} to get
+  \code{mpoly}-compatible output.
 
   Function \code{taylor()} is a convenience wrapper for \code{series()}.
   

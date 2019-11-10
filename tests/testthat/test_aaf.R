@@ -115,6 +115,7 @@ test_that("Test suite test_aaf.R",{
     expect_true(is.zero(trunc(ooom(P,7)*(1-P)-1,7)))
 
     expect_true(is.constant(onevarpow(P,y=18)))
+    expect_false(is.constant(onevarpow(P,y=0)))
 
     expect_output(print(series(P,"x")))
     
@@ -126,6 +127,7 @@ test_that("Test suite test_aaf.R",{
     expect_true(nterms(P)==73)
     expect_output(print(summary(P)))
     expect_silent(rtypical(P))
+    expect_error(!P)
 
 })
 

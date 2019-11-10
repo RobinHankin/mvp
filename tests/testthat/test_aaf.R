@@ -65,6 +65,7 @@ test_that("Test suite test_aaf.R",{
         expect_true(consistent(coeffs(a),coeffs(a)*2))
         expect_true(consistent(coeffs(a),coeffs(a)+5))
         expect_false(consistent(coeffs(a),coeffs(a+5)))
+        expect_error(coeffs(a) & coeffs(a))
 
 
         expect_silent(as.function(a)(a=3))
@@ -127,6 +128,7 @@ test_that("Test suite test_aaf.R",{
     expect_true(nterms(P)==73)
     expect_output(print(summary(P)))
     expect_silent(rtypical(P))
+    expect_error(P&P)
     expect_error(!P)
 
 })

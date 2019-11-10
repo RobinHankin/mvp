@@ -10,14 +10,12 @@ test_that("Test suite test_aae.R",{
         
         expect_silent(jj <- homog(n))
         expect_error (jj <- homog(n,symbols=letters[seq_len(n-1)]))
-        expect_error (jj <- homog(seq_len(n)))
         expect_silent(jj <- homog(n,n))
 
         expect_silent(jj <- linear(seq_len(n),n))
         expect_error (jj <- linear(seq_len(n),symbols=letters[seq_len(n-1)]))
 
         expect_silent(jj <- xyz(n))
-        expect_error (jj <- xyz(seq_len(n)))
         expect_error (jj <- xyz(n,symbols=letters[seq_len(n-1)]))
 
         expect_silent (jj <- knight(n))

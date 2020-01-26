@@ -70,30 +70,45 @@ x \%~\% y
   \code{x,y,xy^3}, and if we choose \code{c(4,1,3)} the terms are
   \code{xy^3,x,y}.
 
-  Likewise a multinomial \code{x+2y+3z} might have coefficients
-  \code{c(1,2,3)} or \code{c(3,1,2)}
+  In the package, \code{coeffs()} returns an object of class
+  \dQuote{\code{mvp_coeffs}}.  This class of object has a slot for the
+  coefficients in the form of a numeric R vector, but also another slot
+  which uses hash codes to prevent users from misusing the ordering of
+  the numeric vector.
+   
+  For example, a multinomial \code{x+2y+3z} might have coefficients
+  \code{c(1,2,3)} or \code{c(3,1,2)}.  Package idiom to extract the
+  coefficients of a multivariate polynomial \code{a} is
+  \code{coeffs(a)}; but this cannot return a standard numeric vector
+  because a numeric vector has elements in a particular order, and the
+  coefficients of a multivariate polynomial are stored in an
+  implementation-specific (and thus unknown) order.
   
-  So even though \code{a+b} is well-defined, idiom such as
-  \code{coeffs(a) + coeffs(b)} is not defined: we might have
-  \code{c(1,3,4)+c(1,2,3)=c(2,5,7)} or
-  \code{c(1,3,4)+c(1,3,2)=c(2,6,6)}, with neither being more
+  Suppose we have two multivariate polynomials, \code{a} as defined as
+  above with \code{a=x+2y+3z} and \code{b=x+3y+4z}.  Even though
+  \code{a+b} is well-defined algebraically, and \code{coeffs(a+b)} will
+  return a well-defined \code{mvp_coeffs} object, idiom such as
+  \code{coeffs(a) + coeffs(b)} is not defined because there is no
+  guarantee that the coefficents of the two multivariate polynomials are
+  stored in the same order.  We might have
+  \code{c(1,2,3)+c(1,3,4)=c(2,5,7)} or
+  \code{c(1,2,3)+c(1,4,3)=c(2,6,6)}, with neither being more
   \dQuote{correct} than the other.  In the package, \code{coeffs(a) +
   coeffs(b)} will return an error.  In the same way \code{coeffs(a) +
-  1:3} is not defined and will return an error.  In the same way, idiom
-  such as \code{coeffs(a) <- 1:3} and \code{coeffs(a) <- coeffs(b)} are
-  not defined and will return an error.  However, note that
-  \code{coeffs(a) + coeffs(a)} and \code{coeffs(a)+coeffs(a)^2} are
-  fine, these returning a \code{coeffs} object specific to \code{a}.
+  1:3} is not defined and will return an error.  Further, idiom such as
+  \code{coeffs(a) <- 1:3} and \code{coeffs(a) <- coeffs(b)} are not
+  defined and will return an error.  However, note that \code{coeffs(a)
+  + coeffs(a)} and \code{coeffs(a)+coeffs(a)^2} are fine, these
+  returning a \code{mvp_coeffs} object specific to \code{a}.
 
-  Idiom such as \code{coeffs(a)
-  <- coeffs(a)^2} is fine too, for one does not need to know the order
-  of the coefficients on either side, so long as the order is the same
-  on both sides.  That would translate into idiomatic English:
-  \dQuote{the coefficient of each term of \code{a} becomes its square};
-  note that this operation is insensitive to the order of coefficients.
-  The whole shebang is intended to make idiom such as \code{coeffs(a) <-
-  coeffs(a)\%\%2} possible (so we can manipulate polynomials over finite
-  rings, here \eqn{Z/2Z}).
+  Idiom such as \code{coeffs(a) <- coeffs(a)^2} is fine too, for one
+  does not need to know the order of the coefficients on either side, so
+  long as the order is the same on both sides.  That would translate
+  into idiomatic English: \dQuote{the coefficient of each term of
+  \code{a} becomes its square}; note that this operation is insensitive
+  to the order of coefficients.  The whole shebang is intended to make
+  idiom such as \code{coeffs(a) <- coeffs(a)\%\%2} possible (so we can
+  manipulate polynomials over finite rings, here \eqn{Z/2Z}).
 
   The replacement methods are defined so that expressions like
   \code{coeffs(a)[coeffs(a) > 5] <- 5} works as expected; the English
@@ -109,16 +124,19 @@ x \%~\% y
   side of an assignment, as long as the right hand side is a length-one
   vector.  Idiom such as
 
-  \preformatted{coeffs(a)[coeffs(a)<5] <- 4+coeffs(a)[coeffs(a)<5]}
+  \itemize{
+    \item\preformatted{coeffs(a)[coeffs(a)<5] <- 4+coeffs(a)[coeffs(a)<5]}
+    \item\preformatted{coeffs(a) <- pmax(a,3)}
+  }
 
-  is arguably meaningful (\dQuote{Add 4 to any element less than 5}) but
-  is not implemented because replacement methods in R require the RHS to
-  be evaluated; also there is no ready way to check for (meaningless)
-  idiom such as \code{coeffs(a)[coeffs(a)<5] <-
+  is algebraically meaningful (\dQuote{Add 4 to any element less than
+  5}; \dQuote{coefficients become the pairwise maximum of themselves and
+  3}); but these are not implemented because replacement methods in R
+  require the RHS to be evaluated; also there is no ready way to check
+  for (meaningless) idiom such as \code{coeffs(a)[coeffs(a)<5] <-
   4+coeffs(a)[coeffs(a)>3]}.  Further note that \code{coeffs(a) <-
   rev(coeffs(a))} is disallowed (as indeed is \code{coeffs(a) <-
   sample(coeffs(a))}, although arguably that should be OK).
-
 
   The function \code{Ops.coeffs()} passes unary and binary arithmetic
   operators to the appropriate specialist function using a system of
@@ -143,8 +161,6 @@ x \%~\% y
   This does not matter because the algebraic value of the term does not
   depend on the order in which the variables appear and this term would
   be equivalent to \code{4b*c^6*a^3}.
-
-  The vignette provides an extensive discussion of this phenomenon.
 
 }
 \author{Robin K. S. Hankin}

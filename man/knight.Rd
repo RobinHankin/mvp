@@ -3,7 +3,8 @@
 \alias{knight}
 \title{Chess knight}
 \description{
-Generating function for a chess knight on an infinite $d$-dimensional chessboard
+  Generating function for a chess knight on an infinite
+  \eqn{d}-dimensional chessboard
 }
 \usage{
 knight(d, can_stay_still = FALSE)

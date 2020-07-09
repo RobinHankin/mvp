@@ -110,7 +110,7 @@ x \%~\% y
   idiom such as \code{coeffs(a) <- coeffs(a)\%\%2} possible (so we can
   manipulate polynomials over finite rings, here \eqn{Z/2Z}).
 
-  The replacement methods are defined so that expressions like
+  The replacement methods are defined so that an expression like
   \code{coeffs(a)[coeffs(a) > 5] <- 5} works as expected; the English
   idiom would be \dQuote{Replace any coefficient greater than 5 with 5}.
 

@@ -136,7 +136,7 @@ x \%~\% y
   for (meaningless) idiom such as \code{coeffs(a)[coeffs(a)<5] <-
   4+coeffs(a)[coeffs(a)>3]}.  Further note that \code{coeffs(a) <-
   rev(coeffs(a))} is disallowed (as indeed is \code{coeffs(a) <-
-  sample(coeffs(a))}, although arguably that should be OK).
+  sample(coeffs(a))}, although arguably the latter should be OK).
 
   The function \code{Ops.coeffs()} passes unary and binary arithmetic
   operators to the appropriate specialist function using a system of

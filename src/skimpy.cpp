@@ -16,7 +16,7 @@
 using namespace std;
 using namespace Rcpp; 
 
-typedef map <string, signed int> term; // A 'term' object is a map from string objects to a integers; thus a^2 b^3 is 'a' -> 2, 'b' -> 3
+typedef map <string, signed int> term; // A 'term' object is a map from string objects to integers; thus a^2 b^3 is 'a' -> 2, 'b' -> 3
 typedef map <term, double> mvp;       // An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double.
 typedef map <string, double> subs;   // A 'subs' object is a map from a string object to a real value, used in variable substitutions; thus a=1.1, b=1.2 is the map {'a' -> 1.1, 'b' -> 2.2}
 

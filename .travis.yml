@@ -9,6 +9,7 @@ r_build_args: '--resave-data --compact-vignettes="both" '
 
 r_packages:
   - covr
+  - mathjaxr
 
 after_success:
   - Rscript -e 'library(covr); codecov(line_exclusions=list("R/coeffs_ops.R" = c(22,51,66), "R/skimpy_ops.R" = c(3,30,40,50)))'

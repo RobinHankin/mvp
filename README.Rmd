@@ -47,14 +47,14 @@ in producing human-readable output.
 
 # Installation
 
-You can install the released version of ```mvp``` from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of `mvp` from [CRAN](https://CRAN.R-project.org) with:
 
 ```{r, message=FALSE}
 # install.packages("mvp")  # uncomment this to install the package
 library("mvp")
 ```
 
-# The ```mvp``` package in use
+# The `mvp` package in use
 
 Creating a multivariate polynomial is straightforward:
 
@@ -73,7 +73,7 @@ X-3*Y
 X^2
 ```
 
-Substitution uses the ```subs()``` function:
+Substitution uses the `subs()` function:
 
 ```{r}
 X
@@ -88,4 +88,4 @@ subs(X+Y,a="1+x^2",b="x+y",c=0)
 
 For more detail, see the package vignette
 
-```vignette("mvp")```
+`vignette("mvp")`

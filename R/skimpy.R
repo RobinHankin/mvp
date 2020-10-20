@@ -124,7 +124,7 @@ coeffs <- function(x){
     return(out)
 }
 
-`rmvp` <- function(n,size=6,pow=6,symbols=6){
+`rmvp` <- function(n=7,size=6,pow=6,symbols=6){
   if(is.numeric(symbols)){symbols <- letters[seq_len(symbols)]}
     mvp(
         vars   = replicate(n,sample(symbols,size,replace=TRUE),simplify=FALSE),

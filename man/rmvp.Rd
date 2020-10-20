@@ -4,7 +4,7 @@
 \description{Random multivariate polynomials, intended as quick
   \dQuote{get you going} examples of \code{mvp} objects}
 \usage{
-rmvp(n, size = 6, pow = 6, symbols = 6)
+rmvp(n=7, size = 6, pow = 6, symbols = 6)
 }
 \arguments{
   \item{n}{Number of terms to generate}
@@ -22,6 +22,6 @@ result may be larger than argument \code{pow}.
 Returns a multivariate polynomial, an object of class \code{mvp}}
 \author{Robin K. S. Hankin}
 \examples{
-rmvp(5)
+rmvp()
 rmvp(5,symbols=state.abb)
 }

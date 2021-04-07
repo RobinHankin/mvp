@@ -57,6 +57,19 @@ mvp_to_series(allnames, allpowers, coefficients, v)
   vector of powers of variable \code{v} (element \code{variablename} is
   a character string holding the variable name, argument \code{v}).
 
+  Function \code{trunc(S,n)} returns the terms of \code{S} with the sum
+  of the powers of the variables \eqn{\leq n}{<=n}.  Alternatively, it
+  discards all terms with total power \eqn{>n}.
+
+  Function \code{trunc1()} is similar to \code{trunc()}.  It takes a
+  \code{mvp} object and an arbitrary number of named arguments, with
+  names corresponding to variables and their values corresponding to the
+  highest power in that variable to be retained.  Thus
+  \code{trunc1(S,x=2,y=4)} will discard any term with variable \code{x}
+  raised to the power 3 or above, and also any term with variable
+  \code{y} raised to the power 5 or above.  The highest power of
+  \code{x} will be 2 and the highest power of \code{y} will be 4.
+  
   Function \code{series()} returns an object of class \code{series}; the
   print method for \code{series} objects is sensitive to the value of
   \code{getOption("mvp_mult_symbol")}; set this to \code{"*"} to get

@@ -321,6 +321,13 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   return(S)
 }
 
+`truncall` <- function(S,n){
+  a <- allvars(S)
+  v <- rep(n,length(a))
+  names(v) <- a
+  do.call(trunc1,c(list(S),as.list(v)))
+}
+
 `onevarpow` <- function(S,...){
   sb <- list(...)
   v <- names(sb)

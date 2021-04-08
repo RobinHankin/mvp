@@ -3,6 +3,7 @@
 \alias{taylor}
 \alias{trunc}
 \alias{trunc1}
+\alias{truncall}
 \alias{print.series}
 \alias{mvp_taylor_allvars}
 \alias{mvp_taylor_onevar}
@@ -14,6 +15,7 @@
   various forms}
 \usage{
 trunc(S,n)
+truncall(S,n)
 trunc1(S,...)
 series(S,v,showsymb=TRUE)
 \method{print}{series}(x,...)
@@ -70,6 +72,9 @@ mvp_to_series(allnames, allpowers, coefficients, v)
   \code{y} raised to the power 5 or above.  The highest power of
   \code{x} will be 2 and the highest power of \code{y} will be 4.
   
+  Function \code{truncall(S,n)} discards any term of \code{S} with any
+  variable raised to a power greater than \code{n}.  
+
   Function \code{series()} returns an object of class \code{series}; the
   print method for \code{series} objects is sensitive to the value of
   \code{getOption("mvp_mult_symbol")}; set this to \code{"*"} to get
@@ -87,8 +92,11 @@ mvp_to_series(allnames, allpowers, coefficients, v)
 \examples{
 trunc(as.mvp("1+x")^6,2)
 
-trunc(as.mvp("1+x+y")^3,2)      # neglects all terms with total power>2
-trunc1(as.mvp("1+x+y")^3,x=2) # terms like y^3 are treated as constants
+trunc(as.mvp("1+x+y")^3,2)      # discards all terms with total power>2
+trunc1(as.mvp("1+x+y")^3,x=2)   # terms like y^3 are treated as constants
+
+trunc(as.mvp("1+x+y^2")^3,3)    # discards x^2y^2 term (total power=4>3)
+truncall(as.mvp("1+x+y^2")^3,3) # retains  x^2y^2 term (all vars to power 2)
 
 p <- horner("x+y",1:4)
 

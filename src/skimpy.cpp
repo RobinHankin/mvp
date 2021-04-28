@@ -1,7 +1,7 @@
 // -*- mode: C++; c-indent-level: 4; c-basic-offset: 4; indent-tabs-mode: nil; -*-
 
 #define USE_UNORDERED_MAP true   // set to true for unordered_map; comment out to use plain stl map.
-
+#define STRICT_R_HEADERS
 #include <Rcpp.h>
 #include <cmath>
 

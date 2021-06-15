@@ -1,6 +1,5 @@
 useDynLib(mvp, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
-export("%~%")
 
 import("methods")
 importFrom("magrittr","%>%")
@@ -17,6 +16,8 @@ importFrom("freealg", "coeffs")
 
 importFrom("digest", "digest")
 importFrom("disordR","disord")
+importFrom("disordR","is.disord")
+importFrom("disordR","consistent")
 
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)
@@ -32,12 +33,5 @@ S3method(Ops,mvp)
 S3method(summary,mvp) 
 S3method(print, summary.mvp)
 
-S3method(print,  mvp_coeffs)
-S3method(Ops  ,  mvp_coeffs)
-S3method("["  ,  mvp_coeffs)
-S3method("[<-",  mvp_coeffs)
-
-
 S3method(constant, numeric)
-
 S3method(print,series)

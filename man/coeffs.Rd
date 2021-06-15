@@ -18,31 +18,27 @@
 \alias{\%~\%}
 \title{Functionality for \code{coeffs} objects}
 \description{
-  Allows arithmetic operators to be used for the coefficients of
-  multivariate polynomials, bearing in mind that the order of
-  coefficients is not determined. 
+
+Function \code{coeffs()} allows arithmetic operators to be used for the
+  coefficients of multivariate polynomials, bearing in mind that the
+  order of coefficients is not determined.  It uses the \code{disord}
+  class of the \pkg{disordR} package.
+
 }
 \usage{
-\method{Ops}{mvp_coeffs}(e1, e2=NULL)
-as_coeffs(v,h)
-is.coeffs(x)
-hash(x)
-\method{print}{mvp_coeffs}(x, ...)
+coeffs(x)
 vars(x)
 powers(x)
-coeffs(x)
 coeffs(x) <- value
-consistent(x,y)
-x \%~\% y
 }
 \arguments{
-  \item{x,y,e1,e2}{Objects of class \code{coeffs}}
-\item{...}{Further arguments}
-\item{v}{Vector of coefficients}
-\item{h}{Hash code}
-\item{value}{Replacement coefficients}
+  \item{x}{Object of class \code{disord}}
+  \item{value}{Object of class \code{disord}, or length-1 numeric vector}
 }
 \details{
+
+  (much of the discussion below appears in the vignette of the
+  \pkg{disordR} package). 
 
   Accessing elements of an \code{mvp} object is problematic because the
   order of the terms of an \code{mvp} object is not well-defined.  This
@@ -71,10 +67,10 @@ x \%~\% y
   \code{xy^3,x,y}.
 
   In the package, \code{coeffs()} returns an object of class
-  \dQuote{\code{mvp_coeffs}}.  This class of object has a slot for the
-  coefficients in the form of a numeric R vector, but also another slot
-  which uses hash codes to prevent users from misusing the ordering of
-  the numeric vector.
+  \code{disord}.  This class of object has a slot for the coefficients
+  in the form of a numeric R vector, but also another slot which uses
+  hash codes to prevent users from misusing the ordering of the numeric
+  vector.
    
   For example, a multinomial \code{x+2y+3z} might have coefficients
   \code{c(1,2,3)} or \code{c(3,1,2)}.  Package idiom to extract the
@@ -131,18 +127,8 @@ x \%~\% y
 
   is algebraically meaningful (\dQuote{Add 4 to any element less than
   5}; \dQuote{coefficients become the pairwise maximum of themselves and
-  3}); but these are not implemented because replacement methods in R
-  require the RHS to be evaluated; also there is no ready way to check
-  for (meaningless) idiom such as \code{coeffs(a)[coeffs(a)<5] <-
-  4+coeffs(a)[coeffs(a)>3]}.  Further note that \code{coeffs(a) <-
-  rev(coeffs(a))} is disallowed (as indeed is \code{coeffs(a) <-
-  sample(coeffs(a))}, although arguably the latter should be OK).
-
-  The function \code{Ops.coeffs()} passes unary and binary arithmetic
-  operators to the appropriate specialist function using a system of
-  hash code (created by function \code{hash()}) that prevents one from
-  misusing the arbitrary ordering of the coefficients returned by
-  \code{coeffs()}.
+  3}).  The \pkg{disordR} package uses \code{pmaxdis()} rather than
+  \code{pmax()} for technical reasons.
 
   So the output of \code{coeffs(x)} is defined only up to an unknown
   rearrangement.  The same considerations apply to the output of
@@ -164,7 +150,6 @@ x \%~\% y
 
 }
 \author{Robin K. S. Hankin}
-\seealso{\code{\link{Ops.mvp}}}
 \examples{
 
 x <- 5+rmvp(6)

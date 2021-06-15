@@ -9,8 +9,8 @@ test_that("Test suite test_aaf.R",{
 
         print(ca)
         
-        expect_error(!ca)
-        expect_error(!cb)
+        expect_silent(!ca)
+        expect_silent(!cb)
 
         expect_silent(+ca)
         expect_silent(-ca)
@@ -58,8 +58,8 @@ test_that("Test suite test_aaf.R",{
         expect_silent(2 >  ca)
         expect_silent(2 <  ca)
 
-        expect_true(is.coeffs(coeffs(a)))
-        expect_false(is.coeffs(a))
+        expect_true(is.disord(coeffs(a)))
+        expect_false(is.disord(a))
         expect_true(consistent(coeffs(a),coeffs(a)))
         expect_true(consistent(coeffs(a),2*coeffs(a)))
         expect_true(consistent(coeffs(a),coeffs(a)*2))

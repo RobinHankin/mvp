@@ -7,15 +7,10 @@
   return(out)
 }
 
-vars <- function(x){x[[1]]}
-powers <- function(x){x[[2]]}
 hash <- function(x){digest::digest(x)}
-coeffs <- function(x){
-    out <- x[[3]]
-    attributes(out) <- list(sha1=hash(x))
-    class(out) <- "mvp_coeffs"
-    return(out)
-}
+vars <- function(x)  {disord(x[[1]],hash(x))}
+powers <- function(x){disord(x[[2]],hash(x))}
+coeffs <- function(x){disord(x[[3]],hash(x))}
 
 `is.mvp` <- function(x){inherits(x,"mvp")}
 
@@ -135,19 +130,16 @@ coeffs <- function(x){
 
 `coeffs<-` <- function(x,value){UseMethod("coeffs<-")}
 `coeffs<-.mvp` <- function(x,value){
-    if(length(value) == 1){
-        x[[3]][] <- value
-        return(mvp(x[[1]],x[[2]],x[[3]]))
-    } else { # length >1;  must be of class mvp_coeffs:
-        stopifnot(inherits(value, "mvp_coeffs"))
-        ## also hash must match:
-        stopifnot(identical(hash(x), attributes(value)$sha1))
-        x[[3]][] <- unclass(value)
-        return(mvp(x[[1]],x[[2]],x[[3]]))
-    }
+  jj <- coeffs(x)
+  if(is.disord(value)){
+    stopifnot(consistent(vars(x),value))
+    stopifnot(consistent(powers(x),value))
+    jj <- value
+  } else {
+    jj[] <- value  # the meat
+  }
+  mvp(vars(x),powers(x),jj)
 }
-        
-    
 
 "constant" <- function(x){UseMethod("constant")}
 "constant<-" <- function(x, value){UseMethod("constant<-")}

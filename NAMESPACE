@@ -16,7 +16,7 @@ importFrom("freealg", "words")
 importFrom("freealg", "coeffs")
 
 importFrom("digest", "digest")
-
+importFrom("disordR","disord")
 
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)

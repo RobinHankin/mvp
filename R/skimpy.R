@@ -141,8 +141,8 @@ coeffs <- function(x){disord(x[[3]],hash(x))}
   mvp(vars(x),powers(x),jj)
 }
 
-"constant" <- function(x){UseMethod("constant")}
-"constant<-" <- function(x, value){UseMethod("constant<-")}
+`constant` <- function(x){UseMethod("constant")}
+`constant<-` <- function(x, value){UseMethod("constant<-")}
 
 `constant.mvp` <- function(x){
   wanted <- sapply(x$names,function(x){length(x)==0})
@@ -264,7 +264,6 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   mvp(vp,pp,coeffs(p))
 }
 
-
 `kahle`  <- function(n=26,r=1,p=1,coeffs=1,symbols=letters){
   if(n > length(symbols)){stop("not enough symbols")}
   symbols <- symbols[seq_len(n)]
@@ -280,7 +279,6 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
       coeffs = coeffs
   )
 }
-
 
 `horner` <- function(P, v) {  # inspired by Rosettacode
   P <- as.mvp(P)

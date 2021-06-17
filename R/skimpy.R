@@ -30,7 +30,7 @@ coeffs <- function(x){disord(x[[3]],hash(x))}
   return(TRUE)
 }
 
-`allvars` <- function(x){sort(unique(c(vars(x),recursive=TRUE)))}
+`allvars` <- function(x){sort(unique(c(elements(vars(x)),recursive=TRUE)))}
 
 `is.zero` <- function(x){
     length(vars(x))==0
@@ -112,7 +112,7 @@ coeffs <- function(x){disord(x[[3]],hash(x))}
       jj <- coeffs(S)
     } else {
       M <- rbind(M,0)
-      jj <- c(coeffs(S),cons)
+      jj <- c(elements(coeffs(S)),cons)
     }
     out <- list(M,jj)
     class(out) <- "spray"
@@ -163,9 +163,9 @@ coeffs <- function(x){disord(x[[3]],hash(x))}
     return(mvp(vars(x),powers(x),coeffs(x)))
   } else {  # no constant term in x... 
     return(mvp(     # ...so an extra (constant) term must be added:
-    c(vars(x),list(character(0))), # to the variables
-    c(powers(x),list(integer(0))), # and the powers
-    c(coeffs(x),value))            # and coeffs (with the correct value)
+    c(elements(vars(x)),list(character(0))), # to the variables
+    c(elements(powers(x)),list(integer(0))), # and the powers
+    c(elements(coeffs(x)),value))            # and coeffs (with the correct value)
     )
   }
 }

@@ -18,6 +18,7 @@ importFrom("digest", "digest")
 importFrom("disordR","disord")
 importFrom("disordR","is.disord")
 importFrom("disordR","consistent")
+importFrom("disordR","elements")
 
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)

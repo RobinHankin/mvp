@@ -12,9 +12,6 @@ test_that("Test suite test_aag.R",{
     expect_silent(as.mvp(structure(list(indices = list(1:2, c(1L, 3L, 3L, 3L), c(2L, 3L, 3L, 2L), 3L, c(3L, 3L, 2L, 1L)), coeffs = c(1, 9, 3, 13, 2)), class = "freealg")))
     expect_error(as.mvp(function(x){x^6}))
 
-    library("spray") # needed for mvp_to_spray()
-    expect_silent(mvp_to_spray(as.mvp("x+x*y")))
-    expect_silent(mvp_to_spray(as.mvp("1+x+x*y")))
 
 
     expect_true(is.constant(as.mvp("1")))
@@ -36,5 +33,15 @@ test_that("Test suite test_aag.R",{
     colnames(M) <- letters
     expect_silent(subvec(kahle(r=3,p=1:3),M)) 
 
-    
+    if(FALSE){  # the spray library interacts badly with the mvp
+                # library [subs() is not generic, for example, and
+                # this can cause problems if the wrong version is
+                # called].  Do not load mvp and spray simultaneously,
+                # pending S4 further investigation.
+
+      library("spray") # needed for mvp_to_spray()
+      expect_silent(mvp_to_spray(as.mvp("x+x*y")))
+      expect_silent(mvp_to_spray(as.mvp("1+x+x*y")))
+      }
+      
 })

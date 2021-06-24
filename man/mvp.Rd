@@ -2,6 +2,11 @@
 \alias{mvp}
 \alias{is.mvp}
 \alias{as.mvp}
+\alias{as.mvp.character}
+\alias{as.mvp.list}
+\alias{as.mvp.mvp}
+\alias{as.mvp.numeric}
+\alias{as.mvp.mpoly}
 \alias{is_ok_mvp}
 \title{Multivariate polynomials, mvp objects}
 \description{Create, test for, an coerce to, \code{mvp} objects}
@@ -9,7 +14,12 @@
 mvp(vars, powers, coeffs)
 is_ok_mvp(vars,powers,coeffs)
 is.mvp(x)
-as.mvp(x,...)
+as.mvp(x)
+\S3method{as.mvp}{character}(x)
+\S3method{as.mvp}{list}(x)
+\S3method{as.mvp}{mpoly}(x)
+\S3method{as.mvp}{mvp}(x)
+\S3method{as.mvp}{numeric}(x)
 }
 \arguments{
   \item{vars}{List of variables comprising each term of an \code{mvp} object}
@@ -17,8 +27,7 @@ as.mvp(x,...)
     \code{vars} argument}
   \item{coeffs}{Numeric vector corresponding to the coefficients to each
     element of the \code{var} and \code{powers} lists}
-  \item{x}{Object possibly of class \code{mvp}}
-  \item{...}{Further arguments, passed to the methods}
+  \item{x}{Object to be coerced to or tested for being class \code{mvp}}
 }
 \details{
 Function \code{mvp()} is the formal creation mechanism for \code{mvp}

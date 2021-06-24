@@ -65,7 +65,13 @@ test_that("Test suite test_aaf.R",{
         expect_true(consistent(coeffs(a),coeffs(a)*2))
         expect_true(consistent(coeffs(a),coeffs(a)+5))
         expect_false(consistent(coeffs(a),coeffs(a+5)))
-        expect_error(coeffs(a) & coeffs(a))
+        expect_silent(coeffs(a)>0 & coeffs(a)>0)
+        expect_silent(coeffs(a)>0 | coeffs(a)>0)
+
+        b <- a*7
+        expect_silent(coeffs(a)>0 & coeffs(b)>0)
+        expect_silent(coeffs(a)>0 | coeffs(b)>0)
+
 
 
         expect_silent(as.function(a)(a=3))

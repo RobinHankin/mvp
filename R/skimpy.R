@@ -46,25 +46,16 @@ coeffs <- function(x){disord(x[[3]],hash(x))}
     cat("\n")
 }
 
-`as.mvp` <- function(x,...){
-  if(is.mvp(x)){
-    return(x)
-  } else if(is.mpoly(x)){
-    return(mpoly_to_mvp(x))
-  } else if(inherits(x,"spray")){
-    return(spray_to_mvp(x,...))
-  } else if(inherits(x,"freealg")){ # free algebra
-    return(freealg_to_mvp(x))
-  } else if(is.character(x)){
-    return(mpoly_to_mvp(mp(x)))
-  } else if(is.list(x)){
-    return(mvp(vars=x$names,powers=x$power,coeffs=x$coeffs))
-  } else if(is.numeric(x)){
-    return(numeric_to_mvp(x))
-  } else {
-    stop("not recognised")
-  }
-}
+setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
+`as.mvp` <- function(x){UseMethod("as.mvp",x)}
+
+`as.mvp.mvp` <- function(x){x}
+`as.mvp.mpoly` <- function(x){mpoly_to_mvp(x)}
+## as.mvp.freealg() defined in the freealg package (eventually)
+`as.mvp.character` <- function(x){mpoly_to_mvp(mp(x))}
+`as.mvp.list` <- function(x){mvp(vars=x$names,powers=x$power,coeffs=x$coeffs)}
+`as.mvp.numeric` <- function(x){numeric_to_mvp(x)}
+
 
 `mpoly_to_mvp` <- function(m){
   mvp(
@@ -83,41 +74,6 @@ coeffs <- function(x){disord(x[[3]],hash(x))}
     class(out) <- "mpoly"
     return(out)
 }    
-
-`spray_to_mvp` <- function(L,symbols=letters){
-  I <- L$index
-  mvp(
-      vars   = sapply(seq_len(nrow(I)),function(i){symbols[which(I[i,] != 0)]},simplify=FALSE),
-      powers = sapply(seq_len(nrow(I)),function(i){          I[i,I[i,] != 0 ]},simplify=FALSE),
-      coeffs = L$value
-      )
-}
-
-`mvp_to_spray` <- function(S){
-    cons <- constant(S)
-    constant(S) <- 0
-    vS <- vars(S)
-    pS <- powers(S)
-    av <- allvars(S)
-
-    M <- matrix(0,length(powers(S)),length(av))
-    for(i in seq_len(nrow(M))){
-        v <- vS[[i]]
-        p <- pS[[i]]
-
-        M[i,sapply(v,function(x){which(x==av)})] <- p
-    }
-
-    if(cons==0){
-      jj <- coeffs(S)
-    } else {
-      M <- rbind(M,0)
-      jj <- c(elements(coeffs(S)),cons)
-    }
-    out <- list(M,jj)
-    class(out) <- "spray"
-    return(out)
-}
 
 `rmvp` <- function(n=7,size=6,pow=6,symbols=6){
   if(is.numeric(symbols)){symbols <- letters[seq_len(symbols)]}
@@ -421,10 +377,3 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   K + mvp(object[[1]][wanted],object[[2]][wanted],object[[3]][wanted])
 }
 
-`freealg_to_mvp` <- function(x){ # takes x, a freealg object, returns mvp
-  mvp(
-      vars   = lapply(freealg::words(x),function(v){letters[abs(v)]}),
-      powers = lapply(freealg::words(x),function(v){2*(v>0)-1}),
-      coeffs = freealg::coeffs(x)
-  )
-}

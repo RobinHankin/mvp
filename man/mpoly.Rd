@@ -20,7 +20,6 @@ mpoly_to_mvp(m)
   \item{...}{further arguments, currently ignored}
 }
 \author{Robin K. S. Hankin}
-\seealso{\code{\link{spray}}}
 \examples{
 
 x <- rmvp(5)

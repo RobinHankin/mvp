@@ -1,0 +1,53 @@
+---
+title: "The `mvp` package and the `freealg` package"
+author: "Robin K. S. Hankin"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(0)
+```
+
+# Introduction
+
+The `freealg` package provides some functionality for the free algebra
+which does not assume commutativity of the elements.  This little
+document discusses the conversion of `freealg` objects to `mvp`
+objects.  Observe that there is no natural way to convert `mvp` to
+`freealg` as one needs to impose an arbitrary order on the
+indeterminates.
+
+```{r}
+library("mvp")
+library("freealg")
+`freealg_to_mvp` <- function(x){ # takes x, a freealg object, returns mvp
+  mvp(
+      vars   = lapply(freealg::words(x),function(v){letters[abs(v)]}),
+      powers = lapply(freealg::words(x),function(v){2*(v>0)-1}),
+      coeffs = freealg::coeffs(x)
+  )
+}
+```
+
+
+Then
+
+
+```{r}
+a <- rfalg()
+a
+freealg_to_mvp(a)
+```
+
+We may show that the conversion is in fact a homomorphism:
+
+
+```{r}
+x <- rfalg()
+y <- rfalg()
+freealg_to_mvp(x*y) == freealg_to_mvp(x) * freealg_to_mvp(y) # should be TRUE
+```
+
+
+

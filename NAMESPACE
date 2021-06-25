@@ -36,6 +36,7 @@ S3method(as.mvp,character)
 S3method(as.mvp,list)
 S3method(as.mvp,numeric)
 
+
 S3method(summary,mvp) 
 S3method(print, summary.mvp)
 

@@ -51,11 +51,10 @@ setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
 
 `as.mvp.mvp` <- function(x){x}
 `as.mvp.mpoly` <- function(x){mpoly_to_mvp(x)}
-## as.mvp.freealg() defined in the freealg package (eventually)
+## as.mvp.freealg() defined in inst/freealg_mvp.R
 `as.mvp.character` <- function(x){mpoly_to_mvp(mp(x))}
 `as.mvp.list` <- function(x){mvp(vars=x$names,powers=x$power,coeffs=x$coeffs)}
 `as.mvp.numeric` <- function(x){numeric_to_mvp(x)}
-
 
 `mpoly_to_mvp` <- function(m){
   mvp(

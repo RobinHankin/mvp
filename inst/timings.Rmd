@@ -23,65 +23,40 @@ particularly favourable example that exploits the symbolic nature of
 the `mvp` package.
 
 ```{r}
-library("spray")
-library("mpoly")
-library("mvp")
-library("microbenchmark")
-
-`spray_to_mvp` <- function(L,symbols=letters){
-  I <- L$index
-  mvp(
-      vars   = sapply(seq_len(nrow(I)),function(i){symbols[which(I[i,] != 0)]},simplify=FALSE),
-      powers = sapply(seq_len(nrow(I)),function(i){          I[i,I[i,] != 0 ]},simplify=FALSE),
-      coeffs = L$value
-      )
-}
-
-`mvp_to_spray` <- function(S){
-    cons <- constant(S)
-    constant(S) <- 0
-    vS <- vars(S)
-    pS <- powers(S)
-    av <- allvars(S)
-
-    M <- matrix(0,length(powers(S)),length(av))
-    for(i in seq_len(nrow(M))){
-        v <- vS[[i]]
-        p <- pS[[i]]
-
-        M[i,sapply(v,function(x){which(x==av)})] <- p
-    }
-
-    if(cons==0){
-      jj <- coeffs(S)
-    } else {
-      M <- rbind(M,0)
-      jj <- c(elements(coeffs(S)),cons)
-    }
-    out <- list(M,jj)
-    class(out) <- "spray"
-    return(out)
-}
-
-
-
-n <- 30
-k <- kahle(n, r = 3, p = 1:3, symbols = paste0("x", sprintf("%03d", 1:n)))
+source("coercion.R")   # low-level functions, e.g. as.mvp()
+tp <- function(n,r){kahle(n,r=r,p=seq_len(r),symbols=paste0("x",sprintf("%03d",seq_len(n))))}
+k <- tp(9,3)  # test polynomial
+mvp_to_spray(k)
 k
 ```
 
-In the above, polynomial `k` has 300 terms of the form $xy^2z^3$.
-Coercing `k` to `spray` form would need a $300\times 300$
-matrix for the indices, almost every element of which would be zero.
-This makes [the __spray__ package](https://github.com/RobinHankin/spray) slower:
+In the above, polynomial `k` has $n=9$ terms of the form $xy^2z^3$.
+Coercing `k` to `spray` form would need a $n\times n$ matrix for the
+indices, only $3n$ elements of which would be nonzero.  This would be
+expected to make [the __spray__
+package](https://github.com/RobinHankin/spray) slower, at least for
+large $n$, but this does not seem to be the case.
 
 ```{r}
-spray_k <- mvp_to_spray(k)
-spray_k
-microbenchmark(k^2, spray_k^2, times=10)
+library("microbenchmark")
+mbm <- function(n,r,p){
+  k <- tp(n,r)
+  spray_k <- mvp_to_spray(k)
+  microbenchmark(k^p, spray_k^p)
+}		  
 ```
 
-In the above, the first line uses `mvp` functionality, and the
-second line uses `spray` functionality.  The speedup increases for
-larger polynomials.
+Thus `mbm()` is a unified benchmark execution function:
 
+
+```{r}
+mbm(10,3,2)
+mbm(10,3,3)
+mbm(10,3,4)
+mbm(20,3,2)
+mbm(30,3,2)
+mbm(40,3,2)
+```
+
+
+In each case above, `spray` is considerably faster.

@@ -17,6 +17,7 @@ importFrom("disordR","disord")
 importFrom("disordR","is.disord")
 importFrom("disordR","consistent")
 importFrom("disordR","elements")
+importFrom("disordR","%~%")
 
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)

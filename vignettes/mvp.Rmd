@@ -324,6 +324,97 @@ mvp objects:
 p + as.mvp("z^6")
 ```
 
+# The `disordR` package
+
+It is possible to examine the coefficients of an `mvp` object:
+
+```{r introtodisord}
+a <- as.mvp("5 + 8*x^2*y - 13*y*x^2 + 11*z - 3*x*yz")
+a
+coeffs(a)
+```
+
+
+
+
+Above, note that the result of `coeffs()` is a `disord` object,
+defined in the `disordR` package.  The order of the elements
+unspecified as the `STL map` class holds the keys and values in an
+implementation-specific order.  This device stops the user from
+illegal operations on the coefficients.  For example, suppose we had
+another `mvp` object, `b`:
+
+
+```{r disordpluscoeffs,error=TRUE}
+b <- a*2
+b
+coeffs(a) + coeffs(b)
+```
+
+above, we get an error because the coefficients of `a` and `b` are
+possibly stored in a different order and therefore vector addition
+makes no sense.  However, we can operate on coefficients of a single
+`mvp` object at will:
+
+
+```{r disordRsingleobjectstuff}
+coeffs(a) > 0
+coeffs(a) + coeffs(a)^4
+```
+
+Extraction also works but subject to standard `disordR` idiom
+restrictions:
+
+```{r disordextract}
+coeffs(a)[coeffs(a) > 0]
+```
+
+But "mixing" objects is forbidden:
+
+
+```{r disordnotallowed,error=TRUE}
+coeffs(a)[coeffs(b) > 0]
+```
+
+Extraction methods work, again subject to `disordR` restrictions:
+
+
+```{r disordreplace}
+coeffs(a)[coeffs(a)<0] <- coeffs(a)[coeffs(a)<0] + 1000 # add 1000 to every negative coefficient
+a
+```
+
+In cases like this where the replacement object is complicated, using
+`magrittr` would simplify the idiom and reduce the opportunity for
+error:
+
+```{r usemagirttr}
+library("magrittr")
+b
+coeffs(b)[coeffs(b)%%3==1] %<>% `+`(100)  # add 100 to every element equal to 1 modulo 3
+b
+```
+
+One good use for this is to "zap" small elements:
+
+```{r}
+x <- as.mvp("1 - 0.11*x + 0.005*x*y")^2
+x
+```
+
+Then we can zap as follows:
+
+```{r zapmvp}
+cx <- coeffs(x)
+cx[abs(cx) < 0.01] <- 0
+coeffs(x) <- cx
+x
+```
+
+(I should write a method for `zapsmall()` that does this)
+
+
+# Multivariate generating functions
 
 We can see the generating function for a chess knight:
 

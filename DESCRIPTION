@@ -14,7 +14,7 @@ Description: Fast manipulation of symbolic multivariate polynomials
   speed improvements.  It is comparable in speed to the 'spray' package
   for sparse arrays, but retains the symbolic benefits of 'mpoly'.
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.3),
+Imports: Rcpp (>= 1.0-7),
   partitions,
   mpoly (>= 1.1.0),
   magic,

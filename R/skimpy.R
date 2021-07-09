@@ -7,10 +7,10 @@
   return(out)
 }
 
-hash <- function(x){digest::digest(x)}
-vars <- function(x)  {disord(x[[1]],hash(x))}
-powers <- function(x){disord(x[[2]],hash(x))}
-coeffs <- function(x){disord(x[[3]],hash(x))}
+vars <- function(x)  {disord(x[[1]],hashcal(x))}
+powers <- function(x){disord(x[[2]],hashcal(x))}
+`coeffs` <- function(x){UseMethod("coeffs")}
+`coeffs.mvp` <- function(x){disord(x[[3]],hashcal(x))}
 
 `is.mvp` <- function(x){inherits(x,"mvp")}
 

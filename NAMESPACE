@@ -18,6 +18,7 @@ importFrom("disordR","is.disord")
 importFrom("disordR","consistent")
 importFrom("disordR","elements")
 importFrom("disordR","%~%")
+importFrom("disordR","hashcal")
 
 S3method(as.mpoly,mvp)
 S3method(constant, mvp)

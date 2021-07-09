@@ -1,6 +1,8 @@
 \name{zero}
 \alias{zero}
+\alias{zero.mvp}
 \alias{is.zero}
+\alias{is.zero.mvp}
 \title{The zero polynomial}
 \description{
 Test for a multivariate polynomial being zero

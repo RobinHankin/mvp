@@ -32,7 +32,8 @@ coeffs <- function(x){disord(x[[3]],hash(x))}
 
 `allvars` <- function(x){sort(unique(c(elements(vars(x)),recursive=TRUE)))}
 
-`is.zero` <- function(x){
+`is.zero` <- function(x){UseMethod("is.zero")}
+`is.zero.mvp` <- function(x){
     length(vars(x))==0
 }
 

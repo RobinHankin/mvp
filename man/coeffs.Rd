@@ -1,6 +1,7 @@
 \name{coeffs}
 \alias{Ops.coeffs}
 \alias{coeffs}
+\alias{coeffs.mvp}
 \alias{Ops.mvp_coeffs}
 \alias{hash}
 \alias{as_coeffs}

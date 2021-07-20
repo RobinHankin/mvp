@@ -118,6 +118,10 @@ p \%>\% trunc(2)
 p \%>\% trunc1(x=2)
 (p \%>\% subs(x="x+dx") -p) \%>\% trunc1(dx=2)
 
+# Nice example of Horner's method:
+p <- as.mvp("x + y + 3*x*y")
+trunc(horner(p,1:5)*(1-p)^2,4)  # should be 1
+
 
 ## Third order taylor expansion of f(x)=sin(x+y) for x=1.1, about x=1:
 sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120,0,-1/5040,0,1/362880))  # sin(x+y)

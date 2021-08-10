@@ -4,3 +4,6 @@
 README.Rmd
 README.html
 ^\.travis\.yml$
+^inst/mvp_blue.png$
+^inst/mvp_screeenshot.xcf$
+^inst/mvp_stickermaker.R$

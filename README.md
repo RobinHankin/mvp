@@ -3,6 +3,8 @@ Fast symbolic multivariate polynomials in R
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# mvp <img src="man/figures/mvp.png" width = "150" align="right" />
+
 <!-- badges: start -->
 
 [![Build

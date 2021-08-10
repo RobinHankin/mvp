@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+# mvp <img src="man/figures/mvp.png" width = "150" align="right" />
 
 <!-- badges: start -->
 [![Build Status](https://travis-ci.org/RobinHankin/mvp.svg?branch=master)](https://travis-ci.org/RobinHankin/mvp)

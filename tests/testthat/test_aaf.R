@@ -1,4 +1,5 @@
 # test coeffs stuff
+library("disordR")   # needed for is.disord()
 
 test_that("Test suite test_aaf.R",{
 

@@ -17,6 +17,10 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", dev = "png", fig.width = 
 options(width = 80, tibble.width = Inf)
 ```
 
+<p style="text-align: right;">
+![](`r system.file("help/figures/mvp.png", package = "mvp")`){width=10%}
+</p>
+
 
 Here I present a short analysis of timings for benchmark tasks using
 the `mvp` and `spray` packages.  I will show some timings using a

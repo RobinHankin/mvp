@@ -19,7 +19,7 @@ Imports: Rcpp (>= 1.0-7),
   mpoly (>= 1.1.0),
   magic,
   digest,
-  disordR
+  disordR (>= 0.0-6)
 LinkingTo: Rcpp
 SystemRequirements: C++11
 URL: https://github.com/RobinHankin/mvp.git

@@ -17,6 +17,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", dev = "png", fig.width = 
 options(width = 80, tibble.width = Inf)
 ```
 
+
 Here I present a short analysis of timings for benchmark tasks using
 the `mvp` and `spray` packages.  I will show some timings using a
 particularly favourable example that exploits the symbolic nature of
@@ -39,10 +40,10 @@ large $n$, but this does not seem to be the case.
 
 ```{r}
 library("microbenchmark")
-mbm <- function(n,r,p){
+mbm <- function(n,r,p,...){
   k <- tp(n,r)
   spray_k <- mvp_to_spray(k)
-  microbenchmark(k^p, spray_k^p)
+  microbenchmark(k^p, spray_k^p,...)
 }		  
 ```
 
@@ -59,4 +60,15 @@ mbm(40,3,2)
 ```
 
 
-In each case above, `spray` is considerably faster.
+In each case above, `spray` is considerably faster.  But if we
+consider the simpler case of calculating $(x_1+x_2+\ldots +x_n)^2$ for
+different values of $n$ we see `mvp` becoming slightly faster:
+
+```{r}
+mbm(10,1,2,times=10)
+mbm(20,1,2,times=10)
+mbm(50,1,2,times=10)
+mbm(100,1,2,times=10)
+mbm(200,1,2,times=10)
+mbm(300,1,2,times=10)
+```

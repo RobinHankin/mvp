@@ -15,8 +15,8 @@ library("microbenchmark")
 }
 
 `mvp_to_spray` <- function(S){
-    cons <- constant(S)
-    constant(S) <- 0
+    cons <- mvp::constant(S)
+    mvp::constant(S) <- 0
     vS <- vars(S)
     pS <- powers(S)
     av <- allvars(S)
@@ -30,12 +30,13 @@ library("microbenchmark")
     }
 
     if(cons==0){
-      jj <- coeffs(S)
+      jj <- disordR::elements(coeffs(S))
     } else {
       M <- rbind(M,0)
-      jj <- c(elements(coeffs(S)),cons)
+      jj <- c(disordR::elements(coeffs(S)),cons)
     }
     out <- list(M,jj)
+
     class(out) <- "spray"
     return(out)
 }

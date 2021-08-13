@@ -18,12 +18,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", dev = "png", fig.width = 
 options(width = 80, tibble.width = Inf)
 ```
 
-<p style="text-align: right;">
-![](`r system.file("help/figures/mvp.png", package = "mvp")`){width=10%}
-</p>
-
-
-
+\hfill![](`r system.file("help/figures/mvp.png", package = "mvp")`){width=10%}
 
 # Introduction
 

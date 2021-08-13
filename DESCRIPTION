@@ -22,5 +22,5 @@ Imports: Rcpp (>= 1.0-7),
   disordR (>= 0.0-6)
 LinkingTo: Rcpp
 SystemRequirements: C++11
-URL: https://github.com/RobinHankin/mvp.git
+URL: https://github.com/RobinHankin/mvp
 BugReports: https://github.com/RobinHankin/mvp/issues

@@ -8,7 +8,7 @@
 \title{Various functions to create simple multivariate polynomials}
 \description{
 Various functions to create simple \code{mvp} objects such as single-term,
-homogenous, and constant multivariate polynomials.
+homogeneous, and constant multivariate polynomials.
 }
 \usage{
 product(v,symbols=letters)

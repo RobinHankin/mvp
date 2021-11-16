@@ -57,8 +57,9 @@ b x^2
 Functions \code{subsy()} and \code{subsmpv()} are lower-level functions,
 not really intended for the end-user.  Function \code{subsy()}
 substitutes variables for numeric values (order matters if a variable is
-substitued more than once).  Function \code{subsmpv()} takes a \code{mvp}
-object and substitutes another \code{mvp} object for a specific symbol.
+substituted more than once).  Function \code{subsmpv()} takes a
+\code{mvp} object and substitutes another \code{mvp} object for a
+specific symbol.
 
 Function \code{subvec()} substitutes the symbols of \code{S} with
 numerical values.  It is vectorised in its ellipsis arguments with

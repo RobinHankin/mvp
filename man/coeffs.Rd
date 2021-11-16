@@ -86,8 +86,8 @@ coeffs(x) <- value
   \code{a+b} is well-defined algebraically, and \code{coeffs(a+b)} will
   return a well-defined \code{mvp_coeffs} object, idiom such as
   \code{coeffs(a) + coeffs(b)} is not defined because there is no
-  guarantee that the coefficents of the two multivariate polynomials are
-  stored in the same order.  We might have
+  guarantee that the coefficients of the two multivariate polynomials
+  are stored in the same order.  We might have
   \code{c(1,2,3)+c(1,3,4)=c(2,5,7)} or
   \code{c(1,2,3)+c(1,4,3)=c(2,6,6)}, with neither being more
   \dQuote{correct} than the other.  In the package, \code{coeffs(a) +

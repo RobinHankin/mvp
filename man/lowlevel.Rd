@@ -30,6 +30,6 @@ mvp_power(allnames, allpowers, coefficients, n)
 \details{These functions call the functions defined in \code{RcppExports.R}}
 \author{Robin K. S.  Hankin}
 \note{These functions are not intended for the end-user.  Use the
-  syntatic sugar (as in \code{a+b} or \code{a*b} or \code{a^n}), or
+  syntactic sugar (as in \code{a+b} or \code{a*b} or \code{a^n}), or
   functions like \code{mvp_plus_mvp()}, which are more user-friendly.}
 \keyword{symbolmath}

@@ -7,10 +7,7 @@ Fast symbolic multivariate polynomials in R
 
 <!-- badges: start -->
 
-[![Build
-Status](https://travis-ci.com/RobinHankin/mvp.svg?branch=master)](https://travis-ci.com/RobinHankin/mvp)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/mvp)](https://cran.r-project.org/package=mvp)
-[![Rdoc](https://www.rdocumentation.org/badges/version/mvp)](https://www.rdocumentation.org/packages/mvp)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/mvp)](https://cran.r-project.org/package=mvp)
 [![Codecov test
 coverage](https://codecov.io/gh/RobinHankin/mvp/branch/master/graph/badge.svg)](https://codecov.io/gh/RobinHankin/mvp/branch/master)
 <!-- badges: end -->

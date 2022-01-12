@@ -18,10 +18,6 @@ knitr::opts_chunk$set(
 
 # mvp <img src="man/figures/mvp.png" width = "150" align="right" />
 
-<!-- badges: start -->
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/mvp)](https://cran.r-project.org/package=mvp)
-[![Codecov test coverage](https://codecov.io/gh/RobinHankin/mvp/branch/master/graph/badge.svg)](https://codecov.io/gh/RobinHankin/mvp/branch/master)
-<!-- badges: end -->
 
 # Overview
 

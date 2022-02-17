@@ -65,10 +65,13 @@
         if(lclass && rclass){
             return(!mvp_eq_mvp(e1,e2))
         } else {
-            stop("Generic '==' only compares two mvp objects with one another")
+            stop("Generic '!=' only compares two mvp objects with one another")
         }
     } else if (.Generic == "/") {
         if(lclass && !rclass){
+            if(e2 == 0) {
+                stop("Division by zero")
+            }
             return(mvp_times_scalar(e1,1/e2))
           } else {
         stop("don't use '/', use ooom() instead")

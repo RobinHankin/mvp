@@ -49,8 +49,18 @@ mvp_to_series(allnames, allpowers, coefficients, v)
 }
 \details{
 
-  Function \code{onevarpow()} returns just the terms in which symbol
-  \code{v} appears with power \code{n}.
+  Function \code{onevarpow()} returns just the terms in which the
+  symbols corresponding to the named arguments have powers equal to the
+  arguments' powers.  Thus:
+
+  \preformatted{
+ onevarpow(as.mvp("x*y*z + 3*x*y^2 + 7*x*y^2*z^6 + x*y^3"),x=1,y=2)
+mvp object algebraically equal to
+3  +  7 z^6
+}
+
+  Above, we see that only the terms with \code{x^1*y^2} have been
+  extracted, corresponding to arguments \code{x=1,y=2}.
   
   Function \code{series()} returns a power series expansion of powers of
   variable \code{v}.  The value returned is a list of three elements

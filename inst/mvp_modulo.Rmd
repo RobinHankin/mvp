@@ -1,0 +1,110 @@
+---
+title: "Multivariate polynomials over finite rings: function `mvp_modulo()` in the `mvp` package"
+author: "Robin K. S. Hankin"
+output: html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{mvp_modulo}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("mvp")
+set.seed(0)
+```
+
+<p style="text-align: right;">
+![](`r system.file("help/figures/mvp.png", package = "mvp")`){width=10%}
+</p>
+
+
+```{r}
+mvp_modulo
+```
+
+The `mvp` package deals with the ring of polynomials with
+indeterminates over the reals.  This document details how the package
+deals with multivariate polynomials over a finite ring, here integers
+modulo $p$, a prime number.
+
+A short example:
+
+```{r}
+m <- rmvp(3,pow=11,symbols=3)*37
+m
+```
+
+We see a standard `mvp` object.  However, we might wish to consider
+this polynomial over integers modulo 7:
+
+```{r}
+m %% 7
+```
+
+Above, the `%%` binary operator [which dispatches to `mvp_modulo()`]
+alters object `m` in two ways: firstly, coefficients are expressed
+modulo 7, and secondly, powers are expressed modulo 6 [on the grounds
+that $(a,p)=1\implies a^{p-1}=1 (\operatorname{mod} p)$, Fermat's
+theorem].  This is good for many purposes but is not ideal.  Consider:
+
+```{r}
+subs(m,a=1,b=2,c=1)
+subs(m%%7,a=1,b=2,c=1)
+```
+
+
+The answer is correct, of course:
+
+```{r}
+subs(m,a=1,b=2,c=1)%%7 == subs(m%%7,a=1,b=2,c=1)%%7
+```
+
+but it would be nice for the substitution not to need manual
+extraction by `%%7`.  Also, various package idiom is sub-optimal:
+
+```{r}
+(m%%7)
+(m%%7)*100
+```
+
+Above, the coefficients should be expressed modulo 7.  Although this
+is relatively straightforward in the package, it should not be
+necessary.
+
+```{r}
+p <- (m%%7)*100
+coeffs(p) <- coeffs(p)%%7
+p
+```
+
+Also
+
+```{r}
+(m%%7) * (m%%7)      # coefficients too big
+((m%%7) * (m%%7))%%7 # better
+```
+
+Above, note how the first product includes the term `16 a^6 b^6 c^6`
+which of course is simplified to `2` on considering the result modulo
+7.
+
+## Conclusions
+
+A proper implementation would require a lot of work.  Firstly, the `C`
+code would need to be rejigged.  Currently `src/skimpy.cpp` has
+
+```
+typedef map <string, signed int> term; // A 'term' object is a map from strings to integers
+typedef map <term, double> mvp;       // An 'mvp' object maps terms to doubles
+typedef map <string, double> subs;   // A 'subs' object maps strings to reals
+```
+
+(`term` objects specify the powers, and `mvp` objects the
+coefficients).  We would need to change `double` to `int` to work in
+modular arithmetic.  We would then need to ensure that the various `C`
+functions that return a `mvp` object are rewritten to work with modulo
+arithmetic [either that, or do it in `R`].  If there is a pressing
+need for such functionality I could be persuaded to implement it, but
+this is low on my list of priorities, as of March 2022.
+

@@ -9,6 +9,7 @@
 \alias{mvp_plus_scalar}
 \alias{mvp_power_scalar}
 \alias{mvp_eq_mvp}
+\alias{mvp_modulo}
 \title{Arithmetic Ops Group Methods for \code{mvp} objects}
 \description{
   Allows arithmetic operators to be used for
@@ -23,6 +24,7 @@ mvp_times_scalar(S,x)
 mvp_plus_mvp(S1,S2)
 mvp_plus_numeric(S,x)
 mvp_eq_mvp(S1,S2)
+mvp_modulo(S1,S2)
 }
 \arguments{
   \item{e1,e2,S,S1,S2}{Objects of class \code{mvp}}
@@ -47,6 +49,8 @@ mvp_eq_mvp(S1,S2)
 
 }
 \author{Robin K. S. Hankin}
+\note{Function \code{mvp_modulo()} is distinctly sub-optimal and
+\code{inst/mvp_modulo.Rmd} details ideas for better implementation.}
 \seealso{\code{\link{lowlevel}}}
 \examples{
 p1 <- rmvp(3)

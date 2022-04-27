@@ -15,6 +15,7 @@
 p <- as.mvp("1+a^2 + a*b^2 + c")
 p
 f <- as.function(p)
+f
 
 f(a=1)
 f(a=1,b=2)

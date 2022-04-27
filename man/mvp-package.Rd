@@ -21,7 +21,7 @@ Maintainer: \packageMaintainer{mvp}
 }
 \keyword{ package }
 \examples{
-p <- as.mvp("1+x+x*y+x^5")
+(p <- as.mvp("1+x+x*y+x^5"))
 
 p + as.mvp("a+b^6")
 

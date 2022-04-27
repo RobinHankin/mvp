@@ -53,8 +53,8 @@ mvp_modulo(S1,S2)
 \code{inst/mvp_modulo.Rmd} details ideas for better implementation.}
 \seealso{\code{\link{lowlevel}}}
 \examples{
-p1 <- rmvp(3)
-p2 <- rmvp(3)
+(p1 <- rmvp(3))
+(p2 <- rmvp(3))
 
 p1*p2
 

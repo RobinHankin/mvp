@@ -35,6 +35,7 @@ is.constant(x)
 \author{Robin K. S. Hankin}
 \examples{
 a <- rmvp(5)+4
+a
 constant(a)
 constant(a) <- 33
 a

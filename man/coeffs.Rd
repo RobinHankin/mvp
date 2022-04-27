@@ -153,14 +153,15 @@ coeffs(x) <- value
 \author{Robin K. S. Hankin}
 \examples{
 
-x <- 5+rmvp(6)
-y <- 2+rmvp(6)
-z <- 2+rmvp(6)
-
+(x <- 5+rmvp(6))
+(y <- 2+rmvp(6))
 
 coeffs(x)^2
-coeffs(z) <- coeffs(z)\%\%3  # fine, all coeffs of z now modulo 3
-coeffs(z) <- 4               # also fine, all coeffs  of z now modulo 3
+coeffs(y) <- coeffs(y)\%\%3  # fine, all coeffs of y now modulo 3
+y
+
+coeffs(y) <- 4               
+y
 
 \dontrun{
 coeffs(x) <- coeffs(y)          # not defined, will give an error

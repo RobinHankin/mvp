@@ -15,7 +15,7 @@
         }
     }
 
-    if (!is.element(.Generic, c("+", "-", "*", "/", "^", "==", "!="))){
+    if (!is.element(.Generic, c("+", "-", "*", "/", "^", "==", "!=", "%%"))){
         stop("Operator '", .Generic, "' is not implemented for mvps")
     }
 
@@ -70,11 +70,14 @@
     } else if (.Generic == "/") {
         if(lclass && !rclass){
             return(mvp_times_scalar(e1,1/e2))
-          } else {
-        stop("don't use '/', use ooom() instead")
+        } else {
+            stop("don't use '/', use ooom() instead")
+        }
+    } else if (.Generic == "%%") {
+        return(mvp_modulo(e1,e2))
     }
-  }
 }
+
 
 `mvp_negative` <- function(S){
     if(is.zero(S)){
@@ -132,4 +135,19 @@ mvp_power_scalar <- function(S,n){
 
 `mvp_eq_mvp` <- function(S1,S2){
   is.zero(S1-S2)  # nontrivial; S1 and S2 might have different orders
+}
+
+`mvp_modulo` <- function(S1,S2){  # S1 an mvp and S2 an integer
+    stopifnot(is.mvp(S1))
+    if(any(coeffs(S1) != round(coeffs(S1)))){warning("non integer coefficients")} 
+
+    n <- S2
+
+    stopifnot(is.vector(n))
+    stopifnot(length(n)==1)
+    stopifnot(n==round(n))
+
+    e <- numbers::eulersPhi(n)
+
+    mvp(vars(S1), lapply(powers(S1),function(x){x%%e}),coeffs(S1)%%n)
 }

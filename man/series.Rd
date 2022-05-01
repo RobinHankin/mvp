@@ -108,14 +108,10 @@ trunc1(as.mvp("1+x+y")^3,x=2)   # terms like y^3 are treated as constants
 trunc(as.mvp("1+x+y^2")^3,3)    # discards x^2y^2 term (total power=4>3)
 truncall(as.mvp("1+x+y^2")^3,3) # retains  x^2y^2 term (all vars to power 2)
 
-p <- horner("x+y",1:4)
-
-onevarpow(p,x=2)   # coefficient of x^2
-onevarpow(p,x=3)   # coefficient of x^3
-
 onevarpow(as.mvp("1+x+x*y^2  + z*y^2*x"),x=1,y=2)
 
-series(rmvp(10),"a")
+(p2 <- rmvp(10))
+series(p2,"a")
 
 # Works well with pipes:
 
@@ -124,17 +120,22 @@ Reduce(`*`,lapply(1:6,f)) \%>\% series('y')
 Reduce(`*`,lapply(1:6,f)) \%>\% series('x')
 
 
+(p <- horner("x+y",1:4))
+onevarpow(p,x=2)   # coefficient of x^2
+onevarpow(p,x=3)   # coefficient of x^3
+
+
 p \%>\% trunc(2)
 p \%>\% trunc1(x=2)
 (p \%>\% subs(x="x+dx") -p) \%>\% trunc1(dx=2)
 
 # Nice example of Horner's method:
-p <- as.mvp("x + y + 3*x*y")
+(p <- as.mvp("x + y + 3*x*y"))
 trunc(horner(p,1:5)*(1-p)^2,4)  # should be 1
 
 
 ## Third order taylor expansion of f(x)=sin(x+y) for x=1.1, about x=1:
-sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120,0,-1/5040,0,1/362880))  # sin(x+y)
+(sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120,0,-1/5040,0,1/362880)))  # sin(x+y)
 dx <- as.mvp("dx")
 t3 <- sinxpy  + aderiv(sinxpy,x=1)*dx + aderiv(sinxpy,x=2)*dx^2/2 + aderiv(sinxpy,x=3)*dx^3/6
 t3 \%<>\% subs(x=1,dx=0.1)  # t3 = Taylor expansion of sin(y+1.1)

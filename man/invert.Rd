@@ -17,6 +17,7 @@ invert(p, v)
 \examples{
 invert("x")
 
-invert(rmvp(10,7,7,letters[1:3]),"a")
+(P <- as.mvp("1+a+6*a^2 -7*a*b"))
+invert(P,"a")
 
 }

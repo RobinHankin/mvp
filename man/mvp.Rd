@@ -51,10 +51,7 @@ kahle  <- mvp(
     powers = rep(list(1:2),26),
     coeffs = 1:26
 )
-
+kahle
 ## again note arbitrary order of terms and symbols within a term
-
-
-
 
 }

@@ -32,6 +32,7 @@ Differentiation of \code{mvp} objects}
 }
 \examples{
 p <- rmvp(10,9,9,letters[1:4])
+p
 deriv(p,letters[1:3])
 deriv(p,rev(letters[1:3]))  # should be the same
 

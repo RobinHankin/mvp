@@ -10,6 +10,7 @@ importFrom(partitions,compositions)
 importFrom(magic, circulant)
 
 importFrom("utils" , "capture.output")
+importFrom("numbers" , "eulersPhi")
 
 
 importFrom("digest", "digest")

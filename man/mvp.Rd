@@ -40,11 +40,10 @@ Function \code{is_ok_mvp()} checks for consistency of its arguments.
 \author{Robin K. S. Hankin}
 \examples{
 
-mvp(list("x" , c("x","y"), "a",c("y","x")),list(1,1:2,3,c(-1,4)),1:4)
+mvp(list("x", c("x","y"), "a", c("y","x")), list(1,1:2,3,c(-1,4)), 1:4)
 
 ## Note how the terms appear in an arbitrary order, as do
 ## the symbols within a term.
-
 
 kahle  <- mvp(
     vars   = split(cbind(letters,letters[c(26,1:25)]),rep(seq_len(26),each=2)),
@@ -53,5 +52,16 @@ kahle  <- mvp(
 )
 kahle
 ## again note arbitrary order of terms and symbols within a term
+
+## Standard arithmetic rules apply:
+
+a <- as.mvp("1 + 4*x*y + 7*z")
+b <- as.mvp("-7*z + 3*x^34 - 2*z*x")
+
+a+b
+a*b^2
+
+(a+b)*(a-b) == a^2-b^2 # should be TRUE
+
 
 }

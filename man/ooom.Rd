@@ -15,7 +15,7 @@ ooom(P,n)
 \seealso{\code{\link{horner}}}
 \examples{
 ooom("x",5)
-ooom("x",5) * as.mvp("1-x")  # zero through fifth order
+ooom("x",5) * as.mvp("1-x")  # 1 + O(x^6)
 
 
 ooom("x+y",4)

@@ -40,11 +40,14 @@ powers <- function(x){disord(x[[2]],hashcal(x))}
 `print.mvp` <-  function(x, ...){
     cat("mvp object algebraically equal to\n")
     if(is.zero(x)){
-        print(mp("0"),...)
+        out <- mp("0")
     } else {
-        print(as.mpoly(x), ...)
+        out <- as.mpoly(x)
     }
+    out <- print(out,silent=TRUE)  # should use print.mpoly()
+    cat(paste(strwrap(out, getOption("width")), collapse="\n"))
     cat("\n")
+    return(x)
 }
 
 setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})

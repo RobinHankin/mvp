@@ -47,7 +47,7 @@ powers <- function(x){disord(x[[2]],hashcal(x))}
     out <- print(out,silent=TRUE)  # should use print.mpoly()
     cat(paste(strwrap(out, getOption("width")), collapse="\n"))
     cat("\n")
-    return(x)
+    return(invisible(x))
 }
 
 setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
@@ -379,4 +379,3 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   wanted <- sample(nterms(object),n,replace=FALSE)
   K + mvp(object[[1]][wanted],object[[2]][wanted],object[[3]][wanted])
 }
-

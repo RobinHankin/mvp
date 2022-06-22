@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // mvp_taylor_onevar
 List mvp_taylor_onevar(const List& allnames, const List& allpowers, const NumericVector& coefficients, const CharacterVector& v, const NumericVector& n);
 RcppExport SEXP _mvp_mvp_taylor_onevar(SEXP allnamesSEXP, SEXP allpowersSEXP, SEXP coefficientsSEXP, SEXP vSEXP, SEXP nSEXP) {

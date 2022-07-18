@@ -3,9 +3,7 @@ Fast symbolic multivariate polynomials in R
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mvp <img src="man/figures/mvp.png" width = "150" align="right" />
-
-# Overview
+# Overview <img src="man/figures/mvp.png" width = "150" align="right" />
 
 Multivariate polynomials are intereresting and useful objects. Here I
 present the `mvp` package which hopefully improves upon previous R
@@ -43,7 +41,7 @@ Creating a multivariate polynomial is straightforward:
 X <- as.mvp("1 + a^2 + a*b*c^3")
 X
 #> mvp object algebraically equal to
-#> 1  +  a b c^3  +  a^2
+#> 1 + a b c^3 + a^2
 ```
 
 and arithmetic operations work as expected:
@@ -52,13 +50,13 @@ and arithmetic operations work as expected:
 Y <- as.mvp("12*a^2  + b - c^2 + 4*d")
 X+Y
 #> mvp object algebraically equal to
-#> 1  +  a b c^3  +  13 a^2  +  b  -  c^2  +  4 d
+#> 1 + a b c^3 + 13 a^2 + b - c^2 + 4 d
 X-3*Y
 #> mvp object algebraically equal to
-#> 1  +  a b c^3  -  35 a^2  -  3 b  +  3 c^2  -  12 d
+#> 1 + a b c^3 - 35 a^2 - 3 b + 3 c^2 - 12 d
 X^2
 #> mvp object algebraically equal to
-#> 1  +  2 a b c^3  +  2 a^2  +  a^2 b^2 c^6  +  2 a^3 b c^3  +  a^4
+#> 1 + 2 a b c^3 + 2 a^2 + a^2 b^2 c^6 + 2 a^3 b c^3 + a^4
 ```
 
 Substitution uses the `subs()` function:
@@ -66,18 +64,18 @@ Substitution uses the `subs()` function:
 ``` r
 X
 #> mvp object algebraically equal to
-#> 1  +  a b c^3  +  a^2
+#> 1 + a b c^3 + a^2
 subs(X,a=1)
 #> mvp object algebraically equal to
-#> 2  +  b c^3
+#> 2 + b c^3
 subs(X,a=1,b=2)
 #> mvp object algebraically equal to
-#> 2  +  2 c^3
+#> 2 + 2 c^3
 subs(X,a=1,b=2,c=3)
 #> [1] 56
 subs(X+Y,a="1+x^2",b="x+y",c=0)
 #> mvp object algebraically equal to
-#> 14  +  4 d  +  x  +  26 x^2  +  13 x^4  +  y
+#> 14 + 4 d + x + 26 x^2 + 13 x^4 + y
 ```
 
 # Further information

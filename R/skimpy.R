@@ -379,3 +379,5 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
   wanted <- sample(nterms(object),n,replace=FALSE)
   K + mvp(object[[1]][wanted],object[[2]][wanted],object[[3]][wanted])
 }
+
+setGeneric("sort")

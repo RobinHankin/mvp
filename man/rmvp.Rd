@@ -14,7 +14,7 @@ rmvp(n=7, size = 6, pow = 6, symbols = 6)
     \code{symbols} letters of the alphabet}
 }
 \details{
-What you see is what you get, basically.  A term such as
+What you see is what you get, basically.  Note that a term such as
 \code{a^2*b*a^3} will be simplified to \code{a^5*b}, so powers in the
 result may be larger than argument \code{pow}. 
 }

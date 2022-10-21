@@ -46,7 +46,7 @@ $x^2y^3z$.  We may consider this term to be the map
 ```
 
 where the map takes symbols to their (integer) power; it is understood
-that powers are nonzero.  A ```mvp``` object is a map from terms to
+that powers are nonzero.  An `mvp` object is a map from terms to
 their coefficients; thus $7xy^2 -3x^2yz^5$ would be
 
 ```
@@ -108,7 +108,7 @@ dput(M)
 
 it is not clear that any human-discernable ordering is preferable to
 any other, and we would be better off letting the compiler decide a
-propitious ordering.  In any event, the ```mpoly``` package can
+propitious ordering.  In any event, the `mpoly` package can
 specify a print order:
 
 
@@ -335,9 +335,6 @@ a <- as.mvp("5 + 8*x^2*y - 13*y*x^2 + 11*z - 3*x*yz")
 a
 coeffs(a)
 ```
-
-
-
 
 Above, note that the result of `coeffs()` is a `disord` object,
 defined in the `disordR` package.  The order of the elements

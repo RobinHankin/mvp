@@ -22,7 +22,7 @@
 \usepackage{wrapfig}
 
 
-\title{Sparse arrays in R: the spray package}
+\title{Fast multivariate polynomials R: the mvp package}
 
 %\date{September 9, 1985}	% Here you can change the date presented in the paper title
 %\date{} 					% Or removing it
@@ -60,7 +60,7 @@ pdfkeywords={multivariate polynomials}
   provides some functionality for handling multivariate polynomials.  The package
   uses the~{\tt C++} Standard Template Library's {\tt map}
   class to store and retrieve elements.    The package is available on CRAN at
-  \url{https://CRAN.R-project.org/package=spray}.
+  \url{https://CRAN.R-project.org/package=mvp}.
 \end{abstract}
 \keywords{Multivariate polynomials}
 
@@ -86,10 +86,11 @@ manipulation of multivariate polynomials, using the Standard Template
 library of {\tt C++}, commonly known as the {\tt STL}.  It is
 comparable in speed to the {\tt spray} package~\cite{hankin2022_spray}
 for sparse arrays, while retaining the symbolic capabilities of the
-{\tt mpoly} package~\cite{kahle2013}; I present some timing results.
-The {\tt mvp} package uses the excellent print and coercion methods of
-{\tt mpoly}.  The {\tt mvp} package provides improved speed over {\tt
-  mpoly} but retains some of the sophisticated substitution mechanism.
+{\tt mpoly} package~\cite{kahle2013}; the package includes some timing
+results.  The {\tt mvp} package uses the excellent print and coercion
+methods of {\tt mpoly}.  The {\tt mvp} package provides improved speed
+over {\tt mpoly} but retains some of the sophisticated substitution
+mechanism.
 
 \section{The {\tt STL} map class}
 
@@ -449,9 +450,7 @@ restrictions:
 coeffs(a)[coeffs(a) > 0]
 @ 
 
-
-But "mixing" objects is forbidden:
-
+But ``mixing" objects is forbidden:
 
 \begin{verbatim}
 coeffs(a)[coeffs(b) > 0]
@@ -496,13 +495,20 @@ x
 (I should write a method for {\tt zapsmall()} that does this)
 
 
-\section{Multivariate generating functions}
+\section{Example: multivariate generating functions}
 
-We can see the generating function for a chess knight:
+Here I give an example of the {\tt mvp} package in use,
+following~\cite{hankin2022_spray}.  The generating function for a
+chess knight is given by function {\tt knight()}, whose argument is
+the dimension of the board.  Thus for a 2D board we have
 
 <<knight2>>=
 knight(2)
 @ 
+
+This object has 8 terms, one for each move that a knight has on an
+unrestricted board.  The powers of {\tt a} and {\tt b} correspond to
+horizontal and vertical directions respectively.
 
 How many ways are there for a 4D knight to return to its starting
 square after four moves?  Answer:

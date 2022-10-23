@@ -22,7 +22,7 @@
 \usepackage{wrapfig}
 
 
-\title{Fast multivariate polynomials R: the mvp package}
+\title{Fast multivariate polynomials in R: the mvp package}
 
 %\date{September 9, 1985}	% Here you can change the date presented in the paper title
 %\date{} 					% Or removing it
@@ -80,17 +80,16 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
   \end{center}
 \end{wrapfigure}
 
-
 The {\tt mvp} package provides some functionality for fast
-manipulation of multivariate polynomials, using the Standard Template
-library of {\tt C++}, commonly known as the {\tt STL}.  It is
-comparable in speed to the {\tt spray} package~\cite{hankin2022_spray}
-for sparse arrays, while retaining the symbolic capabilities of the
-{\tt mpoly} package~\cite{kahle2013}; the package includes some timing
-results.  The {\tt mvp} package uses the excellent print and coercion
-methods of {\tt mpoly}.  The {\tt mvp} package provides improved speed
-over {\tt mpoly} but retains some of the sophisticated substitution
-mechanism.
+manipulation of multivariate polynomials in the R programming
+language~\citep{rcore2022}.  It uses the Standard Template library of
+{\tt C++}, commonly known as the {\tt STL}, and is comparable in speed
+to the {\tt spray} package~\cite{hankin2022_spray} for sparse arrays, while
+while retaining the symbolic capabilities of the {\tt mpoly}
+package~\cite{kahle2013}; the package includes some timing results.
+The {\tt mvp} package uses the excellent print and coercion methods of
+{\tt mpoly}.  The {\tt mvp} package provides improved speed over {\tt
+  mpoly} but retains some of the sophisticated substitution mechanism.
 
 \section{The {\tt STL} map class}
 

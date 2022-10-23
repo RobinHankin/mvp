@@ -1,7 +1,7 @@
 Package: mvp
 Type: Package
 Title: Fast Symbolic Multivariate Polynomials
-Version: 1.0-12
+Version: 1.0-13
 Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
 Depends: methods,magrittr, mpoly (>= 1.1.0)
 Suggests: knitr,rmarkdown, microbenchmark,testthat,spray

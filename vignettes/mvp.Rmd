@@ -106,7 +106,7 @@ we consider a marginally more involved situation, such as
 dput(M)
 ```
 
-it is not clear that any human-discernable ordering is preferable to
+it is not clear that any human-discernible ordering is preferable to
 any other, and we would be better off letting the compiler decide a
 propitious ordering.  In any event, the `mpoly` package can
 specify a print order:
@@ -147,7 +147,7 @@ subs(S3, x = 1)
 ```
 
 Note the natural R idiom, and that the return value is another mvp
-object.  We may subsitute for the other variables:
+object.  We may substitute for the other variables:
 
 ```{r}
 subs(S3, x = 1, y = 2, z = 3)

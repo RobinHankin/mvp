@@ -54,7 +54,7 @@ mbm <- function(n,r,p,...){
 Thus `mbm()` is a unified benchmark execution function:
 
 
-```{r}
+```{r,cache=TRUE}
 mbm(10,3,2)
 mbm(10,3,3)
 mbm(10,3,4)
@@ -63,12 +63,11 @@ mbm(30,3,2)
 mbm(40,3,2)
 ```
 
-
 In each case above, `spray` is considerably faster.  But if we
 consider the simpler case of calculating $(x_1+x_2+\ldots +x_n)^2$ for
 different values of $n$ we see `mvp` becoming slightly faster:
 
-```{r}
+```{r,cache=TRUE}
 mbm(10,1,2,times=10)
 mbm(20,1,2,times=10)
 mbm(50,1,2,times=10)

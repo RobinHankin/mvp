@@ -602,28 +602,18 @@ Further, we might ask which places the knight can move to on the plane
 $a=4$, $b=5$:
 
 <<furtherknightq>>=
-(ab45 <- onevarpow(K,a=4,b=5))
+onevarpow(K,a=4,b=5)
 @
 
 Thus there are exactly 60 ways for the knight to move to $(4,5,-3,0)$,
 96 ways to move to $(4,5,-2,-1)$, and so on.  As a final example, we
 might assume that the knight moves randomly, and wish to determine the
-probability mass function of its position.  Consider a 4D knight that
-moves randomly.  What is its expected Euclidean distance from the
-origin after four moves?
-
-<<distfun>>=
-dist <- function(x){sqrt(sum(x^2))}  # regular Euclidean distance function
-@ 
+probability mass function of its position.  What is its expected
+Euclidean distance from the origin after four moves?
 
 <<furtherfurtherknight>>=
+dist <- function(x){sqrt(sum(x^2))}  # regular Euclidean distance function
 sum(unlist(lapply(powers(K),dist))*coeffs(K))/sum(coeffs(K))
-@ 
-
-<<varianceq>>=
-onevarpow(K,a=4,b=5)
-aderiv(onevarpow(K,a=4,b=5),c=1)
-deriv(onevarpow(K,a=4,b=5),"c")
 @ 
 
 \bibliographystyle{plain}

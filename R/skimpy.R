@@ -381,3 +381,4 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
 }
 
 setGeneric("sort")
+setGeneric("lapply")

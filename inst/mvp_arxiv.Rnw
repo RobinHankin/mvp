@@ -84,22 +84,23 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 The {\tt mvp} package provides some functionality for fast
 manipulation of multivariate polynomials in the R programming
 language~\citep{rcore2022}.  It uses the Standard Template library of
-{\tt C++}, commonly known as the {\tt STL}, and is comparable in speed
-to the {\tt spray} package~\cite{hankin2022_spray} for sparse arrays, while
-while retaining the symbolic capabilities of the {\tt mpoly}
-package~\cite{kahle2013}; the package includes some timing results.
-The {\tt mvp} package uses the excellent print and coercion methods of
-{\tt mpoly}.  The {\tt mvp} package provides improved speed over {\tt
-  mpoly} but retains some of the sophisticated substitution mechanism.
+{\tt C++}~\cite{musser2009}, commonly known as the {\tt STL}, and is
+comparable in speed to the {\tt spray} package~\cite{hankin2022_spray}
+for sparse arrays, while while retaining the symbolic capabilities of
+the {\tt mpoly} package~\cite{kahle2013}; the package includes some
+timing results.  The {\tt mvp} package uses the excellent print and
+coercion methods of {\tt mpoly}.  The {\tt mvp} package provides
+improved speed over {\tt mpoly} but retains some of the sophisticated
+substitution mechanism.
 
 \section{The {\tt STL} map class}
 
-A ``map'' is a sorted associative container that contains key-value
-pairs with unique keys.  It is interesting here because search and
-insertion operations have logarithmic complexity.  Multivariate
-polynomials are considered to be the sum of a finite number of {\bf
-  terms}, each multiplied by a coefficient.  A term is something like
-$x^2y^3z$.  We may consider this term to be the map
+A ``map'' is a sorted associative container that stores key-value
+pairs with unique keys~\citep{musser2009}.  It is interesting here
+because search and insertion operations have logarithmic complexity.
+Multivariate polynomials are considered to be the sum of a finite
+number of {\bf terms}, each multiplied by a coefficient.  A term is
+something like $x^2y^3z$.  We may consider this term to be the map
 
 \begin{verbatim}
 {"x" -> 2, "y" -> 3, "z" -> 1}
@@ -320,14 +321,16 @@ onevarpow(X,x=3) # retain only terms with power of x == 3
 @ 
 
 The ideas above allow us to express Taylor series in package idiom.
-For example suppose we wish to evaluate the second order Taylor
-expansion of $f(x)=\sin(x+y)$ about $x=1.1$.  Working to fifth order:
+For example, consider $\sin_5(x+y)$, where $\sin_n$ is shorthand for
+the fifth-order Taylor expansion of $\sin$.  We wish to evaluate the
+second order Taylor expansion of $f(x,y)=\sin_5(x+y)$ about $x=1.1$.
+We define a {\tt mvp} object which is correct to fifth order:
 
 <<secondordertaylor>>=
 (sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120)))  # sin(x+y)
 @ 
 
-we would then define an object {\tt dx} with the intent that this is
+and then define an object {\tt dx} with the intent that this is
 ``small"
 
 <<definedxissmall>>=
@@ -360,6 +363,7 @@ numerical value of {\tt x} and {\tt dx} which we will take to be 0.1:
 (t2 %<>% subs(x=1.1, dx=0.1))
 @ 
 
+See that this Taylor expansion retains a symbolic dependence on $y$.
 For numerical verification we will evaluate this at $y=0.3$:
 
 <<x1y03>>=
@@ -368,9 +372,9 @@ t2 %>% subs(y=0.3)  - sinxpy %>% subs(x=1.1,y=0.4)
 @ 
 
 Above we see that the error in evaluating
-$\sin(1.5)=\sin(1.1+0.3+0.1)$ using a Taylor expansion
-$\sin(1.4+\delta x)$ to second order in $\delta x$ is ${\mathcal
-  O}(\delta x)^3\sim 10^{-3}$.  The package is thus seen to be capable
+$\sin_5(1.5)=\sin_5(1.1+0.3+\delta x)$ using a second order Taylor
+expansion in $\delta x=0.1$ about $\sin_5(1.4)$ is ${\mathcal
+O}(\delta x)^3\sim 10^{-3}$.  The package is thus seen to be capable
 of representing objects with differing degrees of symbolic and numeric
 constitution.
 

@@ -1,0 +1,11 @@
+## R package reference generated from DESCRIPTION metadata
+citation(auto = meta)
+
+## NLME book
+bibentry(bibtype = "misc",
+         title = "Fast multivariate polynomials in R: the mvp package",
+         author = c(person(c("Robin", "K.", "S."), "Hankin")),
+         year = "2022", publisher = "arXiv",
+         doi = "10.48550/ARXIV.2210.15991"
+         )
+  

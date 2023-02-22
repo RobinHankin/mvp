@@ -27,9 +27,9 @@ is.zero(x)
 \note{
 
 I would have expected the zero polynomial to be problematic (cf the
-\pkg{freegroup} and \pkg{permutations} packages, where similar issues
-require extensive special case treatment).  But it seems to work fine,
-which is a testament to the robust coding in the STL.
+\CRANpkg{freegroup} and \CRANpkg{permutations} packages, where similar
+issues require extensive special case treatment).  But it seems to work
+fine, which is a testament to the robust coding in the \proglang{STL}.
 
 A general \code{mvp} object is something like
 

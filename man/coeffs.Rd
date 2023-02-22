@@ -23,7 +23,7 @@
 Function \code{coeffs()} allows arithmetic operators to be used for the
   coefficients of multivariate polynomials, bearing in mind that the
   order of coefficients is not determined.  It uses the \code{disord}
-  class of the \pkg{disordR} package.
+  class of the \CRANpkg{disordR} package.
 
 }
 \usage{
@@ -39,7 +39,7 @@ coeffs(x) <- value
 \details{
 
   (much of the discussion below appears in the vignette of the
-  \pkg{disordR} package). 
+  \CRANpkg{disordR} package). 
 
   Accessing elements of an \code{mvp} object is problematic because the
   order of the terms of an \code{mvp} object is not well-defined.  This
@@ -128,7 +128,7 @@ coeffs(x) <- value
 
   is algebraically meaningful (\dQuote{Add 4 to any element less than
   5}; \dQuote{coefficients become the pairwise maximum of themselves and
-  3}).  The \pkg{disordR} package uses \code{pmaxdis()} rather than
+  3}).  The \CRANpkg{disordR} package uses \code{pmaxdis()} rather than
   \code{pmax()} for technical reasons.
 
   So the output of \code{coeffs(x)} is defined only up to an unknown

@@ -13,7 +13,7 @@ kahle(n = 26, r = 1, p = 1, coeffs = 1, symbols = letters)
   \item{symbols}{Alphabet of symbols}
 }
 \references{
-David Kahle 2013.  \dQuote{\pkg{mpoly}: multivariate polynomials in R}.
+David Kahle 2013.  \dQuote{\CRANpkg{mpoly}: multivariate polynomials in R}.
 \emph{R Journal}, volume 5/1.
 }
 \author{Robin K. S. Hankin}

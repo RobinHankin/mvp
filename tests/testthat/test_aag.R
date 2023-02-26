@@ -42,4 +42,8 @@ test_that("Test suite test_aag.R",{
       expect_silent(mvp_to_spray(as.mvp("1+x+x*y")))
       }
       
+set.seed(0)
+a <- rmvp(9)
+expect_error(coeffs(a)[coeffs(a)<3] + coeffs(a)[coeffs(a)>7])
+
 })

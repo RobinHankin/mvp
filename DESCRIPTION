@@ -19,7 +19,7 @@ Imports: Rcpp (>= 1.0-7),
   partitions,
   magic,
   digest,
-  disordR (>= 0.0-9-4),
+  disordR (>= 0.9),
   numbers
 LinkingTo: Rcpp
 SystemRequirements: C++11

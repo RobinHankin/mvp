@@ -136,7 +136,7 @@ setGeneric("lose",function(x){standardGeneric("lose")})
 `lose.mvp` <- function(x){
     if(is.zero(x)){
       return(0)
-    } else if((length(vars(x))==1) & (length(vars(x)[[1]])==0)){
+    } else if((length(vars(x))==1) & (length(elements(vars(x))[[1]])==0)){
         out <- coeffs(x)
         attributes(out) <- NULL
         return(unclass(out))
@@ -213,9 +213,9 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
 
 `invert` <- function(p,v){
   p <- as.mvp(p)
-  vp <- vars(p)
-  if(missing(v)){v <- unique(unlist(elements(vp)))}
-  pp <- powers(p)
+  vp <- elements(vars(p))
+  if(missing(v)){v <- unique(unlist(vp))}
+  pp <- elements(powers(p))
   for(i in seq_along(powers(p))){
     ## pp[[i]][vp[[i]] %in% v]  %<>% `*`(-1)
     pp[[i]][vp[[i]] %in% v] <- -pp[[i]][vp[[i]] %in% v]

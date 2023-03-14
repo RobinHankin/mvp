@@ -8,3 +8,12 @@ README.html
 ^inst/mvp_screeenshot.xcf$
 ^inst/mvp_stickermaker.R$
 ^inst/mvp_modulo.Rmd$
+^inst/coercion.R$
+^inst/freealg_mvp.Rmd$
+^inst/gastineau.R$
+^inst/mvp_arxiv.bib$
+^inst/mvp_arxiv.Rnw$
+^inst/mvp_blue.png$
+^inst/mvp_modulo.Rmd$
+^inst/mvp_screenshot.xcf$
+^inst/timings.Rmd$

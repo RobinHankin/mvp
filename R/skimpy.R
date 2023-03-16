@@ -44,7 +44,7 @@ powers <- function(x){disord(x[[2]],hashcal(x))}
     } else {
         out <- as.mpoly(x)
     }
-    out <- print(out,silent=TRUE)  # should use print.mpoly()
+    out <- print(out,...,silent=TRUE)  # should use print.mpoly()
     cat(paste(strwrap(out, getOption("width")), collapse="\n"))
     cat("\n")
     return(invisible(x))

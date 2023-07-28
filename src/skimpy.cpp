@@ -113,7 +113,7 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
     return zero_coefficient_remover(out);
 }
 
-mvp product(const mvp X1, const mvp X2){
+mvp product(const mvp &X1, const mvp &X2){
     mvp out;
     
     for(mvp::const_iterator it1=X1.begin() ; it1 != X1.end() ; ++it1){
@@ -135,7 +135,7 @@ mvp product(const mvp X1, const mvp X2){
     return zero_coefficient_remover(out);
 }
 
-mvp sum(const mvp X1, const mvp X2){
+mvp sum(const mvp &X1, const mvp &X2){
     mvp out=X1;
     
     for(mvp::const_iterator it2=X2.begin() ; it2 != X2.end() ; ++it2){
@@ -144,7 +144,7 @@ mvp sum(const mvp X1, const mvp X2){
     return zero_coefficient_remover(out);
 }
 
-mvp power_int(const mvp X, unsigned int n){
+mvp power_int(const mvp &X, unsigned int n){
     mvp out; // empty mvp object is the zero polynomial; X^0 is managed in R
     if(n<1){throw std::range_error("power cannot be <1");} 
     if(n==1){
@@ -158,7 +158,7 @@ mvp power_int(const mvp X, unsigned int n){
     return out;
 }
 
-mvp deriv(const mvp X, const string v){// differentiation: dX/dv, 'v' a single variable
+mvp deriv(const mvp &X, const string &v){// differentiation: dX/dv, 'v' a single variable
     mvp out;
 
     for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){
@@ -171,7 +171,7 @@ mvp deriv(const mvp X, const string v){// differentiation: dX/dv, 'v' a single v
     return zero_coefficient_remover(out); // eliminates terms with no v
 }
 
-mvp taylor_onevar(const mvp X, const string v, const signed int n){
+mvp taylor_onevar(const mvp &X, const string &v, const signed int &n){
     if(n < 0){throw std::range_error("power cannot be <0");} 
     mvp out=X;
     mvp::const_iterator it;  // sit == symbol iterator
@@ -186,7 +186,7 @@ mvp taylor_onevar(const mvp X, const string v, const signed int n){
     return out;
 }
 
-mvp taylor_onepower_onevar(const mvp X, const string v, const signed int n){
+mvp taylor_onepower_onevar(const mvp &X, const string &v, const signed int &n){
     mvp jj,out;
     mvp::const_iterator it;  // sit == symbol iterator
     if(n==0){  // n=0 means we seek terms with no symbol v in them
@@ -215,7 +215,7 @@ mvp taylor_onepower_onevar(const mvp X, const string v, const signed int n){
     return out;
 }
 
-mvp taylor_allvars(const mvp X, const signed int n){  // truncated Taylor series
+mvp taylor_allvars(const mvp &X, const signed int &n){  // truncated Taylor series
     if(n < 0){throw std::range_error("power cannot be <0");} 
     term::const_iterator sit;  // sit == symbol iterator
     mvp::const_iterator it;  
@@ -421,10 +421,9 @@ NumericVector mvp_vectorised_substitute(
     return out;
 }
 
-series mvp_to_series(const mvp X, const string var){
+series mvp_to_series(const mvp &X, const string &var){
     series out;
     mvp jj;
-    term::iterator it;
     mvp::const_iterator ix;
     
     for(ix=X.begin() ; ix!=X.end() ; ++ix){ // iterate through (mvp) X

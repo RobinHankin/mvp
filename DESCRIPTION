@@ -19,7 +19,7 @@ Imports: Rcpp (>= 1.0-7),
   partitions,
   magic,
   digest,
-  disordR (>= 0.9),
+  disordR (>= 0.9-7),
   numbers,
   mpoly (>= 1.1.0)
 LinkingTo: Rcpp

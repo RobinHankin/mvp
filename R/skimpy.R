@@ -2,15 +2,17 @@
   stopifnot(is_ok_mvp(vars,powers,coeffs))
   out <- simplify(vars,powers,coeffs)  # simplify() is defined in
                                        # RcppExports.R; it returns a
-                                       # list
+                                        # list
+  out <- c(out,list(hashcal(out)))
   class(out) <- "mvp"   # this is the only time class() is set to "mvp"
   return(out)
 }
 
-vars <- function(x)  {disord(x[[1]],hashcal(x))}
-powers <- function(x){disord(x[[2]],hashcal(x))}
 `coeffs` <- function(x){UseMethod("coeffs")}
-`coeffs.mvp` <- function(x){disord(x[[3]],hashcal(x))}
+
+`vars`       <- function(x){disord(x[[1]],hashcal(unclass(x)))}
+`powers`     <- function(x){disord(x[[2]],hashcal(unclass(x)))}
+`coeffs.mvp` <- function(x){disord(x[[3]],hashcal(unclass(x)))}
 
 `is.mvp` <- function(x){inherits(x,"mvp")}
 

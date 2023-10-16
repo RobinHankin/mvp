@@ -22,17 +22,25 @@ Differentiation of \code{mvp} objects}
 \seealso{\code{\link{taylor}}}
 \details{
 
-  Function \code{deriv(S,v)} returns \eqn{\frac{\partial^r S}{\partial
-  v_1\partial v_2\ldots\partial v_r}}{d^rS/dv1...dvr}.
+  \code{deriv(S,v)} returns \eqn{\frac{\partial^r S}{\partial
+  v_1\partial v_2\ldots\partial v_r}}{d^rS/dv1...dvr}.  Here, \code{v}
+  is a (character) vector of symbols.
 
-  Function \code{aderiv()} uses the ellipsis construction with the names
-  of the argument being the variable to be differentiated with respect
-  to.  Thus \code{aderiv(S,x=1,y=2)} returns \eqn{\frac{\partial^3
+  \code{deriv(S,v,n)} returns the n-th derivative of \code{S} with
+  respect to symbol \code{v}, \eqn{\frac{\partial^n S}\partial
+  v^n}{d^nS/dv^n}.
+
+  \code{aderiv()} uses the ellipsis construction with the names of the
+  argument being the variable to be differentiated with respect to.
+  Thus \code{aderiv(S,x=1,y=2)} returns \eqn{\frac{\partial^3
   S}{\partial x\partial y^2}}{d^3S/dxdy^2}.
+
 }
 \examples{
 p <- rmvp(10,9,9,letters[1:4])
 p
+deriv(p,"a")
+deriv(p,"a",3)
 deriv(p,letters[1:3])
 deriv(p,rev(letters[1:3]))  # should be the same
 

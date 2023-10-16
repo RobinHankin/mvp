@@ -200,6 +200,8 @@ setGeneric("lose",function(x){standardGeneric("lose")})
 }
 
 `deriv.mvp` <- function(expr, v, ...){
+  nth <- list(...)
+  if(length(nth)>0){v <- rep(v,nth[[1]])}
   jj <- mvp_deriv(expr[[1]], expr[[2]], expr[[3]], v)
   return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }

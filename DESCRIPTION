@@ -3,8 +3,8 @@ Type: Package
 Title: Fast Symbolic Multivariate Polynomials
 Version: 1.0-15
 Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
-Depends: methods,magrittr
-Suggests: knitr,rmarkdown, microbenchmark,testthat,spray
+Depends: methods
+Suggests: knitr, rmarkdown, microbenchmark, testthat, spray, magrittr
 VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
 Description: Fast manipulation of symbolic multivariate polynomials

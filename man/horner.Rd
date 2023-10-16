@@ -39,7 +39,7 @@ horner("x+y",1:3)
 w <- as.mvp("x+y^2")
 stopifnot(1 + 2*w + 3*w^2 == horner(w,1:3))  # note off-by-one issue
 
-"x+y+x*y" \%>\% horner(1:3) \%>\% horner(1:2)
+"x+y+x*y" |> horner(1:3) |> horner(1:2)
 }
 
 

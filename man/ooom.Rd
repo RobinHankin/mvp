@@ -20,6 +20,6 @@ ooom("x",5) * as.mvp("1-x")  # 1 + O(x^6)
 
 ooom("x+y",4)
 
-"x+y" \%>\% ooom(5) \%>\% `-`(1) \%>\% ooom(3)
+"x+y" |> ooom(5) |> aderiv(x=2,y=1)
 
 }

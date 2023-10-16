@@ -104,7 +104,7 @@ subvec(kahle(r=3,p=1:3),M)  # supply a matrix
 
 varchange(as.mvp("1+x+xy + x*y"),x="newx") # variable xy unchanged
 
-kahle(5,3,1:3) \%>\% subs(a="a + delta")
+kahle(5,3,1:3) |> subs(a="a + delta")
 
 varchange(p,a="]")  # nonstandard variable names OK
 

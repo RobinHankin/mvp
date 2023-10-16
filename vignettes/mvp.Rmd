@@ -83,6 +83,7 @@ representation in the following R session:
 
 ```{r}
 library("mvp",quietly=TRUE)
+library("magrittr")
 (p <- as.mvp("3 x y + z^3 + x y^6 z"))
 ```
 
@@ -388,8 +389,6 @@ In cases like this where the replacement object is complicated, using
 error:
 
 ```{r usemagirttr}
-library("magrittr")
-b
 coeffs(b)[coeffs(b)%%3==1] %<>% `+`(100)  # add 100 to every element equal to 1 modulo 3
 b
 ```

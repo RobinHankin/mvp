@@ -60,7 +60,7 @@ coeffs(x) <- value
   and \preformatted{{xy^3 -> 4, x -> 1, y -> 3}}
   
   are the same map and correspond to the same multinomial (symbolically,
-  \eqn{x+3y+4xy^3=4xy^3+x+3y}).  Thus the coefficients of the
+  \mjseqn{x+3y+4xy^3=4xy^3+x+3y}).  Thus the coefficients of the
   multinomial might be \code{c(1,3,4)} or \code{c(4,1,3)}, or indeed any
   ordering.  But note that any particular ordering imposes an ordering
   on the terms.  If we choose \code{c(1,3,4)} then the terms are
@@ -105,7 +105,7 @@ coeffs(x) <- value
   \code{a} becomes its square}; note that this operation is insensitive
   to the order of coefficients.  The whole shebang is intended to make
   idiom such as \code{coeffs(a) <- coeffs(a)\%\%2} possible (so we can
-  manipulate polynomials over finite rings, here \eqn{Z/2Z}).
+  manipulate polynomials over finite rings, here \mjseqn{Z/2Z}).
 
   The replacement methods are defined so that an expression like
   \code{coeffs(a)[coeffs(a) > 5] <- 5} works as expected; the English

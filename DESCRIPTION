@@ -21,7 +21,9 @@ Imports: Rcpp (>= 1.0-7),
   digest,
   disordR (>= 0.9-7),
   numbers,
-  mpoly (>= 1.1.0)
+  mpoly (>= 1.1.0),
+  mathjaxr
 LinkingTo: Rcpp
 URL: https://github.com/RobinHankin/mvp
 BugReports: https://github.com/RobinHankin/mvp/issues
+RdMacros: mathjaxr

@@ -2,7 +2,7 @@ useDynLib(mvp, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
 
 import("methods")
-
+import("mathjaxr")
 
 importFrom(Rcpp, evalCpp)
 importFrom("mpoly","as.mpoly","is.mpoly","mp")

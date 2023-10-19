@@ -14,9 +14,12 @@ Differentiation of \code{mvp} objects}
 }
 \arguments{
   \item{expr}{Object of class \code{mvp}}
-  \item{v}{Character vector.  Elements denote variables to differentiate with respect to}
-  \item{...}{Further arguments, ignored in \code{deriv()} but specifies
-    the differentials in \code{aderiv()}}
+  \item{v}{Character vector.  Elements denote variables to differentiate
+    with respect to}
+  \item{...}{Further arguments.  In \code{deriv()}, a non-negative
+    integer argument specifies the order of the differential, and in
+    \code{aderiv()} the argument names specify the differentials and
+    their values their respective orders}
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{taylor}}}
@@ -27,8 +30,8 @@ Differentiation of \code{mvp} objects}
   is a (character) vector of symbols.
 
   \code{deriv(S,v,n)} returns the n-th derivative of \code{S} with
-  respect to symbol \code{v}, \mjeqn{\frac{\partial^n S}\partial
-  v^n}{d^nS/dv^n}.
+  respect to symbol \code{v}, \mjeqn{\frac{\partial^n S}{\partial
+  v^n}}{d^nS/dv^n}.
 
   \code{aderiv()} uses the ellipsis construction with the names of the
   argument being the variable to be differentiated with respect to.

@@ -11,7 +11,7 @@ importFrom(magic, circulant)
 
 importFrom("utils" , "capture.output")
 importFrom("numbers" , "eulersPhi")
-
+importFrom("stats", "rmultinom")
 
 importFrom("digest", "digest")
 importFrom("disordR","disord")

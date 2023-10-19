@@ -80,13 +80,29 @@ setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
     return(out)
 }    
 
-`rmvp` <- function(n=7,size=6,pow=6,symbols=6){
+`rhmvp` <- function(n=7,size=4,pow=6,symbols=6){
   if(is.numeric(symbols)){symbols <- letters[seq_len(symbols)]}
-    mvp(
-        vars   = replicate(n,sample(symbols,size,replace=TRUE),simplify=FALSE),
-        powers = replicate(n,sample(pow,size,replace=TRUE),simplify=FALSE),
-        coeffs = sample(seq_len(n))
-    )
+  mvp(
+      vars   = replicate(n,sample(symbols,size,replace=FALSE),simplify=FALSE),
+      powers = replicate(n,c(rmultinom(1,pow,rep(1,size)))   ,simplify=FALSE),
+      coeffs = sample(seq_len(n),replace=TRUE)
+  )
+}
+
+`rmvp` <- function(n=7,size=4,pow=6,symbols=6){
+  out <- constant(0)
+  for(i in seq_len(n)){
+    out <- out + sample(n,1)*rhmvp(n=1,size=size,pow=sample(seq_len(pow+1)-1,1),symbols=symbols)
+  }
+  return(out)
+}
+
+`rmvpp` <- function(n=30,size=9,pow=20,symbols=15){rmvp(n=n,size=size,pow=pow,symbols=symbols)}
+`rmvppp` <- function(n=100,size=15,pow=99,symbols){
+  if(missing(symbols)){
+    symbols <- apply(expand.grid(sample(letters[1:9]),sample(letters[18:26])),1,paste,collapse="")
+  }
+  return(rmvp(n=n,size=size,pow=pow,symbols=symbols))
 }
 
 `coeffs<-` <- function(x,value){UseMethod("coeffs<-")}

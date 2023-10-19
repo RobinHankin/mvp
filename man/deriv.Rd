@@ -40,8 +40,8 @@ Differentiation of \code{mvp} objects}
 
 }
 \examples{
-p <- rmvp(10,9,9,letters[1:4])
-p
+
+(p <- rmvp(10,4,15,5))
 deriv(p,"a")
 deriv(p,"a",3)
 deriv(p,letters[1:3])

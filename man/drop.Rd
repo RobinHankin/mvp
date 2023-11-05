@@ -17,7 +17,7 @@ A few functions in the package (currently \code{subs()},
 Function \code{drop()} is an \proglang{S4} generic, which is why the
 package calls \code{setOldClass()}.
 
-\code{drop()} was formerly called \code{lose()}.
+Function \code{drop()} was formerly called \code{lose()}.
 
 }
 \usage{

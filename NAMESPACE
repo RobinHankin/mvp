@@ -33,9 +33,9 @@ S3method(constant, mvp)
 S3method(is.zero, mvp)
 S3method(deriv, mvp)
 S3method(aderiv,mvp)
-S3method(lose,mvp)
 S3method(print,mvp)
 S3method(Ops,mvp)
+
 
 S3method(as.mvp,mvp)
 S3method(as.mvp,mpoly)

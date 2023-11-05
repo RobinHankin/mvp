@@ -20,6 +20,6 @@ f
 f(a=1)
 f(a=1,b=2)
 f(a=1,b=2,c=3)             # coerces to a scalar
-f(a=1,b=2,c=3,lose=FALSE)  # formal mvp object
+f(a=1,b=2,c=3,drop=FALSE)  # formal mvp object
 }
 

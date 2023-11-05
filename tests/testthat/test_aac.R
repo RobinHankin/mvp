@@ -39,7 +39,7 @@ expect_error(P>=P)
 
 expect_true(aderiv(P,x=1,y=2,z=3) == aderiv(P,z=3,x=1,y=2))
 
-expect_true(lose(as.mvp("0")) + lose(as.mvp("1")) + lose(as.mvp("2")) == 3)
+expect_true(drop(as.mvp("0")) + drop(as.mvp("1")) + drop(as.mvp("2")) == 3)
 
 expect_true(aderiv(as.mvp("x^6 y"),x=2,y=1) == as.mvp("30 x^4"),label="aderiv")
 

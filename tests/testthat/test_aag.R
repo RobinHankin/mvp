@@ -15,13 +15,13 @@ test_that("Test suite test_aag.R",{
     expect_true(is.constant(as.mvp("1")))
     expect_false(is.constant(as.mvp("1+x")))
 
-    expect_true(subs(as.mvp("1+x+y"),x=2,y=5,lose=TRUE) == 8)
-    expect_error(subs(as.mvp("1+x+y"),x=2,y=5,lose=FALSE) == 8)
-    expect_true(subs(as.mvp("1+x+y"),x=2,y=5,lose=FALSE) == as.mvp(8))
+    expect_true(subs(as.mvp("1+x+y"),x=2,y=5,drop=TRUE) == 8)
+    expect_error(subs(as.mvp("1+x+y"),x=2,y=5,drop=FALSE) == 8)
+    expect_true(subs(as.mvp("1+x+y"),x=2,y=5,drop=FALSE) == as.mvp(8))
 
-    expect_true (subsy(as.mvp("1+x"),x=1,lose=TRUE )==2)
-    expect_error(subsy(as.mvp("1+x"),x=1,lose=FALSE)==2)
-    expect_true (subsy(as.mvp("1+x"),x=1,lose=FALSE)==as.mvp(2))
+    expect_true (subsy(as.mvp("1+x"),x=1,drop=TRUE )==2)
+    expect_error(subsy(as.mvp("1+x"),x=1,drop=FALSE)==2)
+    expect_true (subsy(as.mvp("1+x"),x=1,drop=FALSE)==as.mvp(2))
 
 
 

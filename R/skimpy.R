@@ -149,21 +149,7 @@ setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
 
 `is.constant` <- function(x){length(allvars(x))==0}
 
-setGeneric("lose",function(x){standardGeneric("lose")})
-`lose` <- function(x){UseMethod("lose",x)}
-`lose.mvp` <- function(x){
-    if(is.zero(x)){
-      return(0)
-    } else if((length(vars(x))==1) & (length(elements(vars(x))[[1]])==0)){
-        out <- coeffs(x)
-        attributes(out) <- NULL
-        return(unclass(out))
-    } else {  # er, nothing to lose
-      return(x)
-    }
-}
-
-`subs` <- function(S,...,lose=TRUE){
+`subs` <- function(S,...,drop=TRUE){
   sb <- list(...)
   v <- names(sb)
 
@@ -171,19 +157,19 @@ setGeneric("lose",function(x){standardGeneric("lose")})
   for(i in seq_along(sb)){
     out <- subsmvp(out,v[i],as.mvp(sb[[i]]))
   }
-  if(lose){
-    return(lose(out))
+  if(drop){
+    return(drop(out))
   } else {
     return(out)
   }
 }
 
-`subsy` <- function(S, ..., lose=TRUE){
+`subsy` <- function(S, ..., drop=TRUE){
     sb <- unlist(list(...))
     jj <- mvp_substitute(S[[1]],S[[2]],S[[3]],names(sb),as.vector(sb))
     out <- mvp(jj[[1]],jj[[2]],jj[[3]])
-    if(lose){
-        return(lose(out))
+    if(drop){
+        return(drop(out))
     } else {
         return(out)
     }
@@ -402,3 +388,19 @@ setGeneric("aderiv",function(x){standardGeneric("aderiv")})
 
 setGeneric("sort")
 setGeneric("lapply")
+
+setOldClass("mvp")
+setGeneric("drop")
+setMethod("drop","mvp", function(x){drop_mvp(x)})
+
+`drop_mvp` <- function(x){
+    if(is.zero(x)){
+      return(0)
+    } else if((length(vars(x))==1) & (length(elements(vars(x))[[1]])==0)){
+        out <- coeffs(x)
+        attributes(out) <- NULL
+        return(unclass(out))
+    } else {  # er, nothing to lose
+      return(x)
+    }
+}

@@ -1,5 +1,6 @@
 \name{mvp}
 \alias{mvp}
+\alias{mvp-class}
 \alias{is.mvp}
 \alias{as.mvp}
 \alias{as.mvp.character}

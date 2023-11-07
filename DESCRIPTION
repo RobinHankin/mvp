@@ -1,9 +1,9 @@
 Package: mvp
 Type: Package
 Title: Fast Symbolic Multivariate Polynomials
-Version: 1.0-16
+Version: 1.0-17
 Authors@R: person(given=c("Robin", "K. S."), family="Hankin", role = c("aut","cre"), email="hankin.robin@gmail.com", comment = c(ORCID = "0000-0001-5982-0415"))
-Depends: methods
+Depends: R (>= 3.5.0), methods
 Suggests: knitr, rmarkdown, microbenchmark, testthat, spray, magrittr
 VignetteBuilder: knitr
 Maintainer: Robin K. S. Hankin <hankin.robin@gmail.com>
@@ -27,3 +27,4 @@ LinkingTo: Rcpp
 URL: https://github.com/RobinHankin/mvp
 BugReports: https://github.com/RobinHankin/mvp/issues
 RdMacros: mathjaxr
+LazyData: FALSE

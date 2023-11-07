@@ -1,0 +1,47 @@
+---
+title: "Single letter symbols"
+output: bookdown::html_document2
+bibliography: mvp_arxiv.bib
+---
+
+```{r setup,include=FALSE}
+set.seed(0)
+knitr::opts_chunk$set(echo = TRUE)
+library("mvp")
+```
+
+```{r out.width='20%', out.extra='style="float:right; padding:10px"',echo=FALSE}
+knitr::include_graphics(system.file("help/figures/mvp.png", package = "mvp"))
+```
+
+To cite the `mvp` package in publications please use @hankin2022_mvp.
+This short markdown document creates variables `a`, `b`, $\ldots$, `z`
+which are single-symbol `mvp` objects.  Letters `c`, `q`, and `t`
+present particular problems as they have distinct meanings in `R`,
+which is why one needs to use `data()` in a session.
+
+```{r}
+for(letter in letters){
+  eval(parse(text=paste(letter, ' <- as.mvp("',letter, '")')))
+}
+```
+
+With these variables we can do all sorts of slick calculations:
+
+
+```{r}
+(a+b)*(a-b)
+a^3 + b^3 + c^3 - 3*a*b*c == (a+b+c)*(a^2+b^2+c^2-a*b-a*c-b*c)
+```
+
+### Package dataset {-}
+
+Following lines create `lettersymbols.rda`, residing in the `data/` directory
+of the package.
+
+```{r,label=savepackagedataset}
+save(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,file="lettersymbols.rda")
+```
+
+
+### References {-}

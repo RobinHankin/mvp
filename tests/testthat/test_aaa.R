@@ -109,6 +109,12 @@ checker1 <- function(x){
     LHS <- subsmvp(deriv(x,v)*deriv(s,"y"),v,s)
     RHS <- deriv(subsmvp(x,v,s),"y")
     expect_true(LHS == RHS,info=list(LHS,RHS))
+
+
+    ## check vectorized exponentiation:
+
+    expect_true(x^(0:3) == horner(x,rep(1,4)))
+
 }
   return(TRUE)
 }  # checker1() closes

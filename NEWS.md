@@ -2,6 +2,7 @@
 
 - single-letter symbols
 - bugfixes
+- vectorized exponentiation
 
 # 1.0-10
 

@@ -5,7 +5,7 @@ Fast symbolic multivariate polynomials in R
 
 # Overview <img src="man/figures/mvp.png" width = "150" align="right" />
 
-Multivariate polynomials are intereresting and useful objects. Here I
+Multivariate polynomials are interesting and useful objects. Here I
 present the `mvp` package which hopefully improves upon previous R
 functionality provided by the packages `multipol`, `mpoly`, and `spray`.
 The `mvp` package follows `mpoly` in using a symbolic, rather than

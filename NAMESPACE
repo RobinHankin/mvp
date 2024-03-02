@@ -35,7 +35,8 @@ S3method(deriv, mvp)
 S3method(aderiv,mvp)
 S3method(print,mvp)
 S3method(Ops,mvp)
-
+S3method("[",mvp)
+S3method("[<-",mvp)
 
 S3method(as.mvp,mvp)
 S3method(as.mvp,mpoly)

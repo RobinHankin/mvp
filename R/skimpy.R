@@ -404,3 +404,13 @@ setMethod("drop","mvp", function(x){drop_mvp(x)})
       return(x)
     }
 }
+
+`[.mvp` <- function(x,...){
+    coeffs(x)[!(...)] <- 0
+    return(x)
+}
+
+`[<-.mvp` <- function(x,index,value){
+    coeffs(x)[index] <- value
+    return(x)
+}

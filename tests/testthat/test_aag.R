@@ -45,4 +45,11 @@ test_that("Test suite test_aag.R",{
 P <- horner("a+b",1:9)
 expect_error(coeffs(P)[coeffs(a)<3] + coeffs(a)[coeffs(a)>500])
 
+P <- as.mvp("-7*z + 3*x^34 - 2*z*x + 7*x*z*u + 1*x*y^5")
+expect_true(P[coeffs(P) < 3] ==  as.mvp("-7*z - 2*z*x + 1*x*y^5"))
+P[coeffs(P) < 3] <- 99
+expect_true(P == as.mvp("7 u x z + 99 x y^5 + 99 x z + 3 x^34 + 99 z"))
+expect_error(P[coeffs(P)==99] <- 1:3)
+
+
 })

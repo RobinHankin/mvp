@@ -29,6 +29,6 @@ selection of terms of its argument.
 \author{Robin K. S. Hankin}
 \examples{
 summary(rmvp(40))
-rtypical(rmvp(1000))
+rtypical(rmvp(40))
 }
 \keyword{math}

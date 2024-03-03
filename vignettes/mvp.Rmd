@@ -116,6 +116,8 @@ specify a print order:
 print(M,order="lex", varorder=c("stoat","goat","boat","bloat","gloat","float","stoatboat"))
 ```
 
+Note in passing that variable names may be any character string, not
+just single letters.
 
 ## Arithmetic operations
 

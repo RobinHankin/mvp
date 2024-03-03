@@ -22,9 +22,10 @@ rmvppp(n=100,size=15,pow=99,symbols)
 \details{
 
 Function \code{rhmvp()} returns a random homogeneous \code{mvp}.
-  Function \code{rmvp()} returns a possibly nonhomogenous \code{mvp} and
-  functions \code{rmvpp()} and \code{rmvppp()} return, by default,
-  progressively more complicated \code{mvp} objects.
+Function \code{rmvp()} returns a possibly nonhomogenous \code{mvp} and
+functions \code{rmvpp()} and \code{rmvppp()} return, by default,
+progressively more complicated \code{mvp} objects.  Function
+\code{rmvppp()} returns a polynomial with multi-letter variable names.
 
 }
 \value{

@@ -65,4 +65,10 @@ a*b^2
 (a+b)*(a-b) == a^2-b^2 # should be TRUE
 
 
+## variable "xy" is distinct from "x*y":
+
+as.mvp("x + y + xy")^2
+as.mvp(paste(state.name[1:5],collapse="+"))^2
+
+
 }

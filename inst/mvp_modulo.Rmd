@@ -19,7 +19,7 @@ set.seed(0)
 </p>
 
 
-```{r}
+```{r showmvp_modulo}
 mvp_modulo
 ```
 
@@ -30,7 +30,7 @@ modulo $p$, a prime number.
 
 A short example:
 
-```{r}
+```{r shortexam}
 m <- rmvp(3,pow=11,symbols=3)*37
 m
 ```
@@ -38,7 +38,7 @@ m
 We see a standard `mvp` object.  However, we might wish to consider
 this polynomial over integers modulo 7:
 
-```{r}
+```{r mmodseven}
 m %% 7
 ```
 
@@ -48,7 +48,7 @@ modulo 7, and secondly, powers are expressed modulo 6 [on the grounds
 that $(a,p)=1\implies a^{p-1}=1 (\operatorname{mod} p)$, Fermat's
 theorem].  This is good for many purposes but is not ideal.  Consider:
 
-```{r}
+```{r showsubsidiom}
 subs(m,a=1,b=2,c=1)
 subs(m%%7,a=1,b=2,c=1)
 ```
@@ -56,14 +56,14 @@ subs(m%%7,a=1,b=2,c=1)
 
 The answer is correct, of course:
 
-```{r}
+```{r correctans}
 subs(m,a=1,b=2,c=1)%%7 == subs(m%%7,a=1,b=2,c=1)%%7
 ```
 
 but it would be nice for the substitution not to need manual
 extraction by `%%7`.  Also, various package idiom is sub-optimal:
 
-```{r}
+```{r manextract}
 (m%%7)
 (m%%7)*100
 ```
@@ -72,7 +72,7 @@ Above, the coefficients should be expressed modulo 7.  Although this
 is relatively straightforward in the package, it should not be
 necessary.
 
-```{r}
+```{r unnecstrai}
 p <- (m%%7)*100
 coeffs(p) <- coeffs(p)%%7
 p
@@ -80,7 +80,7 @@ p
 
 Also
 
-```{r}
+```{r toobig}
 (m%%7) * (m%%7)      # coefficients too big
 ((m%%7) * (m%%7))%%7 # better
 ```
@@ -107,4 +107,3 @@ functions that return a `mvp` object are rewritten to work with modulo
 arithmetic [either that, or do it in `R`].  If there is a pressing
 need for such functionality I could be persuaded to implement it, but
 this is low on my list of priorities, as of March 2022.
-

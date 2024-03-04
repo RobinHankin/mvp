@@ -1,22 +1,36 @@
 ---
 title: "The `mvp` package and the `freealg` package"
 author: "Robin K. S. Hankin"
-output: html_document
+bibliography: mvp_arxiv.bib
+output: html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{mvp_and_freealg}
+  %\usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(echo = TRUE)
+library("mvp")
+library("freealg")
 set.seed(0)
 ```
 
+<p style="text-align: right;">
+![](`r system.file("help/figures/mvp.png", package = "mvp")`){width=10%}
+</p>
+
+
 # Introduction
 
-The `freealg` package provides some functionality for the free algebra
-which does not assume commutativity of the elements.  This little
-document discusses the conversion of `freealg` objects to `mvp`
-objects.  Observe that there is no natural way to convert `mvp` to
-`freealg` as one needs to impose an arbitrary order on the
-indeterminates.
+To cite the `mvp` package in publications, please use @hankin2022_mvp.
+The `freealg` package [@hankin2022_freealg] provides some
+functionality for the free algebra which does not assume commutativity
+of the elements.  This little document discusses the conversion of
+`freealg` objects to `mvp` objects.  Observe that there is no natural
+way to convert `mvp` to `freealg` as one needs to impose an arbitrary
+order on the indeterminates.
 
 ```{r}
 library("mvp")
@@ -51,3 +65,4 @@ freealg_to_mvp(x*y) == freealg_to_mvp(x) * freealg_to_mvp(y) # should be TRUE
 
 
 
+# References

@@ -620,5 +620,5 @@ sum(unlist(lapply(powers(K),dist))*coeffs(K))/sum(coeffs(K))
 @ 
 
 \bibliographystyle{plain}
-\bibliography{mvp_arxiv}
+\bibliography{mvp}   % copy from the vignettes/ directory
 \end{document}

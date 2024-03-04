@@ -2,6 +2,7 @@
 title: "Multivariate polynomials over finite rings: function `mvp_modulo()` in the `mvp` package"
 author: "Robin K. S. Hankin"
 output: html_vignette
+bibliography: mvp.bib
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{mvp_modulo}
@@ -24,6 +25,7 @@ set.seed(0)
 mvp_modulo
 ```
 
+To cite the `mvp` package in publications, please use @hankin2022_mvp.
 The `mvp` package deals with the ring of polynomials with
 indeterminates over the reals.  This document details how the package
 deals with multivariate polynomials over a finite ring, here integers
@@ -115,3 +117,6 @@ functions that return a `mvp` object are rewritten to work with modulo
 arithmetic [either that, or do it in `R`].  If there is a pressing
 need for such functionality I could be persuaded to implement it, but
 this is low on my list of priorities, as of March 2023.
+
+
+### References 

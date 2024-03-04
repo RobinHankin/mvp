@@ -31,8 +31,7 @@ modulo $p$, a prime number.
 A short example:
 
 ```{r shortexam}
-m <- rmvp(3,pow=11,symbols=3)*37
-m
+(m <- as.mvp("100 + 6 x^9 + 7 x^2*y + 8*y^1000"))
 ```
 
 We see a standard `mvp` object.  However, we might wish to consider
@@ -46,22 +45,30 @@ Above, the `%%` binary operator [which dispatches to `mvp_modulo()`]
 alters object `m` in two ways: firstly, coefficients are expressed
 modulo 7, and secondly, powers are expressed modulo 6 [on the grounds
 that $(a,p)=1\implies a^{p-1}=1 (\operatorname{mod} p)$, Fermat's
-theorem].  This is good for many purposes but is not ideal.  Consider:
+theorem].  This is good for many purposes but is not ideal.  Suppose
+we wish to sustitute `x=6`.  Consider:
 
 ```{r showsubsidiom}
-subs(m,a=1,b=2,c=1)
-subs(m%%7,a=1,b=2,c=1)
+subs(m,x=6)
+subs(m,x=6)%%7
+subs(m%%7,x=6)
 ```
 
+Above, `subs(m,x=6)` shows unnecessarily large coefficients (so
+`subs(m,x=6)%%7`, while in reduced form, may suffer from numerical
+inaccuracy); and `subs(m%%7,x=6)` is not in reduced form.  Currently
+the only way to avoid these problems is:
 
-The answer is correct, of course:
-
-```{r correctans}
-subs(m,a=1,b=2,c=1)%%7 == subs(m%%7,a=1,b=2,c=1)%%7
+```{r avoidprobs}
+subs(m%%7,x=6)%%7
 ```
 
-but it would be nice for the substitution not to need manual
-extraction by `%%7`.  Also, various package idiom is sub-optimal:
+but it would be nice for the substitution not to need repeated manual
+extraction by `%%7`.  What we _want_ is to specify, at the start of a
+session, "everything everything _everything_ is modulo 7"; and
+thereafter just silently work modulo 7, without having to type "`%%7`"
+ever again.  In addition to this, various package idiom is
+sub-optimal:
 
 ```{r manextract}
 (m%%7)
@@ -85,9 +92,9 @@ Also
 ((m%%7) * (m%%7))%%7 # better
 ```
 
-Above, note how the first product includes the term `16 a^6 b^6 c^6`
-which of course is simplified to `2` on considering the result modulo
-7.
+Above, note how the first product includes the term `36 x^6` which of
+course is simplified to `1` [this being added to the constant `4`] on
+considering the result modulo 7.
 
 ## Conclusions
 
@@ -106,4 +113,4 @@ modular arithmetic.  We would then need to ensure that the various `C`
 functions that return a `mvp` object are rewritten to work with modulo
 arithmetic [either that, or do it in `R`].  If there is a pressing
 need for such functionality I could be persuaded to implement it, but
-this is low on my list of priorities, as of March 2022.
+this is low on my list of priorities, as of March 2023.

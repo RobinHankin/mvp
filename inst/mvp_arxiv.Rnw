@@ -144,6 +144,7 @@ representation in the following R session:
 
 <<mvpdefinep>>=
 library("mvp",quietly=TRUE)
+library("magrittr")
 (p <- as.mvp("3 x y + z^3 + x y^6 z"))
 @ 
 
@@ -223,10 +224,10 @@ subs(S3, x = 1, y = 2, z = 3)
 
 (in this case, the default behaviour is to return the the resulting
 polynomial coerced to a scalar).  We can suppress the coercion using
-the {\tt lose} argument:
+the {\tt drop} argument:
 
 <<uselose>>=
-subs(S3, x = 1, y = 2, z = 3,lose=FALSE)
+subs(S3, x = 1, y = 2, z = 3,drop=FALSE)
 @ 
 
 The idiom also allows one to substitute a variable for an {\tt mvp}
@@ -250,7 +251,7 @@ subs(as.mvp("a+b+c"), x="1+a",a="x^6")
 Substitution works well with pipes:
 
 <<subwithpipes>>=
-as.mvp("a+b") %>% subs(a="a^2+b^2") %>% subs(b="x^6")
+as.mvp("a+b") |> subs(a="a^2+b^2") |> subs(b="x^6")
 @ 
 
 
@@ -472,7 +473,7 @@ p + as.mvp("z^6")
 As discussed above, the terms of an {\tt mvp} object are held in an
 implementation-specific order and dealing with this in a consistent
 way is achieved using the {\tt disordR}
-package~\cite{hankin2022_disordR}.  It is possible to examine the
+package~\cite{hankin2022_disordR_arxiv}.  It is possible to examine the
 coefficients of an {\tt mvp} object:
 
 <<introdisord>>=

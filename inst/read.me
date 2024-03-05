@@ -1,19 +1,14 @@
 To make mvp_arxiv.pdf you will need to:
 
-1.  run R CMD Sweaave mvp_arxiv.Rnw
+1.  run:
+
+R CMD Sweave mvp_arxiv.Rnw
 
 This creates mvp_arxiv.tex.
 
-2. run:
+2. to process mvp_arxiv.tex, you will need some additional files,
+which are not under version control:
 
-latex mvp_arxiv.
-bibtex mvp_arxiv.
-latex mvp_arxiv.
-latex mvp_arxiv.
-
-
-To do this, you will need some additional files, which are not under
-version control:
 
 - arxiv.sty
 - Sweave.sty
@@ -21,4 +16,13 @@ version control:
 - mvp.png [this held at man/figures in the repo]
 - four_dimensional_knight.pdf [this from the spray repo at vignettes/]
 - mvp.bib [this held at vignettes/ in the repo]
+
+3.  Then use pdflatex:
+
+pdflatex mvp_arxiv
+bibtex   mvp_arxiv
+pdflatex mvp_arxiv
+pdflatex mvp_arxiv
+
+
 

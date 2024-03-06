@@ -1,7 +1,7 @@
 ---
 title: "The `mvp` package and the `freealg` package"
 author: "Robin K. S. Hankin"
-bibliography: mvp_arxiv.bib
+bibliography: mvp.bib  # copy mvp.bib from vignettes/
 output: html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
@@ -17,12 +17,10 @@ library("freealg")
 set.seed(0)
 ```
 
-<p style="text-align: right;">
-![](`r system.file("help/figures/mvp.png", package = "mvp")`){width=10%}
-</p>
-
-
-# Introduction
+```{r out.width='20%', out.extra='style="float:right; padding:10px"',echo=FALSE}
+knitr::include_graphics(system.file("help/figures/mvp.png", package = "mvp"))
+knitr::include_graphics(system.file("help/figures/freealg.png", package = "freealg"))
+```
 
 To cite the `mvp` package in publications, please use @hankin2022_mvp.
 The `freealg` package [@hankin2022_freealg] provides some
@@ -30,7 +28,10 @@ functionality for the free algebra which does not assume commutativity
 of the elements.  This little document discusses the conversion of
 `freealg` objects to `mvp` objects.  Observe that there is no natural
 way to convert `mvp` to `freealg` as one needs to impose an arbitrary
-order on the indeterminates.
+order on the indeterminates.  The package does not support this, as it
+declines to guess what order would be appropriate.  The `freealg`
+package is not a dependency for the `mvp` package, as the two do not
+generally play nicely together.
 
 ```{r}
 library("mvp")

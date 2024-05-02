@@ -43,7 +43,7 @@ mvp_modulo(S1,S2)
   The caret \dQuote{\code{^}} denotes arithmetic exponentiation, as in
   \code{x^3==x*x*x}.  As an experimental feature, this is (sort of)
   vectorised: if \code{n} is a vector, then \code{a^n} returns the sum
-  of \code{a} raised to the power of each element of {n}.  For example,
+  of \code{a} raised to the power of each element of \code{n}.  For example,
   \code{a^c(n1,n2,n3)} is \code{a^n1 + a^n2 + a^n3}.  Internally,
   \code{n} is tabulated in the interests of efficiency, so
   \code{a^c(0,2,5,5,5) = 1 + a^2 + 3a^5} is evaluated with only a

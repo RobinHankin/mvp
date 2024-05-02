@@ -59,6 +59,9 @@
 data(lettersymbols)
 (a+b)*(a-b)
 
+(x + y + z)^3 - 3*(x + y + z)*(x*y + x*z + y*z) + 3*x*y*z
+
+
 }
 \keyword{datasets}
 

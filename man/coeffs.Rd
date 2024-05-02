@@ -26,7 +26,7 @@
   class of the \CRANpkg{disordR} package.
 
 \dQuote{Pure} extraction and replacement (as in \code{a[i]} and
-\code{a[i] <- value} is implemented experimentally.  The code for
+\code{a[i] <- value}) is implemented experimentally.  The code for
 extraction is cute but not particularly efficient.
   
 }

@@ -1,0 +1,37 @@
+---
+name: Check 🛠
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+# This reusable workflow from insightsengineering/r.pkg.template will run once a PR to master branch is created.
+jobs:
+  job-setup:
+    name: Should we run R CMD check?
+    runs-on: ubuntu-latest
+    outputs:
+      check_out: ${{ steps.check.outputs.run_r_cmd_check }}
+    steps:
+      # We can have much more advanced logic to decide which jobs we want to run.
+      - name: To check or not to check?
+        id: check
+        run: |
+          echo "run_r_cmd_check=true" >> $GITHUB_OUTPUT
+
+  r-cmd:
+    name: R CMD Check 🧬
+    needs: job-setup
+    # Call a workflow from a given GitHub repository, from a given branch (or tag).
+    uses: insightsengineering/r.pkg.template/.github/workflows/build-check-install.yaml@main
+    if: >
+      needs.job-setup.outputs.check_out == 'true'

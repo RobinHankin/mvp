@@ -21,3 +21,7 @@ README.html
 inst/lettersymbols.rda$
 ^.github$
 ^.devcontainer$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$

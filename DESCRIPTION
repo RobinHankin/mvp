@@ -24,7 +24,7 @@ Imports: Rcpp (>= 1.0-7),
   mpoly (>= 1.1.0),
   mathjaxr
 LinkingTo: Rcpp
-URL: https://github.com/RobinHankin/mvp
+URL: https://github.com/RobinHankin/mvp, https://robinhankin.github.io/mvp/
 BugReports: https://github.com/RobinHankin/mvp/issues
 RdMacros: mathjaxr
 LazyData: FALSE

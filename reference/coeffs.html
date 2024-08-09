@@ -53,7 +53,7 @@ extraction is cute but not particularly efficient."></head><body>
     <div class="ref-description section level2">
 
 
-<p>Function <code><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs()</a></code> allows arithmetic operators to be used for
+<p>Function <code><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs()</a></code> allows arithmetic operators to be used for
   the coefficients of multivariate polynomials, bearing in mind that the
   order of coefficients is not determined.  It uses the <code>disord</code>
   class of the <a href="https://CRAN.R-project.org/package=disordR" class="external-link"><span class="pkg">disordR</span></a> package.</p>
@@ -64,10 +64,10 @@ extraction is cute but not particularly efficient.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu">vars</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu">powers</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
+<span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">value</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -109,7 +109,7 @@ extraction is cute but not particularly efficient.</p>
   on the terms.  If we choose <code>c(1,3,4)</code> then the terms are
   <code>x,y,xy^3</code>, and if we choose <code>c(4,1,3)</code> the terms are
   <code>xy^3,x,y</code>.</p>
-<p>In the package, <code><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs()</a></code> returns an object of class
+<p>In the package, <code><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs()</a></code> returns an object of class
   <code>disord</code>.  This class of object has a slot for the coefficients
   in the form of a numeric R vector, but also another slot which uses
   hash codes to prevent users from misusing the ordering of the numeric
@@ -157,8 +157,8 @@ extraction is cute but not particularly efficient.</p>
   done with such an object?  However, it makes sense on the left hand
   side of an assignment, as long as the right hand side is a length-one
   vector.  Idiom such as</p>
-<p></p><ul><li><p></p><div class="sourceCode"><pre><code><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div></li>
-<li><p></p><div class="sourceCode"><pre><code><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="va">a</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div></li>
+<p></p><ul><li><p></p><div class="sourceCode"><pre><code><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">+</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div></li>
+<li><p></p><div class="sourceCode"><pre><code><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="va">a</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div></li>
 </ul><p>is algebraically meaningful (“Add 4 to any element less than
   5”; “coefficients become the pairwise maximum of themselves and
   3”).  The <a href="https://CRAN.R-project.org/package=disordR" class="external-link"><span class="pkg">disordR</span></a> package uses <code>pmaxdis()</code> rather than
@@ -195,23 +195,23 @@ extraction is cute but not particularly efficient.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 + a d + 5 a f + 2 b e + 4 c e f + 4 d^4 e^2 + 4 f</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A disord object with hash 20f06fbe71a234bc5a321f400a5051f1119d6422 and elements</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 324   4   9  36</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (in some order)</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span><span class="fl">3</span>  <span class="co"># fine, all coeffs of y now modulo 3</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span><span class="fl">3</span>  <span class="co"># fine, all coeffs of y now modulo 3</span></span></span>
 <span class="r-in"><span><span class="va">y</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 + a d + 2 a f + 2 b e + c e f + d^4 e^2 + f</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">4</span>               </span></span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">4</span>               </span></span>
 <span class="r-in"><span><span class="va">y</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 + 4 a d + 4 a f + 4 b e + 4 c e f + 4 d^4 e^2 + 4 f</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>          <span class="co"># not defined, will give an error</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="summary.html">nterms</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="co"># not defined, will give an error</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>          <span class="co"># not defined, will give an error</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="summary.html">nterms</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="co"># not defined, will give an error</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

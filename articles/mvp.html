@@ -403,11 +403,11 @@ object:</p>
 <span><span class="va">a</span></span>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
 <span><span class="co">#&gt; 5 - 3 x yz - 5 x^2 y + 11 z</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
 <span><span class="co">#&gt; A disord object with hash b0695ec1b46bb6da92f016f17e49971e1036d786 and elements</span></span>
 <span><span class="co">#&gt; [1]  5 -3 -5 11</span></span>
 <span><span class="co">#&gt; (in some order)</span></span></code></pre></div>
-<p>Above, note that the result of <code><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs()</a></code> is a
+<p>Above, note that the result of <code><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs()</a></code> is a
 <code>disord</code> object, defined in the <code>disordR</code> package
 <span class="citation">(Hankin 2022a)</span>. The order of the elements
 unspecified as the <code>STL map</code> class holds the keys and values
@@ -419,7 +419,7 @@ another <code>mvp</code> object, <code>b</code>:</p>
 <span><span class="va">b</span></span>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
 <span><span class="co">#&gt; 10 - 6 x yz - 10 x^2 y + 22 z</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
 <span><span class="co">#&gt; coeffs(a) + coeffs(b)</span></span>
 <span><span class="co">#&gt; Error in check_matching_hash(e1, e2, match.call()): </span></span>
 <span><span class="co">#&gt; hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match</span></span></code></pre></div>
@@ -428,31 +428,31 @@ another <code>mvp</code> object, <code>b</code>:</p>
 vector addition makes no sense. However, we can operate on coefficients
 of a single <code>mvp</code> object at will:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span></span>
 <span><span class="co">#&gt; A disord object with hash b0695ec1b46bb6da92f016f17e49971e1036d786 and elements</span></span>
 <span><span class="co">#&gt; [1]  TRUE FALSE FALSE  TRUE</span></span>
 <span><span class="co">#&gt; (in some order)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span></span>
+<span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span></span>
 <span><span class="co">#&gt; A disord object with hash b0695ec1b46bb6da92f016f17e49971e1036d786 and elements</span></span>
 <span><span class="co">#&gt; [1]   630    78   620 14652</span></span>
 <span><span class="co">#&gt; (in some order)</span></span></code></pre></div>
 <p>Extraction also works but subject to standard <code>disordR</code>
 idiom restrictions:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
 <span><span class="co">#&gt; A disord object with hash 54f03094a678b0e4328942e555e5a308c29f40fe and elements</span></span>
 <span><span class="co">#&gt; [1]  5 11</span></span>
 <span><span class="co">#&gt; (in some order)</span></span></code></pre></div>
 <p>But “mixing” objects is forbidden:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
 <span><span class="co">#&gt; .local(x = x, i = i, j = j, drop = drop)</span></span>
 <span><span class="co">#&gt; Error in check_matching_hash(x, i, match.call()): </span></span>
 <span><span class="co">#&gt; hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match</span></span></code></pre></div>
 <p>Extraction methods work, again subject to <code>disordR</code>
 restrictions:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">+</span> <span class="fl">1000</span> <span class="co"># add 1000 to every negative coefficient</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">&lt;</span><span class="fl">0</span><span class="op">]</span> <span class="op">+</span> <span class="fl">1000</span> <span class="co"># add 1000 to every negative coefficient</span></span>
 <span><span class="va">a</span></span>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
 <span><span class="co">#&gt; 5 + 997 x yz + 995 x^2 y + 11 z</span></span></code></pre></div>
@@ -460,7 +460,7 @@ restrictions:</p>
 <code>magrittr</code> would simplify the idiom and reduce the
 opportunity for error:</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span><span class="fl">3</span><span class="op">==</span><span class="fl">1</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>  <span class="co"># add 100 to every element equal to 1 modulo 3</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span><span class="fl">3</span><span class="op">==</span><span class="fl">1</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu">`+`</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>  <span class="co"># add 100 to every element equal to 1 modulo 3</span></span>
 <span><span class="va">b</span></span>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
 <span><span class="co">#&gt; 110 - 6 x yz - 10 x^2 y + 122 z</span></span></code></pre></div>
@@ -472,9 +472,9 @@ opportunity for error:</p>
 <span><span class="co">#&gt; 1 - 0.22 x + 0.01 x y + 0.0121 x^2 - 0.0011 x^2 y + 0.000025 x^2 y^2</span></span></code></pre></div>
 <p>Then we can zap as follows:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">cx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">cx</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">cx</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">0.01</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/coeffs.html" class="external-link">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">cx</span></span>
+<span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">cx</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
 <span><span class="co">#&gt; 1 - 0.22 x + 0.01 x y + 0.0121 x^2</span></span></code></pre></div>
@@ -492,7 +492,7 @@ this)</p>
 <p>How many ways are there for a 4D knight to return to its starting
 square after four moves? Answer:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/mvp/man/constant.html" class="external-link">constant</a></span><span class="op">(</span><span class="fu"><a href="../reference/knight.html">knight</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/constant.html">constant</a></span><span class="op">(</span><span class="fu"><a href="../reference/knight.html">knight</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 12528</span></span></code></pre></div>
 </div>
 <div class="section level2">

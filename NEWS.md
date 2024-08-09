@@ -1,6 +1,9 @@
 # mvp 1.0-18
 
 - pure extraction
+- code of conduct
+- contributing guide
+- pkgdown
 
 # mvp 1.0-17
 

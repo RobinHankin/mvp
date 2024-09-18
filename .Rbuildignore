@@ -21,3 +21,9 @@ README.html
 inst/lettersymbols.rda$
 ^.github$
 ^.devcontainer$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^CODE_OF_CONDUCT.md$
+^CONTRIBUTING.md$

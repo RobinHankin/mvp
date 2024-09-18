@@ -8,3 +8,4 @@ src/*.dll
 mvp.Rproj
 man/*.Rd~
 README.html
+docs

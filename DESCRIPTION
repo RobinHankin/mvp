@@ -22,9 +22,7 @@ Imports: Rcpp (>= 1.0-7),
   disordR (>= 0.9-7),
   numbers,
   mpoly (>= 1.1.0),
-  mathjaxr
 LinkingTo: Rcpp
 URL: https://github.com/RobinHankin/mvp, https://robinhankin.github.io/mvp/
 BugReports: https://github.com/RobinHankin/mvp/issues
-RdMacros: mathjaxr
 LazyData: FALSE

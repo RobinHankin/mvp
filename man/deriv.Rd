@@ -6,7 +6,7 @@
 \alias{aderiv.mvp}
 \alias{aderiv_mvp}
 \title{Differentiation of \code{mvp} objects}
-\description{\loadmathjax
+\description{
 Differentiation of \code{mvp} objects}
 \usage{
 \method{deriv}{mvp}(expr, v, ...)
@@ -25,17 +25,17 @@ Differentiation of \code{mvp} objects}
 \seealso{\code{\link{taylor}}}
 \details{
 
-  \code{deriv(S,v)} returns \mjeqn{\frac{\partial^r S}{\partial
+  \code{deriv(S,v)} returns \eqn{\frac{\partial^r S}{\partial
   v_1\partial v_2\ldots\partial v_r}}{d^rS/dv1...dvr}.  Here, \code{v}
   is a (character) vector of symbols.
 
   \code{deriv(S,v,n)} returns the n-th derivative of \code{S} with
-  respect to symbol \code{v}, \mjeqn{\frac{\partial^n S}{\partial
+  respect to symbol \code{v}, \eqn{\frac{\partial^n S}{\partial
   v^n}}{d^nS/dv^n}.
 
   \code{aderiv()} uses the ellipsis construction with the names of the
   argument being the variable to be differentiated with respect to.
-  Thus \code{aderiv(S,x=1,y=2)} returns \mjeqn{\frac{\partial^3
+  Thus \code{aderiv(S,x=1,y=2)} returns \eqn{\frac{\partial^3
   S}{\partial x\partial y^2}}{d^3S/dxdy^2}.
 
 }

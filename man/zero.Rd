@@ -13,7 +13,7 @@ is.zero(x)
 \arguments{
   \item{x}{Object of class \code{mvp}}
 }
-\details{\loadmathjax
+\details{
 
   Function \code{is.zero()} returns \code{TRUE} if \code{x} is indeed
   the zero polynomial.  It is defined as \code{length(vars(x))==0} for
@@ -35,7 +35,7 @@ A general \code{mvp} object is something like
 
 \code{\{\{"x" -> 3, "y" -> 5\} -> 6, \{"x" -> 1, "z" -> 8\} -> -7\}\}}
 
-which would be \mjeqn{6x^3y^5-7xz^8}{6x^3*y^5-7x*z^8}.  The zero
+which would be \eqn{6x^3y^5-7xz^8}{6x^3*y^5-7x*z^8}.  The zero
 polynomial is just \code{\{\}}.  Neat, eh?
   
 }

@@ -1,3 +1,9 @@
+# mvp 1.0-19
+
+- remove mathjax dependency
+- approximate equality
+
+
 # mvp 1.0-18
 
 - pure extraction

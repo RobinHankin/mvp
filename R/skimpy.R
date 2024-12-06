@@ -414,3 +414,10 @@ setMethod("drop","mvp", function(x){drop_mvp(x)})
     coeffs(x)[index] <- value
     return(x)
 }
+
+`all_equal_mvp` <- function(target, current){
+    x <- elements(coeffs(target - current))
+    base::all.equal(x,rep(0,length(x)),scale=max(c(elements(coeffs(current)),elements(coeffs(target)))))
+}
+
+setMethod(f = "all.equal", signature = "mvp", definition = all_equal_mvp)

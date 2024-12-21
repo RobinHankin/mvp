@@ -3,6 +3,7 @@ title: 'The `mvp` package: fast multivariate polynomials in R'
 author: "Robin K. S. Hankin"
 output: html_vignette
 bibliography: mvp.bib
+link-citations: true
 vignette: >
   %\VignetteIndexEntry{mvp}
   %\VignetteEngine{knitr::rmarkdown}

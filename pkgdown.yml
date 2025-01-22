@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   mvp: mvp.html
-last_built: 2024-12-21T14:40Z
+last_built: 2025-01-22T07:33Z
 urls:
   reference: https://robinhankin.github.io/mvp/reference
   article: https://robinhankin.github.io/mvp/articles

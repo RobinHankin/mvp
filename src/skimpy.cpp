@@ -112,22 +112,16 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
 mvp product(const mvp &X1, const mvp &X2){
     mvp out;
     
-    for(mvp::const_iterator it1=X1.begin() ; it1 != X1.end() ; ++it1){
-        const term t1=it1->first;
-        const double c1=it1->second; // coefficient
-        for(mvp::const_iterator it2=X2.begin() ; it2 != X2.end() ; ++it2){
-            term t1new = t1;// we will modify t1new by adding stuff to it
-            const term t2=it2->first;
-            for(term::const_iterator is=t2.begin() ; is != t2.end() ; ++is){
-                t1new[is->first] += is->second;  // add the powers of the variables in the two terms
-            }  // is loop closes
-            
+    for(const auto& [t1, c1] : X1){
+        for(const auto& [t2, c2] : X2){
+            term t1new = t1;
+            for(const auto& [symbol, power] : t2){
+                t1new[symbol] += power;  // add the powers of the variables in the two terms
+            }
             t1new = zero_power_remover(t1new);
-            const double c2=it2->second; // coefficient of t2
-            out[t1new] += c1*c2;  // NB inside the it2 loop
-
-        }  //it2 loop closes
-    } // it1 loop closes
+            out[t1new] += c1*c2;  
+        }
+    }
     return zero_coefficient_remover(out);
 }
 
@@ -158,7 +152,8 @@ mvp deriv(const mvp &X, const string &v){// differentiation: dX/dv, 'v' a single
     mvp out;
 
     for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){
-        term t=it->first;
+        term t = it->first;
+        if(t.find(v) == t.end()) continue;
         const signed int power = t[v];       
         t[v]--; // power reduces by one (maybe to zero...)
         t = zero_power_remover(t); // (...which is why we call zpr())

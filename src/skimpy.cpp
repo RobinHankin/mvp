@@ -164,12 +164,10 @@ mvp deriv(const mvp &X, const string &v){// differentiation: dX/dv, 'v' a single
 
 mvp taylor_onevar(const mvp &X, const string &v, const signed int &n){
     if(n < 0){throw std::range_error("power cannot be <0");} 
-    mvp out=X;
-    mvp::const_iterator it;  // sit == symbol iterator
-    for(it=X.begin() ; it != X.end() ; ++it){      // iterate through X, remove terms if needed.
-        term xt=it->first;                         // coefficient, "it->second", is ignored
+    mvp out = X;
+    for(const auto& [xt, _] : X){
         if(xt.find(v) != xt.end()){ 
-            if(xt[v]>n){
+            if(xt.at(v) > n){
                 out.erase(xt) ;
             }
         }
@@ -178,46 +176,39 @@ mvp taylor_onevar(const mvp &X, const string &v, const signed int &n){
 }
 
 mvp taylor_onepower_onevar(const mvp &X, const string &v, const signed int &n){
-    mvp jj,out;
-    mvp::const_iterator it;  // sit == symbol iterator
-    if(n==0){  // n=0 means we seek terms with no symbol v in them
-        for(it=X.begin() ; it != X.end() ; ++it){      // iterate through X
-            const term xt=it->first;                   // it->second is the coefficient
+    mvp jj, out;
+    if(n == 0){  // n=0 means we seek terms with no symbol v in them
+        for(const auto& [xt, coef] : X){
             jj.clear();
             if(xt.find(v) == xt.end()){ // if symbol v *not* present in xt, then:
-                jj[xt] = it->second;    // (1) populate mvp jj with a single pair
+                jj[xt] = coef;          // (1) populate mvp jj with a single pair
                 out = sum(out, jj);     // (2) add this to out
             } // else do nothing
         } // X iteration closes
     } else { //  now n != 0, we seek terms with v^n
-        for(it=X.begin() ; it != X.end() ; ++it){ // iterate through X, 
-            term xt=it->first;
+        for(const auto& [xt, coef] : X){
             jj.clear();
             if(xt.find(v) != xt.end()){  // if there *is* symbol v in term...
-                if(xt[v]==n){            // ...and if its power equals n, then:
-                    term xn=xt;               // (1) create a new term,
+                if(xt.at(v) == n){       // ...and if its power equals n, then:
+                    term xn = xt;        // (1) create a new term,
                     xn.erase(v);         // (2) remove v from the new term, 
-                    jj[xn] = it->second; // (3) populate jj with a single key-value pair
+                    jj[xn] = coef;       // (3) populate jj with a single key-value pair
                     out = sum(out, jj);  // (4) add jj to out.
-                } // else do nothing
-            } // else do nothing
+                }
+            }
         }
-    } //if(n==0) closes
+    } 
     return out;
 }
 
 mvp taylor_allvars(const mvp &X, const signed int &n){  // truncated Taylor series
     if(n < 0){throw std::range_error("power cannot be <0");} 
-    term::const_iterator sit;  // sit == symbol iterator
-    mvp::const_iterator it;  
-    mvp out=X;
-
-    for(it=X.begin() ; it != X.end() ; ++it){      // iterate through X, remove terms if needed.
-      const term xt=it->first;                         // coefficient, "it->second", is ignored
+    mvp out = X;
+    for(const auto& [xt, coef] : X){
       signed int totalpower = 0;
-      for(sit = xt.begin() ; sit != xt.end() ; ++sit){ // iterate through one term of X
-          totalpower += sit->second;
-      }      
+      for(const auto& [_, power] : xt){
+          totalpower += power;
+      }
       if(totalpower > n){ out.erase(xt); }
     }
     return out;

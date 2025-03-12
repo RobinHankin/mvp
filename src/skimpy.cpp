@@ -24,9 +24,7 @@ typedef map <signed int, mvp> series;  // used for Taylor series
 
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
-    for(mvp::const_iterator it=X.begin() ; it != X.end() ; ++it){
-        const term t = it->first;
-        const double coef = it->second;
+    for(const auto& [t, coef] : X){
         if(coef != 0){
             out[t] += coef;
         }
@@ -36,9 +34,7 @@ mvp zero_coefficient_remover(const mvp &X){
 
 term zero_power_remover(const term &t){
     term out;
-    for(term::const_iterator it=t.begin() ; it != t.end() ; ++it){
-        const string var = it->first;
-        const unsigned int power = it->second;
+    for(const auto& [var, power] : t){
         if(power != 0){
             out[var] += power;
         }
@@ -138,8 +134,8 @@ mvp product(const mvp &X1, const mvp &X2){
 mvp sum(const mvp &X1, const mvp &X2){
     mvp out=X1;
     
-    for(mvp::const_iterator it2=X2.begin() ; it2 != X2.end() ; ++it2){
-            out[it2->first] += it2->second;
+    for(const auto& [term, coef] : X2){
+        out[term] += coef;
     }
     return zero_coefficient_remover(out);
 }

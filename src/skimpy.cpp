@@ -315,19 +315,19 @@ List mvp_substitute(
     term::iterator it;
 
     mvp Xnew;    
-    for(i = s.begin() ; i != s.end() ; ++i){     // Iterate through the substitution object s; e.g. {x=1.1, b=5.5};  i->first = "x" and  i->second = 1.1
+    for(const auto& [symbol, value ] : s){       // Iterate through the substitution object s; e.g. {x=1.1, b=5.5};  i->first = "x" and  i->second = 1.1
         Xnew.clear();                            // Empty mvp object to take substituted terms
         for(j = X.begin() ; j != X.end() ; ++j){ // Iterate through  X; e.g. j->first = {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5] and j->second=2.2 [that is, 2.2 x^3*ab^5]
             term t = j->first;                   // "t" is a single term of X, eg {"x" -> 3, "ab" -> 5} [that is, x^3*ab^5]
             const double coeff = j->second;      // "coeff" is the coefficient corresponding to that term (a real number)
-	    it = t.find(i->first);               // Now, search the symbols in the term for one that matches the substitution symbol, e.g. it->first = {"x"}
+	    it = t.find(symbol);                 // Now, search the symbols in the term for one that matches the substitution symbol, e.g. it->first = {"x"}
             if(it == t.end()){                   // if(no match)...
                 Xnew[t] = coeff;                 // ...then include term t and coeff unchanged in Xnew
 	    } else {                             // else a match found.  If so, we want to effect 3x^2*y^5 /. {x -> 2} giving 12*y^3 [mathematica notation];  do three things:
               const signed int p=it->second;     // (1) extract the power, p, *before* erasing the iterator;
 	      t.erase(it);                       // (2) Set the power of the matched symbol to zero (in t); and
 	      Xnew[t] +=                         // (3) Add a new element to Xnew with term (updated) t...
-              coeff*pow(i->second,p);            // ... and coefficient coeff*<var>^n using the saved value of n; note use of "+=" in case there is another term the same
+              coeff * pow(value, p);             // ... and coefficient coeff*<var>^n using the saved value of n; note use of "+=" in case there is another term the same
             }                                    // if(match found) closes
 	}                                        // j loop closes: go on to look at the next element of X
         X = Xnew;                                // update X to reflect changes

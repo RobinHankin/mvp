@@ -1,3 +1,9 @@
+# mvp 1.1-0
+
+- C++-17 constructions
+- more efficient exponentiation
+
+
 # mvp 1.0-19
 
 - remove mathjax dependency

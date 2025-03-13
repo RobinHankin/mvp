@@ -58,10 +58,10 @@ List retval(const mvp &X){   // takes a mvp object and returns a mpoly-type list
         CharacterVector names(r); 
         IntegerVector powers(r);
 
-    for(ic = oneterm.begin(), j=0 ; ic != oneterm.end() ; ++ic, ++j){
-        names[j] = (string) ic->first;
-        powers[j] = (int) ic->second;
-    }
+        for(ic = oneterm.begin(), j=0 ; ic != oneterm.end() ; ++ic, ++j){
+            names[j] = (string) ic->first;
+            powers[j] = (int) ic->second;
+        }
         
         namesList[i] = names;
         powerList[i] = powers;

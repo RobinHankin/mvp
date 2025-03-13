@@ -33,9 +33,9 @@ power_test_lowlevel <- function(p=as.mvp("1+x"),n){
     return(mvp(jj[[1]],jj[[2]],jj[[3]]))
 }
 
-expect_error(power_test_lowlevel(n= -1))
-expect_true(power_test_lowlevel(n=0) == as.mvp("1"))
-expect_true(power_test_lowlevel(n=1) == as.mvp("1+x"))
-expect_true(power_test_lowlevel(n=2) == as.mvp("1+2*x+x^2"))
+expect_error(power_test_lowlevel(n = -1))
+expect_true(power_test_lowlevel(n = 0) == as.mvp("1"))
+expect_true(power_test_lowlevel(n = 1) == as.mvp("1+x"))
+expect_true(power_test_lowlevel(n = 2) == as.mvp("1+2*x+x^2"))
 
 })

@@ -22,6 +22,8 @@ typedef map <string, double> subs;   // A 'subs' object is a map from a string o
 
 typedef map <signed int, mvp> series;  // used for Taylor series
 
+const mvp ONE = {{{}, 1.0}};
+
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
     for(const auto& [t, coef] : X){
@@ -134,18 +136,25 @@ mvp sum(const mvp &X1, const mvp &X2){
     return zero_coefficient_remover(out);
 }
 
-mvp power_int(const mvp &X, unsigned int n){
-    mvp out; // empty mvp object is the zero polynomial; X^0 is managed in R
-    if(n<1){throw std::range_error("power cannot be <1");} 
-    if(n==1){
-        return X;
-    } else {
-        out = X; 
-        for( ; n>1; n--){
-            out = product(X,out);
+mvp power_int(const mvp &X, signed int n){
+
+    if(n <  0) {throw std::range_error("power cannot be < 0"); }
+    if(n == 0) {return ONE; }
+    if(n == 1) {return X; }
+
+    mvp out = ONE; 
+    mvp base = X;  
+
+    while (n > 1) {
+        if (n % 2 == 1) { 
+            out = product(out, base);
+        }
+        n /= 2;
+        if (n > 0) {
+            base = product(base, base);
         }
     }
-    return out;
+    return product(out, base);
 }
 
 mvp deriv(const mvp &X, const string &v){// differentiation: dX/dv, 'v' a single variable

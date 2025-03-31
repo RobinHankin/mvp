@@ -26,21 +26,15 @@ const mvp ONE = {{{}, 1.0}};
 
 mvp zero_coefficient_remover(const mvp &X){
     mvp out;
-    for(const auto& [t, coef] : X){
-        if(coef != 0){
-            out[t] += coef;
-        }
-    }
+    std::copy_if(X.begin(), X.end(), std::inserter(out, out.end()),
+                 [](const auto& pair) { return pair.second != 0; });
     return out;
 }
 
 term zero_power_remover(const term &t){
     term out;
-    for(const auto& [var, power] : t){
-        if(power != 0){
-            out[var] += power;
-        }
-    }
+    std::copy_if(t.begin(), t.end(), std::inserter(out, out.end()),
+                 [](const auto& pair) { return pair.second != 0; });
     return out;
 }
     
@@ -296,13 +290,9 @@ List mvp_deriv(
               const CharacterVector &v    // v a vector of symbols to be differentiated WR to.
                ){
 
-    const mvp X = prepare(allnames, allpowers, coefficients);
-    mvp out = X;
-    const unsigned int n=v.size();
-     
-    for(unsigned int i=0 ; i<n ; i++){
-        out = deriv(out, (string) v[i]);
-    }
+    mvp X = prepare(allnames, allpowers, coefficients);
+    mvp out = std::accumulate(v.begin(), v.end(), X, 
+                              [](mvp acc, const auto& var) { return deriv(acc, std::string(var)); });
     return retval(out);
 }
 

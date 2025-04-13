@@ -188,7 +188,7 @@ as.mvp("a+b") %>% subs(a="a^2+b^2") %>% subs(b="x^6")
 
 ## Vectorised substitution
 
-Function `subvec()`allows one to substitute variables for numeric
+Function `subvec()` allows one to substitute variables for numeric
 values using vectorised idiom:
 
 ```{r subvec_example}
@@ -276,12 +276,12 @@ For example:
 as.mvp('x^3 + x*a') %>% subs(x="x_m_a + a") %>% series("x_m_a")
 ```
 
-So above we see the expansion of $x^2+ax$ in powers of $x-a$.  If we
+So above we see the expansion of $x^3+ax$ in powers of $x-a$.  If we
 want to see the expansion of a mvp in terms of a more complicated
 expression then it is better to use a nonce variable `v`:
 
 ```{r betternonce}
-as.mvp('x^2 + x*a+b^3') %>% subs(x="x_m_v + a^2+b") %>% series("x_m_v")
+as.mvp('x^2 + x*a + b^3') %>% subs(x="x_m_v + a^2+b") %>% series("x_m_v")
 ```
 
 where it is understood that $v=a+b^2$.  Function `taylor()` is a

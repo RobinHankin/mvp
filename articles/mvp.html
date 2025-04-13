@@ -238,7 +238,7 @@ substitution:</p>
 <div class="section level3">
 <h3 id="vectorised-substitution">Vectorised substitution<a class="anchor" aria-label="anchor" href="#vectorised-substitution"></a>
 </h3>
-<p>Function <code><a href="../reference/subs.html">subvec()</a></code>allows one to substitute variables for
+<p>Function <code><a href="../reference/subs.html">subvec()</a></code> allows one to substitute variables for
 numeric values using vectorised idiom:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rmvp.html">rmvp</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
@@ -337,13 +337,13 @@ this is typeset as <code>(x-foo)</code>. For example:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">'x^3 + x*a'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"x_m_a + a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/series.html">series</a></span><span class="op">(</span><span class="st">"x_m_a"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; (x-a)^0(a^2  +  a^3)  + (x-a)^1(a  +  3 a^2)  + (x-a)^2(3 a)  + (x-a)^3(1)</span></span></code></pre></div>
 <p>So above we see the expansion of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">x^2+ax</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">x^3+ax</annotation></semantics></math>
 in powers of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>−</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">x-a</annotation></semantics></math>.
 If we want to see the expansion of a mvp in terms of a more complicated
 expression then it is better to use a nonce variable <code>v</code>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">'x^2 + x*a+b^3'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"x_m_v + a^2+b"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/series.html">series</a></span><span class="op">(</span><span class="st">"x_m_v"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">'x^2 + x*a + b^3'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"x_m_v + a^2+b"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/series.html">series</a></span><span class="op">(</span><span class="st">"x_m_v"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; (x-v)^0(a b  +  2 a^2 b  +  a^3  +  a^4  +  b^2  +  b^3)  + (x-v)^1(a  +  2 a^2 </span></span>
 <span><span class="co">#&gt;  +  2 b)  + (x-v)^2(1)</span></span></code></pre></div>
 <p>where it is understood that

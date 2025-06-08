@@ -13,8 +13,10 @@
 #include <utility>
 #include <iterator>
 
-using namespace std;
+
 using namespace Rcpp; 
+using std::map;
+using std::string;
 
 typedef map <string, signed int> term; // A 'term' object is a map from string objects to integers; thus a^2 b^3 is 'a' -> 2, 'b' -> 3
 typedef map <term, double> mvp;       // An 'mvp' object (MultiVariatePolynomial) is a map from a term object to a double.

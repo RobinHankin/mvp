@@ -315,15 +315,15 @@ object into a power series in a single variable:</p>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
 <span><span class="co">#&gt; a b c + a b x^2 + a^2 b x + b c x^2 + c^6 x</span></span>
 <span><span class="fu"><a href="../reference/series.html">series</a></span><span class="op">(</span><span class="va">p</span>,<span class="st">'x'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; x^0(a b c)  + x^1(a^2 b  +  c^6)  + x^2(a b  +  b c)</span></span></code></pre></div>
+<span><span class="co">#&gt; x^0(a b c )  + x^1(a^2 b  +  c^6 )  + x^2(a b  +  b c )</span></span></code></pre></div>
 <p>This works nicely with <code><a href="../reference/subs.html">subs()</a></code> if we wish to take a power
 series about <code>x-v</code>, where <code>v</code> is any
 <code>mvp</code> object. For example:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"xmv+a+b"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/series.html">series</a></span><span class="op">(</span><span class="st">"xmv"</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; xmv^0(a b c  +  2 a b^2 c  +  a b^3  +  a c^6  +  a^2 b c  +  3 a^2 b^2  +  2 </span></span>
-<span><span class="co">#&gt; a^3 b  +  b c^6  +  b^3 c)  + xmv^1(2 a b c  +  2 a b^2  +  3 a^2 b  +  2 b^2 c </span></span>
-<span><span class="co">#&gt;  +  c^6)  + xmv^2(a b  +  b c)</span></span></code></pre></div>
+<span><span class="co">#&gt; a^3 b  +  b c^6  +  b^3 c )  + xmv^1(2 a b c  +  2 a b^2  +  3 a^2 b  +  2 b^2 </span></span>
+<span><span class="co">#&gt; c  +  c^6 )  + xmv^2(a b  +  b c )</span></span></code></pre></div>
 <p>is a series in powers of <code>x-a-b</code>. We may perform a
 consistency check by a second substitution, returning us to the original
 expression:</p>
@@ -335,7 +335,7 @@ expression:</p>
 this is typeset as <code>(x-foo)</code>. For example:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">'x^3 + x*a'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"x_m_a + a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/series.html">series</a></span><span class="op">(</span><span class="st">"x_m_a"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; (x-a)^0(a^2  +  a^3)  + (x-a)^1(a  +  3 a^2)  + (x-a)^2(3 a)  + (x-a)^3(1)</span></span></code></pre></div>
+<span><span class="co">#&gt; (x-a)^0(a^2  +  a^3 )  + (x-a)^1(a  +  3 a^2 )  + (x-a)^2(3 a )  + (x-a)^3(1)</span></span></code></pre></div>
 <p>So above we see the expansion of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>a</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">x^3+ax</annotation></semantics></math>
 in powers of
@@ -344,8 +344,8 @@ If we want to see the expansion of a mvp in terms of a more complicated
 expression then it is better to use a nonce variable <code>v</code>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">'x^2 + x*a + b^3'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subs.html">subs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"x_m_v + a^2+b"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/series.html">series</a></span><span class="op">(</span><span class="st">"x_m_v"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; (x-v)^0(a b  +  2 a^2 b  +  a^3  +  a^4  +  b^2  +  b^3)  + (x-v)^1(a  +  2 a^2 </span></span>
-<span><span class="co">#&gt;  +  2 b)  + (x-v)^2(1)</span></span></code></pre></div>
+<span><span class="co">#&gt; (x-v)^0(a b  +  2 a^2 b  +  a^3  +  a^4  +  b^2  +  b^3 )  + (x-v)^1(a  +  2 </span></span>
+<span><span class="co">#&gt; a^2  +  2 b )  + (x-v)^2(1)</span></span></code></pre></div>
 <p>where it is understood that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>=</mo><mi>a</mi><mo>+</mo><msup><mi>b</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">v=a+b^2</annotation></semantics></math>.
 Function <code><a href="../reference/series.html">taylor()</a></code> is a convenience wrapper that does some
@@ -353,8 +353,8 @@ of the above in one step:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">"1+x-x*y+a"</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span><span class="fu"><a href="../reference/series.html">taylor</a></span><span class="op">(</span><span class="va">p</span>,<span class="st">'x'</span>,<span class="st">'a'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; (x-a)^0(1  +  4 a  -  2 a y  +  4 a^2  -  4 a^2 y  +  a^2 y^2)  + (x-a)^1(2  +  </span></span>
-<span><span class="co">#&gt; 4 a  -  6 a y  +  2 a y^2  -  2 y)  + (x-a)^2(1  -  2 y  +  y^2)</span></span></code></pre></div>
+<span><span class="co">#&gt; (x-a)^0(1  +  4 a  -  2 a y  +  4 a^2  -  4 a^2 y  +  a^2 y^2 )  + (x-a)^1(2  + </span></span>
+<span><span class="co">#&gt;  4 a  -  6 a y  +  2 a y^2  -  2 y )  + (x-a)^2(1  -  2 y  +  y^2 )</span></span></code></pre></div>
 <p>But it’s not as good as I expected it to be and frankly it’s
 overkill.</p>
 </div>

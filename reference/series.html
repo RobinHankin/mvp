@@ -175,28 +175,28 @@ mvp object algebraically equal to
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13 + 9 a c + 3 a c^2 e + 3 a^2 b c + b f^2 + 6 c f^2 + 5 d f + d^2 e^3 f + 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> d^2 f^4</span>
 <span class="r-in"><span><span class="fu">series</span><span class="op">(</span><span class="va">p2</span>,<span class="st">"a"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a^0(13  +  b f^2  +  6 c f^2  +  5 d f  +  d^2 e^3 f  +  3 d^2 f^4)  + a^1(9 c  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> +  3 c^2 e)  + a^2(3 b c)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a^0(13  +  b f^2  +  6 c f^2  +  5 d f  +  d^2 e^3 f  +  3 d^2 f^4 )  + a^1(9 c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  +  3 c^2 e )  + a^2(3 b c )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Works well with pipes:</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">{</span><span class="fu"><a href="mvp.html">as.mvp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">'n'</span>,<span class="va">n</span>,<span class="st">'1+x^n*y'</span><span class="op">)</span><span class="op">)</span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Reduce</a></span><span class="op">(</span><span class="va">`*`</span>,<span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,<span class="va">f</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">series</span><span class="op">(</span><span class="st">'y'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y^0(1)  + y^1(x  +  x^2  +  x^3  +  x^4  +  x^5  +  x^6)  + y^2(x^3  +  x^4  +  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 x^5  +  2 x^6  +  3 x^7  +  2 x^8  +  2 x^9  +  x^10  +  x^11)  + y^3(x^6  +  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x^7  +  2 x^8  +  3 x^9  +  3 x^10  +  3 x^11  +  3 x^12  +  2 x^13  +  x^14  + </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x^15)  + y^4(x^10  +  x^11  +  2 x^12  +  2 x^13  +  3 x^14  +  2 x^15  +  2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x^16  +  x^17  +  x^18)  + y^5(x^15  +  x^16  +  x^17  +  x^18  +  x^19  +  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x^20)  + y^6(x^21)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y^0(1)  + y^1(x  +  x^2  +  x^3  +  x^4  +  x^5  +  x^6 )  + y^2(x^3  +  x^4  + </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2 x^5  +  2 x^6  +  3 x^7  +  2 x^8  +  2 x^9  +  x^10  +  x^11 )  + y^3(x^6  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> +  x^7  +  2 x^8  +  3 x^9  +  3 x^10  +  3 x^11  +  3 x^12  +  2 x^13  +  x^14 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  +  x^15 )  + y^4(x^10  +  x^11  +  2 x^12  +  2 x^13  +  3 x^14  +  2 x^15  +  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 x^16  +  x^17  +  x^18 )  + y^5(x^15  +  x^16  +  x^17  +  x^18  +  x^19  +  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x^20 )  + y^6(x^21 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Reduce</a></span><span class="op">(</span><span class="va">`*`</span>,<span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,<span class="va">f</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">series</span><span class="op">(</span><span class="st">'x'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x^0(1)  + x^1(y)  + x^2(y)  + x^3(y  +  y^2)  + x^4(y  +  y^2)  + x^5(y  +  2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y^2)  + x^6(y  +  2 y^2  +  y^3)  + x^7(3 y^2  +  y^3)  + x^8(2 y^2  +  2 y^3)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + x^9(2 y^2  +  3 y^3)  + x^10(y^2  +  3 y^3  +  y^4)  + x^11(y^2  +  3 y^3  +  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> y^4)  + x^12(3 y^3  +  2 y^4)  + x^13(2 y^3  +  2 y^4)  + x^14(y^3  +  3 y^4)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + x^15(y^3  +  2 y^4  +  y^5)  + x^16(2 y^4  +  y^5)  + x^17(y^4  +  y^5)  + </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x^18(y^4  +  y^5)  + x^19(y^5)  + x^20(y^5)  + x^21(y^6)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x^0(1)  + x^1(y )  + x^2(y )  + x^3(y  +  y^2 )  + x^4(y  +  y^2 )  + x^5(y  +  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 y^2 )  + x^6(y  +  2 y^2  +  y^3 )  + x^7(3 y^2  +  y^3 )  + x^8(2 y^2  +  2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> y^3 )  + x^9(2 y^2  +  3 y^3 )  + x^10(y^2  +  3 y^3  +  y^4 )  + x^11(y^2  +  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 y^3  +  y^4 )  + x^12(3 y^3  +  2 y^4 )  + x^13(2 y^3  +  2 y^4 )  + x^14(y^3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  +  3 y^4 )  + x^15(y^3  +  2 y^4  +  y^5 )  + x^16(2 y^4  +  y^5 )  + x^17(y^4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  +  y^5 )  + x^18(y^4  +  y^5 )  + x^19(y^5 )  + x^20(y^5 )  + x^21(y^6 )</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>

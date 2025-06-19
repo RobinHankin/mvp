@@ -84,10 +84,10 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
     for(unsigned int i=0 ; i<n ; i++){  // need to use int i because we are iterating through a list
         unsigned int j; // scope of j should extend beyond the for(j) loop but not the i loop
         const SEXP jj = allnames[i]; 
-        const Rcpp::CharacterVector names(jj);
+        const CharacterVector names(jj);
 
         const SEXP kk = allpowers[i]; 
-        const Rcpp::IntegerVector powers(kk);
+        const IntegerVector powers(kk);
 
         const unsigned int r=names.size();
              
@@ -387,7 +387,7 @@ NumericVector mvp_vectorised_substitute(
     term::const_iterator it;
     mvp::const_iterator ix;
     double w;
-    Rcpp::NumericVector out(nrows);
+    NumericVector out(nrows);
     
     for(int i=0 ; i<nrows ; i++){             // main loop, one iteration per row of M
         out[i] = 0;                            // initialize at zero

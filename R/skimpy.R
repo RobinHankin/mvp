@@ -1,35 +1,35 @@
-`mvp` <- function(vars,powers,coeffs){  # three-element list
-  stopifnot(is_ok_mvp(vars,powers,coeffs))
-  out <- simplify(vars,powers,coeffs)  # simplify() is defined in
-                                       # RcppExports.R; it returns a
-                                        # list
-  out <- c(out,list(hashcal(out)))
-  class(out) <- "mvp"   # this is the only time class() is set to "mvp"
-  return(out)
+`mvp` <- function(vars, powers, coeffs){   # three-element list
+    stopifnot(is_ok_mvp(vars, powers, coeffs))
+    out <- simplify(vars, powers, coeffs)  # simplify() is defined in
+                                         # RcppExports.R; it returns a
+                                         # list
+    out <- c(out, list(hashcal(out)))
+    class(out) <- "mvp"   # this is the only time class() is set to "mvp"
+    return(out)
 }
 
 `coeffs` <- function(x){UseMethod("coeffs")}
 
-`vars`       <- function(x){disord(x[[1]],hashcal(unclass(x)))}
-`powers`     <- function(x){disord(x[[2]],hashcal(unclass(x)))}
-`coeffs.mvp` <- function(x){disord(x[[3]],hashcal(unclass(x)))}
+`vars`       <- function(x){disord(x[[1]], hashcal(unclass(x)))}
+`powers`     <- function(x){disord(x[[2]], hashcal(unclass(x)))}
+`coeffs.mvp` <- function(x){disord(x[[3]], hashcal(unclass(x)))}
 
 `is.mvp` <- function(x){inherits(x,"mvp")}
 
-`is_ok_mvp` <- function(vars,powers,coeffs){
+`is_ok_mvp` <- function(vars, powers, coeffs){
     if( (length(vars)==0) & (length(powers)==0) && (length(coeffs)==0)){
         return(TRUE)  # zero polynomial
     }
-  stopifnot(unlist(lapply(vars,is.character)))
-  stopifnot(unlist(lapply(powers,is.numeric)))
-  stopifnot(is.numeric(coeffs))
-
-  stopifnot(length(vars)==length(powers))
-  stopifnot(length(powers)==length(coeffs))
-
-  stopifnot(unlist(lapply(vars,length)) == unlist(lapply(powers,length)))
-
-  return(TRUE)
+    stopifnot(unlist(lapply(vars, is.character)))
+    stopifnot(unlist(lapply(powers, is.numeric)))
+    stopifnot(is.numeric(coeffs))
+    
+    stopifnot(length(vars) == length(powers))
+    stopifnot(length(powers) == length(coeffs))
+    
+    stopifnot(unlist(lapply(vars,length)) == unlist(lapply(powers,length)))
+    
+    return(TRUE)
 }
 
 `allvars` <- function(x){sort(unique(c(elements(vars(x)),recursive=TRUE)))}

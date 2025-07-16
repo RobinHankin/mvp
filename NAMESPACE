@@ -1,7 +1,7 @@
 useDynLib(mvp, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
 
-import("methods")
+importFrom("methods","setGeneric")
 
 importFrom(Rcpp, evalCpp)
 importFrom("mpoly","as.mpoly","is.mpoly","mp")

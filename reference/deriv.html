@@ -92,25 +92,25 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="rmvp.html">rmvp</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">4</span>,<span class="fl">15</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 + 7 a b^3 c^4 e + 6 a^3 b^7 c e^4 + 5 a^3 c^2 d^2 e^4 + 5 a^3 d e^5 + 10 a^4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b^4 e + 3 a^5 b^4 c d^3 + 6 b c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 + 7 a b^3 c^4 e + 9 a b^3 d^2 e^2 + 8 a^4 b^4 d^3 e + 10 a^4 b^4 e + 3 a^5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b^4 c d^3 + 10 b c^2 + 10 b^3 c^2 + 4 b^5 c^5 d^2</span>
 <span class="r-in"><span><span class="fu">deriv</span><span class="op">(</span><span class="va">p</span>,<span class="st">"a"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18 a^2 b^7 c e^4 + 15 a^2 c^2 d^2 e^4 + 15 a^2 d e^5 + 40 a^3 b^4 e + 15 a^4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b^4 c d^3 + 7 b^3 c^4 e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32 a^3 b^4 d^3 e + 40 a^3 b^4 e + 15 a^4 b^4 c d^3 + 7 b^3 c^4 e + 9 b^3 d^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> e^2</span>
 <span class="r-in"><span><span class="fu">deriv</span><span class="op">(</span><span class="va">p</span>,<span class="st">"a"</span>,<span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 240 a b^4 e + 180 a^2 b^4 c d^3 + 36 b^7 c e^4 + 30 c^2 d^2 e^4 + 30 d e^5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192 a b^4 d^3 e + 240 a b^4 e + 180 a^2 b^4 c d^3</span>
 <span class="r-in"><span><span class="fu">deriv</span><span class="op">(</span><span class="va">p</span>,<span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126 a^2 b^6 e^4 + 60 a^4 b^3 d^3 + 84 b^2 c^3 e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60 a^4 b^3 d^3 + 84 b^2 c^3 e</span>
 <span class="r-in"><span><span class="fu">deriv</span><span class="op">(</span><span class="va">p</span>,<span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>  <span class="co"># should be the same</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126 a^2 b^6 e^4 + 60 a^4 b^3 d^3 + 84 b^2 c^3 e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60 a^4 b^3 d^3 + 84 b^2 c^3 e</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">aderiv</span><span class="op">(</span><span class="va">p</span>,a<span class="op">=</span><span class="fl">1</span>,b<span class="op">=</span><span class="fl">2</span>,c<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 756 a^2 b^5 e^4 + 180 a^4 b^2 d^3 + 168 b c^3 e</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 180 a^4 b^2 d^3 + 168 b c^3 e</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## verify the chain rule:</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="rmvp.html">rmvp</a></span><span class="op">(</span><span class="fl">7</span>,symbols<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span></span>

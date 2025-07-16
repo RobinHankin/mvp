@@ -113,26 +113,25 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">(</span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="rmvp.html">rmvp</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b^2 d e f^2 + b^2 d^2 e^2 + d^2 e^2 f^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 a^2 b c^2 + 3 a^2 d e + b^2 e f</span>
 <span class="r-in"><span><span class="op">(</span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="rmvp.html">rmvp</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a b^2 d^2 f + 3 a^2 e^2 f + 2 c f^3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 + 3 a d e + 2 f</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">p1</span><span class="op">*</span><span class="va">p2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a b^2 d^4 e^2 f^3 + a b^4 d^3 e f^3 + a b^4 d^4 e^2 f + 3 a^2 b^2 d e^3 f^3 + 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a^2 b^2 d^2 e^4 f + 3 a^2 d^2 e^4 f^3 + 2 b^2 c d e f^5 + 2 b^2 c d^2 e^2 f^3 +</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 c d^2 e^2 f^5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 a b^2 d e^2 f + 6 a^2 b c^2 + 4 a^2 b c^2 f + 9 a^2 d e + 6 a^2 d e f + 6 a^3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b c^2 d e + 9 a^3 d^2 e^2 + 3 b^2 e f + 2 b^2 e f^2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">p1</span><span class="op">+</span><span class="va">p2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a b^2 d^2 f + 3 a^2 e^2 f + b^2 d e f^2 + b^2 d^2 e^2 + 2 c f^3 + d^2 e^2 f^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 + 3 a d e + 2 a^2 b c^2 + 3 a^2 d e + b^2 e f + 2 f</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">p1</span><span class="op">^</span><span class="fl">3</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 b^2 d^5 e^5 f^6 + 3 b^2 d^6 e^6 f^4 + 3 b^4 d^4 e^4 f^6 + 6 b^4 d^5 e^5 f^4 +</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 b^4 d^6 e^6 f^2 + b^6 d^3 e^3 f^6 + 3 b^6 d^4 e^4 f^4 + 3 b^6 d^5 e^5 f^2 +</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b^6 d^6 e^6 + d^6 e^6 f^6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9 a^2 b^4 d e^3 f^2 + 6 a^2 b^5 c^2 e^2 f^2 + 27 a^4 b^2 d^2 e^3 f + 36 a^4 b^3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> c^2 d e^2 f + 12 a^4 b^4 c^4 e f + 54 a^6 b c^2 d^2 e^2 + 36 a^6 b^2 c^4 d e +</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8 a^6 b^3 c^6 + 27 a^6 d^3 e^3 + b^6 e^3 f^3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">p1</span><span class="op">*</span><span class="op">(</span><span class="va">p1</span><span class="op">+</span><span class="va">p2</span><span class="op">)</span> <span class="op">==</span> <span class="va">p1</span><span class="op">^</span><span class="fl">2</span><span class="op">+</span><span class="va">p1</span><span class="op">*</span><span class="va">p2</span>  <span class="co"># should be TRUE</span></span></span>

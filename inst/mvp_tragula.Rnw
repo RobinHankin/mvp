@@ -87,12 +87,12 @@ language~\citep{rcore2022_tragula}.  It uses the Standard Template
 library of \proglang{C++}~\citep{musser2009_tragula}, commonly known
 as the \proglang{STL}, and is comparable in speed to the \pkg{spray}
 package~\citep{hankin2022_spray_tragula} for sparse arrays, while
-while retaining the symbolic capabilities of the \pkg{mpoly}
+retaining the symbolic capabilities of the \pkg{mpoly}
 package~\citep{kahle2013_tragula}; the package includes some timing
 results.  The \pkg{mvp} package uses the excellent print and coercion
 methods of \pkg{mpoly}.  The \pkg{mvp} package provides improved speed
-over \pkg{mpoly} but retains some of the sophisticated substitution
-mechanism.
+over \pkg{mpoly} and offers symbolic features such as subsitution,
+differentiation, and Taylor expansions.
 
 \section[The STL map class]{The \pkg{STL} map class}
 
@@ -146,16 +146,15 @@ Consider a simple multivariate polynomial $3xy+z^3+xy^6z$ and its
 representation in the following R session:
 
 <<mvpdefinep>>=
-library("mvp",quietly=TRUE)
+library("mvp", quietly=TRUE)
 library("magrittr")
 (p <- as.mvp("3 x y + z^3 + x y^6 z"))
 @ 
 
-
 Coercion and printing are accomplished by the \pkg{mpoly} package
 (there is no way I could improve upon
 Kahle's work).  Note carefully that the printed representation of
-the mvp object is created by the \pkg{mpoly} package and the print method
+the \code{mvp} object is created by the \pkg{mpoly} package and the print method
 can rearrange both the terms of the polynomial
 ($3xy+z^3+xy^6z = z^3+3xy+xy^6z$, for example) and the symbols within
 a term ($3xy=3yx$, for example) to display the polynomial in a
@@ -203,8 +202,8 @@ S1^2
 \subsection{Substitution}
 
 The package has two substitution functionalities.  Firstly, we can
-substitute one or more variables for a numeric value.  Define a mvp
-object:
+substitute one or more variables for a numeric value.  Define an
+\code{mvp} object:
 
 <<defineS3obj>>=
 (S3 <- as.mvp("x + 5 x^4 y + 8 y^2 x z^3"))
@@ -217,8 +216,8 @@ And then we may substitute $x=1$:
 subs(S3, x = 1)
 @ 
 
-Note the natural R idiom, and that the return value is another mvp
-object.  We may substitute for the other variables:
+Note the natural \proglang{R} idiom, and that the return value is another
+\code{mvp} object.  We may substitute for the other variables:
 
 <<natidiom>>=
 subs(S3, x = 1, y = 2, z = 3)
@@ -233,7 +232,7 @@ the {\tt drop} argument:
 subs(S3, x = 1, y = 2, z = 3,drop=FALSE)
 @ 
 
-The idiom also allows one to substitute a variable for an {\tt mvp}
+The idiom also allows one to substitute a variable for an \code{mvp}
 object:
 
 <<>>=
@@ -291,17 +290,15 @@ aderiv(S, a = 3, b = 1, c = 2)
 
 Again, pipes work quite nicely:
 
-
 <<pipesworknicely>>=
 S %<>% aderiv(a=1,b=2) %>% subs(c="x^4") %>% `+`(as.mvp("o^99"))
 S
 @ 
 
-
 \subsection{Taylor series}
 
 The package includes functionality to deal with Taylor and Laurent
-series.  The {\tt trunc()} function allows one to truncate a
+series.  The \code{trunc()} function allows one to truncate a
 polynomial, retain only terms with total power less than a particular
 integer, for example:
 
@@ -328,7 +325,7 @@ The ideas above allow us to express Taylor series in package idiom.
 For example, consider $\sin_5(x+y)$, where $\sin_n$ is shorthand for
 the fifth-order Taylor expansion of $\sin$.  We wish to evaluate the
 second order Taylor expansion of $f(x,y)=\sin_5(x+y)$ about $x=1.1$.
-We define a {\tt mvp} object which is correct to fifth order:
+We define an \code{mvp} object which is correct to fifth order:
 
 <<secondordertaylor>>=
 (sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120)))  # sin(x+y)
@@ -349,7 +346,7 @@ second order using {\tt aderiv()}:
 @ 
 
 Noting that the terms are stored in an implementation-specific order,
-above we see an {\tt mvp} object equal to the right hand side of
+above we see an \code{mvp} object equal to the right hand side of
 
 \[
 \sin(x+y+\delta x)\simeq
@@ -384,7 +381,7 @@ constitution.
 
 \subsection{Power series}
 
-Function {\tt series()} will decompose an {\tt mvp} object into a power
+Function {\tt series()} will decompose an \code{mvp} object into a power
 series in a single variable:
 
 <<powerseriessinglevariablen>>=
@@ -393,14 +390,14 @@ p
 series(p,"x")
 @ 
 
-This works nicely with {\tt subs()} if we wish to take a power series
-about {\tt x-v}, where {\tt v} is any {\tt mvp} object.  For example:
+This works nicely with \code{subs()} if we wish to take a power series
+about \code{x-v}, where \code{v} is any \code{mvp} object.  For example:
 
 <<powerseriesaboutxminusv>>=
 p %>% subs(x="xmv+a+b") %>% series("xmv") 
 @ 
 
-is a series in powers of {\tt x-a-b}.  We may perform a consistency
+is a series in powers of \code{x-a-b}.  We may perform a consistency
 check by a second substitution, returning us to the original
 expression:
 
@@ -408,24 +405,23 @@ expression:
 p == p %>% subs(x="xmv+a+b") %>% subs(xmv="x-a-b")
 @ 
 
-If function {\tt series()} is given a variable name ending in {\tt
-  \_m\_foo}, where {\tt foo} is any variable name, then this is
-typeset as {\tt (x-foo)}.  For example:
+If function \code{series()} is given a variable name ending in
+\code{\_m\_foo}, where \code{foo} is any variable name, then this is
+typeset as \code{(x-foo)}.  For example:
 
 <<typesetxminusfoo>>=
 as.mvp("x^3 + x*a") %>% subs(x="x_m_a + a") %>% series("x_m_a")
 @ 
 
 So above we see the expansion of $x^2+ax$ in powers of $x-a$.  If we
-want to see the expansion of an {\tt mvp} object in terms of a more
-complicated expression then it is better to use a nonce variable {\tt
-  v}:
+want to see the expansion of an \code{mvp} object in terms of a more
+complicated expression then it is better to use a nonce variable \code{v}:
 
 <<noncevariablev>>=
 as.mvp("x^2 + x*a+b^3") %>% subs(x="x_m_v + a^2+b") %>% series("x_m_v")
 @ 
 
-where it is understood that $v=a+b^2$.  Function {\tt taylor()} is a
+where it is understood that $v=a+b^2$.  Function \code{taylor()} is a
 convenience wrapper that does some of the above in one step:
 
 <<conveniencewrapper>>=
@@ -438,33 +434,33 @@ However, this functionality is under development.
 \subsection{Extraction}
 
 Given a multivariate polynomial, one often needs to extract certain
-terms.  Because the terms of an {\tt mvp} object have an
+terms.  Because the terms of an \code{mvp} object have an
 implementation-dependent order, this can be difficult.  But we can use
-function {\tt onevarpow()}:
+function \code{onevarpow()}:
 
 <<onevarpowp>>=
 (P <- as.mvp("1 + z + y^2 + x*z^2 +  x*y")^3)
 onevarpow(P,x=1,y=2)
 @ 
 
-Above we see function {\tt onevarpow()} returns an {\tt mvp} object
+Above we see function \code{onevarpow()} returns an \code{mvp} object
 including only those terms with $x$ to the first power and $y$ to the
 second power (the factor of $x^1y^2$ is dropped from the result).
 
 \subsection{Negative powers}
 
-The {\tt mvp} package handles negative powers, although the idiom is
+The \code{mvp} package handles negative powers, although the idiom is
 not perfect and is still under development.  Consider experimental
-function {\tt invert()}:
+function \code{invert()}:
 
 <<useinvertfunc>>=
 (p <- as.mvp("1+x+x^2 y"))
 invert(p)
 @ 
 
-In the above, {\tt p} is a regular multivariate polynomial which
+In the above, \code{p} is a regular multivariate polynomial which
 includes negative powers.  It obeys the same arithmetic rules as other
-mvp objects:
+\code{mvp} objects:
 
 <<samearithasotherobjects>>=
 p + as.mvp("z^6")
@@ -478,7 +474,7 @@ As discussed above, the terms of an \pkg{mvp} object are held in an
 implementation-specific order and dealing with this in a consistent
 way is achieved using the \pkg{disordR}
 package~\citep{hankin2022_disordR_tragula}.  It is possible to examine
-the coefficients of an \pkg{mvp} object:
+the coefficients of an \code{mvp} object:
 
 <<introdisord>>=
 a <- as.mvp("5 + 8*x^2*y - 13*y*x^2 + 11*z - 3*x*yz")
@@ -486,13 +482,13 @@ a
 coeffs(a)
 @ 
 
-Above, note that the result of {\tt coeffs()} is a {\tt disord}
+Above, note that the result of \code{coeffs()} is a \code{disord}
 object, defined in the \pkg{disordR}
 package~\citep{hankin2022_disordR_tragula}.  The order of the elements is
 unspecified as the \proglang{STL} map class holds the keys and values in an
 implementation-specific order.  This device stops the user from
 illegal operations on the coefficients.  For example, suppose we had
-another mvp object, {\tt b}:
+another \code{mvp} object, \code{b}:
 
 <<defineb>>=
 b <- a*2
@@ -511,17 +507,17 @@ hash codes 64e403dc35ccd68b1bcbd3e0444c72f4e57b50fd and d4875b2ede120f28db25aa64
 \end{Soutput}
 \end{Schunk}
 
-Above, we get an error because the coefficients of {\tt a} and {\tt b}
+Above, we get an error because the coefficients of \code{a} and \code{b}
 are possibly stored in a different order and therefore vector
 addition makes no sense.  However, we can operate on coefficients of
-a single {\tt mvp} object at will:
+a single \code{mvp} object at will:
 
 <<disordRsingleobjectstuff>>=
 coeffs(a) > 0
 coeffs(a) + coeffs(a)^4
 @
 
-Extraction also works but subject to standard {\tt disordR} idiom
+Extraction also works but subject to standard \pkg{disordR} idiom
 restrictions:
 
 <<disordextract>>=
@@ -542,7 +538,7 @@ a
 @
 
 In cases like this where the replacement object is complicated, using
-{\tt magrittr} would simplify the idiom and reduce the opportunity for
+\pkg{magrittr} would simplify the idiom and reduce the opportunity for
 error:
 
 <<usemagrittrpipe>>=
@@ -568,12 +564,11 @@ coeffs(x) <- cx
 x
 @ 
 
-
 \section{Example: multivariate generating functions}
 
 Here I give an example of the \pkg{mvp} package in use,
 following~\cite{hankin2022_spray_tragula}.  The generating function for a
-chess knight is given by function {\tt knight()}, whose argument is
+chess knight is given by function \code{knight()}, whose argument is
 the dimension of the board.  Thus for a 2D board we have
 
 <<knight2>>=
@@ -585,9 +580,8 @@ knight(2)
   \caption{Four-dimensional knight\label{four_dimensional_knight} on a $4\times 4\times 4\times 4$ board.  Cells attacked by the knight shown by dots}
 \end{figure}
 
-
 This object has 8 terms, one for each move that a knight has on an
-unrestricted board.  The powers of {\tt a} and {\tt b} correspond to
+unrestricted board.  The powers of \code{a} and \code{b} correspond to
 horizontal and vertical directions respectively.  Now consider a
 four-dimensional chessboard (Figure~\ref{four_dimensional_knight}
 shows a $4\times 4\times 4\times 4$ board).  How many ways are there

@@ -18,7 +18,9 @@ README.html
 ^inst/mvp_screenshot.xcf$
 ^inst/timings.Rmd$
 ^inst/read.me$
-inst/lettersymbols.rda$
+^inst/lettersymbols.rda$
+^inst/mvp_tragula.Rnw$
+^inst/mvp.bib$
 ^.github$
 ^.devcontainer$
 ^_pkgdown\.yml$

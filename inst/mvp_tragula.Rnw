@@ -13,8 +13,8 @@
 
 %% for pretty printing and a nice hypersummary also set:
 \Plainauthor{Robin K. S. Hankin}
-\Plaintitle{The mvp package}
-\Shorttitle{The mvp package}
+\Plaintitle{The \pkg{mvp} package}
+\Shorttitle{The \pkg{mvp} package}
 
 %% an abstract and keywords
 \Abstract{

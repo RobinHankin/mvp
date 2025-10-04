@@ -1,0 +1,627 @@
+% -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
+\documentclass[nojss]{jss}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% just as usual
+\author{Robin K. S. Hankin\\University of Stirling}
+\title{Fast multivariate polynomials in \proglang{R}: the \pkg{mvp} package}
+
+%% for pretty printing and a nice hypersummary also set:
+\Plainauthor{Robin K. S. Hankin}
+\Plaintitle{The mvp package}
+\Shorttitle{The mvp package}
+
+%% an abstract and keywords
+\Abstract{
+
+  In this short article I introduce the \pkg{mvp} package, which
+  provides some functionality for handling multivariate polynomials.
+  The package uses the~\proglang{C++} Standard Template Library's
+  \proglang{map} class to store and retrieve elements; it conforms to
+  \pkg{disordR} discipline for coefficients.  The package is available
+  on CRAN at \url{https://CRAN.R-project.org/package=mvp}.
+}
+
+\Keywords{Multivariate polynomials}
+\Plainkeywords{Multivariate polynomials}
+  
+%% publication information
+%% NOTE: This needs to filled out ONLY IF THE PAPER WAS ACCEPTED.
+%% If it was not (yet) accepted, leave them commented.
+%% \Volume{13}
+%% \Issue{9}
+%% \Month{September}
+%% \Year{2004}
+%% \Submitdate{2004-09-29}
+%% \Acceptdate{2004-09-29}
+%% \Repository{https://github.com/RobinHankin/freegroup} %% this line for Tragula
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Robin K. S. Hankin\\%\orcid{https://orcid.org/0000-0001-5982-0415}\\
+  University of Stirling\\
+  E-mail: \email{hankin.robin@gmail.com}
+}
+%% It is also possible to add a telephone and fax number
+%% before the e-mail in the following format:
+%% Telephone: +43/1/31336-5053
+%% Fax: +43/1/31336-734
+
+%% for those who use Sweave please include the following line (with % symbols):
+%% need no \usepackage{Sweave.sty}
+
+%% end of declarations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\SweaveOpts{}
+\usepackage{wrapfig}
+\usepackage{tikz-cd}
+\begin{document}
+
+<<setup,echo=FALSE,print=FALSE>>=
+ignore <- require("mvp")
+options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
+@ 
+
+\SweaveOpts{}
+
+\section{Introduction}
+
+\setlength{\intextsep}{0pt}
+\begin{wrapfigure}{r}{0.2\textwidth}
+  \begin{center}
+\includegraphics[width=1in]{mvp.png}
+  \end{center}
+\end{wrapfigure}
+
+The \pkg{mvp} package provides some functionality for fast
+manipulation of multivariate polynomials in the R programming
+language~\citep{rcore2022}.  It uses the Standard Template library of
+\proglang{C++}~\cite{musser2009}, commonly known as the
+\proglang{STL}, and is comparable in speed to the \pkg{spray}
+package~\cite{hankin2022_spray} for sparse arrays, while while
+retaining the symbolic capabilities of the \pkg{mpoly}
+package~\cite{kahle2013}; the package includes some timing results.
+The \pkg{mvp} package uses the excellent print and coercion methods of
+\pkg{mpoly}.  The \pkg{mvp} package provides improved speed over
+\pkg{mpoly} but retains some of the sophisticated substitution
+mechanism.
+
+\section[The STL map class]{The \pkg{STL} map class}
+
+A ``map'' is a sorted associative container that stores key-value
+pairs with unique keys~\citep{musser2009}.  It is interesting here
+because search and insertion operations have logarithmic complexity.
+Multivariate polynomials are considered to be the sum of a finite
+number of {\bf terms}, each multiplied by a coefficient.  A term is
+something like $x^2y^3z$.  We may consider this term to be the map
+
+\begin{verbatim}
+{"x" -> 2, "y" -> 3, "z" -> 1}
+\end{verbatim}
+
+where the map takes symbols to their (integer) power; it is understood
+that powers are nonzero.  An {\tt mvp} object is a map from terms to
+their coefficients; thus $7xy^2 -3x^2yz^5$ would be
+
+\begin{verbatim}
+{{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, "y" -> 1, "z" ->5} -> -3}
+\end{verbatim}
+
+and we understand that coefficients are nonzero.  In {\tt C++} the
+declarations would be
+
+\begin{verbatim}
+typedef vector <signed int> mypowers;  
+typedef vector <string> mynames;  
+
+typedef map <string, signed int> term; 
+typedef map <term, double> mvp; 
+\end{verbatim}
+
+Thus a term maps a string to a (signed) integer, and an \code{mvp}
+object maps terms to doubles.  One reason why the \proglang{map} class
+is fast is that the order in which the keys are stored is undefined:
+the compiler may store them in the order which it regards as most
+propitious.  This is not an issue for the maps considered here as
+addition and multiplication are commutative and associative.  The
+package uses \pkg{disordR} discipline, discussed below in
+section~\ref{disordsection}.
+
+Note also that constant terms are handled with no difficulty
+(constants are simply maps from the empty map to its value), as is the
+zero polynomial (which is simply an empty map).
+
+\section{The package in use}
+
+Consider a simple multivariate polynomial $3xy+z^3+xy^6z$ and its
+representation in the following R session:
+
+<<mvpdefinep>>=
+library("mvp",quietly=TRUE)
+library("magrittr")
+(p <- as.mvp("3 x y + z^3 + x y^6 z"))
+@ 
+
+
+Coercion and printing are accomplished by the {\tt mpoly} package
+(there is no way I could improve upon
+Kahle's work).  Note carefully that the printed representation of
+the mvp object is created by the {\tt mpoly} package and the print method
+can rearrange both the terms of the polynomial
+($3xy+z^3+xy^6z = z^3+3xy+xy^6z$, for example) and the symbols within
+a term ($3xy=3yx$, for example) to display the polynomial in a
+human-friendly form.
+
+However, note carefully that such rearranging does not affect the
+mathematical properties of the polynomial itself.  In the {\tt mvp}
+package, the order of the terms is not preserved (or even defined) in
+the internal representation of the object; and neither is the order of
+the symbols within a single term.  Although this might sound odd, if
+we consider a marginally more involved situation, such as
+
+<<stoatgoat>>=
+(M <- as.mvp("3 stoat goat^6 -4 + 7 stoatboat^3 bloat -9 float boat goat gloat^6"))
+dput(M)
+@ 
+
+it is not clear that any human-discernible ordering is preferable to
+any other, and we would be better off letting the compiler decide a
+propitious ordering.  In any event, the {\tt mpoly} package can
+specify a print order:
+
+<<specifyprintorder>>=
+print(M,order="lex", varorder=c("stoat","goat","boat","bloat","gloat","float","stoatboat"))
+@ 
+
+Package idiom ({\tt disordR} discipline) for dealing with the
+undefined order of terms is discussed below in
+section~\ref{disordsection}.
+
+\subsection{Arithmetic operations}
+
+The arithmetic operations {\tt *}, {\tt +}, {\tt -} and \verb|^| work
+as expected:
+
+<<asexpected>>=
+(S1 <- rmvp(5,2,2,4))
+(S2 <- rmvp(5,2,2,4))
+S1 + S2
+S1 * S2
+S1^2
+@ 
+
+
+\subsection{Substitution}
+
+The package has two substitution functionalities.  Firstly, we can
+substitute one or more variables for a numeric value.  Define a mvp
+object:
+
+<<defineS3obj>>=
+(S3 <- as.mvp("x + 5 x^4 y + 8 y^2 x z^3"))
+@ 
+
+
+And then we may substitute $x=1$:
+
+<<nextsub>>=
+subs(S3, x = 1)
+@ 
+
+Note the natural R idiom, and that the return value is another mvp
+object.  We may substitute for the other variables:
+
+<<natidiom>>=
+subs(S3, x = 1, y = 2, z = 3)
+@ 
+
+
+(in this case, the default behaviour is to return the the resulting
+polynomial coerced to a scalar).  We can suppress the coercion using
+the {\tt drop} argument:
+
+<<uselose>>=
+subs(S3, x = 1, y = 2, z = 3,drop=FALSE)
+@ 
+
+The idiom also allows one to substitute a variable for an {\tt mvp}
+object:
+
+<<>>=
+subs(as.mvp("a+b+c"), a="x^6")
+@ 
+
+
+Note carefully that {\tt subs()} depends on the order of substitution:
+
+<<subsdependsonorder>>=
+subs(as.mvp("a+b+c"), a="x^6",x="1+a")
+subs(as.mvp("a+b+c"), x="1+a",a="x^6")
+@ 
+
+  
+\subsection{Pipes}
+
+Substitution works well with pipes:
+
+<<subwithpipes>>=
+as.mvp("a+b") |> subs(a="a^2+b^2") |> subs(b="x^6")
+@ 
+
+
+\subsection{Vectorised substitution}
+
+Function {\tt subvec()} allows one to substitute variables for numeric
+values using vectorised idiom:
+
+<<usevectorisedsub>>=
+p <- rmvp(6,2,2,letters[1:3])
+p
+subvec(p,a=1,b=2,c=1:5)   # supply a named list of vectors
+@ 
+
+
+
+\subsection{Differentiation}
+
+Differentiation is implemented.  First we have the {\tt deriv()}
+method:
+
+<<showthederivmethod>>=
+(S <- as.mvp("a + 5 a^5*b^2*c^8 -3 x^2 a^3 b c^3"))
+deriv(S, letters[1:3])
+deriv(S, rev(letters[1:3]))  # should be the same.
+@ 
+
+Also a slightly different form: {\tt aderiv()}, here used to evaluate
+$\frac{\partial^6S}{\partial a^3\partial b\partial c^2}$:
+
+<<useaderiv>>=
+aderiv(S, a = 3, b = 1, c = 2)
+@ 
+
+Again, pipes work quite nicely:
+
+
+<<pipesworknicely>>=
+S %<>% aderiv(a=1,b=2) %>% subs(c="x^4") %>% `+`(as.mvp("o^99"))
+S
+@ 
+
+
+\subsection{Taylor series}
+
+The package includes functionality to deal with Taylor and Laurent
+series.  The {\tt trunc()} function allows one to truncate a
+polynomial, retain only terms with total power less than a particular
+integer, for example:
+
+<<taylorseries>>=
+(X <- as.mvp("1+x+x^2 y")^3)
+trunc(X,3)        
+@ 
+
+Alternatively, we could retain only terms with powers of $x$ {\em
+  less} than a particular value:
+
+<<truncx3>>=
+trunc1(X,x=3)    # retain only terms with power of x <= 3
+@
+
+If we wish to return powers of $x$ that are {\em equal} to a
+particular value, we need to use {\tt onevarpow()}:
+
+<<useonevarpow>>=
+onevarpow(X,x=3) # retain only terms with power of x == 3
+@ 
+
+The ideas above allow us to express Taylor series in package idiom.
+For example, consider $\sin_5(x+y)$, where $\sin_n$ is shorthand for
+the fifth-order Taylor expansion of $\sin$.  We wish to evaluate the
+second order Taylor expansion of $f(x,y)=\sin_5(x+y)$ about $x=1.1$.
+We define a {\tt mvp} object which is correct to fifth order:
+
+<<secondordertaylor>>=
+(sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120)))  # sin(x+y)
+@ 
+
+and then define an object {\tt dx} with the intent that this is
+``small"
+
+<<definedxissmall>>=
+dx <- as.mvp("dx")
+@ 
+
+which would allow us to create a {\em symbolic} Taylor series to
+second order using {\tt aderiv()}:
+
+<<secondorderTaylor>>=
+(t2 <- sinxpy  + aderiv(sinxpy,x=1)*dx + aderiv(sinxpy,x=2)*dx^2/2)
+@ 
+
+Noting that the terms are stored in an implementation-specific order,
+above we see an {\tt mvp} object equal to the right hand side of
+
+\[
+\sin(x+y+\delta x)\simeq
+\sin(x+y) + 
+ \delta x\cdot\frac{\partial}{\partial x}\sin(x+y) +
+\frac{(\delta x)^2}{2!}\cdot\frac{\partial^2}{\partial x^2}\sin(x+y) 
+\]
+
+(the second argument of function {\tt aderiv()} gives the order of
+differentiation).  To evaluate the second order Taylor expansion of
+$\sin(y+1.1)$, left in symbolic form we would substitute for the
+numerical value of {\tt x} and {\tt dx} which we will take to be 0.1:
+
+<<>>=
+(t2 %<>% subs(x=1.1, dx=0.1))
+@ 
+
+See that this Taylor expansion retains a symbolic dependence on $y$.
+For numerical verification we will evaluate this at $y=0.3$:
+
+<<x1y03>>=
+(t2 %>% subs(y=0.3))
+t2 %>% subs(y=0.3)  - sinxpy %>% subs(x=1.1,y=0.4)
+@ 
+
+Above we see that the error in evaluating
+$\sin_5(1.5)=\sin_5(1.1+0.3+\delta x)$ using a second order Taylor
+expansion in $\delta x=0.1$ about $\sin_5(1.4)$ is ${\mathcal
+O}(\delta x)^3\sim 10^{-3}$.  The package is thus seen to be capable
+of representing objects with differing degrees of symbolic and numeric
+constitution.
+
+\subsection{Power series}
+
+Function {\tt series()} will decompose an {\tt mvp} object into a power
+series in a single variable:
+
+<<powerseriessinglevariablen>>=
+p <- as.mvp("a^2 x b + x^2 a b + b c x^2 + a b c + c^6 x")
+p
+series(p,"x")
+@ 
+
+This works nicely with {\tt subs()} if we wish to take a power series
+about {\tt x-v}, where {\tt v} is any {\tt mvp} object.  For example:
+
+<<powerseriesaboutxminusv>>=
+p %>% subs(x="xmv+a+b") %>% series("xmv") 
+@ 
+
+is a series in powers of {\tt x-a-b}.  We may perform a consistency
+check by a second substitution, returning us to the original
+expression:
+
+<<consistencybacksubstitutecheck>>=
+p == p %>% subs(x="xmv+a+b") %>% subs(xmv="x-a-b")
+@ 
+
+If function {\tt series()} is given a variable name ending in {\tt
+  \_m\_foo}, where {\tt foo} is any variable name, then this is
+typeset as {\tt (x-foo)}.  For example:
+
+<<typesetxminusfoo>>=
+as.mvp("x^3 + x*a") %>% subs(x="x_m_a + a") %>% series("x_m_a")
+@ 
+
+So above we see the expansion of $x^2+ax$ in powers of $x-a$.  If we
+want to see the expansion of an {\tt mvp} object in terms of a more
+complicated expression then it is better to use a nonce variable {\tt
+  v}:
+
+<<noncevariablev>>=
+as.mvp("x^2 + x*a+b^3") %>% subs(x="x_m_v + a^2+b") %>% series("x_m_v")
+@ 
+
+where it is understood that $v=a+b^2$.  Function {\tt taylor()} is a
+convenience wrapper that does some of the above in one step:
+
+<<conveniencewrapper>>=
+p <- as.mvp("1+x-x*y+a")^2
+taylor(p,"x","a")
+@ 
+
+However, this functionality is under development.
+
+\subsection{Extraction}
+
+Given a multivariate polynomial, one often needs to extract certain
+terms.  Because the terms of an {\tt mvp} object have an
+implementation-dependent order, this can be difficult.  But we can use
+function {\tt onevarpow()}:
+
+<<onevarpowp>>=
+(P <- as.mvp("1 + z + y^2 + x*z^2 +  x*y")^3)
+onevarpow(P,x=1,y=2)
+@ 
+
+Above we see function {\tt onevarpow()} returns an {\tt mvp} object
+including only those terms with $x$ to the first power and $y$ to the
+second power (the factor of $x^1y^2$ is dropped from the result).
+
+\subsection{Negative powers}
+
+The {\tt mvp} package handles negative powers, although the idiom is
+not perfect and is still under development.  Consider experimental
+function {\tt invert()}:
+
+<<useinvertfunc>>=
+(p <- as.mvp("1+x+x^2 y"))
+invert(p)
+@ 
+
+In the above, {\tt p} is a regular multivariate polynomial which
+includes negative powers.  It obeys the same arithmetic rules as other
+mvp objects:
+
+<<samearithasotherobjects>>=
+p + as.mvp("z^6")
+@ 
+
+
+\section[The {disordR} package]{The \pkg{disordR}
+\label{disordsection} package}
+
+As discussed above, the terms of an \pkg{mvp} object are held in an
+implementation-specific order and dealing with this in a consistent
+way is achieved using the \pkg{disordR}
+package~\cite{hankin2022_disordR_arxiv}.  It is possible to examine
+the coefficients of an \pkg{mvp} object:
+
+<<introdisord>>=
+a <- as.mvp("5 + 8*x^2*y - 13*y*x^2 + 11*z - 3*x*yz")
+a
+coeffs(a)
+@ 
+
+Above, note that the result of {\tt coeffs()} is a {\tt disord}
+object, defined in the {\tt disordR}
+package~\cite{hankin2022_disordR}.  The order of the elements is
+unspecified as the {\tt STL} map class holds the keys and values in an
+implementation-specific order.  This device stops the user from
+illegal operations on the coefficients.  For example, suppose we had
+another mvp object, {\tt b}:
+
+<<defineb>>=
+b <- a*2
+b
+@ 
+
+Then we could not add the coefficients of the two objects
+
+\begin{Schunk}
+\begin{Sinput}
+R> coeffs(a) + coeffs(b)
+\end{Sinput}
+\begin{Soutput}
+Error in check_matching_hash(e1, e2, match.call()) : 
+hash codes 64e403dc35ccd68b1bcbd3e0444c72f4e57b50fd and d4875b2ede120f28db25aa644df3ea95f5be7d58 do not match
+\end{Soutput}
+\end{Schunk}
+
+Above, we get an error because the coefficients of {\tt a} and {\tt b}
+are possibly stored in a different order and therefore vector
+addition makes no sense.  However, we can operate on coefficients of
+a single {\tt mvp} object at will:
+
+<<disordRsingleobjectstuff>>=
+coeffs(a) > 0
+coeffs(a) + coeffs(a)^4
+@
+
+Extraction also works but subject to standard {\tt disordR} idiom
+restrictions:
+
+<<disordextract>>=
+coeffs(a)[coeffs(a) > 0]
+@ 
+
+But ``mixing" objects is forbidden:
+
+\begin{verbatim}
+coeffs(a)[coeffs(b) > 0]
+\end{verbatim}
+
+Extraction methods work, again subject to {\tt disordR} restrictions:
+
+<< disordreplace>>=
+coeffs(a)[coeffs(a)<0] <- coeffs(a)[coeffs(a)<0] + 1000 # add 1000 to every negative coefficient
+a
+@
+
+In cases like this where the replacement object is complicated, using
+{\tt magrittr} would simplify the idiom and reduce the opportunity for
+error:
+
+<<usemagrittrpipe>>=
+library("magrittr")
+b
+coeffs(b)[coeffs(b)%%3==1] %<>% `+`(100)  # add 100 to every element equal to 1 modulo 3
+b
+@ 
+
+One good use for this is to ``zap" small elements:
+
+<<goodzapsmall>>=
+x <- as.mvp("1 - 0.11*x + 0.005*x*y")^2
+x
+@ 
+
+Then we can zap as follows:
+
+<<zapmvp>>=
+cx <- coeffs(x)
+cx[abs(cx) < 0.01] <- 0
+coeffs(x) <- cx
+x
+@ 
+
+
+\section{Example: multivariate generating functions}
+
+Here I give an example of the {\tt mvp} package in use,
+following~\cite{hankin2022_spray}.  The generating function for a
+chess knight is given by function {\tt knight()}, whose argument is
+the dimension of the board.  Thus for a 2D board we have
+
+<<knight2>>=
+knight(2)
+@ 
+
+\begin{figure}[p]
+  \centering \includegraphics[width=10cm]{four_dimensional_knight.pdf}
+  \caption{Four-dimensional knight\label{four_dimensional_knight} on a $4\times 4\times 4\times 4$ board.  Cells attacked by the knight shown by dots}
+\end{figure}
+
+
+This object has 8 terms, one for each move that a knight has on an
+unrestricted board.  The powers of {\tt a} and {\tt b} correspond to
+horizontal and vertical directions respectively.  Now consider a
+four-dimensional chessboard (Figure~\ref{four_dimensional_knight}
+shows a $4\times 4\times 4\times 4$ board).  How many ways are there
+for a 4D knight to return to its starting square after four moves on
+an infinite board?  Answer:
+
+<<answertoknight>>=
+constant(knight(4)^4)
+@
+
+We might ask how many ways there are for the knight to move one space
+in each of the 4 directions, by extracting the coefficient of $abcd$:
+
+<<answertoknight>>=
+K <- knight(4)^4
+onevarpow(K,a=1,b=1,c=1,d=1)
+@ 
+
+Further, we might ask which places the knight can move to on the plane
+$a=4$, $b=5$:
+
+<<furtherknightq>>=
+onevarpow(K,a=4,b=5)
+@
+
+Thus there are exactly 60 ways for the knight to move to $(4,5,-3,0)$,
+96 ways to move to $(4,5,-2,-1)$, and so on.  As a final example, we
+might assume that the knight moves randomly, and wish to determine the
+probability mass function of its position.  What is its expected
+Euclidean distance from the origin after four moves?
+
+<<furtherfurtherknight>>=
+dist <- function(x){sqrt(sum(x^2))}  # regular Euclidean distance function
+sum(unlist(lapply(powers(K),dist))*coeffs(K))/sum(coeffs(K))
+@ 
+
+\bibliography{mvp}
+\end{document}

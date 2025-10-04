@@ -84,11 +84,11 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 The \pkg{mvp} package provides some functionality for fast
 manipulation of multivariate polynomials in the R programming
 language~\citep{rcore2022}.  It uses the Standard Template library of
-\proglang{C++}~\cite{musser2009}, commonly known as the
+\proglang{C++}~\citep{musser2009}, commonly known as the
 \proglang{STL}, and is comparable in speed to the \pkg{spray}
-package~\cite{hankin2022_spray} for sparse arrays, while while
+package~\citep{hankin2022_spray} for sparse arrays, while while
 retaining the symbolic capabilities of the \pkg{mpoly}
-package~\cite{kahle2013}; the package includes some timing results.
+package~\citep{kahle2013}; the package includes some timing results.
 The \pkg{mvp} package uses the excellent print and coercion methods of
 \pkg{mpoly}.  The \pkg{mvp} package provides improved speed over
 \pkg{mpoly} but retains some of the sophisticated substitution

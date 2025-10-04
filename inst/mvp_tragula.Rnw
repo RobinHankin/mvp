@@ -152,17 +152,17 @@ library("magrittr")
 @ 
 
 
-Coercion and printing are accomplished by the {\tt mpoly} package
+Coercion and printing are accomplished by the \pkg{mpoly} package
 (there is no way I could improve upon
 Kahle's work).  Note carefully that the printed representation of
-the mvp object is created by the {\tt mpoly} package and the print method
+the mvp object is created by the \pkg{mpoly} package and the print method
 can rearrange both the terms of the polynomial
 ($3xy+z^3+xy^6z = z^3+3xy+xy^6z$, for example) and the symbols within
 a term ($3xy=3yx$, for example) to display the polynomial in a
 human-friendly form.
 
 However, note carefully that such rearranging does not affect the
-mathematical properties of the polynomial itself.  In the {\tt mvp}
+mathematical properties of the polynomial itself.  In the \pkg{mvp}
 package, the order of the terms is not preserved (or even defined) in
 the internal representation of the object; and neither is the order of
 the symbols within a single term.  Although this might sound odd, if
@@ -175,14 +175,14 @@ dput(M)
 
 it is not clear that any human-discernible ordering is preferable to
 any other, and we would be better off letting the compiler decide a
-propitious ordering.  In any event, the {\tt mpoly} package can
+propitious ordering.  In any event, the \pkg{mpoly} package can
 specify a print order:
 
 <<specifyprintorder>>=
 print(M,order="lex", varorder=c("stoat","goat","boat","bloat","gloat","float","stoatboat"))
 @ 
 
-Package idiom ({\tt disordR} discipline) for dealing with the
+Package idiom (\pkg{disordR} discipline) for dealing with the
 undefined order of terms is discussed below in
 section~\ref{disordsection}.
 
@@ -477,7 +477,7 @@ p + as.mvp("z^6")
 As discussed above, the terms of an \pkg{mvp} object are held in an
 implementation-specific order and dealing with this in a consistent
 way is achieved using the \pkg{disordR}
-package~\cite{hankin2022_disordR_tragula}.  It is possible to examine
+package~\citep{hankin2022_disordR_tragula}.  It is possible to examine
 the coefficients of an \pkg{mvp} object:
 
 <<introdisord>>=
@@ -488,7 +488,7 @@ coeffs(a)
 
 Above, note that the result of {\tt coeffs()} is a {\tt disord}
 object, defined in the \pkg{disordR}
-package~\cite{hankin2022_disordR_tragula}.  The order of the elements is
+package~\citep{hankin2022_disordR_tragula}.  The order of the elements is
 unspecified as the \proglang{STL} map class holds the keys and values in an
 implementation-specific order.  This device stops the user from
 illegal operations on the coefficients.  For example, suppose we had

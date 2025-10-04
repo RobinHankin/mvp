@@ -83,25 +83,26 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 
 The \pkg{mvp} package provides some functionality for fast
 manipulation of multivariate polynomials in the R programming
-language~\citep{rcore2022}.  It uses the Standard Template library of
-\proglang{C++}~\citep{musser2009}, commonly known as the
-\proglang{STL}, and is comparable in speed to the \pkg{spray}
-package~\citep{hankin2022_spray} for sparse arrays, while while
-retaining the symbolic capabilities of the \pkg{mpoly}
-package~\citep{kahle2013}; the package includes some timing results.
-The \pkg{mvp} package uses the excellent print and coercion methods of
-\pkg{mpoly}.  The \pkg{mvp} package provides improved speed over
-\pkg{mpoly} but retains some of the sophisticated substitution
+language~\citep{rcore2022_tragula}.  It uses the Standard Template
+library of \proglang{C++}~\citep{musser2009_tragula}, commonly known
+as the \proglang{STL}, and is comparable in speed to the \pkg{spray}
+package~\citep{hankin2022_spray_tragula} for sparse arrays, while
+while retaining the symbolic capabilities of the \pkg{mpoly}
+package~\citep{kahle2013_tragula}; the package includes some timing
+results.  The \pkg{mvp} package uses the excellent print and coercion
+methods of \pkg{mpoly}.  The \pkg{mvp} package provides improved speed
+over \pkg{mpoly} but retains some of the sophisticated substitution
 mechanism.
 
 \section[The STL map class]{The \pkg{STL} map class}
 
 A ``map'' is a sorted associative container that stores key-value
-pairs with unique keys~\citep{musser2009}.  It is interesting here
-because search and insertion operations have logarithmic complexity.
-Multivariate polynomials are considered to be the sum of a finite
-number of {\bf terms}, each multiplied by a coefficient.  A term is
-something like $x^2y^3z$.  We may consider this term to be the map
+pairs with unique keys~\citep{musser2009_tragula}.  It is interesting
+here because search and insertion operations have logarithmic
+complexity.  Multivariate polynomials are considered to be the sum of
+a finite number of {\bf terms}, each multiplied by a coefficient.  A
+term is something like $x^2y^3z$.  We may consider this term to be the
+map
 
 \begin{verbatim}
 {"x" -> 2, "y" -> 3, "z" -> 1}
@@ -476,7 +477,7 @@ p + as.mvp("z^6")
 As discussed above, the terms of an \pkg{mvp} object are held in an
 implementation-specific order and dealing with this in a consistent
 way is achieved using the \pkg{disordR}
-package~\cite{hankin2022_disordR_arxiv}.  It is possible to examine
+package~\cite{hankin2022_disordR_tragula}.  It is possible to examine
 the coefficients of an \pkg{mvp} object:
 
 <<introdisord>>=
@@ -486,9 +487,9 @@ coeffs(a)
 @ 
 
 Above, note that the result of {\tt coeffs()} is a {\tt disord}
-object, defined in the {\tt disordR}
-package~\cite{hankin2022_disordR}.  The order of the elements is
-unspecified as the {\tt STL} map class holds the keys and values in an
+object, defined in the \pkg{disordR}
+package~\cite{hankin2022_disordR_tragula}.  The order of the elements is
+unspecified as the \proglang{STL} map class holds the keys and values in an
 implementation-specific order.  This device stops the user from
 illegal operations on the coefficients.  For example, suppose we had
 another mvp object, {\tt b}:
@@ -570,8 +571,8 @@ x
 
 \section{Example: multivariate generating functions}
 
-Here I give an example of the {\tt mvp} package in use,
-following~\cite{hankin2022_spray}.  The generating function for a
+Here I give an example of the \pkg{mvp} package in use,
+following~\cite{hankin2022_spray_tragula}.  The generating function for a
 chess knight is given by function {\tt knight()}, whose argument is
 the dimension of the board.  Thus for a 2D board we have
 

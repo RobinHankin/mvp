@@ -150,7 +150,7 @@ zero polynomial (which is simply an empty map).
 \section{The package in use}
 
 Consider a simple multivariate polynomial $3xy+z^3+xy^6z$ and its
-representation in the following R session:
+representation in the following \proglang{R} session:
 
 <<mvpdefinep>>=
 library("mvp", quietly=TRUE)

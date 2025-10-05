@@ -123,7 +123,7 @@ their coefficients; thus $7xy^2 -3x^2yz^5$ would be
 {{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, "y" -> 1, "z" ->5} -> -3}
 \end{verbatim}
 
-and we understand that coefficients are nonzero.  In {\tt C++} the
+and we understand that coefficients are nonzero.  In \proglang{C++} the
 declarations would be
 
 \begin{verbatim}

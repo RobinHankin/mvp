@@ -107,8 +107,9 @@ pairs with unique keys~\citep{musser2009_tragula}.  It is interesting
 here because search and insertion operations have logarithmic
 complexity.  Multivariate polynomials are considered to be the sum of
 a finite number of {\bf terms}, each multiplied by a coefficient.  A
-term is something like $x^2y^3z$.  We may consider this term to be the
-map
+term is a product of powers of algebraic indeterminates (for example,
+$x^2y^3z$; note the absence of a coefficient).  We may consider this
+term to be the map
 
 \begin{verbatim}
 {"x" -> 2, "y" -> 3, "z" -> 1}

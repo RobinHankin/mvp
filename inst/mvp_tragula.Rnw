@@ -38,8 +38,8 @@
 \Issue{0}
 %% \Month{September}
 \Year{0000}
-%% \Submitdate{2004-09-29}
-%% \Acceptdate{2004-09-29}
+%% \Submitdate{0000-00-00}
+%% \Acceptdate{0000-00-00}
 \Repository{https://github.com/RobinHankin/mvp} %% this line for Tragula
 
 %% The address of (at least) one author should be given

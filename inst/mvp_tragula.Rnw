@@ -24,7 +24,8 @@
   The package uses the~\proglang{C++} Standard Template Library's
   \proglang{map} class to store and retrieve elements; it conforms to
   \pkg{disordR} discipline for coefficients.  The package is available
-  on CRAN at \url{https://CRAN.R-project.org/package=mvp}.
+  on CRAN at \url{https://CRAN.R-project.org/package=mvp}.  To cite
+  this article or the package, use~\citet{hankin2022_mvp_tragula}.
 }
 
 \Keywords{Multivariate polynomials}
@@ -33,13 +34,13 @@
 %% publication information
 %% NOTE: This needs to filled out ONLY IF THE PAPER WAS ACCEPTED.
 %% If it was not (yet) accepted, leave them commented.
-%% \Volume{13}
-%% \Issue{9}
+\Volume{0}
+\Issue{0}
 %% \Month{September}
-%% \Year{2004}
+\Year{0000}
 %% \Submitdate{2004-09-29}
 %% \Acceptdate{2004-09-29}
-%% \Repository{https://github.com/RobinHankin/mvp} %% this line for Tragula
+\Repository{https://github.com/RobinHankin/mvp} %% this line for Tragula
 
 %% The address of (at least) one author should be given
 %% in the following format:
@@ -71,6 +72,11 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 @ 
 
 \SweaveOpts{}
+
+\textbf{This document has not been peer-reviewed and is not an
+  accepted \textsf{Tragula} publication.  It is intended as an example
+  of the style and substance appropriate for submission to
+  \textsf{Tragula}.}
 
 \section{Introduction}
 

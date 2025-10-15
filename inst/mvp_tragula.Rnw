@@ -47,6 +47,7 @@
 \Address{
   Robin K. S. Hankin\\
   University of Stirling\\
+  Scotland\\
   email: \email{hankin.robin@gmail.com}
 }
 %% It is also possible to add a telephone and fax number
@@ -88,7 +89,7 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 \end{wrapfigure}
 
 The \pkg{mvp} package provides some functionality for fast
-manipulation of multivariate polynomials in the R programming
+manipulation of multivariate polynomials in the \proglang{R} programming
 language~\citep{rcore2022_tragula}.  It uses the Standard Template
 library of \proglang{C++}~\citep{musser2009_tragula}, commonly known
 as the \proglang{STL}, and is comparable in speed to the \pkg{spray}

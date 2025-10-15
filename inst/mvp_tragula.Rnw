@@ -13,7 +13,7 @@
 
 %% for pretty printing and a nice hypersummary also set:
 \Plainauthor{Robin K. S. Hankin}
-\Plaintitle{The \pkg{mvp} package}
+\Plaintitle{The mvp package}
 \Shorttitle{The \pkg{mvp} package}
 
 %% an abstract and keywords
@@ -47,7 +47,7 @@
 \Address{
   Robin K. S. Hankin\\
   University of Stirling\\
-  E-mail: \email{hankin.robin@gmail.com}
+  email: \email{hankin.robin@gmail.com}
 }
 %% It is also possible to add a telephone and fax number
 %% before the e-mail in the following format:

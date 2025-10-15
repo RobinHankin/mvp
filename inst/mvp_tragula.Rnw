@@ -8,7 +8,7 @@
 
 
 %% just as usual
-\author{Robin K. S. Hankin}
+\author{Robin K. S. Hankin\orcid{https://orcid.org/0000-0001-5982-0415}\\
 \title{Fast multivariate polynomials in \proglang{R}: the \pkg{mvp} package}
 
 %% for pretty printing and a nice hypersummary also set:

@@ -1,6 +1,6 @@
 % -*- mode: noweb; noweb-default-code-mode: R-mode; -*-
-\documentclass[nojss]{jss}
-
+\documentclass[article]{tragula}
+\usepackage{amssymb}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8,7 +8,7 @@
 
 
 %% just as usual
-\author{Robin K. S. Hankin\\University of Stirling}
+\author{Robin K. S. Hankin}
 \title{Fast multivariate polynomials in \proglang{R}: the \pkg{mvp} package}
 
 %% for pretty printing and a nice hypersummary also set:
@@ -45,7 +45,7 @@
 %% The address of (at least) one author should be given
 %% in the following format:
 \Address{
-  Robin K. S. Hankin\\%\orcid{https://orcid.org/0000-0001-5982-0415}\\
+  Robin K. S. Hankin\\
   University of Stirling\\
   E-mail: \email{hankin.robin@gmail.com}
 }

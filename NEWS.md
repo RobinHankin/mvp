@@ -1,5 +1,6 @@
 # mvp 1.1-1
 
+- code refactoring
 - some C++-18 constructions
 
 

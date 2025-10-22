@@ -71,10 +71,10 @@ List mvp_deriv(
               const List &allnames, const List &allpowers, const NumericVector &coefficients,
               const CharacterVector &v    // v a vector of symbols to be differentiated WR to.
                ){
-
-    mvp X = prepare(allnames, allpowers, coefficients);
-    mvp out = std::accumulate(v.begin(), v.end(), X, 
-                              [](mvp acc, const auto& var) { return deriv(acc, std::string(var)); });
+    mvp out = prepare(allnames, allpowers, coefficients);
+    for (const auto &var : v) {
+        out = deriv(out, std::string(var));
+    }
     return retval(out);
 }
 

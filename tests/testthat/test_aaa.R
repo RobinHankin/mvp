@@ -8,7 +8,7 @@
 test_that("Test suite aaa.R",{
 
 checker1 <- function(x){
-    expect_true(x==x, info=dput(x))
+    expect_true(x == x, info=dput(x))
 
     expect_true(x == x + constant(0), info=dput(x))
     expect_true(x == x + 0, info=dput(x))

@@ -147,15 +147,15 @@ setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
   }
 }
 
-`is.constant` <- function(x){length(allvars(x))==0}
+`is.constant` <- function(x){length(allvars(x)) == 0}
 
-`subs` <- function(S,...,drop=TRUE){
+`subs` <- function(S, ..., drop=TRUE){
   sb <- list(...)
   v <- names(sb)
 
   out <- S
   for(i in seq_along(sb)){
-    out <- subsmvp(out,v[i],as.mvp(sb[[i]]))
+    out <- subsmvp(out, v[i], as.mvp(sb[[i]]))
   }
   if(drop){
     return(drop(out))

@@ -1,0 +1,228 @@
+# Fast symbolic multivariate polynomials in R
+
+# Overview ![](reference/figures/mvp.png)
+
+Multivariate polynomials are interesting and useful objects. Here I
+present the `mvp` package which hopefully improves upon previous R
+functionality provided by the packages `multipol`, `mpoly`, and `spray`.
+The `mvp` package follows `mpoly` in using a symbolic, rather than
+numeric, representation of a multivariate polynomial; but it offers
+speed advantages over `mpoly`. `mvp` uses the excellent print and
+coercion methods of the `mpoly` package. `mvp` includes some pleasing
+substitution idiom not found elsewhere; it is theoretically comparable
+in speed to the `spray` package and I present some timings in the
+package vignette.
+
+The `mvp` package uses `C++`’s STL `map` class for efficiency, which has
+the downside that the order of the terms, and the order of the symbols
+within each term, is undefined. This does not matter as the mathematical
+value of a multivariate polynomial is unaffected by reordering; and the
+print method (taken from `mpoly`) does a good job in producing
+human-readable output.
+
+# Installation
+
+You can install the released version of `mvp` from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+# install.packages("mvp")  # uncomment this to install the package
+library("mvp")
+```
+
+# The `mvp` package in use
+
+Creating a multivariate polynomial is straightforward:
+
+``` r
+X <- as.mvp("1 + a^2 + a*b*c^3")
+X
+#> mvp object algebraically equal to
+#> 1 + a b c^3 + a^2
+```
+
+and arithmetic operations work as expected:
+
+``` r
+Y <- as.mvp("12*a^2  + b - c^2 + 4*d")
+X+Y
+#> mvp object algebraically equal to
+#> 1 + a b c^3 + 13 a^2 + b - c^2 + 4 d
+X-3*Y
+#> mvp object algebraically equal to
+#> 1 + a b c^3 - 35 a^2 - 3 b + 3 c^2 - 12 d
+X^2
+#> mvp object algebraically equal to
+#> 1 + 2 a b c^3 + 2 a^2 + a^2 b^2 c^6 + 2 a^3 b c^3 + a^4
+```
+
+Substitution uses the
+[`subs()`](https://robinhankin.github.io/mvp/reference/subs.md)
+function:
+
+``` r
+X
+#> mvp object algebraically equal to
+#> 1 + a b c^3 + a^2
+subs(X,a=1)
+#> mvp object algebraically equal to
+#> 2 + b c^3
+subs(X,a=1,b=2)
+#> mvp object algebraically equal to
+#> 2 + 2 c^3
+subs(X,a=1,b=2,c=3)
+#> [1] 56
+subs(X+Y,a="1+x^2",b="x+y",c=0)
+#> mvp object algebraically equal to
+#> 14 + 4 d + x + 26 x^2 + 13 x^4 + y
+```
+
+# Further information
+
+For more detail, see the package vignette
+
+[`vignette("mvp")`](https://robinhankin.github.io/mvp/articles/mvp.md)
+
+# Package index
+
+## All functions
+
+- [`Ops(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_negative()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_times_mvp()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_times_scalar()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_plus_mvp()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_plus_numeric()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_eq_mvp()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_modulo()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  :
+
+  Arithmetic Ops Group Methods for `mvp` objects
+
+- [`all_equal_mvp()`](https://robinhankin.github.io/mvp/reference/all.equal.md)
+  : Approximate equality of mvp objects
+
+- [`allvars()`](https://robinhankin.github.io/mvp/reference/allvars.md)
+  : All variables in a multivariate polynomial
+
+- [`as.function(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/as.function.md)
+  : Functional form for multivariate polynomials
+
+- [`coeffs()`](https://robinhankin.github.io/mvp/reference/coeffs.md)
+  [`vars()`](https://robinhankin.github.io/mvp/reference/coeffs.md)
+  [`powers()`](https://robinhankin.github.io/mvp/reference/coeffs.md)
+  [`` `coeffs<-`() ``](https://robinhankin.github.io/mvp/reference/coeffs.md)
+  :
+
+  Functionality for `coeffs` objects
+
+- [`constant(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/constant.md)
+  [`` `constant<-`( ``*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/constant.md)
+  [`constant(`*`<numeric>`*`)`](https://robinhankin.github.io/mvp/reference/constant.md)
+  [`is.constant()`](https://robinhankin.github.io/mvp/reference/constant.md)
+  : The constant term
+
+- [`deriv(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/deriv.md)
+  [`aderiv(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/deriv.md)
+  :
+
+  Differentiation of `mvp` objects
+
+- [`drop(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/drop.md)
+  : Drop empty variables
+
+- [`horner()`](https://robinhankin.github.io/mvp/reference/horner.md) :
+  Horner's method
+
+- [`invert()`](https://robinhankin.github.io/mvp/reference/invert.md) :
+  Replace symbols with their reciprocals
+
+- [`kahle()`](https://robinhankin.github.io/mvp/reference/kahle.md) : A
+  sparse multivariate polynomial
+
+- [`knight()`](https://robinhankin.github.io/mvp/reference/knight.md) :
+  Chess knight
+
+- [`lettersymbols`](https://robinhankin.github.io/mvp/reference/letters.md)
+  : Single-letter symbols
+
+- [`mvp_substitute()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  [`mvp_substitute_mvp()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  [`mvp_vectorised_substitute()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  [`mvp_prod()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  [`mvp_add()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  [`simplify()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  [`mvp_deriv()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  [`mvp_power()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+  : Low level functions
+
+- [`mpoly_to_mvp()`](https://robinhankin.github.io/mvp/reference/mpoly.md)
+  [`as.mpoly(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/mpoly.md)
+  : Conversion to and from mpoly form
+
+- [`mvp-package`](https://robinhankin.github.io/mvp/reference/mvp-package.md)
+  : Fast Symbolic Multivariate Polynomials
+
+- [`mvp()`](https://robinhankin.github.io/mvp/reference/mvp.md)
+  [`is_ok_mvp()`](https://robinhankin.github.io/mvp/reference/mvp.md)
+  [`is.mvp()`](https://robinhankin.github.io/mvp/reference/mvp.md)
+  [`as.mvp()`](https://robinhankin.github.io/mvp/reference/mvp.md) :
+  Multivariate polynomials, mvp objects
+
+- [`ooom()`](https://robinhankin.github.io/mvp/reference/ooom.md) : One
+  over one minus a multivariate polynomial
+
+- [`print(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/print.md)
+  :
+
+  Print methods for `mvp` objects
+
+- [`rhmvp()`](https://robinhankin.github.io/mvp/reference/rmvp.md)
+  [`rmvp()`](https://robinhankin.github.io/mvp/reference/rmvp.md)
+  [`rmvpp()`](https://robinhankin.github.io/mvp/reference/rmvp.md)
+  [`rmvppp()`](https://robinhankin.github.io/mvp/reference/rmvp.md) :
+  Random multivariate polynomials
+
+- [`trunc()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`truncall()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`trunc1()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`series()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`print(`*`<series>`*`)`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`onevarpow()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`taylor()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`mvp_taylor_onevar()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`mvp_taylor_allvars()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`mvp_taylor_onepower_onevar()`](https://robinhankin.github.io/mvp/reference/series.md)
+  [`mvp_to_series()`](https://robinhankin.github.io/mvp/reference/series.md)
+  : Decomposition of multivariate polynomials by powers
+
+- [`product()`](https://robinhankin.github.io/mvp/reference/special.md)
+  [`homog()`](https://robinhankin.github.io/mvp/reference/special.md)
+  [`linear()`](https://robinhankin.github.io/mvp/reference/special.md)
+  [`xyz()`](https://robinhankin.github.io/mvp/reference/special.md)
+  [`numeric_to_mvp()`](https://robinhankin.github.io/mvp/reference/special.md)
+  : Various functions to create simple multivariate polynomials
+
+- [`subs()`](https://robinhankin.github.io/mvp/reference/subs.md)
+  [`subsy()`](https://robinhankin.github.io/mvp/reference/subs.md)
+  [`subvec()`](https://robinhankin.github.io/mvp/reference/subs.md)
+  [`subsmvp()`](https://robinhankin.github.io/mvp/reference/subs.md)
+  [`varchange()`](https://robinhankin.github.io/mvp/reference/subs.md)
+  [`varchange_formal()`](https://robinhankin.github.io/mvp/reference/subs.md)
+  [`namechanger()`](https://robinhankin.github.io/mvp/reference/subs.md)
+  : Substitution
+
+- [`summary(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/summary.md)
+  [`print(`*`<summary.mvp>`*`)`](https://robinhankin.github.io/mvp/reference/summary.md)
+  [`rtypical()`](https://robinhankin.github.io/mvp/reference/summary.md)
+  : Summary methods for mvp objects
+
+- [`is.zero()`](https://robinhankin.github.io/mvp/reference/zero.md) :
+  The zero polynomial
+
+# Articles
+
+### All vignettes
+
+- [The \`mvp\` package: fast multivariate polynomials in
+  R](https://robinhankin.github.io/mvp/articles/mvp.md):

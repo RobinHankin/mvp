@@ -1,0 +1,31 @@
+# Changelog
+
+## mvp 1.1-1
+
+- code refactoring
+- some C++-18 constructions
+
+## mvp 1.1-0
+
+- C++-17 constructions
+- more efficient exponentiation
+
+## mvp 1.0-19
+
+- remove mathjax dependency
+- approximate equality
+
+## mvp 1.0-18
+
+CRAN release: 2025-01-31
+
+- pure extraction
+- code of conduct
+- contributing guide
+- pkgdown
+
+## mvp 1.0-17
+
+- single-letter symbols
+- bugfixes
+- vectorized exponentiation

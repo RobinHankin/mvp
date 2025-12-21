@@ -18,18 +18,7 @@
 \alias{consistent}
 \alias{\%~\%}
 \title{Functionality for \code{coeffs} objects}
-\description{
-
-  Function \code{coeffs()} allows arithmetic operators to be used for
-  the coefficients of multivariate polynomials, bearing in mind that the
-  order of coefficients is not determined.  It uses the \code{disord}
-  class of the \CRANpkg{disordR} package.
-
-\dQuote{Pure} extraction and replacement (as in \code{a[i]} and
-\code{a[i] <- value}) is implemented experimentally.  The code for
-extraction is cute but not particularly efficient.
-  
-}
+\description{Get and set the coefficients of an \code{mvp} object.}
 \usage{
 coeffs(x)
 vars(x)
@@ -41,6 +30,18 @@ coeffs(x) <- value
   \item{value}{Object of class \code{disord}, or length-1 numeric vector}
 }
 \details{
+
+  Function \code{coeffs()} extracts the coefficients of an \code{mvp}
+  object.  The coefficients may be set with \code{coeffs<-()}, as in
+  \code{coeffs(M) <- value}.  These follow \CRANpkg{disordR} discipline.
+  The idea is that the methods allow arithmetic operators to be used for
+  the coefficients of multivariate polynomials, bearing in mind that the
+  order of coefficients is not determined.
+
+  \dQuote{Pure} extraction and replacement, as in \code{M[coeffs(M) >
+  9]} [which returns an \code{mvp} object] and \code{M[Mod(coeffs(M)) <=
+  1] <- value} [which modifies \code{a}] is implemented experimentally.
+  The code for extraction is cute but not particularly efficient.
 
   (much of the discussion below appears in the vignette of the
   \CRANpkg{disordR} package). 
@@ -173,5 +174,11 @@ coeffs(x) <- coeffs(y)          # not defined, will give an error
 coeffs(x) <- seq_len(nterms(x)) # not defined, will give an error
 }
 
+
+## "Pure" extraction:
+M <- as.mvp("4 -0.1 x + 7 x y z -3 x^5  + 0.3 y^5")
+M[coeffs(M)>3]
+M[Mod(coeffs(M)) < 1] <- 0
+M
 }
 \keyword{symbolmath}

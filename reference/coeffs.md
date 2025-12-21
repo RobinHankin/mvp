@@ -1,15 +1,6 @@
 # Functionality for `coeffs` objects
 
-Function
-[`coeffs()`](https://robinhankin.github.io/mvp/reference/coeffs.html)
-allows arithmetic operators to be used for the coefficients of
-multivariate polynomials, bearing in mind that the order of coefficients
-is not determined. It uses the `disord` class of the
-[disordR](https://CRAN.R-project.org/package=disordR) package.
-
-“Pure” extraction and replacement (as in `a[i]` and `a[i] <- value`) is
-implemented experimentally. The code for extraction is cute but not
-particularly efficient.
+Get and set the coefficients of an `mvp` object.
 
 ## Usage
 
@@ -31,6 +22,20 @@ coeffs(x) <- value
   Object of class `disord`, or length-1 numeric vector
 
 ## Details
+
+Function
+[`coeffs()`](https://robinhankin.github.io/mvp/reference/coeffs.html)
+extracts the coefficients of an `mvp` object. The coefficients may be
+set with `coeffs<-()`, as in `coeffs(M) <- value`. These follow
+[disordR](https://CRAN.R-project.org/package=disordR) discipline. The
+idea is that the methods allow arithmetic operators to be used for the
+coefficients of multivariate polynomials, bearing in mind that the order
+of coefficients is not determined.
+
+“Pure” extraction and replacement, as in `M[coeffs(M) > 9]` \[which
+returns an `mvp` object\] and `M[Mod(coeffs(M)) <= 1] <- value` \[which
+modifies `a`\] is implemented experimentally. The code for extraction is
+cute but not particularly efficient.
 
 (much of the discussion below appears in the vignette of the
 [disordR](https://CRAN.R-project.org/package=disordR) package).
@@ -171,4 +176,15 @@ if (FALSE) { # \dontrun{
 coeffs(x) <- coeffs(y)          # not defined, will give an error
 coeffs(x) <- seq_len(nterms(x)) # not defined, will give an error
 } # }
+
+
+## "Pure" extraction:
+M <- as.mvp("4 -0.1 x + 7 x y z -3 x^5  + 0.3 y^5")
+M[coeffs(M)>3]
+#> mvp object algebraically equal to
+#> 4 + 7 x y z
+M[Mod(coeffs(M)) < 1] <- 0
+M
+#> mvp object algebraically equal to
+#> 4 + 7 x y z - 3 x^5
 ```

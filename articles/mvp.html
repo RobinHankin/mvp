@@ -62,7 +62,7 @@ Hankin</h4>
 
     
     
-<p><img src="../../../_temp/Library/mvp/help/figures/mvp.png" class="r-plt" width="20%" style="float:right; padding:10px"></p>
+<p><img src="../../../_temp/Library/mvp/help/figures/mvp.png" class="r-plt" alt="" width="20%" style="float:right; padding:10px"></p>
 <p>To cite the <code>mvp</code> package in publications please use <span class="citation">Hankin (<a href="#ref-hankin2022_mvp">2022b</a>)</span>. Multivariate polynomials
 are interesting and useful objects, with a wide range of applications.
 The <code>mvp</code> package provides some functionality for fast
@@ -422,7 +422,8 @@ operations on the coefficients. For example, suppose we had another
 <span><span class="co">#&gt; 10 - 6 x yz - 10 x^2 y + 22 z</span></span>
 <span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
 <span><span class="co">#&gt; coeffs(a) + coeffs(b)</span></span>
-<span><span class="co">#&gt; Error in check_matching_hash(e1, e2, match.call()): </span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_matching_hash()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> </span></span>
 <span><span class="co">#&gt; hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match</span></span></code></pre></div>
 <p>above, we get an error because the coefficients of <code>a</code> and
 <code>b</code> are possibly stored in a different order and therefore
@@ -448,7 +449,8 @@ idiom restrictions:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/coeffs.html">coeffs</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span></span>
 <span><span class="co">#&gt; .local(x = x, i = i, j = j, drop = drop)</span></span>
-<span><span class="co">#&gt; Error in check_matching_hash(x, i, match.call()): </span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_matching_hash()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> </span></span>
 <span><span class="co">#&gt; hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match</span></span></code></pre></div>
 <p>Extraction methods work, again subject to <code>disordR</code>
 restrictions:</p>

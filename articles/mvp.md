@@ -423,7 +423,8 @@ b
 #> 10 - 6 x yz - 10 x^2 y + 22 z
 coeffs(a) + coeffs(b)
 #> coeffs(a) + coeffs(b)
-#> Error in check_matching_hash(e1, e2, match.call()): 
+#> Error in `check_matching_hash()`:
+#> ! 
 #> hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match
 ```
 
@@ -458,7 +459,8 @@ But “mixing” objects is forbidden:
 ``` r
 coeffs(a)[coeffs(b) > 0]
 #> .local(x = x, i = i, j = j, drop = drop)
-#> Error in check_matching_hash(x, i, match.call()): 
+#> Error in `check_matching_hash()`:
+#> ! 
 #> hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match
 ```
 

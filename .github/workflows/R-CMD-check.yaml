@@ -1,0 +1,16 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# for debugging help, https://github.com/r-lib/actions#where-to-find-help
+
+name: R-CMD-check-mvp
+
+on:
+  push:
+    branches: [ master]
+  pull_request:
+    branches: [ master]
+  workflow_dispatch:
+
+
+jobs:
+  check:
+    uses: robinhankin/workflow/.github/workflows/R-CMD-check.yaml@master

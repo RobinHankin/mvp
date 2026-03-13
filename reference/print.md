@@ -34,14 +34,14 @@ Robin K. S. Hankin
 a <- rmvp(4)
 a
 #> mvp object algebraically equal to
-#> 2 + 2 a b c^3 + 4 a^2 + 3 b
+#> 11
 print(a)
 #> mvp object algebraically equal to
-#> 2 + 2 a b c^3 + 4 a^2 + 3 b
+#> 11
 print(a,stars=TRUE)
 #> mvp object algebraically equal to
-#> 2 + 2 * a * b * c**3 + 4 * a**2 + 3 * b
+#> 11
 print(a,varorder=rev(letters))
 #> mvp object algebraically equal to
-#> 2 c^3 b a + 3 b + 4 a^2 + 2
+#> 11
 ```

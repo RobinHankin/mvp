@@ -29,5 +29,5 @@ a <- rmvp()
 a1 <- a + rmvp()/1e5
 a2 <- a - rmvp()/1e5
 all.equal(a1,a2)
-#> [1] "Mean scaled difference: 6.714267e-06"
+#> [1] "Mean scaled difference: 6e-06"
 ```

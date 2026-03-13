@@ -68,25 +68,26 @@ Function `mvp_modulo()` is distinctly sub-optimal and
 ``` r
 (p1 <- rmvp(3))
 #> mvp object algebraically equal to
-#> 2 a^2 b c^2 + 3 a^2 d e + b^2 e f
+#> b^2 d e f^2 + b^2 d^2 e^2 + d^2 e^2 f^2
 (p2 <- rmvp(3))
 #> mvp object algebraically equal to
-#> 3 + 3 a d e + 2 f
+#> a b^2 d^2 f + 3 a^2 e^2 f + 2 c f^3
 
 p1*p2
 #> mvp object algebraically equal to
-#> 3 a b^2 d e^2 f + 6 a^2 b c^2 + 4 a^2 b c^2 f + 9 a^2 d e + 6 a^2 d e f + 6 a^3
-#> b c^2 d e + 9 a^3 d^2 e^2 + 3 b^2 e f + 2 b^2 e f^2
+#> a b^2 d^4 e^2 f^3 + a b^4 d^3 e f^3 + a b^4 d^4 e^2 f + 3 a^2 b^2 d e^3 f^3 + 3
+#> a^2 b^2 d^2 e^4 f + 3 a^2 d^2 e^4 f^3 + 2 b^2 c d e f^5 + 2 b^2 c d^2 e^2 f^3 +
+#> 2 c d^2 e^2 f^5
 
 p1+p2
 #> mvp object algebraically equal to
-#> 3 + 3 a d e + 2 a^2 b c^2 + 3 a^2 d e + b^2 e f + 2 f
+#> a b^2 d^2 f + 3 a^2 e^2 f + b^2 d e f^2 + b^2 d^2 e^2 + 2 c f^3 + d^2 e^2 f^2
 
 p1^3
 #> mvp object algebraically equal to
-#> 9 a^2 b^4 d e^3 f^2 + 6 a^2 b^5 c^2 e^2 f^2 + 27 a^4 b^2 d^2 e^3 f + 36 a^4 b^3
-#> c^2 d e^2 f + 12 a^4 b^4 c^4 e f + 54 a^6 b c^2 d^2 e^2 + 36 a^6 b^2 c^4 d e +
-#> 8 a^6 b^3 c^6 + 27 a^6 d^3 e^3 + b^6 e^3 f^3
+#> 3 b^2 d^5 e^5 f^6 + 3 b^2 d^6 e^6 f^4 + 3 b^4 d^4 e^4 f^6 + 6 b^4 d^5 e^5 f^4 +
+#> 3 b^4 d^6 e^6 f^2 + b^6 d^3 e^3 f^6 + 3 b^6 d^4 e^4 f^4 + 3 b^6 d^5 e^5 f^2 +
+#> b^6 d^6 e^6 + d^6 e^6 f^6
 
 
 p1*(p1+p2) == p1^2+p1*p2  # should be TRUE

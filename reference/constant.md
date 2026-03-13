@@ -46,13 +46,13 @@ Robin K. S. Hankin
 a <- rmvp(5)+4
 a
 #> mvp object algebraically equal to
-#> 6 + 5 b c e f^2 + 5 c^2 e + 5 d e f + 5 e^2
+#> 4 + 5 b c e f^2 + 3 c + 5 c d^2 e^2 + 3 d e + 2 e f^3
 constant(a)
-#> [1] 6
+#> [1] 4
 constant(a) <- 33
 a
 #> mvp object algebraically equal to
-#> 33 + 5 b c e f^2 + 5 c^2 e + 5 d e f + 5 e^2
+#> 33 + 5 b c e f^2 + 3 c + 5 c d^2 e^2 + 3 d e + 2 e f^3
 
 constant(0)  # the zero mvp
 #> mvp object algebraically equal to

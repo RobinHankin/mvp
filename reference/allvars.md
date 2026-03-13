@@ -30,7 +30,7 @@ have been better for `allvars()` to return a `disord` object.
 p <- rmvp(5)
 p
 #> mvp object algebraically equal to
-#> 5 + 5 c d^3 + 3 c d^3 e^2 + 2 e f + 2 f
+#> 7 + 3 c d^3 e^2 + 2 e f + 2 f
 allvars(p)
 #> [1] "c" "d" "e" "f"
 ```

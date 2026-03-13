@@ -138,11 +138,11 @@ onevarpow(as.mvp("1+x+x*y^2  + z*y^2*x"),x=1,y=2)
 
 (p2 <- rmvp(10))
 #> mvp object algebraically equal to
-#> 9 + 3 a + 5 a b^3 d e + 5 a d^2 + 2 b d^3 + c^2 d + 6 d e^2 + 9 d f + d^2 e f +
-#> 10 e^2
+#> 13 + 9 a c + 3 a c^2 e + 3 a^2 b c + b f^2 + 6 c f^2 + 5 d f + d^2 e^3 f + 3
+#> d^2 f^4
 series(p2,"a")
-#> a^0(9  +  2 b d^3  +  c^2 d  +  6 d e^2  +  9 d f  +  d^2 e f  +  10 e^2 )  + 
-#> a^1(3  +  5 b^3 d e  +  5 d^2 )
+#> a^0(13  +  b f^2  +  6 c f^2  +  5 d f  +  d^2 e^3 f  +  3 d^2 f^4 )  + a^1(9 c 
+#>  +  3 c^2 e )  + a^2(3 b c )
 #> 
 
 # Works well with pipes:

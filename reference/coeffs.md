@@ -153,24 +153,24 @@ Robin K. S. Hankin
 ``` r
 (x <- 5+rmvp(6))
 #> mvp object algebraically equal to
-#> 5 + 2 a c^2 f + 5 b + 5 b c d + 6 b d + 6 c e f^2 + 5 e^3
+#> 5 + 2 a c^2 f + 4 b d e^3 + 5 c d^3 + 6 e f + 11 e^3
 (y <- 2+rmvp(6))
 #> mvp object algebraically equal to
-#> 2 + 6 a b + 4 a^3 c f^2 + 2 b + 3 c + 5 c d^2 e^2 + 4 d
+#> 2 + 6 a b + 4 a^3 c f^2 + 7 b + 6 c e f^2 + 4 d
 
 coeffs(x)^2
-#> A disord object with hash 654c2c4102acef68a89664a25b0ac4aad030bc93 and elements
-#> [1] 25  4 25 25 36 36 25
+#> A disord object with hash 6e9c517615f9d400b1bb1e77c36345a594b4db8c and elements
+#> [1]  25   4  16  25  36 121
 #> (in some order)
 coeffs(y) <- coeffs(y)%%3  # fine, all coeffs of y now modulo 3
 y
 #> mvp object algebraically equal to
-#> 2 + a^3 c f^2 + 2 b + 2 c d^2 e^2 + d
+#> 2 + a^3 c f^2 + b + d
 
 coeffs(y) <- 4               
 y
 #> mvp object algebraically equal to
-#> 4 + 4 a^3 c f^2 + 4 b + 4 c d^2 e^2 + 4 d
+#> 4 + 4 a^3 c f^2 + 4 b + 4 d
 
 if (FALSE) { # \dontrun{
 coeffs(x) <- coeffs(y)          # not defined, will give an error

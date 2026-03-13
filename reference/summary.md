@@ -43,13 +43,13 @@ Robin K. S. Hankin
 ``` r
 summary(rmvp(40))
 #> mvp object.
-#> Number of terms: 35 
+#> Number of terms: 36 
 #> Number of distinct symbols: 6 
 #> Highest power: 4 
 #> Longest term:  4 
 #> Has negative powers:  FALSE 
-#> Constant:  90 
+#> Constant:  122 
 rtypical(rmvp(40))
 #> mvp object algebraically equal to
-#> 61 + 54 a + 2 a^2 b^4 + 5 b c e
+#> 25 + 30 a b e^2 + 29 a c d + 9 a c f
 ```

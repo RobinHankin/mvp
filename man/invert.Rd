@@ -18,6 +18,6 @@ invert(p, v)
 invert("x")
 
 (P <- as.mvp("1+a+6*a^2 -7*a*b"))
-invert(P,"a")
+invert(P, "a")
 
 }

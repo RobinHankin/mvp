@@ -38,7 +38,7 @@ invert("x")
 (P <- as.mvp("1+a+6*a^2 -7*a*b"))
 #> mvp object algebraically equal to
 #> 1 + a - 7 a b + 6 a^2
-invert(P,"a")
+invert(P, "a")
 #> mvp object algebraically equal to
 #> 1 + 6 a^-2 + a^-1 - 7 a^-1 b
 ```

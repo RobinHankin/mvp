@@ -44,6 +44,10 @@ Internally, `n` is tabulated in the interests of efficiency, so
 power. Similar functionality is implemented in the
 [freealg](https://CRAN.R-project.org/package=freealg) package.
 
+Function `mvp_modulo()` reduces an `mvp` object using modular
+arithmetic. Here, “mvp_modulo(S, p)” returns `S` modulo `p` (despite the
+argument names) where `p` is prime. Package idiom includes `P %% n`.
+
 ## Value
 
 The high-level functions documented here return an object of `mvp`, the

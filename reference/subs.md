@@ -99,20 +99,19 @@ Robin K. S. Hankin
 p <- rmvp(6,2,2,letters[1:3])
 p
 #> mvp object algebraically equal to
-#> 2 a b + a c + 3 b^2 + 5 c
+#> 2 + 7 a + 5 a^2 + 6 b + 4 b^2
 subs(p,a=1)
 #> mvp object algebraically equal to
-#> 2 b + 3 b^2 + 6 c
+#> 14 + 6 b + 4 b^2
 subs(p,a=1,b=2)
-#> mvp object algebraically equal to
-#> 16 + 6 c
+#> [1] 42
 
 subs(p,a="1+b x^3",b="1-y")
 #> mvp object algebraically equal to
-#> 5 + 6 c + c x^3 - c x^3 y + 2 x^3 - 4 x^3 y + 2 x^3 y^2 - 8 y + 3 y^2
+#> 24 + 17 x^3 - 17 x^3 y + 5 x^6 - 10 x^6 y + 5 x^6 y^2 - 14 y + 4 y^2
 subs(p,a=1,b=2,c=3,drop=FALSE)
 #> mvp object algebraically equal to
-#> 34
+#> 42
 
 do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 #> mvp object algebraically equal to
@@ -140,14 +139,14 @@ do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 #> 120 C^14 z^4 + 8 C^15 + 16 C^15 z^2 + C^16 + z^32
 
 subvec(p,a=1,b=2,c=1:5)   # supply a named list of vectors
-#> [1] 22 28 34 40 46
+#> [1] 42 42 42 42 42
 
 M <- matrix(sample(1:3,26*3,replace=TRUE),ncol=26)
 colnames(M) <- letters
 rownames(M) <- c("Huey", "Dewie", "Louie")
 subvec(kahle(r=3,p=1:3),M)  # supply a matrix
 #>  Huey Dewie Louie 
-#>  1042  1909  3122 
+#>  2048   989  2051 
 
 varchange(as.mvp("1+x+xy + x*y"),x="newx") # variable xy unchanged
 #> mvp object algebraically equal to
@@ -161,9 +160,9 @@ kahle(5,3,1:3) |> subs(a="a + delta")
 
 varchange(p,a="]")  # nonstandard variable names OK
 #> mvp object algebraically equal to
-#> 2 ] b + ] c + 3 b^2 + 5 c
+#> 2 + 7 ] + 5 ]^2 + 6 b + 4 b^2
 
 varchange_formal(p,"\\]","a")
 #> mvp object algebraically equal to
-#> 2 a b + a c + 3 b^2 + 5 c
+#> 2 + 7 a + 5 a^2 + 6 b + 4 b^2
 ```

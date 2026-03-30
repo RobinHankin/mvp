@@ -71,6 +71,9 @@
   [`mvp_power()`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
   : Low level functions
 
+- [`mmvp()`](https://robinhankin.github.io/mvp/reference/mmvp.md) :
+  Spray-style specification of mvp objects
+
 - [`mpoly_to_mvp()`](https://robinhankin.github.io/mvp/reference/mpoly.md)
   [`as.mpoly(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/mpoly.md)
   : Conversion to and from mpoly form

@@ -421,3 +421,23 @@ setMethod("drop","mvp", function(x){drop_mvp(x)})
 }
 
 setMethod(f = "all.equal", signature = "mvp", definition = all_equal_mvp)
+
+mmvp <- function(M, coeffs, vars){
+
+    if(missing(coeffs)){coeffs <- rep(1, nrow(M))}
+    if(missing(vars)){
+        if(is.null(colnames(M))){
+            vars <- letters[seq_len(ncol(M))]
+        } else {
+            vars <- colnames(M)
+        }
+    }
+
+    mvp(
+        vars   = rep(list(vars), nrow(M), simplify=FALSE),
+        powers = as.list(data.frame(t(M))),
+        coeffs = coeffs
+    )
+}
+       
+    

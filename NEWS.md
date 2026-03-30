@@ -2,7 +2,7 @@
 
 - code refactoring
 - some C++-18 constructions
-
+- mmvp()
 
 # mvp 1.1-0
 

@@ -152,11 +152,12 @@ mvp_power_scalar <- function(S,n){
     if(any(coeffs(S1) != round(coeffs(S1)))){warning("non integer coefficients")} 
 
     n <- S2
-
+    
     stopifnot(is.vector(n))
     stopifnot(length(n)==1)
     stopifnot(n==round(n))
-
+    stopifnot(numbers::isPrime(n))
+    
     e <- numbers::eulersPhi(n)
 
     mvp(vars(S1), lapply(powers(S1),function(x){x%%e}),coeffs(S1)%%n)

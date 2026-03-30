@@ -10,6 +10,7 @@ importFrom(magic, circulant)
 
 importFrom("utils" , "capture.output")
 importFrom("numbers" , "eulersPhi")
+importFrom("numbers" , "isPrime")
 importFrom("stats", "rmultinom")
 
 importFrom("digest", "digest")

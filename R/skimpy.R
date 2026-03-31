@@ -423,7 +423,7 @@ setMethod("drop","mvp", function(x){drop_mvp(x)})
 setMethod(f = "all.equal", signature = "mvp", definition = all_equal_mvp)
 
 mmvp <- function(M, coeffs, vars){
-
+    if(inherits(M, "partition")){M <- t(unclass(M))}
     if(missing(coeffs)){coeffs <- rep(1, nrow(M))}
     if(missing(vars)){
         if(is.null(colnames(M))){
@@ -439,5 +439,3 @@ mmvp <- function(M, coeffs, vars){
         coeffs = coeffs
     )
 }
-       
-    

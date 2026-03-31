@@ -21,6 +21,12 @@ adapted for the \pkg{mvp} package.
 If argument \code{vars} is missing, variables are named after the
 colnames of \code{M}.
 
+The function has special dispensation if \code{M} is a
+\CRANpkg{partitions} object.  So, \code{mmvp(parts(5))} and
+\code{mmvp(blockparts(1:5,3))} and \code{mmvp(compositions(4,3))} and
+\code{mmvp(multiset(c(1,2,2,3)))} work as expected [returning
+homogeneous polynomials].
+
 }
 \value{
 Returns a multivariate polynomial, an object of class \code{mvp}}

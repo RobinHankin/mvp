@@ -17,18 +17,18 @@
 subs(S, ..., drop = TRUE)
 subsy(S, ..., drop = TRUE)
 subvec(S, ...)
-subsmvp(S,v,X)
-varchange(S,...)
-varchange_formal(S,old,new)
-namechanger(x,old,new)
+subsmvp(S, v, X)
+varchange(S, ...)
+varchange_formal(S, old, new)
+namechanger(x, old, new)
 }
 \arguments{
-  \item{S,X}{Multivariate polynomials}
+  \item{S, X}{Multivariate polynomials}
   \item{\dots}{named arguments corresponding to variables to substitute}
   \item{drop}{Boolean with default \code{TRUE} meaning to return a
     scalar (the constant) in place of a constant \code{mvp} object}
   \item{v}{A string corresponding to the variable to substitute}
-  \item{old,new,x}{The old and new variable names respectively; \code{x}
+  \item{old, new, x}{The old and new variable names respectively; \code{x}
   is a character vector} 
 }
 \value{
@@ -46,10 +46,10 @@ sensitive to order:
 
 \preformatted{
 > p <- as.mvp("a b^2")
-> subs(p,a="b",b="x")
+> subs(p, a="b", b="x")
 mvp object algebraically equal to
 x^3
-> subs(p,b="x",a="b")  # same arguments, different order
+> subs(p, b="x", a="b")  # same arguments, different order
 mvp object algebraically equal to
 b x^2
 }
@@ -85,30 +85,30 @@ substitute variable names.
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{drop}}}
 \examples{
-p <- rmvp(6,2,2,letters[1:3])
+p <- rmvp(6, 2, 2, letters[1:3])
 p
-subs(p,a=1)
-subs(p,a=1,b=2)
+subs(p, a=1)
+subs(p, a=1, b=2)
 
-subs(p,a="1+b x^3",b="1-y")
-subs(p,a=1,b=2,c=3,drop=FALSE)
+subs(p, a="1+b x^3", b="1-y")
+subs(p, a=1, b=2, c=3, drop=FALSE)
 
-do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
+do.call(subs, c(list(as.mvp("z")), rep(c(z="C+z^2"),5)))
 
-subvec(p,a=1,b=2,c=1:5)   # supply a named list of vectors
+subvec(p, a=1, b=2, c=1:5)   # supply a named list of vectors
 
-M <- matrix(sample(1:3,26*3,replace=TRUE),ncol=26)
+M <- matrix(sample(1:3, 26*3, replace=TRUE), ncol=26)
 colnames(M) <- letters
 rownames(M) <- c("Huey", "Dewie", "Louie")
-subvec(kahle(r=3,p=1:3),M)  # supply a matrix
+subvec(kahle(r=3, p=1:3), M)  # supply a matrix
 
-varchange(as.mvp("1+x+xy + x*y"),x="newx") # variable xy unchanged
+varchange(as.mvp("1+x+xy + x*y"), x="newx") # variable xy unchanged
 
 kahle(5,3,1:3) |> subs(a="a + delta")
 
-varchange(p,a="]")  # nonstandard variable names OK
+varchange(p, a="]")  # nonstandard variable names OK
 
-varchange_formal(p,"\\\]","a")
+varchange_formal(p, "\\\]", "a")
 
 }
 \keyword{symbolmath}

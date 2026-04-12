@@ -10,9 +10,9 @@
 Convert an \code{mvp} object which is a pure constant into a scalar
 whose value is the coefficient of the empty term.
 
-A few functions in the package (currently \code{subs()},
-\code{subsy()}) take a \code{drop} argument that behaves much like the
-\code{drop} argument in base extraction.
+A few functions in the package (notably \code{subs()}) take a
+\code{drop} argument that behaves much like the \code{drop} argument in
+base extraction.
 
 Function \code{drop()} is an \proglang{S4} generic, which is why the
 package calls \code{setOldClass()}.

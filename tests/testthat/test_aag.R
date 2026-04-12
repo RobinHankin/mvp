@@ -10,20 +10,12 @@ test_that("Test suite test_aag.R",{
     expect_silent(as.mvp(list(names=list(c('x'),c('x','y')),powers=list(1,1:2),coeffs=1:2)))
     expect_error(as.mvp(function(x){x^6}))
 
-
-
     expect_true(is.constant(as.mvp("1")))
     expect_false(is.constant(as.mvp("1+x")))
 
     expect_true(subs(as.mvp("1+x+y"),x=2,y=5,drop=TRUE) == 8)
     expect_error(subs(as.mvp("1+x+y"),x=2,y=5,drop=FALSE) == 8)
     expect_true(subs(as.mvp("1+x+y"),x=2,y=5,drop=FALSE) == as.mvp(8))
-
-    expect_true (subsy(as.mvp("1+x"),x=1,drop=TRUE )==2)
-    expect_error(subsy(as.mvp("1+x"),x=1,drop=FALSE)==2)
-    expect_true (subsy(as.mvp("1+x"),x=1,drop=FALSE)==as.mvp(2))
-
-
 
     M <- matrix(sample(1:3,26*3,replace=TRUE),ncol=26)
     rownames(M) <- c("Huey", "Dewie", "Louie")

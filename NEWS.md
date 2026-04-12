@@ -3,6 +3,7 @@
 - code refactoring
 - some C++-18 constructions
 - mmvp()
+- retire subsy()
 
 # mvp 1.1-0
 

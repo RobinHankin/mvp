@@ -7,17 +7,16 @@ polynomials
 
 ``` r
 subs(S, ..., drop = TRUE)
-subsy(S, ..., drop = TRUE)
 subvec(S, ...)
-subsmvp(S,v,X)
-varchange(S,...)
-varchange_formal(S,old,new)
-namechanger(x,old,new)
+subsmvp(S, v, X)
+varchange(S, ...)
+varchange_formal(S, old, new)
+namechanger(x, old, new)
 ```
 
 ## Arguments
 
-- S,X:
+- S, X:
 
   Multivariate polynomials
 
@@ -34,16 +33,16 @@ namechanger(x,old,new)
 
   A string corresponding to the variable to substitute
 
-- old,new,x:
+- old, new, x:
 
   The old and new variable names respectively; `x` is a character vector
 
 ## Value
 
-Functions `subs()`, `subsy()` and `subsmvp()` return a multivariate
-polynomial unless `drop` is `TRUE` in which case a length one numeric
-vector is returned. Function `subvec()` returns a numeric vector (sic!
-the output inherits its order from the arguments).
+Functions `subs()` and `subsmvp()` return a multivariate polynomial
+unless `drop` is `TRUE` in which case a length one numeric vector is
+returned. Function `subvec()` returns a numeric vector (sic! the output
+inherits its order from the arguments).
 
 ## Details
 
@@ -52,18 +51,16 @@ natural R idiom. Observe that this type of substitution is sensitive to
 order:
 
     > p <- as.mvp("a b^2")
-    > subs(p,a="b",b="x")
+    > subs(p, a="b", b="x")
     mvp object algebraically equal to
     x^3
-    > subs(p,b="x",a="b")  # same arguments, different order
+    > subs(p, b="x", a="b")  # same arguments, different order
     mvp object algebraically equal to
     b x^2
 
-Functions `subsy()` and `subsmvp()` are lower-level functions, not
-really intended for the end-user. Function `subsy()` substitutes
-variables for numeric values (order matters if a variable is substituted
-more than once). Function `subsmpv()` takes a `mvp` object and
-substitutes another `mvp` object for a specific symbol.
+Function `subsmvp()` is a lower-level function, not really intended for
+the end-user. It takes a `mvp` object and substitutes another `mvp`
+object for a specific symbol.
 
 Function `subvec()` substitutes the symbols of `S` with numerical
 values. It is vectorised in its ellipsis arguments with recycling rules
@@ -96,24 +93,24 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
-p <- rmvp(6,2,2,letters[1:3])
+p <- rmvp(6, 2, 2, letters[1:3])
 p
 #> mvp object algebraically equal to
 #> 2 + 7 a + 5 a^2 + 6 b + 4 b^2
-subs(p,a=1)
+subs(p, a=1)
 #> mvp object algebraically equal to
 #> 14 + 6 b + 4 b^2
-subs(p,a=1,b=2)
+subs(p, a=1, b=2)
 #> [1] 42
 
-subs(p,a="1+b x^3",b="1-y")
+subs(p, a="1+b x^3", b="1-y")
 #> mvp object algebraically equal to
 #> 24 + 17 x^3 - 17 x^3 y + 5 x^6 - 10 x^6 y + 5 x^6 y^2 - 14 y + 4 y^2
-subs(p,a=1,b=2,c=3,drop=FALSE)
+subs(p, a=1, b=2, c=3, drop=FALSE)
 #> mvp object algebraically equal to
 #> 42
 
-do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
+do.call(subs, c(list(as.mvp("z")), rep(c(z="C+z^2"),5)))
 #> mvp object algebraically equal to
 #> C + 2 C z^16 + 4 C z^24 + 8 C z^28 + 16 C z^30 + C^2 + 4 C^2 z^8 + 8 C^2 z^12 +
 #> 16 C^2 z^14 + 6 C^2 z^16 + 24 C^2 z^20 + 48 C^2 z^22 + 28 C^2 z^24 + 112 C^2
@@ -138,17 +135,17 @@ do.call(subs,c(list(as.mvp("z")),rep(c(z="C+z^2"),5)))
 #> C^13 + 336 C^13 z^2 + 728 C^13 z^4 + 560 C^13 z^6 + 28 C^14 + 112 C^14 z^2 +
 #> 120 C^14 z^4 + 8 C^15 + 16 C^15 z^2 + C^16 + z^32
 
-subvec(p,a=1,b=2,c=1:5)   # supply a named list of vectors
+subvec(p, a=1, b=2, c=1:5)   # supply a named list of vectors
 #> [1] 42 42 42 42 42
 
-M <- matrix(sample(1:3,26*3,replace=TRUE),ncol=26)
+M <- matrix(sample(1:3, 26*3, replace=TRUE), ncol=26)
 colnames(M) <- letters
 rownames(M) <- c("Huey", "Dewie", "Louie")
-subvec(kahle(r=3,p=1:3),M)  # supply a matrix
+subvec(kahle(r=3, p=1:3), M)  # supply a matrix
 #>  Huey Dewie Louie 
 #>  2048   989  2051 
 
-varchange(as.mvp("1+x+xy + x*y"),x="newx") # variable xy unchanged
+varchange(as.mvp("1+x+xy + x*y"), x="newx") # variable xy unchanged
 #> mvp object algebraically equal to
 #> 1 + newx + newx y + xy
 
@@ -158,11 +155,11 @@ kahle(5,3,1:3) |> subs(a="a + delta")
 #> + a^3 b^2 c + b delta^2 e^3 + b^2 c delta^3 + b^3 c^2 d + c^3 d^2 e + d^3 delta
 #> e^2
 
-varchange(p,a="]")  # nonstandard variable names OK
+varchange(p, a="]")  # nonstandard variable names OK
 #> mvp object algebraically equal to
 #> 2 + 7 ] + 5 ]^2 + 6 b + 4 b^2
 
-varchange_formal(p,"\\]","a")
+varchange_formal(p, "\\]", "a")
 #> mvp object algebraically equal to
 #> 2 + 7 a + 5 a^2 + 6 b + 4 b^2
 ```

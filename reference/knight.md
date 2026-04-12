@@ -33,28 +33,28 @@ The function is a slight modification of
 ## Examples
 
 ``` r
-knight(2)      # regular chess knight on a regular chess board
+knight(2)       # regular chess knight on a regular chess board
 #> mvp object algebraically equal to
 #> a^-2 b^-1 + a^-2 b + a^-1 b^-2 + a^-1 b^2 + a b^-2 + a b^2 + a^2 b^-1 + a^2 b
-knight(2,TRUE) # regular chess knight that can stay still
+knight(2, TRUE) # regular chess knight that can stay still
 #> mvp object algebraically equal to
 #> 1 + a^-2 b^-1 + a^-2 b + a^-1 b^-2 + a^-1 b^2 + a b^-2 + a b^2 + a^2 b^-1 + a^2
 #> b
 
-# Q: how many ways are there for a 4D knight to return to its starting
+# Q: how many ways are there for a 3D knight to return to its starting
 # square after four moves?
 
 # A:
-constant(knight(4)^4)
-#> [1] 12528
+constant(knight(3)^4)
+#> [1] 2520
 
 # Q ...and how many ways in four moves or fewer?
 
 # A1:
-constant(knight(4,TRUE)^4)
-#> [1] 12817
+constant(knight(3, TRUE)^4)
+#> [1] 2665
 
 # A2:
-constant((1+knight(4))^4)
-#> [1] 12817
+constant((1+knight(3))^4)
+#> [1] 2665
 ```

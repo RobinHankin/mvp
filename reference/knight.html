@@ -70,30 +70,30 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">knight</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>      <span class="co"># regular chess knight on a regular chess board</span></span></span>
+<span class="r-in"><span><span class="fu">knight</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>       <span class="co"># regular chess knight on a regular chess board</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a^-2 b^-1 + a^-2 b + a^-1 b^-2 + a^-1 b^2 + a b^-2 + a b^2 + a^2 b^-1 + a^2 b</span>
-<span class="r-in"><span><span class="fu">knight</span><span class="op">(</span><span class="fl">2</span>,<span class="cn">TRUE</span><span class="op">)</span> <span class="co"># regular chess knight that can stay still</span></span></span>
+<span class="r-in"><span><span class="fu">knight</span><span class="op">(</span><span class="fl">2</span>, <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># regular chess knight that can stay still</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mvp object algebraically equal to</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 + a^-2 b^-1 + a^-2 b + a^-1 b^-2 + a^-1 b^2 + a b^-2 + a b^2 + a^2 b^-1 + a^2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> b</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Q: how many ways are there for a 4D knight to return to its starting</span></span></span>
+<span class="r-in"><span><span class="co"># Q: how many ways are there for a 3D knight to return to its starting</span></span></span>
 <span class="r-in"><span><span class="co"># square after four moves?</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># A:</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/constant.html">constant</a></span><span class="op">(</span><span class="fu">knight</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12528</span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/constant.html">constant</a></span><span class="op">(</span><span class="fu">knight</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2520</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Q ...and how many ways in four moves or fewer?</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># A1:</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/constant.html">constant</a></span><span class="op">(</span><span class="fu">knight</span><span class="op">(</span><span class="fl">4</span>,<span class="cn">TRUE</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12817</span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/constant.html">constant</a></span><span class="op">(</span><span class="fu">knight</span><span class="op">(</span><span class="fl">3</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2665</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># A2:</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/constant.html">constant</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu">knight</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12817</span>
+<span class="r-in"><span><span class="fu"><a href="https://robinhankin.github.io/mvp/reference/constant.html">constant</a></span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu">knight</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2665</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

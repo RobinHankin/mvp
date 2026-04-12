@@ -122,7 +122,6 @@
   : Various functions to create simple multivariate polynomials
 
 - [`subs()`](https://robinhankin.github.io/mvp/reference/subs.md)
-  [`subsy()`](https://robinhankin.github.io/mvp/reference/subs.md)
   [`subvec()`](https://robinhankin.github.io/mvp/reference/subs.md)
   [`subsmvp()`](https://robinhankin.github.io/mvp/reference/subs.md)
   [`varchange()`](https://robinhankin.github.io/mvp/reference/subs.md)

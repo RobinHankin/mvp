@@ -3,9 +3,8 @@
 Convert an `mvp` object which is a pure constant into a scalar whose
 value is the coefficient of the empty term.
 
-A few functions in the package (currently
-[`subs()`](https://robinhankin.github.io/mvp/reference/subs.md),
-[`subsy()`](https://robinhankin.github.io/mvp/reference/subs.md)) take a
+A few functions in the package (notably
+[`subs()`](https://robinhankin.github.io/mvp/reference/subs.md)) take a
 `drop` argument that behaves much like the `drop` argument in base
 extraction.
 

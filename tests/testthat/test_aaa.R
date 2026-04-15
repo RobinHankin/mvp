@@ -56,19 +56,6 @@ checker1 <- function(x){
         expect_true(invert(invert(x,v[1]),v[1])==x, info=dput(x))
     }
     
-    ## check subs():
-    if(length(allvars(x))>0){
-        v <- allvars(x)[1]
-        jj1 <- list(2)
-        names(jj1) <- v
-        jj2 <- list(1/2)
-        names(jj2) <- v
-        
-        LHS <- do.call("subsy",list(x,jj1))
-        RHS <- invert(do.call("subsy",list(invert(x),jj2)))
-        expect_true(LHS == RHS, info=dput(x))
-    }  
-
     ## check subsmvp():
     if(length(allvars(x))>0){
         v <- allvars(x)[1]

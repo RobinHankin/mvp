@@ -162,4 +162,11 @@ varchange(p, a="]")  # nonstandard variable names OK
 varchange_formal(p, "\\]", "a")
 #> mvp object algebraically equal to
 #> 2 + 7 a + 5 a^2 + 6 b + 4 b^2
+
+## OEIS A004019:
+x <- as.mvp("x")
+p <- (1+x)^2
+sapply(1:5,function(n){constant(do.call(subs, c(list(x), rep(list(x=p),n))))})
+#> [1]      1      4     25    676 458329
+
 ```

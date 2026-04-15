@@ -69,6 +69,11 @@ vector of 1s</p></dd>
 adapted for the <span class="pkg">mvp</span> package.</p>
 <p>If argument <code>vars</code> is missing, variables are named after the
 colnames of <code>M</code>.</p>
+<p>The function has special dispensation if <code>M</code> is a
+<a href="https://CRAN.R-project.org/package=partitions" class="external-link"><span class="pkg">partitions</span></a> object.  So, <code>mmvp(parts(5))</code> and
+<code>mmvp(blockparts(1:5,3))</code> and <code>mmvp(compositions(4,3))</code> and
+<code>mmvp(multiset(c(1,2,2,3)))</code> work as expected [returning
+homogeneous polynomials].</p>
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>

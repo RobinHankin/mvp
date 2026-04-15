@@ -33,6 +33,12 @@ but adapted for the mvp package.
 If argument `vars` is missing, variables are named after the colnames of
 `M`.
 
+The function has special dispensation if `M` is a
+[partitions](https://CRAN.R-project.org/package=partitions) object. So,
+`mmvp(parts(5))` and `mmvp(blockparts(1:5,3))` and
+`mmvp(compositions(4,3))` and `mmvp(multiset(c(1,2,2,3)))` work as
+expected \[returning homogeneous polynomials\].
+
 ## Value
 
 Returns a multivariate polynomial, an object of class `mvp`

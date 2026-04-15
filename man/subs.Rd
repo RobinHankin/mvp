@@ -110,5 +110,11 @@ varchange(p,a="]")  # nonstandard variable names OK
 
 varchange_formal(p,"\\\]","a")
 
+## OEIS A004019:
+x <- as.mvp("x")
+p <- (1+x)^2
+sapply(1:5,function(n){constant(do.call(subs, c(list(x), rep(list(x=p),n))))})
+
+
 }
 \keyword{symbolmath}

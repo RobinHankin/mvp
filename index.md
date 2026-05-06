@@ -26,6 +26,7 @@ You can install the released version of `mvp` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 # install.packages("mvp")  # uncomment this to install the package
 library("mvp")
 ```
@@ -35,6 +36,7 @@ library("mvp")
 Creating a multivariate polynomial is straightforward:
 
 ``` r
+
 X <- as.mvp("1 + a^2 + a*b*c^3")
 X
 #> mvp object algebraically equal to
@@ -44,6 +46,7 @@ X
 and arithmetic operations work as expected:
 
 ``` r
+
 Y <- as.mvp("12*a^2  + b - c^2 + 4*d")
 X+Y
 #> mvp object algebraically equal to
@@ -61,6 +64,7 @@ Substitution uses the
 function:
 
 ``` r
+
 X
 #> mvp object algebraically equal to
 #> 1 + a b c^3 + a^2

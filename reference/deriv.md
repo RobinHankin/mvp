@@ -53,6 +53,7 @@ y^2}\\.
 ## Examples
 
 ``` r
+
 (p <- rmvp(10,4,15,5))
 #> mvp object algebraically equal to
 #> 13 + 7 a b^3 c^4 e + 6 a^3 b^7 c e^4 + 5 a^3 c^2 d^2 e^4 + 5 a^3 d e^5 + 10 a^4

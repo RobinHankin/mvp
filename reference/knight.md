@@ -33,6 +33,7 @@ The function is a slight modification of
 ## Examples
 
 ``` r
+
 knight(2)       # regular chess knight on a regular chess board
 #> mvp object algebraically equal to
 #> a^-2 b^-1 + a^-2 b + a^-1 b^-2 + a^-1 b^2 + a b^-2 + a b^2 + a^2 b^-1 + a^2 b

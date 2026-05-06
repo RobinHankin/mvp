@@ -12,6 +12,7 @@ data(lettersymbols)
 
 Twenty-six variables a-z are defined as their `mvp` semantic equivalent:
 
+
         a <- as.mvp("a")
         ...
         z <- as.mvp("z")
@@ -30,6 +31,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 data(lettersymbols)
 (a+b)*(a-b)
 #> mvp object algebraically equal to

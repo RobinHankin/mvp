@@ -35,6 +35,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 x <- rmvp(5)
 
 x == mpoly_to_mvp(mpoly::as.mpoly(x))        # should be TRUE

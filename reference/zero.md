@@ -49,6 +49,7 @@ which would be \\6x^3y^5-7xz^8\\. The zero polynomial is just
 ## Examples
 
 ``` r
+
 constant(0)
 #> mvp object algebraically equal to
 #> 0

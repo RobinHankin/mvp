@@ -55,6 +55,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 mvp(list("x", c("x","y"), "a", c("y","x")), list(1,1:2,3,c(-1,4)), 1:4)
 #> mvp object algebraically equal to
 #> 3 a^3 + x + 2 x y^2 + 4 x^4 y^-1

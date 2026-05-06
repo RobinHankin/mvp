@@ -50,6 +50,7 @@ Function `subs()` substitutes variables for `mvp` objects, using a
 natural R idiom. Observe that this type of substitution is sensitive to
 order:
 
+
     > p <- as.mvp("a b^2")
     > subs(p, a="b", b="x")
     mvp object algebraically equal to

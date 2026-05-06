@@ -151,6 +151,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 (x <- 5+rmvp(6))
 #> mvp object algebraically equal to
 #> 5 + 2 a c^2 f + 4 b d e^3 + 5 c d^3 + 6 e f + 11 e^3

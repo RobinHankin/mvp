@@ -63,6 +63,7 @@ Function `onevarpow()` returns just the terms in which the symbols
 corresponding to the named arguments have powers equal to the arguments'
 powers. Thus:
 
+
      onevarpow(as.mvp("x*y*z + 3*x*y^2 + 7*x*y^2*z^6 + x*y^3"),x=1,y=2)
     mvp object algebraically equal to
     3  +  7 z^6

@@ -37,6 +37,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 (m1 <- as.mvp("1+bish +bash^2 + bosh^3"))
 #> mvp object algebraically equal to
 #> 1 + bash^2 + bish + bosh^3

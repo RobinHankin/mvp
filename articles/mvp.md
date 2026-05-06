@@ -22,14 +22,14 @@ A `map` is a sorted associative container that contains key-value pairs
 with unique keys. It is interesting here because search and insertion
 operations have logarithmic complexity. Multivariate polynomials are
 considered to be the sum of a finite number of *terms*, each multiplied
-by a coefficient. A *term* is something like $x^{2}y^{3}z$. We may
+by a coefficient. A *term* is something like $`x^2y^3z`$. We may
 consider this term to be the map
 
     {"x" -> 2, "y" -> 3, "z" -> 1}
 
 where the map takes symbols to their (integer) power; it is understood
 that powers are nonzero. An `mvp` object is a map from terms to their
-coefficients; thus $7xy^{2} - 3x^{2}yz^{5}$ would be
+coefficients; thus $`7xy^2 -3x^2yz^5`$ would be
 
     {{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, 'y" -> 1, "z" ->5} -> -3}
 
@@ -55,10 +55,11 @@ polynomial (which is simply an empty map).
 
 ### The package in use
 
-Consider a simple multivariate polynomial $3xy + z^{3} + xy^{6}z$ and
-its representation in the following R session:
+Consider a simple multivariate polynomial $`3xy+z^3+xy^6z`$ and its
+representation in the following R session:
 
 ``` r
+
 library("mvp",quietly=TRUE)
 library("magrittr")
 (p <- as.mvp("3 x y + z^3 + x y^6 z"))
@@ -70,9 +71,9 @@ Coercion and printing are accomplished by the `mpoly` package (there is
 no way I could improve upon Kahle’s work). Note carefully that the
 printed representation of the mvp object is created by the `mpoly`
 package and the print method can rearrange both the terms of the
-polynomial ($3xy + z^{3} + xy^{6}z = z^{3} + 3xy + xy^{6}z$, for
-example) and the symbols within a term ($3xy = 3yx$, for example) to
-display the polynomial in a human-friendly form.
+polynomial ($`3xy+z^3+xy^6z = z^3+3xy+xy^6z`$, for example) and the
+symbols within a term ($`3xy=3yx`$, for example) to display the
+polynomial in a human-friendly form.
 
 However, note carefully that such rearranging does not affect the
 mathematical properties of the polynomial itself. In the `mvp` package,
@@ -82,6 +83,7 @@ symbols within a single term. Although this might sound odd, if we
 consider a marginally more involved situation, such as
 
 ``` r
+
 (M <- as.mvp("3 stoat goat^6 -4 + 7 stoatboat^3 bloat -9 float boat goat gloat^6"))
 #> mvp object algebraically equal to
 #> -4 + 7 bloat stoatboat^3 - 9 boat float gloat^6 goat + 3 goat^6 stoat
@@ -98,6 +100,7 @@ propitious ordering. In any event, the `mpoly` package can specify a
 print order:
 
 ``` r
+
 print(M,order="lex", varorder=c("stoat","goat","boat","bloat","gloat","float","stoatboat"))
 #> mvp object algebraically equal to
 #> 3 stoat goat^6 - 9 goat boat gloat^6 float + 7 bloat stoatboat^3 - 4
@@ -111,6 +114,7 @@ just single letters.
 The arithmetic operations `*`, `+`, `-` and `^` work as expected:
 
 ``` r
+
 (S1 <- rmvp(5,2,2,4))
 #> mvp object algebraically equal to
 #> 12 + 9 b d
@@ -136,14 +140,16 @@ substitute one or more variables for a numeric value. Define a mvp
 object:
 
 ``` r
+
 (S3 <- as.mvp("x + 5 x^4 y + 8 y^2 x z^3"))
 #> mvp object algebraically equal to
 #> x + 8 x y^2 z^3 + 5 x^4 y
 ```
 
-And then we may substitute $x = 1$:
+And then we may substitute $`x=1`$:
 
 ``` r
+
 subs(S3, x = 1)
 #> mvp object algebraically equal to
 #> 1 + 5 y + 8 y^2 z^3
@@ -153,6 +159,7 @@ Note the natural R idiom, and that the return value is another mvp
 object. We may substitute for the other variables:
 
 ``` r
+
 subs(S3, x = 1, y = 2, z = 3)
 #> [1] 875
 ```
@@ -162,6 +169,7 @@ polynomial coerced to a scalar). We can suppress the coercion using the
 `drop` (formerly `lose`) argument:
 
 ``` r
+
 subs(S3, x = 1, y = 2, z = 3, drop=FALSE)
 #> mvp object algebraically equal to
 #> 875
@@ -170,6 +178,7 @@ subs(S3, x = 1, y = 2, z = 3, drop=FALSE)
 The idiom also allows one to substitute a variable for an `mvp` object:
 
 ``` r
+
 subs(as.mvp("a+b+c"), a="x^6")
 #> mvp object algebraically equal to
 #> b + c + x^6
@@ -180,6 +189,7 @@ Note carefully that
 on the order of substitution:
 
 ``` r
+
 subs(as.mvp("a+b+c"), a="x^6",x="1+a")
 #> mvp object algebraically equal to
 #> 1 + 6 a + 15 a^2 + 20 a^3 + 15 a^4 + 6 a^5 + a^6 + b + c
@@ -193,6 +203,7 @@ subs(as.mvp("a+b+c"), x="1+a",a="x^6")
 Substitution works well with pipes:
 
 ``` r
+
 as.mvp("a+b") %>% subs(a="a^2+b^2") %>% subs(b="x^6")
 #> mvp object algebraically equal to
 #> a^2 + x^6 + x^12
@@ -205,6 +216,7 @@ Function
 one to substitute variables for numeric values using vectorised idiom:
 
 ``` r
+
 p <- rmvp(6,2,2,letters[1:3])
 p
 #> mvp object algebraically equal to
@@ -220,6 +232,7 @@ Differentiation is implemented. First we have the
 method:
 
 ``` r
+
 (S <- as.mvp("a + 5 a^5*b^2*c^8 -3 x^2 a^3 b c^3"))
 #> mvp object algebraically equal to
 #> a - 3 a^3 b c^3 x^2 + 5 a^5 b^2 c^8
@@ -234,9 +247,10 @@ deriv(S, rev(letters[1:3]))  # should be the same.
 Also a slightly different form:
 [`aderiv()`](https://robinhankin.github.io/mvp/reference/deriv.md), here
 used to evaluate
-$\frac{\partial^{6}S}{\partial a^{3}\partial b\partial c^{2}}$:
+$`\frac{\partial^6S}{\partial a^3\partial b\partial c^2}`$:
 
 ``` r
+
 aderiv(S, a = 3, b = 1, c = 2)
 #> mvp object algebraically equal to
 #> 33600 a^2 b c^6 - 108 c x^2
@@ -245,6 +259,7 @@ aderiv(S, a = 3, b = 1, c = 2)
 Again, pipes work quite nicely:
 
 ``` r
+
 S %<>% aderiv(a=1,b=2) %>% subs(c="x^4") %>% `+`(as.mvp("o^99"))
 S
 #> mvp object algebraically equal to
@@ -257,6 +272,7 @@ The package includes functionality to deal with Taylor and Laurent
 series:
 
 ``` r
+
 (X <- as.mvp("1+x+x^2 y")^3)
 #> mvp object algebraically equal to
 #> 1 + 3 x + 3 x^2 + 3 x^2 y + x^3 + 6 x^3 y + 3 x^4 y + 3 x^4 y^2 + 3 x^5 y^2 +
@@ -273,6 +289,7 @@ onevarpow(X,x=3) # retain only terms with power of x == 3
 ```
 
 ``` r
+
 ## second order taylor expansion of f(x)=sin(x+y) for x=1.1, about x=1:
 sinxpy <- horner("x+y",c(0,1,0,-1/6,0,+1/120,0,-1/5040))  # sin(x+y)
 dx <- as.mvp("dx")
@@ -290,6 +307,7 @@ Function
 decompose an `mvp` object into a power series in a single variable:
 
 ``` r
+
 p <- as.mvp("a^2 x b + x^2 a b + b c x^2 + a b c + c^6 x")
 p
 #> mvp object algebraically equal to
@@ -304,6 +322,7 @@ wish to take a power series about `x-v`, where `v` is any `mvp` object.
 For example:
 
 ``` r
+
 p %>% subs(x="xmv+a+b") %>% series("xmv") 
 #> xmv^0(a b c  +  2 a b^2 c  +  a b^3  +  a c^6  +  a^2 b c  +  3 a^2 b^2  +  2 
 #> a^3 b  +  b c^6  +  b^3 c )  + xmv^1(2 a b c  +  2 a b^2  +  3 a^2 b  +  2 b^2 
@@ -314,6 +333,7 @@ is a series in powers of `x-a-b`. We may perform a consistency check by
 a second substitution, returning us to the original expression:
 
 ``` r
+
 p == p %>% subs(x="xmv+a+b") %>% subs(xmv="x-a-b")
 #> [1] TRUE
 ```
@@ -324,25 +344,28 @@ given a variable name ending in `_m_foo`, where `foo` is any variable
 name, then this is typeset as `(x-foo)`. For example:
 
 ``` r
+
 as.mvp('x^3 + x*a') %>% subs(x="x_m_a + a") %>% series("x_m_a")
 #> (x-a)^0(a^2  +  a^3 )  + (x-a)^1(a  +  3 a^2 )  + (x-a)^2(3 a )  + (x-a)^3(1)
 ```
 
-So above we see the expansion of $x^{3} + ax$ in powers of $x - a$. If
-we want to see the expansion of a mvp in terms of a more complicated
+So above we see the expansion of $`x^3+ax`$ in powers of $`x-a`$. If we
+want to see the expansion of a mvp in terms of a more complicated
 expression then it is better to use a nonce variable `v`:
 
 ``` r
+
 as.mvp('x^2 + x*a + b^3') %>% subs(x="x_m_v + a^2+b") %>% series("x_m_v")
 #> (x-v)^0(a b  +  2 a^2 b  +  a^3  +  a^4  +  b^2  +  b^3 )  + (x-v)^1(a  +  2 
 #> a^2  +  2 b )  + (x-v)^2(1)
 ```
 
-where it is understood that $v = a + b^{2}$. Function
+where it is understood that $`v=a+b^2`$. Function
 [`taylor()`](https://robinhankin.github.io/mvp/reference/series.md) is a
 convenience wrapper that does some of the above in one step:
 
 ``` r
+
 p <- as.mvp("1+x-x*y+a")^2
 taylor(p,'x','a')
 #> (x-a)^0(1  +  4 a  -  2 a y  +  4 a^2  -  4 a^2 y  +  a^2 y^2 )  + (x-a)^1(2  + 
@@ -360,6 +383,7 @@ function
 [`onevarpow()`](https://robinhankin.github.io/mvp/reference/series.md):
 
 ``` r
+
 P <- as.mvp("1 + z + y^2 + x*z^2 +  x*y")^4
 onevarpow(P,x=1,y=2)
 #> mvp object algebraically equal to
@@ -374,6 +398,7 @@ perfect and I’m still working on it. There is the
 function:
 
 ``` r
+
 (p <- as.mvp("1+x+x^2 y"))
 #> mvp object algebraically equal to
 #> 1 + x + x^2 y
@@ -387,6 +412,7 @@ negative powers. It obeys the same arithmetic rules as other mvp
 objects:
 
 ``` r
+
 p + as.mvp("z^6")
 #> mvp object algebraically equal to
 #> 1 + x + x^2 y + z^6
@@ -397,6 +423,7 @@ p + as.mvp("z^6")
 It is possible to examine the coefficients of an `mvp` object:
 
 ``` r
+
 a <- as.mvp("5 + 8*x^2*y - 13*y*x^2 + 11*z - 3*x*yz")
 a
 #> mvp object algebraically equal to
@@ -417,6 +444,7 @@ operations on the coefficients. For example, suppose we had another
 `mvp` object, `b`:
 
 ``` r
+
 b <- a*2
 b
 #> mvp object algebraically equal to
@@ -434,6 +462,7 @@ no sense. However, we can operate on coefficients of a single `mvp`
 object at will:
 
 ``` r
+
 coeffs(a) > 0
 #> A disord object with hash b0695ec1b46bb6da92f016f17e49971e1036d786 and elements
 #> [1]  TRUE FALSE FALSE  TRUE
@@ -448,6 +477,7 @@ Extraction also works but subject to standard `disordR` idiom
 restrictions:
 
 ``` r
+
 coeffs(a)[coeffs(a) > 0]
 #> A disord object with hash 54f03094a678b0e4328942e555e5a308c29f40fe and elements
 #> [1]  5 11
@@ -457,6 +487,7 @@ coeffs(a)[coeffs(a) > 0]
 But “mixing” objects is forbidden:
 
 ``` r
+
 coeffs(a)[coeffs(b) > 0]
 #> .local(x = x, i = i, j = j, drop = drop)
 #> Error in `check_matching_hash()`:
@@ -467,6 +498,7 @@ coeffs(a)[coeffs(b) > 0]
 Extraction methods work, again subject to `disordR` restrictions:
 
 ``` r
+
 coeffs(a)[coeffs(a)<0] <- coeffs(a)[coeffs(a)<0] + 1000 # add 1000 to every negative coefficient
 a
 #> mvp object algebraically equal to
@@ -478,6 +510,7 @@ In cases like this where the replacement object is complicated, using
 error:
 
 ``` r
+
 coeffs(b)[coeffs(b)%%3==1] %<>% `+`(100)  # add 100 to every element equal to 1 modulo 3
 b
 #> mvp object algebraically equal to
@@ -487,6 +520,7 @@ b
 One good use for this is to “zap” small elements:
 
 ``` r
+
 x <- as.mvp("1 - 0.11*x + 0.005*x*y")^2
 x
 #> mvp object algebraically equal to
@@ -496,6 +530,7 @@ x
 Then we can zap as follows:
 
 ``` r
+
 cx <- coeffs(x)
 cx[abs(cx) < 0.01] <- 0
 coeffs(x) <- cx
@@ -512,6 +547,7 @@ x
 We can see the generating function for a chess knight:
 
 ``` r
+
 knight(2)
 #> mvp object algebraically equal to
 #> a^-2 b^-1 + a^-2 b + a^-1 b^-2 + a^-1 b^2 + a b^-2 + a b^2 + a^2 b^-1 + a^2 b
@@ -521,18 +557,20 @@ How many ways are there for a 4D knight to return to its starting square
 after four moves? Answer:
 
 ``` r
+
 constant(knight(4)^4)
 #> [1] 12528
 ```
 
 ## References
 
-Hankin, Robin K. S. 2022a. “Disordered Vectors in R: Introducing the
-disordR Package.” arXiv. <https://doi.org/10.48550/ARXIV.2210.03856>.
+Hankin, Robin K. S. 2022a. *Disordered Vectors in R: Introducing the
+disordR Package*. arXiv. <https://doi.org/10.48550/ARXIV.2210.03856>.
 
-———. 2022b. “Fast Multivariate Polynomials in R: The `mvp` Package.”
-<https://arxiv.org/abs/2210.15991>; arXiv.
-<https://doi.org/10.48550/ARXIV.2210.15991>.
+Hankin, Robin K. S. 2022b. *Fast Multivariate Polynomials in R: The
+`mvp` Package*.
+[Https://arxiv.org/abs/2210.15991](https://arxiv.org/abs/2210.15991);
+arXiv. <https://doi.org/10.48550/ARXIV.2210.15991>.
 
 Kahle, D. 2013. “Mpoly: Multivariate Polynomials in r.” *R Journal* 5
 (1): 162.

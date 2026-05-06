@@ -31,6 +31,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 a <- rmvp(4)
 a
 #> mvp object algebraically equal to

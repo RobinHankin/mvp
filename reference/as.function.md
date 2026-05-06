@@ -26,6 +26,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 p <- as.mvp("1+a^2 + a*b^2 + c")
 p
 #> mvp object algebraically equal to
@@ -36,8 +37,8 @@ f
 #> {
 #>     subs(x, ...)
 #> }
-#> <bytecode: 0x55cea44de530>
-#> <environment: 0x55cea44de0d0>
+#> <bytecode: 0x55d6c0d79dc8>
+#> <environment: 0x55d6c0d79968>
 
 f(a=1)
 #> mvp object algebraically equal to

@@ -50,6 +50,7 @@ Robin K. S. Hankin
 ## Examples
 
 ``` r
+
 mmvp(matrix(1:35, 5, 7))
 #> mvp object algebraically equal to
 #> a b^6 c^11 d^16 e^21 f^26 g^31 + a^2 b^7 c^12 d^17 e^22 f^27 g^32 + a^3 b^8

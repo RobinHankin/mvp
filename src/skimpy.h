@@ -5,7 +5,7 @@
 #include <Rcpp.h>
 #include <cmath>
 
-#include <string.h>
+#include <string>
 #include <iostream>
 #include <unordered_map>
 #include <vector>

@@ -113,7 +113,7 @@ List mvp_substitute(
 	}                                        // j loop closes: go on to look at the next element of X
         X = Xnew;                                // update X to reflect changes
     }                                            // i loop closes: go on to consider the next element of substitution object s 
-    return(retval(X));                           // return a pre-prepared list to R
+    return retval(X);                            // return a pre-prepared list to R
 }                                                // function mvp_substitute() closes
 
 // [[Rcpp::export]]
@@ -148,7 +148,7 @@ List mvp_substitute_mvp(
             Xnew = sum(Xnew,Xtemp);          // Take cumulative sum
         }                                    // if(match found) closes
     }                                        // i loop closes: go on to consider the next element of X
-    return(retval(Xnew));                    // return a pre-prepared list to R
+    return retval(Xnew);                     // return a pre-prepared list to R
 }                                            // function mvp_substitute() closes
 
 

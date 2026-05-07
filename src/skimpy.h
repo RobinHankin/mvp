@@ -29,11 +29,10 @@ typedef map <signed int, mvp> series;  // used for Taylor series
 
 const mvp ONE = {{{}, 1.0}};
 
-mvp zero_coefficient_remover(const mvp &X){
-    mvp out;
-    std::copy_if(X.begin(), X.end(), std::inserter(out, out.end()),
-                 [](const auto& pair) { return pair.second != 0; });
-    return out;
+void remove_zeros(mvp &X) {
+    std::erase_if(X, [](const auto& pair) {
+        return pair.second == 0;
+    });
 }
 
 term zero_power_remover(const term &t){
@@ -107,7 +106,9 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
     } // i loop closes
 
     // now clear out any term with zero coefficient:
-    return zero_coefficient_remover(out);
+    remove_zeros(out);
+    return out;
+
 }
 
 mvp product(const mvp &X1, const mvp &X2){
@@ -123,7 +124,8 @@ mvp product(const mvp &X1, const mvp &X2){
             out[t1new] += c1*c2;  
         }
     }
-    return zero_coefficient_remover(out);
+    remove_zeros(out);
+    return out;
 }
 
 mvp sum(const mvp &X1, const mvp &X2){
@@ -132,7 +134,9 @@ mvp sum(const mvp &X1, const mvp &X2){
     for(const auto& [term, coef] : X2){
         out[term] += coef;
     }
-    return zero_coefficient_remover(out);
+    remove_zeros(out);
+    return out;
+
 }
 
 mvp power_int(const mvp &X, signed int n){
@@ -167,7 +171,8 @@ mvp deriv(const mvp &X, const string &v){// differentiation: dX/dv, 'v' a single
         t = zero_power_remover(t); // (...which is why we call zpr())
         out[t] = (it->second)* power ;  // coefficient multiplies by power
     }
-    return zero_coefficient_remover(out); // eliminates terms with no v
+    remove_zeros(out); // eliminates terms with no v
+    return out;
 }
 
 mvp taylor_onevar(const mvp &X, const string &v, const signed int &n){

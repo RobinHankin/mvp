@@ -35,13 +35,16 @@ void remove_zeros(mvp &X) {
     });
 }
 
-term zero_power_remover(const term &t){
-    term out;
-    std::copy_if(t.begin(), t.end(), std::inserter(out, out.end()),
-                 [](const auto& pair) { return pair.second != 0; });
-    return out;
+void zero_power_remover(term &t) {
+    for (auto it = t.begin(); it != t.end(); ) {
+        if (it->second == 0) {
+            it = t.erase(it); // the meat
+        } else {
+            ++it;
+        }
+    }
 }
-    
+
 List retval(const mvp &X){   // takes a mvp object and returns a mpoly-type list suitable for return to R
     unsigned int i,j;
     mvp::const_iterator it;
@@ -97,7 +100,7 @@ mvp prepare(const List allnames, const List allpowers, const NumericVector coeff
         }
        
         // now clear out any variable with a zero power:
-        oneterm = zero_power_remover(oneterm);
+        zero_power_remover(oneterm);
 
         // now map the term to its coefficient: 
         if(coefficients[i] != 0){ // only consider terms with a nonzero coefficient
@@ -120,7 +123,7 @@ mvp product(const mvp &X1, const mvp &X2){
             for(const auto& [symbol, power] : t2){
                 t1new[symbol] += power;  // add the powers of the variables in the two terms
             }
-            t1new = zero_power_remover(t1new);
+            zero_power_remover(t1new);
             out[t1new] += c1*c2;  
         }
     }
@@ -168,7 +171,7 @@ mvp deriv(const mvp &X, const string &v){// differentiation: dX/dv, 'v' a single
         if(t.find(v) == t.end()) continue;
         const signed int power = t[v];       
         t[v]--; // power reduces by one (maybe to zero...)
-        t = zero_power_remover(t); // (...which is why we call zpr())
+        zero_power_remover(t); // (...which is why we call zpr())
         out[t] = (it->second)* power ;  // coefficient multiplies by power
     }
     remove_zeros(out); // eliminates terms with no v

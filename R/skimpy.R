@@ -118,10 +118,10 @@ setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
   mvp(vars(x),powers(x),jj)
 }
 
-`constant` <- function(x){UseMethod("constant")}
+`constant` <- function(x, ...){UseMethod("constant")}
 `constant<-` <- function(x, value){UseMethod("constant<-")}
 
-`constant.mvp` <- function(x){
+`constant.mvp` <- function(x, ...){
   wanted <- sapply(x$names,function(x){length(x)==0})
   if(any(wanted)){
     out <- x$coeffs[wanted]
@@ -131,7 +131,7 @@ setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
   return(out)
 }
 
-`constant.numeric` <- function(x){numeric_to_mvp(x)}
+`constant.numeric` <- function(x, ...){numeric_to_mvp(x)}
 
 `constant<-.mvp` <- function(x,value){
   wanted <- sapply(x$names,function(x){length(x)==0})

@@ -9,14 +9,15 @@
 \title{The constant term}
 \description{Get and set the constant term of an \code{mvp} object}
 \usage{
-\method{constant}{mvp}(x)
+\method{constant}{mvp}(x, ...)
 \method{constant}{mvp}(x) <- value
-\method{constant}{numeric}(x)
+\method{constant}{numeric}(x, ...)
 is.constant(x)
 }
 \arguments{
   \item{x}{Object of class \code{mvp}}
   \item{value}{Scalar value for the constant}
+  \item{...}{Further arguments, currently ignored}
 }
 \details{
 

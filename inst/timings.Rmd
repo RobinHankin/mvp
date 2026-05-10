@@ -27,7 +27,7 @@ the `mvp` and `spray` packages.  I will show some timings using a
 particularly favourable example that exploits the symbolic nature of
 the `mvp` package.
 
-```{r}
+```{r usecoercion}
 source("coercion.R")   # low-level functions, e.g. as.mvp()
 tp <- function(n,r){kahle(n,r=r,p=seq_len(r),symbols=paste0("x",sprintf("%03d",seq_len(n))))}
 k <- tp(9,3)  # test polynomial
@@ -42,7 +42,7 @@ expected to make [the __spray__
 package](https://github.com/RobinHankin/spray) slower, at least for
 large $n$, but this does not seem to be the case.
 
-```{r}
+```{r loadmicro}
 library("microbenchmark")
 mbm <- function(n,r,p,...){
   k <- tp(n,r)
@@ -54,7 +54,7 @@ mbm <- function(n,r,p,...){
 Thus `mbm()` is a unified benchmark execution function:
 
 
-```{r,cache=TRUE}
+```{r, dothetimings, cache=TRUE}
 mbm(10,3,2)
 mbm(10,3,3)
 mbm(10,3,4)
@@ -67,7 +67,7 @@ In each case above, `spray` is considerably faster.  But if we
 consider the simpler case of calculating $(x_1+x_2+\ldots +x_n)^2$ for
 different values of $n$ we see `mvp` becoming slightly faster:
 
-```{r,cache=TRUE}
+```{r,domoretimings,cache=TRUE}
 mbm(10,1,2,times=10)
 mbm(20,1,2,times=10)
 mbm(50,1,2,times=10)

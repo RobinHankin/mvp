@@ -22,7 +22,7 @@ namechanger(x, old, new)
 }
 \arguments{
   \item{S, X}{Multivariate polynomials}
-  \item{\dots}{named arguments corresponding to variables to substitute}
+  \item{\dots}{Named arguments corresponding to variables to substitute}
   \item{drop}{Boolean with default \code{TRUE} meaning to return a
     scalar (the constant) in place of a constant \code{mvp} object}
   \item{v}{A string corresponding to the variable to substitute}

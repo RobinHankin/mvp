@@ -60,6 +60,6 @@ kahle(r=2,p=1:2)  # Kahle's original example
 k <- kahle(200,r=3,p=1:3,symbols=paste("x",sprintf("%02d",1:200),sep=""))
 system.time(ignore <- k^2)
 #>    user  system elapsed 
-#>   1.195   0.001   1.197 
+#>   0.877   0.001   0.880 
 #system.time(ignore <- mvp_to_spray(k)^2)   # needs spray package loaded
 ```

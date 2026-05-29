@@ -6,11 +6,11 @@ Get and set the constant term of an `mvp` object
 
 ``` r
 # S3 method for class 'mvp'
-constant(x)
+constant(x, ...)
 # S3 method for class 'mvp'
 constant(x) <- value
 # S3 method for class 'numeric'
-constant(x)
+constant(x, ...)
 is.constant(x)
 ```
 
@@ -23,6 +23,10 @@ is.constant(x)
 - value:
 
   Scalar value for the constant
+
+- ...:
+
+  Further arguments, currently ignored
 
 ## Details
 

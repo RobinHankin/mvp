@@ -22,7 +22,7 @@ namechanger(x, old, new)
 
 - ...:
 
-  named arguments corresponding to variables to substitute
+  Named arguments corresponding to variables to substitute
 
 - drop:
 

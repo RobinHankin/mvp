@@ -30,10 +30,24 @@ typedef map <signed int, mvp> series;  // used for Taylor series
 const mvp ONE = {{{}, 1.0}};
 
 void remove_zeros(mvp &X) {
-    std::erase_if(X, [](const auto& pair) {
-        return pair.second == 0;
-    });
+    for(auto it = X.begin() ; it != X.end() ; ){
+        if(it->second == 0){
+            it = X.erase(it);
+        } else {
+            ++it;
+        }
+    }
 }
+
+/* Above, remove_zeros() works but better idiom would be
+
+   std::erase_if(X, [](const auto& pair) { return pair.second == 0;  });
+   
+   However, erase_if() needs C++-20 which is not supported by the
+   github workflow container.  I will change this when C++-20 is
+   supported.
+*/
+
 
 void zero_power_remover(term &t) {
     for (auto it = t.begin(); it != t.end(); ) {
@@ -180,12 +194,13 @@ mvp deriv(const mvp &X, const string &v){// differentiation: dX/dv, 'v' a single
 
 mvp taylor_onevar(const mvp &X, const string &v, const signed int &n){
     if(n < 0){throw std::range_error("power cannot be <0");} 
-    mvp out = X;
-    for(const auto& [xt, _] : X){
-        if(xt.find(v) != xt.end()){ 
-            if(xt.at(v) > n){
-                out.erase(xt) ;
-            }
+    mvp out;
+    Rcpp::Rcerr << "Error message\n";
+
+    for(const auto& [t, coeff] : X){
+        auto it = t.find(v);
+        if(it == t.end() || it->second <= n){
+            out.insert(out.end(), {t, coeff});
         }
     }
     return out;

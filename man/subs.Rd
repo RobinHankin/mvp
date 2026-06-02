@@ -56,14 +56,14 @@ Function \code{subsmvp()} is a lower-level function, not really intended
 for the end-user.  It takes a \code{mvp} object and substitutes another
 \code{mvp} object for a specific symbol.
 
-Function \code{subvec()} substitutes the symbols of \code{S} with
-numerical values.  It is vectorised in its ellipsis arguments with
-recycling rules and names behaviour inherited from \code{cbind()}.
-However, if the first element of \code{...} is a matrix, then this is
-interpreted by rows, with symbol names given by the matrix column names;
-further arguments are ignored.  Unlike \code{subs()}, this function is
-generally only useful if all symbols are given a value; unassigned
-symbols take a value of zero.
+Function \code{subvec()} substitutes \strong{all} the symbols of
+\code{S} with numerical values.  It is vectorised in its ellipsis
+arguments with recycling rules and names behaviour inherited from
+\code{cbind()}.  However, if the first element of \code{...} is a
+matrix, then this is interpreted by rows, with symbol names given by the
+matrix column names; further arguments are ignored.  Unlike
+\code{subs()}, this function is generally only useful if all symbols are
+given a value; unassigned symbols take a value of zero.
 
 Function \code{varchange()} makes a \emph{formal} variable substitution.
 It is useful because it can take non-standard variable names such as

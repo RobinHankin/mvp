@@ -45,7 +45,7 @@ power. Similar functionality is implemented in the
 [freealg](https://CRAN.R-project.org/package=freealg) package.
 
 Function `mvp_modulo()` reduces an `mvp` object using modular
-arithmetic. Here, “mvp_modulo(S, p)” returns `S` modulo `p` (despite the
+arithmetic. Here, `mvp_modulo(S, p)` returns `S` modulo `p` (despite the
 argument names) where `p` is prime. Package idiom includes `P %% n`.
 
 ## Value

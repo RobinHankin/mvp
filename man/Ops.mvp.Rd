@@ -51,7 +51,7 @@ mvp_modulo(S1,S2)
   \CRANpkg{freealg} package.
 
   Function \code{mvp_modulo()} reduces an \code{mvp} object using
-  modular arithmetic.  Here, \dQuote{mvp_modulo(S, p)} returns \code{S}
+  modular arithmetic.  Here, \code{mvp_modulo(S, p)} returns \code{S}
   modulo \code{p} (despite the argument names) where \code{p} is prime.
   Package idiom includes \code{P \%\% n}.
 

@@ -100,14 +100,14 @@ b x^2
 <p>Function <code>subsmvp()</code> is a lower-level function, not really intended
 for the end-user.  It takes a <code>mvp</code> object and substitutes another
 <code>mvp</code> object for a specific symbol.</p>
-<p>Function <code>subvec()</code> substitutes the symbols of <code>S</code> with
-numerical values.  It is vectorised in its ellipsis arguments with
-recycling rules and names behaviour inherited from <code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code>.
-However, if the first element of <code>...</code> is a matrix, then this is
-interpreted by rows, with symbol names given by the matrix column names;
-further arguments are ignored.  Unlike <code>subs()</code>, this function is
-generally only useful if all symbols are given a value; unassigned
-symbols take a value of zero.</p>
+<p>Function <code>subvec()</code> substitutes <strong>all</strong> the symbols of
+<code>S</code> with numerical values.  It is vectorised in its ellipsis
+arguments with recycling rules and names behaviour inherited from
+<code><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind()</a></code>.  However, if the first element of <code>...</code> is a
+matrix, then this is interpreted by rows, with symbol names given by the
+matrix column names; further arguments are ignored.  Unlike
+<code>subs()</code>, this function is generally only useful if all symbols are
+given a value; unassigned symbols take a value of zero.</p>
 <p>Function <code>varchange()</code> makes a <em>formal</em> variable substitution.
 It is useful because it can take non-standard variable names such as
 “<code>(a-b)</code>” or “<code>?</code>”, and is used in

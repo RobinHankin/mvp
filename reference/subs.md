@@ -63,9 +63,9 @@ Function `subsmvp()` is a lower-level function, not really intended for
 the end-user. It takes a `mvp` object and substitutes another `mvp`
 object for a specific symbol.
 
-Function `subvec()` substitutes the symbols of `S` with numerical
-values. It is vectorised in its ellipsis arguments with recycling rules
-and names behaviour inherited from
+Function `subvec()` substitutes **all** the symbols of `S` with
+numerical values. It is vectorised in its ellipsis arguments with
+recycling rules and names behaviour inherited from
 [`cbind()`](https://rdrr.io/r/base/cbind.html). However, if the first
 element of `...` is a matrix, then this is interpreted by rows, with
 symbol names given by the matrix column names; further arguments are

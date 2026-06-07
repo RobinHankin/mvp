@@ -428,3 +428,11 @@ mmvp <- function(M, coeffs, vars){
         coeffs = coeffs
     )
 }
+
+`laurent_factor` <- function(P){
+    p <- c(elements(powers(P)), recursive=TRUE)
+    if(all(p >= 0)){return(as.mvp(1))}
+    jj <- lapply(by(p, c(elements(vars  (P)), recursive=TRUE), c), min)
+    jj <- jj[jj<0]
+    mvp(list(names(jj)), list(-c(unname(jj), recursive=TRUE)), coeffs=1)
+}

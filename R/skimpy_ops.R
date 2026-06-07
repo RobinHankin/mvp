@@ -68,10 +68,14 @@
             stop("Generic '==' only compares two mvp objects with one another")
         }
     } else if (.Generic == "/") {
-        if(lclass && !rclass){
-            return(mvp_times_scalar(e1,1/e2))
+        if(lclass && rclass){
+            return(mvp_times_mvp(e1, mvp_reciprocal(e2)))
+        } else if(lclass && !rclass){
+            return(mvp_times_scalar(e1, 1/e2))
+        } else if(!lclass && rclass){
+            return(mvp_times_scalar(mvp_reciprocal(e2), 1/e1))
         } else {
-            stop("don't use '/', use ooom() instead")
+            oddfunc()
         }
     } else if (.Generic == "%%") {
         return(mvp_modulo(e1,e2))
@@ -119,6 +123,15 @@
 
 `mvp_plus_numeric` <- function(S,x){
     mvp_plus_mvp(S,numeric_to_mvp(x))
+}
+
+`mvp_reciprocal` <- function(S){
+    if(nterms(S) == 0){
+        stop("Division by zero")
+    } else if(nterms(S) > 1){
+        stop("Reciprocal is only possible by mvp objects with 1 term; consider ooom()")
+    }
+    return(mvp(vars(S), lapply(powers(S),`-`), 1/coeffs(S)))
 }
 
 mvp_power_scalar <- function(S,n){

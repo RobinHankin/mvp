@@ -2,6 +2,7 @@
 \alias{Ops.mvp}
 \alias{Ops}
 \alias{mvp_negative}
+\alias{mvp_reciprocal}
 \alias{mvp_times_mvp}
 \alias{mvp_times_scalar}
 \alias{mvp_plus_mvp}
@@ -19,6 +20,7 @@
 \usage{
 \method{Ops}{mvp}(e1, e2)
 mvp_negative(S)
+mvp_reciprocal(S)
 mvp_times_mvp(S1,S2)
 mvp_times_scalar(S,x)
 mvp_plus_mvp(S1,S2)
@@ -50,6 +52,10 @@ mvp_modulo(S1,S2)
   single fifth power.  Similar functionality is implemented in the
   \CRANpkg{freealg} package.
 
+  Function \code{mvp_reciprocal()} returns the reciprocal of a one-term
+  \code{mvp} object.  If its argument is not a one-term \code{mvp}
+  object, an error is returned.
+
   Function \code{mvp_modulo()} reduces an \code{mvp} object using
   modular arithmetic.  Here, \code{mvp_modulo(S, p)} returns \code{S}
   modulo \code{p} (despite the argument names) where \code{p} is prime.
@@ -66,7 +72,7 @@ mvp_modulo(S1,S2)
 \author{Robin K. S. Hankin}
 \note{Function \code{mvp_modulo()} is distinctly sub-optimal and
 \code{inst/mvp_modulo.Rmd} details ideas for better implementation.}
-\seealso{\code{\link{lowlevel}}}
+\seealso{\code{\link{lowlevel}}, \code{\link{laurent_factor}}}
 \examples{
 (p1 <- rmvp(3))
 (p2 <- rmvp(3))

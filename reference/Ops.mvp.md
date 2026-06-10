@@ -9,6 +9,7 @@ as addition, multiplication, integer powers, etc.
 # S3 method for class 'mvp'
 Ops(e1, e2)
 mvp_negative(S)
+mvp_reciprocal(S)
 mvp_times_mvp(S1,S2)
 mvp_times_scalar(S,x)
 mvp_plus_mvp(S1,S2)
@@ -44,6 +45,10 @@ Internally, `n` is tabulated in the interests of efficiency, so
 power. Similar functionality is implemented in the
 [freealg](https://CRAN.R-project.org/package=freealg) package.
 
+Function `mvp_reciprocal()` returns the reciprocal of a one-term `mvp`
+object. If its argument is not a one-term `mvp` object, an error is
+returned.
+
 Function `mvp_modulo()` reduces an `mvp` object using modular
 arithmetic. Here, `mvp_modulo(S, p)` returns `S` modulo `p` (despite the
 argument names) where `p` is prime. Package idiom includes `P %% n`.
@@ -65,7 +70,8 @@ Function `mvp_modulo()` is distinctly sub-optimal and
 
 ## See also
 
-[`lowlevel`](https://robinhankin.github.io/mvp/reference/lowlevel.md)
+[`lowlevel`](https://robinhankin.github.io/mvp/reference/lowlevel.md),
+[`laurent_factor`](https://robinhankin.github.io/mvp/reference/laurent_factor.md)
 
 ## Examples
 

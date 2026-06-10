@@ -83,6 +83,9 @@ be quoted; also you might need to escape some characters, see the
 examples. Function `namechanger()` is a low-level helper function that
 uses regular expression idiom to substitute variable names.
 
+There is limited support for substitution for variables raised to
+negative powers.
+
 ## Author
 
 Robin K. S. Hankin
@@ -97,19 +100,19 @@ Robin K. S. Hankin
 p <- rmvp(6, 2, 2, letters[1:3])
 p
 #> mvp object algebraically equal to
-#> 2 + 7 a + 5 a^2 + 6 b + 4 b^2
+#> 20 + a + 4 b
 subs(p, a=1)
 #> mvp object algebraically equal to
-#> 14 + 6 b + 4 b^2
+#> 21 + 4 b
 subs(p, a=1, b=2)
-#> [1] 42
+#> [1] 29
 
 subs(p, a="1+b x^3", b="1-y")
 #> mvp object algebraically equal to
-#> 24 + 17 x^3 - 17 x^3 y + 5 x^6 - 10 x^6 y + 5 x^6 y^2 - 14 y + 4 y^2
+#> 25 + x^3 - x^3 y - 4 y
 subs(p, a=1, b=2, c=3, drop=FALSE)
 #> mvp object algebraically equal to
-#> 42
+#> 29
 
 do.call(subs, c(list(as.mvp("z")), rep(c(z="C+z^2"),5)))
 #> mvp object algebraically equal to
@@ -137,14 +140,14 @@ do.call(subs, c(list(as.mvp("z")), rep(c(z="C+z^2"),5)))
 #> 120 C^14 z^4 + 8 C^15 + 16 C^15 z^2 + C^16 + z^32
 
 subvec(p, a=1, b=2, c=1:5)   # supply a named list of vectors
-#> [1] 42 42 42 42 42
+#> [1] 29 29 29 29 29
 
 M <- matrix(sample(1:3, 26*3, replace=TRUE), ncol=26)
 colnames(M) <- letters
 rownames(M) <- c("Huey", "Dewie", "Louie")
 subvec(kahle(r=3, p=1:3), M)  # supply a matrix
 #>  Huey Dewie Louie 
-#>  2048   989  2051 
+#>  6102  5594  2333 
 
 varchange(as.mvp("1+x+xy + x*y"), x="newx") # variable xy unchanged
 #> mvp object algebraically equal to
@@ -158,11 +161,11 @@ kahle(5,3,1:3) |> subs(a="a + delta")
 
 varchange(p, a="]")  # nonstandard variable names OK
 #> mvp object algebraically equal to
-#> 2 + 7 ] + 5 ]^2 + 6 b + 4 b^2
+#> 20 + ] + 4 b
 
 varchange_formal(p, "\\]", "a")
 #> mvp object algebraically equal to
-#> 2 + 7 a + 5 a^2 + 6 b + 4 b^2
+#> 20 + a + 4 b
 
 ## OEIS A004019:
 x <- as.mvp("x")
@@ -170,4 +173,17 @@ p <- (1+x)^2
 sapply(1:5,function(n){constant(do.call(subs, c(list(x), rep(list(x=p),n))))})
 #> [1]      1      4     25    676 458329
 
+
+
+## substitution for negative powers is implemented where defined:
+
+x <- as.mvp("x")
+y <- as.mvp("y")
+P <- 5 + x + y + 1/x + x/y^4 + y/x^4*7
+subs(P, x=1.1)
+#> mvp object algebraically equal to
+#> 7.009091 + 1.1 y^-4 + 5.781094 y
+subs(P, x="x*z", y="a*b")
+#> mvp object algebraically equal to
+#> 5 + a^-4 b^-4 x z + a b + 7 a b x^-4 z^-4 + x^-1 z^-1 + x z
 ```

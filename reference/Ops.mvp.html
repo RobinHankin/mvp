@@ -49,6 +49,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'mvp'</span></span>
 <span><span class="fu">Ops</span><span class="op">(</span><span class="va">e1</span>, <span class="va">e2</span><span class="op">)</span></span>
 <span><span class="fu">mvp_negative</span><span class="op">(</span><span class="va">S</span><span class="op">)</span></span>
+<span><span class="fu">mvp_reciprocal</span><span class="op">(</span><span class="va">S</span><span class="op">)</span></span>
 <span><span class="fu">mvp_times_mvp</span><span class="op">(</span><span class="va">S1</span>,<span class="va">S2</span><span class="op">)</span></span>
 <span><span class="fu">mvp_times_scalar</span><span class="op">(</span><span class="va">S</span>,<span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu">mvp_plus_mvp</span><span class="op">(</span><span class="va">S1</span>,<span class="va">S2</span><span class="op">)</span></span>
@@ -86,6 +87,9 @@
   <code>a^c(0,2,5,5,5) = 1 + a^2 + 3a^5</code> is evaluated with only a
   single fifth power.  Similar functionality is implemented in the
   <a href="https://CRAN.R-project.org/package=freealg" class="external-link"><span class="pkg">freealg</span></a> package.</p>
+<p>Function <code>mvp_reciprocal()</code> returns the reciprocal of a one-term
+  <code>mvp</code> object.  If its argument is not a one-term <code>mvp</code>
+  object, an error is returned.</p>
 <p>Function <code>mvp_modulo()</code> reduces an <code>mvp</code> object using
   modular arithmetic.  Here, <code>mvp_modulo(S, p)</code> returns <code>S</code>
   modulo <code>p</code> (despite the argument names) where <code>p</code> is prime.
@@ -110,7 +114,7 @@
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="lowlevel.html">lowlevel</a></code></p></div>
+    <div class="dont-index"><p><code><a href="lowlevel.html">lowlevel</a></code>, <code><a href="laurent_factor.html">laurent_factor</a></code></p></div>
     </div>
 
     <div class="section level2">

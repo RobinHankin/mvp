@@ -59,5 +59,5 @@ mmvp(matrix(1:35, 5, 7))
 
 mmvp(matrix(rpois(21,1), ncol=3), 1:7)
 #> mvp object algebraically equal to
-#> a^2 + 4 a^2 b + 7 a^2 b c^2 + 2 b c + 5 b^2 + 3 b^3 + 6 c^3
+#> 2 a b + 6 a c^2 + 5 a^2 b^2 + 4 a^2 b^2 c + 7 b^3 + 4 c
 ```

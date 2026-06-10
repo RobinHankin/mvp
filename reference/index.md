@@ -4,6 +4,7 @@
 
 - [`Ops(`*`<mvp>`*`)`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
   [`mvp_negative()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
+  [`mvp_reciprocal()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
   [`mvp_times_mvp()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
   [`mvp_times_scalar()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
   [`mvp_plus_mvp()`](https://robinhankin.github.io/mvp/reference/Ops.mvp.md)
@@ -57,6 +58,9 @@
 
 - [`knight()`](https://robinhankin.github.io/mvp/reference/knight.md) :
   Chess knight
+
+- [`laurent_factor()`](https://robinhankin.github.io/mvp/reference/laurent_factor.md)
+  : Laurent factor
 
 - [`lettersymbols`](https://robinhankin.github.io/mvp/reference/letters.md)
   : Single-letter symbols

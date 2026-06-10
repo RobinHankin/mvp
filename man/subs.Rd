@@ -76,6 +76,9 @@ escape some characters, see the examples.  Function \code{namechanger()}
 is a low-level helper function that uses regular expression idiom to
 substitute variable names.
 
+There is limited support for substitution for variables raised to negative
+powers.
+
 }
 \author{Robin K. S. Hankin}
 \seealso{\code{\link{drop}}}
@@ -110,6 +113,15 @@ x <- as.mvp("x")
 p <- (1+x)^2
 sapply(1:5,function(n){constant(do.call(subs, c(list(x), rep(list(x=p),n))))})
 
+
+
+## substitution for negative powers is implemented where defined:
+
+x <- as.mvp("x")
+y <- as.mvp("y")
+P <- 5 + x + y + 1/x + x/y^4 + y/x^4*7
+subs(P, x=1.1)
+subs(P, x="x*z", y="a*b")
 
 }
 \keyword{symbolmath}

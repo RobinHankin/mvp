@@ -150,6 +150,9 @@ setGeneric("as.mvp",function(x){standardGeneric("as.mvp")})
 `is.constant` <- function(x){length(allvars(x)) == 0}
 
 `subs` <- function(S, ..., drop=TRUE){
+  if(any(c(elements(powers(S)), recursive=TRUE) < 0)){
+    return(subs(S*laurent_factor(S), ...) / subs(laurent_factor(S), ...))
+  }
   sb <- list(...)
   v <- names(sb)
 

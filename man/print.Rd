@@ -16,8 +16,12 @@ Print methods for \code{mvp} objects: to print, an \code{mvp} object is coerced 
   \item{x}{Object of class \code{mvp}, coerced to \code{mpoly} form}
   \item{...}{Further arguments}
 }
+\details{
+  See \code{mvp.Rd} for notes on interactive inspection in Rstudio.
+}  
 \value{Returns its argument invisibly}
 \author{Robin K. S. Hankin}
+\seealso{\code{\link{mvp}}}
 \examples{
 
 a <- rmvp(4)

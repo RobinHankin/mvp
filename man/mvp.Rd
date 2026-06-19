@@ -36,8 +36,27 @@ objects.  However, it is not very user-friendly; it is better to use
 \code{as.mvp()} in day-to-day use.
 
 Function \code{is_ok_mvp()} checks for consistency of its arguments.
+}
+\note{
+
+Interactive development environments such as RStudio may invoke
+subsetting operations internally for object inspection, particularly the
+Environment pane.  These calls may trigger warnings on the console,
+typically:
+
+\verb{
+  Warning message:
+In jj[] <- value :
+  number of items to replace is not a multiple of replacement length
+}
+
+Such warnings are expected in interactive inspection contexts and do not
+indicate an error in user code or package functionality.  Just ignore
+them.
+
 
 }
+
 \author{Robin K. S. Hankin}
 \examples{
 

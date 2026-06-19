@@ -82,6 +82,25 @@ objects.  However, it is not very user-friendly; it is better to use
 <p>Function <code>is_ok_mvp()</code> checks for consistency of its arguments.</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+
+
+<p>Interactive development environments such as RStudio may invoke
+subsetting operations internally for object inspection, particularly the
+Environment pane.  These calls may trigger warnings on the console,
+typically:</p>
+<p><code>
+  Warning message:
+In jj[] &lt;- value :
+  number of items to replace is not a multiple of replacement length
+</code></p>
+<p>Such warnings are expected in interactive inspection contexts and do not
+indicate an error in user code or package functionality.  Just ignore
+them.</p>
+
+
+    </div>
+    <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Robin K. S. Hankin</p>
     </div>

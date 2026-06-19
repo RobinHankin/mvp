@@ -48,6 +48,19 @@ day-to-day use.
 
 Function `is_ok_mvp()` checks for consistency of its arguments.
 
+## Note
+
+Interactive development environments such as RStudio may invoke
+subsetting operations internally for object inspection, particularly the
+Environment pane. These calls may trigger warnings on the console,
+typically:
+
+` Warning message: In jj[] <- value : number of items to replace is not a multiple of replacement length `
+
+Such warnings are expected in interactive inspection contexts and do not
+indicate an error in user code or package functionality. Just ignore
+them.
+
 ## Author
 
 Robin K. S. Hankin

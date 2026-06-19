@@ -20,6 +20,10 @@ print(x, ...)
 
   Further arguments
 
+## Details
+
+See `mvp.Rd` for notes on interactive inspection in Rstudio.
+
 ## Value
 
 Returns its argument invisibly
@@ -27,6 +31,10 @@ Returns its argument invisibly
 ## Author
 
 Robin K. S. Hankin
+
+## See also
+
+[`mvp`](https://robinhankin.github.io/mvp/reference/mvp.md)
 
 ## Examples
 

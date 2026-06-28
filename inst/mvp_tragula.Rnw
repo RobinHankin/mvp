@@ -90,7 +90,7 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 
 The \pkg{mvp} package provides some functionality for fast
 manipulation of multivariate polynomials in the \proglang{R} programming
-language~\citep{rcore2022_tragula}.  It uses the Standard Template
+language~\citep{rcore2026_tragula}.  It uses the Standard Template
 library of \proglang{C++}~\citep{musser2009_tragula}, commonly known
 as the \proglang{STL}, and is comparable in speed to the \pkg{spray}
 package~\citep{hankin2022_spray_tragula} for sparse arrays, while

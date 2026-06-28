@@ -83,7 +83,7 @@ options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
 
 The {\tt mvp} package provides some functionality for fast
 manipulation of multivariate polynomials in the R programming
-language~\citep{rcore2022}.  It uses the Standard Template library of
+language~\citep{rcore2026}.  It uses the Standard Template library of
 {\tt C++}~\cite{musser2009}, commonly known as the {\tt STL}, and is
 comparable in speed to the {\tt spray} package~\cite{hankin2022_spray}
 for sparse arrays, while retaining the symbolic capabilities of the

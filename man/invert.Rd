@@ -17,7 +17,10 @@ invert(p, v)
 \examples{
 invert("x")
 
-(P <- as.mvp("1+a+6*a^2 -7*a*b"))
-invert(P, "a")
+(P <- as.mvp("1 + a + 6*a^2 - 7*a*b + 8*b*c"))
+invert(P, "b")
+
+P |> invert("a") == P |> subs(d = 1/as.mvp("a"))
+
 
 }

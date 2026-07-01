@@ -2,6 +2,8 @@
 
 ## mvp 1.1-1
 
+CRAN release: 2026-06-29
+
 - code refactoring
 - some C++-18 constructions
 - mmvp()

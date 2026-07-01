@@ -11,12 +11,12 @@ Source:
 [`inst/CITATION`](https://github.com/RobinHankin/mvp/blob/master/inst/CITATION)
 
 Hankin RK (????). *mvp: Fast Symbolic Multivariate Polynomials*. R
-package version 1.1-1, <https://github.com/RobinHankin/mvp>.
+package version 1.1-1-0, <https://github.com/RobinHankin/mvp>.
 
     @Manual{,
       title = {mvp: Fast Symbolic Multivariate Polynomials},
       author = {Robin K. S. Hankin},
-      note = {R package version 1.1-1},
+      note = {R package version 1.1-1-0},
       url = {https://github.com/RobinHankin/mvp},
     }
 

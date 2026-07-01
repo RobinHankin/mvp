@@ -35,10 +35,14 @@ invert("x")
 #> mvp object algebraically equal to
 #> x^-1
 
-(P <- as.mvp("1+a+6*a^2 -7*a*b"))
+(P <- as.mvp("1 + a + 6*a^2 - 7*a*b + 8*b*c"))
 #> mvp object algebraically equal to
-#> 1 + a - 7 a b + 6 a^2
-invert(P, "a")
+#> 1 + a - 7 a b + 6 a^2 + 8 b c
+invert(P, "b")
 #> mvp object algebraically equal to
-#> 1 + 6 a^-2 + a^-1 - 7 a^-1 b
+#> 1 + a - 7 a b^-1 + 6 a^2 + 8 b^-1 c
+
+P |> invert("a") == P |> subs(d = 1/as.mvp("a"))
+#> [1] FALSE
+
 ```

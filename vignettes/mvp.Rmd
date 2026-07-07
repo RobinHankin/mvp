@@ -107,7 +107,7 @@ we consider a marginally more involved situation, such as
 dput(M)
 ```
 
-it is not clear that any human-discernible ordering is preferable to
+It is not clear that any human-discernible ordering is preferable to
 any other, and we would be better off letting the compiler decide a
 propitious ordering.  In any event, the `mpoly` package can
 specify a print order:
@@ -352,7 +352,7 @@ b
 coeffs(a) + coeffs(b)
 ```
 
-above, we get an error because the coefficients of `a` and `b` are
+Above, we get an error because the coefficients of `a` and `b` are
 possibly stored in a different order and therefore vector addition
 makes no sense.  However, we can operate on coefficients of a single
 `mvp` object at will:

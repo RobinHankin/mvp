@@ -121,7 +121,7 @@ that powers are nonzero.  An \code{mvp} object is a map from terms to
 their coefficients; thus $7xy^2 -3x^2yz^5$ would be
 
 \begin{verbatim}
-{{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, "y" -> 1, "z" ->5} -> -3}
+{{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, "y" -> 1, "z" -> 5} -> -3}
 \end{verbatim}
 
 and we understand that coefficients are nonzero.  In \proglang{C++} the

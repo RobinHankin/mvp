@@ -320,12 +320,12 @@ There is the `invert()` function:
 invert(p)
 ```
 
-In the above, `p` is a regular multivariate polynomial which
+In the above, `p` is a regular multivariate polynomial; `invert(p)`
 includes negative powers.  It obeys the same arithmetic rules as other
 mvp objects:
 
 ```{r samerules}
-p + as.mvp("z^6")
+p + invert(p) + as.mvp("z^6")
 ```
 
 # The `disordR` package

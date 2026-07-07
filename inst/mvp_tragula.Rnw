@@ -466,12 +466,12 @@ function \code{invert()}:
 invert(p)
 @ 
 
-In the above, \code{p} is a regular multivariate polynomial which
-includes negative powers.  It obeys the same arithmetic rules as other
-\code{mvp} objects:
+In the above, \code{p} is a regular multivariate polynomial;
+\code{invert(p)} includes negative powers.  It obeys the same
+arithmetic rules as other \code{mvp} objects:
 
 <<samearithasotherobjects>>=
-p + as.mvp("z^6")
+p + invert(p) + as.mvp("z^6")
 @ 
 
 

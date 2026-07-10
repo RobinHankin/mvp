@@ -31,7 +31,7 @@ where the map takes symbols to their (integer) power; it is understood
 that powers are nonzero. An `mvp` object is a map from terms to their
 coefficients; thus $`7xy^2 -3x^2yz^5`$ would be
 
-    {{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, 'y" -> 1, "z" ->5} -> -3}
+    {{"x" -> 1, "y" -> 2} -> 7, {"x" -> 2, "y" -> 1, "z" -> 5} -> -3}
 
 and we understand that coefficients are nonzero. In `C++` the
 declarations would be
@@ -94,7 +94,7 @@ dput(M)
 #>     1L)), coeffs = c(-4, 7, -9, 3), "a42fbf7de80773710e0bf126ddb55cd6ece4a8dc"), class = "mvp")
 ```
 
-it is not clear that any human-discernible ordering is preferable to any
+It is not clear that any human-discernible ordering is preferable to any
 other, and we would be better off letting the compiler decide a
 propitious ordering. In any event, the `mpoly` package can specify a
 print order:
@@ -407,15 +407,15 @@ invert(p)
 #> 1 + x^-2 y^-1 + x^-1
 ```
 
-In the above, `p` is a regular multivariate polynomial which includes
-negative powers. It obeys the same arithmetic rules as other mvp
-objects:
+In the above, `p` is a regular multivariate polynomial; `invert(p)`
+includes negative powers. It obeys the same arithmetic rules as other
+mvp objects:
 
 ``` r
 
-p + as.mvp("z^6")
+p + invert(p) + as.mvp("z^6")
 #> mvp object algebraically equal to
-#> 1 + x + x^2 y + z^6
+#> 2 + x^-2 y^-1 + x^-1 + x + x^2 y + z^6
 ```
 
 ## The `disordR` package
@@ -456,7 +456,7 @@ coeffs(a) + coeffs(b)
 #> hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match
 ```
 
-above, we get an error because the coefficients of `a` and `b` are
+Above, we get an error because the coefficients of `a` and `b` are
 possibly stored in a different order and therefore vector addition makes
 no sense. However, we can operate on coefficients of a single `mvp`
 object at will:

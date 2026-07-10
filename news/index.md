@@ -1,5 +1,9 @@
 # Changelog
 
+## mvp 1.1-2
+
+- upper-case symbols A-Z
+
 ## mvp 1.1-1
 
 CRAN release: 2026-06-29

@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mvp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1-1-0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1-2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,7 @@ understood that powers are nonzero. An <code>mvp</code> object is a map
 from terms to their coefficients; thus
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mi>x</mi><msup><mi>y</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mi>y</mi><msup><mi>z</mi><mn>5</mn></msup></mrow><annotation encoding="application/x-tex">7xy^2 -3x^2yz^5</annotation></semantics></math>
 would be</p>
-<pre><code>{{"x" -&gt; 1, "y" -&gt; 2} -&gt; 7, {"x" -&gt; 2, 'y" -&gt; 1, "z" -&gt;5} -&gt; -3}</code></pre>
+<pre><code>{{"x" -&gt; 1, "y" -&gt; 2} -&gt; 7, {"x" -&gt; 2, "y" -&gt; 1, "z" -&gt; 5} -&gt; -3}</code></pre>
 <p>and we understand that coefficients are nonzero. In <code>C++</code>
 the declarations would be</p>
 <pre><code>typedef vector &lt;signed int&gt; mypowers;  
@@ -148,7 +148,7 @@ as</p>
 <span><span class="co">#&gt; ), c("boat", "float", "gloat", "goat"), c("goat", "stoat")), </span></span>
 <span><span class="co">#&gt;     power = list(integer(0), c(1L, 3L), c(1L, 1L, 6L, 1L), c(6L, </span></span>
 <span><span class="co">#&gt;     1L)), coeffs = c(-4, 7, -9, 3), "a42fbf7de80773710e0bf126ddb55cd6ece4a8dc"), class = "mvp")</span></span></code></pre></div>
-<p>it is not clear that any human-discernible ordering is preferable to
+<p>It is not clear that any human-discernible ordering is preferable to
 any other, and we would be better off letting the compiler decide a
 propitious ordering. In any event, the <code>mpoly</code> package can
 specify a print order:</p>
@@ -384,13 +384,13 @@ idiom is not perfect and I’m still working on it. There is the
 <span><span class="fu"><a href="../reference/invert.html">invert</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
 <span><span class="co">#&gt; 1 + x^-2 y^-1 + x^-1</span></span></code></pre></div>
-<p>In the above, <code>p</code> is a regular multivariate polynomial
-which includes negative powers. It obeys the same arithmetic rules as
-other mvp objects:</p>
+<p>In the above, <code>p</code> is a regular multivariate polynomial;
+<code>invert(p)</code> includes negative powers. It obeys the same
+arithmetic rules as other mvp objects:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">"z^6"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/invert.html">invert</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="../reference/mvp.html">as.mvp</a></span><span class="op">(</span><span class="st">"z^6"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; mvp object algebraically equal to</span></span>
-<span><span class="co">#&gt; 1 + x + x^2 y + z^6</span></span></code></pre></div>
+<span><span class="co">#&gt; 2 + x^-2 y^-1 + x^-1 + x + x^2 y + z^6</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -425,7 +425,7 @@ operations on the coefficients. For example, suppose we had another
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_matching_hash()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> </span></span>
 <span><span class="co">#&gt; hash codes b0695ec1b46bb6da92f016f17e49971e1036d786 and 286de701fbfc3887e4489c2b07127f0811071f43 do not match</span></span></code></pre></div>
-<p>above, we get an error because the coefficients of <code>a</code> and
+<p>Above, we get an error because the coefficients of <code>a</code> and
 <code>b</code> are possibly stored in a different order and therefore
 vector addition makes no sense. However, we can operate on coefficients
 of a single <code>mvp</code> object at will:</p>
@@ -531,7 +531,7 @@ Wesley.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

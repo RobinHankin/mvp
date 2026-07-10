@@ -21,6 +21,8 @@ README.html
 ^inst/lettersymbols.rda$
 ^inst/mvp_tragula.Rnw$
 ^inst/mvp.bib$
+^inst/gotcha.Rmd$
+^inst/3_6_25.Rmd$
 ^.github$
 ^.devcontainer$
 ^_pkgdown\.yml$

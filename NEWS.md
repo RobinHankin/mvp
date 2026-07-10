@@ -1,3 +1,7 @@
+# mvp 1.1-2
+
+- upper-case symbols A-Z
+
 # mvp 1.1-1
 
 - code refactoring

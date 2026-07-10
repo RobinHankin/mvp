@@ -9,8 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-```{r out.width='20%', out.extra='style="float:right; padding:10px"',echo=FALSE}
+```{r label=hexsticker, out.width='20%', out.extra='style="float:right; padding:10px"',echo=FALSE}
 knitr::include_graphics(system.file("help/figures/mvp.png", package = "mvp"))
 ```
 
@@ -18,13 +17,13 @@ To cite the `mvp` package in publications please use @hankin2022_mvp.
 @abramowitz1965 observe (equation 3.6.25, p16) that if
 
 \begin{equation}
-y = ax + bx^2 + cx^3 + dx^4=\ldots
+y = ax + bx^2 + cx^3 + dx^4 + \ldots
 \end{equation}
 
 then 
 
 \begin{equation}
-x = Ay + By^2 + Cy^3 + Dy^4=\ldots
+x = Ay + By^2 + Cy^3 + Dy^4 + \ldots
 \end{equation}
 
 where 
@@ -37,33 +36,63 @@ a^7D &=& 5abc - a^2d - 5b^3\\
 &\vdots&
 \end{eqnarray}
 
+Here I verify these relations using the `mvp` package.
 
-
-
-```{r}
-library("mvp")
-
+```{r definexandy}
+suppressMessages(library("mvp"))
 data("lettersymbols")
-A <- as.mvp("A")
-B <- as.mvp("B")
-C <- as.mvp("C")
-D <- as.mvp("D")
-
-y_temp <- a*x + b*x^2 + c*x^3 + d*x^4
-x_temp <- A*y + B*y^2 + C*y^3 + D*y^4
-
-x <- x_temp
-y <- y_temp
-
-x
-y
 ```
 
-
-```{r}
-jj <- x |> subs(y=y_temp) |> subs(A=1/a, B= -b/a^3, C=(2*b^2-a*c)/a^5, D=(5*a*b*c - a^2*d - 5*b^3)/a^7)|> series("x")
+We can set up the equations in package idiom:
+```{r AMS5536265}
+y <- a*x + b*x^2 + c*x^3 + d*x^4
+jj <- y   |> subs(x = A*y + B*y^2 + C*y^3 + D*y^4)
 ```
 
-```{r}
-jj
+Above, `jj` is the result of substituting for `x`.  Note that this is not the same as:
+
+```{r AMS5536265_another}
+jj_fail <- a*x + b*x^2 + c*x^3 + d*x^4   |> subs(x = A*y + B*y^2 + C*y^3 + D*y^4)
 ```
+
+Object `jj` is quite complicated:
+
+
+```{r showjj}
+summary(jj)
+```
+
+Now perform the substitutions for $A,B,C,D$:
+
+```{r subjj, cache=TRUE}
+jj <- jj |> subs(
+              A = 1/a,
+              B = -b/a^3,
+              C = (2*b^2-a*c)/a^5,
+              D = (5*a*b*c - a^2*d - 5*b^3)/a^7
+              )
+```
+
+```{r showjjsub}
+summary(jj)
+```
+
+We may verify the result, to fourth order:
+
+```{r showjjtrunc4}
+trunc1(jj, x=4)
+```
+
+and we see that the original polynomial is recovered.  However, the
+result is not true to fifth order:
+
+
+```{r showjjtrunc5}
+trunc1(jj, x=5)
+trunc1(jj, x=6)
+```
+
+To match the series to fifth order we would need to substitute for $E$
+as well.
+
+## References {-}

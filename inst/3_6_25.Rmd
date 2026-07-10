@@ -55,7 +55,7 @@ Above, `jj` is the result of substituting for `x`.  Note that this is not the sa
 jj_fail <- a*x + b*x^2 + c*x^3 + d*x^4   |> subs(x = A*y + B*y^2 + C*y^3 + D*y^4)
 ```
 
-Object `jj` is quite complicated:
+(see `inst/gotcha.Rmd`).  Object `jj` is quite complicated:
 
 
 ```{r showjj}

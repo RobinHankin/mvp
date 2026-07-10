@@ -1,0 +1,37 @@
+---
+title: "A gotcha with `subs()`"
+author: "Robin K. S. Hankin"
+bibliography: mvp.bib
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r label=hexsticker, out.width='20%', out.extra='style="float:right; padding:10px"',echo=FALSE}
+knitr::include_graphics(system.file("help/figures/mvp.png", package = "mvp"))
+```
+
+To cite the `mvp` package in publications please use @hankin2022_mvp.
+Here I present a gotcha.
+
+
+```{r definexandy}
+suppressMessages(library("mvp"))
+data("lettersymbols")
+```
+
+Consider the two following chunks, that define `jj1` and `jj2`:
+
+```{r way1}
+x^2 |> subs(x = y)
+```
+
+```{r way2}
+y <- x^2
+y |> subs(x = y)
+```
+
+
+## References {-}

@@ -91,6 +91,7 @@ data(lettersymbols)
 
 (x + y + z)^3 - 3*(x + y + z)*(x*y + x*z + y*z) + 3*x*y*z
 
+((x+y)^2 + y^2)*((x-y)^2 + y^2) # Sophie Germain's identity (so-called)
 
 }
 \keyword{datasets}

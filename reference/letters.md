@@ -45,4 +45,7 @@ data(lettersymbols)
 #> mvp object algebraically equal to
 #> x^3 + y^3 + z^3
 
+((x+y)^2 + y^2)*((x-y)^2 + y^2) # Sophie Germain's identity (so-called)
+#> mvp object algebraically equal to
+#> x^4 + 4 y^4
 ```

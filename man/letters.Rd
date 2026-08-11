@@ -1,6 +1,7 @@
 \name{letters}
 \alias{letters}
 \alias{lettersymbols}
+\alias{lettersymb}
 \alias{a}
 \alias{b}
 \alias{c}

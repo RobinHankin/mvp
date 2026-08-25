@@ -29,6 +29,17 @@ Robin K. S. Hankin
 
 ``` r
 
+x <- as.mvp("x")
+y <- as.mvp("y")
+P <- 2 + 3*x*y^7 - 4*x/y^2 + 7*y^4/x
+P
+#> mvp object algebraically equal to
+#> 2 + 7 x^-1 y^4 - 4 x y^-2 + 3 x y^7
+laurent_factor(P)
+#> mvp object algebraically equal to
+#> x y^2
+
+
 laurent_factor(invert(rmvp()))
 #> mvp object algebraically equal to
 #> b c d e^3

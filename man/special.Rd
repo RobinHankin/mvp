@@ -11,16 +11,16 @@ Various functions to create simple \code{mvp} objects such as single-term,
 homogeneous, and constant multivariate polynomials.
 }
 \usage{
-product(v,symbols=letters)
-homog(d,power=1,symbols=letters)
-linear(x,power=1,symbols=letters)
-xyz(n,symbols=letters)
+product(v, symbols=letters)
+homog(d, power=1, symbols=letters)
+linear(x, power=1, symbols=letters)
+xyz(n, symbols=letters)
 numeric_to_mvp(x)
 }
 \arguments{
-  \item{d,n}{An integer; generally, the dimension or arity of the
+  \item{d, n}{An integer; generally, the dimension or arity of the
     resulting \code{mvp} object}
-  \item{v,power}{Integer vector of powers}
+  \item{v, power}{Integer vector of powers}
   \item{x}{Numeric vector of coefficients}
   \item{symbols}{Character vector for the symbols}
 }

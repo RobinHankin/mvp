@@ -6,21 +6,21 @@ homogeneous, and constant multivariate polynomials.
 ## Usage
 
 ``` r
-product(v,symbols=letters)
-homog(d,power=1,symbols=letters)
-linear(x,power=1,symbols=letters)
-xyz(n,symbols=letters)
+product(v, symbols=letters)
+homog(d, power=1, symbols=letters)
+linear(x, power=1, symbols=letters)
+xyz(n, symbols=letters)
 numeric_to_mvp(x)
 ```
 
 ## Arguments
 
-- d,n:
+- d, n:
 
   An integer; generally, the dimension or arity of the resulting `mvp`
   object
 
-- v,power:
+- v, power:
 
   Integer vector of powers
 

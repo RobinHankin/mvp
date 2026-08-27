@@ -27,7 +27,7 @@ Print methods for \code{mvp} objects: to print, an \code{mvp} object is coerced 
 a <- rmvp(4)
 a
 print(a)
-print(a,stars=TRUE)
-print(a,varorder=rev(letters))
+print(a, stars=TRUE)
+print(a, varorder=rev(letters))
 }
 \keyword{symbolmath}

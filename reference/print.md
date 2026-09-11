@@ -47,10 +47,10 @@ a
 print(a)
 #> mvp object algebraically equal to
 #> 2 + 4 a b d^2 + 3 a^3 c e f + b^2 f^2
-print(a,stars=TRUE)
+print(a, stars=TRUE)
 #> mvp object algebraically equal to
 #> 2 + 4 * a * b * d**2 + 3 * a**3 * c * e * f + b**2 * f**2
-print(a,varorder=rev(letters))
+print(a, varorder=rev(letters))
 #> mvp object algebraically equal to
 #> f^2 b^2 + 3 f e c a^3 + 4 d^2 b a + 2
 ```

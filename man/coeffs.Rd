@@ -26,7 +26,7 @@ powers(x)
 coeffs(x) <- value
 }
 \arguments{
-  \item{x}{Object of class \code{disord}}
+  \item{x}{Object of class \code{mvp}}
   \item{value}{Object of class \code{disord}, or length-1 numeric vector}
 }
 \details{

@@ -40,7 +40,7 @@ coeffs(x) <- value
 
   \dQuote{Pure} extraction and replacement, as in \code{M[coeffs(M) >
   9]} [which returns an \code{mvp} object] and \code{M[Mod(coeffs(M)) <=
-  1] <- value} [which modifies \code{a}] is implemented experimentally.
+  1] <- value} [which modifies \code{M}] is implemented experimentally.
   The code for extraction is cute but not particularly efficient.
 
   (much of the discussion below appears in the vignette of the

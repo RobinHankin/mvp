@@ -34,7 +34,7 @@ of coefficients is not determined.
 
 “Pure” extraction and replacement, as in `M[coeffs(M) > 9]` \[which
 returns an `mvp` object\] and `M[Mod(coeffs(M)) <= 1] <- value` \[which
-modifies `a`\] is implemented experimentally. The code for extraction is
+modifies `M`\] is implemented experimentally. The code for extraction is
 cute but not particularly efficient.
 
 (much of the discussion below appears in the vignette of the

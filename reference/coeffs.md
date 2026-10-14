@@ -15,7 +15,7 @@ coeffs(x) <- value
 
 - x:
 
-  Object of class `disord`
+  Object of class `mvp`
 
 - value:
 

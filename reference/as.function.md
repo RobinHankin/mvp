@@ -37,8 +37,8 @@ f
 #> {
 #>     subs(x, ...)
 #> }
-#> <bytecode: 0x55689b59d108>
-#> <environment: 0x55689b59cca8>
+#> <bytecode: 0x5632366069b0>
+#> <environment: 0x563236606550>
 
 f(a=1)
 #> mvp object algebraically equal to
